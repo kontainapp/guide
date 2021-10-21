@@ -14,4 +14,4 @@
 # limitations under the License.
 #
 #
-print("Hello again !")
+print("Hello from Kontain!")
