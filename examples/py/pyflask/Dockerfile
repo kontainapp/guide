@@ -1,25 +1,22 @@
 FROM python:3.8-slim AS build
-RUN mkdir -p /opt/scripts/app/
-
-RUN apt-get update
-RUN apt-get install -y --no-install-recommends build-essential gcc
+WORKDIR /opt/src/app
 
 RUN python -m venv /opt/venv
 # Make sure we use the virtualenv:
 ENV PATH="/opt/venv/bin:$PATH"
 
-ADD . /opt/scripts/
-RUN pip install -r /opt/scripts/requirements.txt
+ADD . /opt/src/
+RUN pip install -r /opt/src/requirements.txt
 
-ADD app/main.py /opt/scripts/app/
-RUN find /opt/scripts/
+ADD app/main.py /opt/src/app/
+#RUN find /opt/src/
 
 
 FROM kontainapp/runenv-python as release
 COPY --from=build /opt/venv /opt/venv
-COPY --from=build /opt/scripts /opt/scripts
+COPY --from=build /opt/src/app /opt/src/app
 ENV PATH="/opt/venv/bin:$PATH"
-WORKDIR /opt/scripts
+WORKDIR /opt/src/app
 
 EXPOSE 5000
-CMD ["python", "app/main.py"]
+CMD ["python", "main.py"]
