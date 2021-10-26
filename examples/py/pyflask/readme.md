@@ -7,6 +7,16 @@ $ docker run --runtime=krun -p 5000:5000 --rm kg/pyflask
 
 # run the http curl client in another shell terminal
 $ curl -s -I http://localhost:5000/
+
+# check size of image
+$ docker images
+python-slim........122MB
+python-bullseye....915MB
+
+# note the sizes of the Kontain python runtime image and 
+#     the Python flask server Kontain container image
+runenv-python......23.5MB
+kg/pyflask.........40 MB
 ```
 
 # Notes
