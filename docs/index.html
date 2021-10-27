@@ -10,9 +10,37 @@
     <div id="docute"></div>
     <script src="https://unpkg.com/docute@4/dist/docute.js"></script>
     <script>
+      // new Docute({
+      //   target: '#docute'
+      // })
       new Docute({
-        target: '#docute'
-      })
+          title: 'Docute',
+          nav: [
+            {
+              title: 'Home',
+              link: '/'
+            },
+            {
+              title: 'GitHub',
+              link: 'https://github.com/egoist/docute'
+            },
+            // A dropdown menu
+            {
+              title: 'Community',
+              children: [
+                {
+                  title: 'Spectrum',
+                  link: 'https://spectrum.chat/your-community'
+                },
+                {
+                  title: 'Discord',
+                  link: 'https://discord.app/your-discord-server'
+                }
+              ]
+            }
+          ]
+        })
+
     </script>
   </body>
 </html>
