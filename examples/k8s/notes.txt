@@ -1,0 +1,14 @@
+- installed with RPM package, copied link from /usr/bin/minikube to /usr/local/bin/minikube
+- started with default docker as runtime
+- verified everythin runnning with $ kubectl get pods -A
+- ran: kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/latest/cloud/k8s/deploy/k8s-deploy.yaml
+- verified daemonset deploy pod:$ kubectl get pods -A --> shows kontain-deploy-qmtct
+- kubectl get daemonsets.apps -A
+- ran: kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/latest/demo/k8s/test.yaml
+- got the following error
+
+Events:
+  Type     Reason                  Age                From               Message
+  ----     ------                  ----               ----               -------
+  Normal   Scheduled               50s                default-scheduler  Successfully assigned default/kontain-test-app-647874765d-h5j4d to minikube
+  Warning  FailedCreatePodSandBox  14s (x4 over 50s)  kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = RuntimeHandler "krun" not supported
