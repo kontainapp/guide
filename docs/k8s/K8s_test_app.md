@@ -1,5 +1,5 @@
 # Test App for Kubernetes
-Below is the deployment specification for a simple Test App which is just busybox wrapped in a Kontain container.
+Below is the deployment specification for a simple Test App which is just busybox wrapped in a Kontain container but offers a view of how Kontain's runtime is used when instantiating a pod that's a Kontain container image.
 
 
 ```yaml
