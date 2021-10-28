@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Kontain Docs</title>
+    <link rel="stylesheet" href="https://unpkg.com/docute@4/dist/docute.css">
+  </head>
+  <body>
+    <div id="docute"></div>
+    <script src="https://unpkg.com/docute@4/dist/docute.js"></script>
+    <script>
+      new Docute({
+        nav: [
+              {
+                title: 'Home',
+                link: 'https://kontain.app'
+              },
+              {
+                title: 'GitHub',
+                link: 'https://github.com/kontainapp/km'
+              }
+            ],
+            sidebar: [
+              // A sidebar item, with child links
+              {
+                title: 'Getting Started',
+                children: [
+                  {
+                    title: 'Install',
+                    link: '/gettingstarted/install'
+                  },
+                  {
+                    title: 'Python',
+                    link: '/gettingstarted/python_flask'
+                  },
+                  {
+                    title: 'Javascript/NodeJS',
+                    link: '/gettingstarted/js_node'
+                  }                ]
+              },
+              // one more item with children
+              {
+                title: 'Docker',
+                children: [
+                  {
+                    title: 'Compose',
+                    link: '/docker/docker_compose'
+                  },
+                  {
+                    title: 'Registries',
+                    link: '/docker/docker_registry'
+                  },
+                  {
+                    title: 'Integration',
+                    link: '/docker/docker_overview'
+                  },
+                ]
+              },
+              // one more item with children
+              {
+                title: 'Kubernetes',
+                children: [
+                  {
+                    title: 'Simple Test App',
+                    link: '/k8s/K8s_test_app.md'
+                  },
+                  {
+                    title: 'Integration',
+                    link: '/k8s/k8s_overview'
+                  }
+                ]
+              },
+              {
+                title: 'AWS',
+                children: [
+
+                ]
+              },
+              {
+                title: 'GCP',
+                children: [
+
+                ]
+              },
+              ,
+              {
+                title: 'GCP',
+                children: [
+
+                ]
+              },
+              // An external link
+              {
+                title: 'GitHub',
+                link: 'https://github.com/kontainapp/km'
+              }
+            ]
+          })
+    </script>
+  </body>
+</html>
