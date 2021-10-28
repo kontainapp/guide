@@ -1,4 +1,4 @@
-# Overview
+# Introduction
 
 [Kontain](https://kontain.app) was founded on the insight that 2013-era containers are far too insecure, slow, and bloated for the demands of the 2020s as explained here.
 
@@ -21,8 +21,9 @@ Resource consumption reduced by orders of magnitude - compute and size
 Really Immutable packages of code
 
 This Docker workflow/tools compatible approach offers huge advantages in the following areas:
-Ideal and perfect for packaging microservices in minimalistic containers
-Functions as a service without the security, startup downsides
+* For packaging microservices in minimalistic, fast, secure containers
+* Functions as a service without the security, startup downsides
 Scale to zero with instantaneous startup time
-Edge computing
-Anyplace where security, speed, cost and resource constraints are a high priority
+* IOT where security, speed, resource size are critical
+* Edge computing
+* Anyplace where security, speed, cost and resource constraints are a high priority
