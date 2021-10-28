@@ -2,7 +2,7 @@
 
 *Pre-requisites:* Kontain runs on Linux kernel version 4.15 or newer, running on Intel VT (vmx) or AMD (svm) with virtualization enabled.  
 
-Recommended distros are Ubuntu 20.04 and Fedora 32, or newer.
+Recommended distros are Ubuntu 20.04 and Fedora 32, or newer.  Note that this also assumes that your user has access to /dev/kvm.
 
 To package Kontain images, it is also necessary to have a recent version of Docker or Moby-engine installed.
 
@@ -13,3 +13,8 @@ curl -s https://raw.githubusercontent.com/kontainapp/km/latest/km-releases/konta
 ```
 
 This installs the necessary files in your /opt/kontain directory and configures the Kontain runtime for docker and podman. It also executes a smoke test of the unikernel virtual machine.
+
+To test using an already prepped Vagrant VM:
+* Vagrant, click here
+* AWS EC2, click here
+* Google Compute, click here
