@@ -2,6 +2,8 @@
 
 Kontain was founded on the insight that 2013-era containers are far too insecure, slow, and bloated for the demands of the 2020s as explained here.
 
+![test](images/vms-ctrs-unikernels.png)
+
 Fully integrated with Docker and Kubernetes with a OCI and CRI compliant approach, and requiring no changes to source code, CI, or DevOps tooling, Kontain simply delivers containers with fortress-strong security isolation, thousands of times faster startup, and vastly smaller footprint.
 
 A new approach to Containers but fully integrated with Docker and Kubernetes.
