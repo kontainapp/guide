@@ -1,10 +1,12 @@
 # Overview
 
-Kontain was founded on the insight that 2013-era containers are far too insecure, slow, and bloated for the demands of the 2020s as explained here.
+[Kontain](https://kontain.app) was founded on the insight that 2013-era containers are far too insecure, slow, and bloated for the demands of the 2020s as explained here.
+
+Fully integrated with Docker and Kubernetes with a OCI and CRI compliant approach, and requiring no changes to source code, CI, or DevOps tooling, Kontain simply delivers strongly isolated containers with fortress-strong security isolation, thousands of times faster startup, and vastly smaller footprint.
+
+To use Kontain, view the [guide](https://kontainapp.github.io/guide/)
 
 ![test](images/vms-ctrs-unikernels.png)
-
-Fully integrated with Docker and Kubernetes with a OCI and CRI compliant approach, and requiring no changes to source code, CI, or DevOps tooling, Kontain simply delivers containers with fortress-strong security isolation, thousands of times faster startup, and vastly smaller footprint.
 
 A new approach to Containers but fully integrated with Docker and Kubernetes.
 With the current ongoing tectonic shift to cloud-based shared tenant, microservice based architectures, where containers, VMs all run on shared cloud hardware, it is time that these microservices are packaged into strongly isolated, secure, specialized packages that only includes the application code and just the required OS code and nothing more to run fast and securely on the shared multi-tenant cloud hardware with strong isolation.  It almost literally packages and employs only the functions needed to make an application work, and nothing more.
