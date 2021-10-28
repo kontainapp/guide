@@ -17,8 +17,11 @@ Resource consumption reduced by orders of magnitude - compute and size
 Really Immutable packages of code
 
 This Docker workflow/tools compatible approach offers huge advantages in the following areas:
-Ideal and perfect for packaging microservices in minimalistic containers
-Functions as a service without the security, startup downsides
-Scale to zero with instantaneous startup time
-Edge computing
-Anyplace where security, speed, cost and resource constraints are a high priority
+* Ideal and perfect for packaging microservices in minimalistic containers
+* Functions as a service without the security, startup downsides
+* Scale to zero with instantaneous startup time
+* Instantaneous Scale up
+* Edge computing
+* Anyplace where security, speed, cost and resource constraints are a high priority
+
+![test](images/vms-ctrs-unikernels.png)
