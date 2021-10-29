@@ -6,7 +6,7 @@ RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
 ADD . /opt/src/
-RUN pip install -r /opt/src/requirements.txt
+RUN pip install - no-cache-dir -r /opt/src/requirements.txt
 
 ADD app/main.py /opt/src/app/
 #RUN find /opt/src/
