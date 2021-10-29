@@ -23,7 +23,7 @@ kube-system   kube-apiserver-minikube             1/1     Running   0          2
 ```
 
 ### Deploy Kontain runtime in Minikube
-Now, to install Kontain runtime in Minikube, we will need to use a Daemonset:
+Now, to install Kontain runtime in Minikube, we will need to use a Daemonset.  This installs Kontain on all the nodes of the Kubernetes cluster.
 ```bash
 
 # Deploy Kontain Runtime
