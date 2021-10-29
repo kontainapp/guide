@@ -11,14 +11,12 @@ To package Kontain images, it is also necessary to have a recent version of Dock
 ```shell
 curl -s https://raw.githubusercontent.com/kontainapp/km/latest/km-releases/kontain-install.sh | sudo bash
 ```
----
 
-# Using Vagrant
 This installs the necessary files in your /opt/kontain directory and configures the Kontain runtime for docker and podman. It also executes a smoke test of the unikernel virtual machine.
 
 To try out Kontain using an already prepped Vagrant VM see below:
-* [Using a Vagrant VM with Kontain pre-installed](/gettingstarted/using_vagrant)
+- [Using a Vagrant VM with Kontain pre-installed](/gettingstarted/using_vagrant)
 
-# On AWS EC2
+
 To try out Kontain on a VM without access to /dev/kvm (for example on AWS EC2), see below:
-* Using the KKM module on AWS EC2
+- Using the KKM module on AWS EC2
