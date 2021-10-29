@@ -1,11 +1,11 @@
 # Usage with Docker-compose
 
-To use Kontain with Docker-compose you can use the Docker-compose stanza for runtime as shown below:
+To use a service that is bundled as a Kontain Container with Docker-compose you can use the Docker-compose stanza for runtime as shown below:
 
 ```yaml
 services:
-  test:
-    image: <image-name
+  myapp:
+    image: <image-name>
     command: <command>
     runtime: krun
 
