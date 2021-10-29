@@ -8,7 +8,8 @@
 
 To use Kontain, view the [Install Guide](/gettingstarted/install)
 
-![test](images/vms-ctrs-unikernels.png)
+<!-- ![test](images/vms-ctrs-unikernels.png) -->
+![test](images/kontain_vs_containers.gif)
 
 A new approach to Containers but fully integrated with Docker and Kubernetes.
 With the current ongoing tectonic shift to cloud-based shared tenant, microservice based architectures, where containers, VMs all run on shared cloud hardware, it is time that these microservices are packaged into strongly isolated, secure, specialized packages that only includes the application code and just the required OS code and nothing more to run fast and securely on the shared multi-tenant cloud hardware with strong isolation.  It almost literally packages and employs only the functions needed to make an application work, and nothing more.
