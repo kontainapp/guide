@@ -1,6 +1,6 @@
 # Python
 
-Below is a short example of using Kontain with Docker:
+Below is a short example of bundling a python microservice in a Kontain-based Container with Docker:
 
 app/hello.py:
 
@@ -43,13 +43,13 @@ EXPOSE 5000
 CMD ["python", "main.py"]
 ```
 
-Build the Kontain based container image:
+Build the Kontain Container image:
 
 ```sh
 $ docker build -t kg/pyflask .
 ```
 
-Run the Kontain based pyflask microservice:
+Run the Kontain pyflask microservice Container:
 
 ```sh
 $ docker run --runtime=krun -p 5000:5000 --rm kg/pyflask
@@ -58,5 +58,5 @@ Hello from Python!
 ```
 
 Check out the size of the Kontain based image for Pyflask microservice with Python runtime, code and libraries - **40.2 MB**
-Size of the Base Python-slim Image without code and libraries - **122 MB**
-Size of the Python bullseye base image - **909MB**
+- Size of the Base Python-slim Image without code and libraries - **122 MB**
+- Size of the Python bullseye base image - **909MB**

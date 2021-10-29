@@ -12,11 +12,11 @@ To package Kontain images, it is also necessary to have a recent version of Dock
 curl -s https://raw.githubusercontent.com/kontainapp/km/latest/km-releases/kontain-install.sh | sudo bash
 ```
 
-This installs the necessary files in your /opt/kontain directory and configures the Kontain runtime for docker and podman. It also executes a smoke test of the unikernel virtual machine.
+This installs the necessary files in your /opt/kontain directory and configures the Kontain runtime (/opt/bin/km) for docker and podman. It also executes a smoke test of the unikernel virtual machine.
 
 ## Vagrant
-### Using Vagrant to test Kontain
-To simplify running Kontain, we provide pre-configured VMs available from Vagrant Cloud:
+### Using Vagrant to try Kontain
+To simplify trying out Kontain, we provide pre-configured VMs available (with km and kkm pre-installed) from Vagrant Cloud:
 
 - Ubuntu 20.10 – https://app.vagrantup.com/kontain/boxes/ubuntu2010-kkm-beta3
 - Fedora 32 – https://app.vagrantup.com/kontain/boxes/fedora32-kkm-beta3
