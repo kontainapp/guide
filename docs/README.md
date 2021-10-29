@@ -4,7 +4,7 @@
 
 Fully integrated with Docker and Kubernetes with a OCI and CRI compliant approach, and requiring no changes to source code, CI, or DevOps tooling, Kontain simply delivers strongly isolated containers with fortress-strong security isolation, thousands of times faster startup, and vastly smaller footprint.
 
-To use Kontain, view the [guide](https://kontainapp.github.io/guide/install)
+To use Kontain, view the [guide](/gettingstarted/install)
 
 ![test](images/vms-ctrs-unikernels.png)
 
