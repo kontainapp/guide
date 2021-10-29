@@ -5,8 +5,7 @@ We will also assume that you have a recent version of Docker pre-installed on yo
 
 You can install Minikube using the instructions [here](https://minikube.sigs.k8s.io/docs/start/).  Note that you will need a recent version of Minikube (Version 1.22.0 or better).
 
-To start Minikube, use:
-
+### Start Minikube
 ```bash
 # for this example, we will use CRI-O runtime and podman driver, 
 #    though we also support Containerd - the default runtime for Minikube
@@ -23,13 +22,16 @@ kube-system   kube-apiserver-minikube             1/1     Running   0          2
 
 ```
 
+### Deploy Kontain runtime in Minikube
+Now, to install Kontain runtime in Minikube, we will need to use a Daemonset:
+```bash
 
 # Deploy Kontain Runtime
 
 ```bash
 $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/latest/cloud/k8s/deploy/k8s-deploy.yaml
 
-# To verify the installation
+# To verify the installation, kontain-deploy should appear.
 $ kubectl get daemonsets.apps -A
 NAMESPACE     NAME             DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
 kube-system   kindnet          1         1         1       1            1           <none>                   168m
@@ -38,16 +40,18 @@ kube-system   kube-proxy       1         1         1       1            1       
 
 ```
 
-A new pod, kontain-deploy should appear.
+### Verify
+Run a test app to verify Kontain running in Kubernetes.
 
 ```bash
-$ kubectl get pods -A
-NAMESPACE     NAME                                READY   STATUS    RESTARTS   AGE
-default       kontain-test-app-647874765d-gnkmv   1/1     Running   0          2d21h
-kube-system   coredns-78fcd69978-gqz46            1/1     Running   0          2d21h
-kube-system   etcd-minikube                       1/1     Running   0          2d21h
-...
-kube-system   kontain-deploy-qmtct               1/1     Running   0          17s
-...
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/latest/demo/k8s/test.yaml
 
+# A new pod, kontain-test-app-xxxxx should appear.
+$ kubectl get pods -n default
+NAMESPACE     NAME                                READY   STATUS    RESTARTS   AGE
+default       kontain-test-app-647874765d-7ftrp   1/1     Running   0          23m
+
+# Check that the pod runs with the Kontain runtime
+$ kubectl exec -it kontain-test-app-647874765d-7ftrp  -- uname -r
+5.13.7-100.fc33.x86_64.kontain.KVM
 ```
