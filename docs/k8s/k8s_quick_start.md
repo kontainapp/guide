@@ -55,3 +55,5 @@ default       kontain-test-app-647874765d-7ftrp   1/1     Running   0          2
 $ kubectl exec -it kontain-test-app-647874765d-7ftrp  -- uname -r
 5.13.7-100.fc33.x86_64.kontain.KVM
 ```
+
+Tip: To load images built in the local docker registry to minikube, you can use: $ docker save <image_name:tag> | (eval $(minikube podman-env) && podman load)
