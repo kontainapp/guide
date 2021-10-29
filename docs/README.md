@@ -1,8 +1,10 @@
 # Introduction
 
-[Kontain](https://kontain.app) was founded on the insight that 2013-era containers are far too insecure, slow, and bloated for the demands of the 2020s as explained here.
+[Kontain](https://kontain.app) was founded on the insight that 2013-era containers are far too insecure, slow, and bloated for the demands of the 2020s as explained here.  
 
-Fully integrated with Docker and Kubernetes with a OCI and CRI compliant approach, and requiring no changes to source code, CI, or DevOps tooling, Kontain simply delivers strongly isolated containers with fortress-strong security isolation, thousands of times faster startup, and vastly smaller footprint.
+*Kontain creates strongly isolated containers with fortress-strong security isolation, thousands of times faster startup, and vastly smaller footprint.*
+
+*Kontain is fully integrated with Docker and Kubernetes with a OCI and CRI compliant approach, and requiring no changes to source code, CI, or DevOps tooling.*
 
 To use Kontain, view the [Install Guide](/gettingstarted/install)
 

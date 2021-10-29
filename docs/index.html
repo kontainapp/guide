@@ -18,6 +18,10 @@
                 link: 'https://kontain.app'
               },
               {
+                title: 'Docs',
+                link: '/'
+              },
+              {
                 title: 'Kontain on GitHub',
                 link: 'https://github.com/kontainapp/km'
               }
@@ -29,28 +33,25 @@
                 children: [
                   {
                     title: 'Install',
-                    link: '/gettingstarted/install',
-                    toc: false,
-                    collapsable: false
+                    link: '/gettingstarted/install'
                   },
                   {
-                    title: 'Vagrant',
-                    link: '/gettingstarted/using_vagrant'
-                  },
-                  {
-                    title: 'Python',
+                    title: 'Python (Docker)',
                     link: '/gettingstarted/python_flask'
                   },
                   {
-                    title: 'Javascript/NodeJS',
+                    title: 'Javascript/NodeJS (Docker)',
                     link: '/gettingstarted/js_node'
-                  }                
-                ]
+                  }                ]
               },
               // one more item with children
               {
                 title: 'Docker',
                 children: [
+                {
+                    title: 'Overview',
+                    link: '/docker/overview'
+                  },
                   {
                     title: 'Compose',
                     link: '/docker/compose'
@@ -58,11 +59,7 @@
                   {
                     title: 'Tagging and Docker Registries',
                     link: '/docker/registry'
-                  },
-                  {
-                    title: 'Integration',
-                    link: '/docker/overview'
-                  },
+                  }
                 ]
               },
               // one more item with children
@@ -70,18 +67,18 @@
                 title: 'Kubernetes',
                 children: [
                   {
+                    title: 'Overview',
+                    link: '/k8s/k8s_overview'
+                  },
+                  {
                     title: 'Simple Test App',
                     link: '/k8s/K8s_test_app'
                   },
                   {
-                    title: 'Integration',
-                    link: '/k8s/k8s_overview'
-                  },
-                  {
                     title: 'Kind, K3s, K0s',
                     link: '/k8s/mini_k8s_distros',
-                    toc: false,
-                    collapsable: false
+                    // toc: false,
+                    // collapsable: false
                   }
                 ]
               },
@@ -97,11 +94,45 @@
 
                 ]
               },
-              ,
               {
                 title: 'Azure AKS',
                 children: [
 
+                ]
+              },
+              {
+                title: 'Workload Examples',
+                children: [
+                  {
+                    title: 'Microservices',
+                    link: '/k8s/mini_k8s_distros',
+                    toc: false,
+                    collapsable: false
+                  },
+                  {
+                    title: 'Service Mesh',
+                    link: '/k8s/mini_k8s_distros',
+                    toc: false,
+                    collapsable: false
+                  },
+                  {
+                    title: 'Event-driven Architecture',
+                    link: '/k8s/mini_k8s_distros',
+                    toc: false,
+                    collapsable: false
+                  },
+                  {
+                    title: 'Edge Computing',
+                    link: '/k8s/mini_k8s_distros',
+                    toc: false,
+                    collapsable: false
+                  },
+                  {
+                    title: 'ML',
+                    link: '/k8s/mini_k8s_distros',
+                    toc: false,
+                    collapsable: false
+                  }
                 ]
               },
               // An external link
