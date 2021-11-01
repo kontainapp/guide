@@ -4,19 +4,19 @@ Given a Javascript Express server:
 
 ```javascript
 'use strict';
- 
+
 const express = require('express');
- 
+
 // Constants
 const PORT = 8080;
 const HOST = '0.0.0.0';
- 
+
 // App
 const app = express();
 app.get('/', (req, res) => {
- res.send('Hello World');
+  res.send('Hello from Kontain!');
 });
- 
+
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
 ```
@@ -44,26 +44,26 @@ And a Dockerfile packaging it:
 
 ```shell
 FROM node:12 as build
- 
+
 # Create app directory
 WORKDIR /opt/src/app
- 
+
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
 COPY package*.json ./
- 
+
 RUN npm install
 # If you are building your code for production
 # RUN npm ci --only=production
- 
+
 # Bundle app source
 COPY . .
- 
+
 FROM kontainapp/runenv-node as release
 COPY --from=build /opt/src /opt/src
 WORKDIR /opt/src/app
- 
+
 EXPOSE 8080
 CMD [ "node", "server.js" ]
 ```
@@ -71,14 +71,19 @@ CMD [ "node", "server.js" ]
 To build:
 
 ```
-$ docker build -t kg/jsexpress .
+$ docker build -t kg/jsexpress:latest .
 
 ```
 
 To run:
-
 ```
-$ docker run --runtime=krun kg/jsexpress
+$ docker run --runtime=krun -p 8080:8080  kg/jsexpress:latest
+```
+
+In another window:
+```
+$ curl  http://localhost:8080/
+Hello from Kontain!
 ```
 
 Check the size:

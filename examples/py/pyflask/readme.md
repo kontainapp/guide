@@ -1,4 +1,6 @@
 # reference
+From: https://medium.com/analytics-vidhya/build-a-python-flask-app-and-deploy-with-kubernetes-ccc99bbec5dc
+
 ```bash
 # build and run the container
 $ docker build -t kg/pyflask .
