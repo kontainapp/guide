@@ -1,2 +1,2 @@
 # Description
-Guide for Kontain
+Guide for Kontain: https://kontainapp.github.io/guide/#/
