@@ -54,7 +54,7 @@ Run the Kontain pyflask microservice Container:
 ```sh
 $ docker run --runtime=krun -p 5000:5000 --rm kg/pyflask
 $ curl http://localhost:5000/
-Hello from Python!
+Hello from Kontain!
 ```
 
 Check out the size of the Kontain based image for Pyflask microservice with Python runtime, code and libraries - **40.2 MB**
