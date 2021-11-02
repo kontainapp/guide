@@ -1,7 +1,4 @@
-ARG BUILD_IMAGE_VERSION
-ARG KONTAIN_RELEASE_IMAGE_VERSION
-
-FROM $BUILD_IMAGE_VERSION AS build
+FROM python:3.8-slim AS build
 WORKDIR /opt/src/app
 
 RUN python -m venv /opt/venv
@@ -9,14 +6,13 @@ RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
 ADD . /opt/src/
-RUN pip install --no-cache-dir -r /opt/src/requirements.txt
+RUN pip install - no-cache-dir -r /opt/src/requirements.txt
 
 ADD app/main.py /opt/src/app/
 #RUN find /opt/src/
 
 
-FROM $KONTAIN_RELEASE_IMAGE_VERSION as release
-
+FROM kontainapp/runenv-python as release
 COPY --from=build /opt/venv /opt/venv
 COPY --from=build /opt/src/app /opt/src/app
 ENV PATH="/opt/venv/bin:$PATH"
