@@ -77,7 +77,7 @@ $ docker build -t kg/jsexpress:latest .
 
 To run:
 ```
-$ docker run --runtime=krun -p 8080:8080  kg/jsexpress:latest
+$ docker run --rm --runtime=krun -p 8080:8080  kg/jsexpress:latest
 ```
 
 In another window:

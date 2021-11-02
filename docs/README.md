@@ -1,4 +1,7 @@
 # Introduction
+“Inside every large program is a small program struggling to get out.”
+— Tony Hoare
+
 It’s a misconception to think of Containers as a way of securely isolating their deployments. Rather, containers are a ‘packaging technology’. 
 
 How do you secure Containers and containerised deployments?

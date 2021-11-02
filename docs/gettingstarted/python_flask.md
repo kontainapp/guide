@@ -52,7 +52,7 @@ $ docker build -t kg/pyflask .
 Run the Kontain pyflask microservice Container:
 
 ```sh
-$ docker run --runtime=krun -p 5000:5000 --rm kg/pyflask
+$ docker run --rm  --runtime=krun -p 5000:5000 kg/pyflask
 $ curl http://localhost:5000/
 Hello from Kontain!
 ```
