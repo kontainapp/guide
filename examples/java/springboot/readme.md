@@ -12,7 +12,7 @@ $ curl localhost:8080
 Hello from Kontain!
 
 # to clean, test, package as jar and tar gz bundling (assembly)
-$ mvn clean test package assembly:assembly
+$ mvn clean test package # assembly:assembly
 
 # to run as executable jar
 $ java -jar target/spring-boot-hello-1.0.jar
