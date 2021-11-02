@@ -1,23 +1,32 @@
-# ref
-Example from: https://mkyong.com/spring-boot/spring-boot-hello-world-example/
-tar gz from here: https://crunchify.com/maven-assembly-plugin-how-to-create-tar-gz-or-zip-archive-for-java-enterprise-project-using-maven/
+# reference for installation of Java and Maven
+Install sdkman:
+https://linuxhint.com/install-openjdk-fedora-linux/
+USE THIS: https://sdkman.io/usage
+Or: https://springframework.guru/using-sdkman-to-manage-java-versions/
 
-# for running in java
-```bash
-# run with maven
-$ mvn springboot:run
+```java
+# install sdkman:
+curl -s "https://get.sdkman.io" | bash
 
-# in another terminal
-$ curl localhost:8080
-Hello from Kontain!
+# list:
+$ sdk list java
 
-# to clean, test, package as jar and tar gz bundling (assembly)
-$ mvn clean test package assembly:assembly
+# install java:
+$ sdk install java 11.0.2-open
 
-# to run as executable jar
-$ java -jar target/spring-boot-hello-1.0.jar
+# show current java:
+$ sdk current java
 
-# in another terminal window
-$ curl http://localhost:8080
-Hello from Kontain!
+# switch:
+$ sdk use java <specific_version>
+$ sdk default java <specific_version>
+
+$ sdk uninstall java <specific_version>
+
+$ sdk current java
+
+$ sdk current
+
+# installing maven
+sdk install maven
 ```
