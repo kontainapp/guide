@@ -1,4 +1,8 @@
 # Introduction
+It’s a misconception to think of Containers as a way of securely isolating their deployments. Rather, containers are a ‘packaging technology’. 
+
+How do you secure Containers and containerised deployments?
+However Containers can actually be isolated to avoid the security risks that they create.
 
 [Kontain](https://kontain.app) was founded on the insight that 2013-era containers are far too insecure, slow, and bloated for the demands of the 2020s as explained here.  
 
@@ -30,3 +34,7 @@ Scale to zero with instantaneous startup time
 * IOT where security, speed, resource size are critical
 * Edge computing
 * Anyplace where security, speed, cost and resource constraints are a high priority
+
+You can watch the video from [Abhay Bhargav](https://www.abhaybhargav.com), the founder of Application Security Company, we45, talk about security aspects of Containers and Unikernels.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/V5g50QiGArc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
