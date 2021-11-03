@@ -1,7 +1,7 @@
 # Microservice Example
 Now we take a python Flask example that we worked on in the [previous](/gettingstarted/python_flask) Docker example and deploy it to Kubernetes.  We assume that the image is available at Docker Hub.
 
-The K8s deployment yaml (flaskapp.yml) along with the service at port 5000 is shown below:
+The K8s deployment yaml (flaskapp_k8s.yml) along with the service at port 5000 is shown below:
 ```yaml
 ---
 apiVersion: v1
@@ -45,7 +45,7 @@ spec:
 
 We deploy this using:
 ```bash
-$ kubectl deploy flaskapp.yml
+$ kubectl apply -f flaskapp_k8s.yml
 
 # verify that the pod is running
 $ kubectl get pods
@@ -57,7 +57,7 @@ Now we port forward the service's port to local port to test out that the servic
 ```bash
 $ kubectl port-forward po/flaskapp-955645cf8-mfrtj 5000:5000
 
-# please note that this is a blocking operation
+# please note that you have to keep this terminal window open before the next step
 ```
 
 In another terminal window we test using curl to verify the output from the service:
@@ -67,3 +67,9 @@ Hello from Kontain!
 ```
 
 Above we see the output from our Python app wrapped in a Kontain based image.
+
+
+To clean up:
+```bash
+$ kubectl delete -f flaskapp_k8s
+```
