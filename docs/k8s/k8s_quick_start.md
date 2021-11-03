@@ -5,19 +5,19 @@ We will also assume that you have a recent version of Docker pre-installed on yo
 
 You can install Minikube using the instructions [here](https://minikube.sigs.k8s.io/docs/start/).  Note that you will need a recent version of Minikube (Version 1.22.0 or better).
 
-### Start Minikube
+### Start a Minikube cluster "kontain"
 ```bash
-[OPTIONAL steps]
-# if you want to reset your old cluster
+# if you want to delete your "default" minikube cluster
 $ minikube delete
 
-# OR start a new cluster named "kontain
+# OR start a new separate cluster named "kontain" with CRI-O runtime and podman as the container driver
 $ minikube start -p kontain --container-runtime=cri-o --driver=podman
 ...
 Done! kubectl is now configured to use "kontain" cluster and "default" namespace by default
 
 # to see status of clusters
 $ minikube profile list
+...
 
 
 # Check if the kube-system pods have been launched correctly and are in "Running" state:
