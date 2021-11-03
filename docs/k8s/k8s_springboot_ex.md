@@ -1,5 +1,5 @@
 # Microservice Example
-Now we take a python Flask example that we worked on in the [previous](/gettingstarted/python_flask) Docker example and deploy it to Kubernetes.  We assume that the image is available at Docker Hub.
+Now we take a python Flask example that we worked on in the [previous](/gettingstarted/java) Docker example and deploy it to Kubernetes.  We assume that the image is available at Docker Hub.
 
 The K8s deployment yaml (springbootapp_k8s.yml) along with the service at port 8080 is shown below:
 ```yaml
