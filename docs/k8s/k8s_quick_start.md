@@ -7,9 +7,18 @@ You can install Minikube using the instructions [here](https://minikube.sigs.k8s
 
 ### Start Minikube
 ```bash
-# for this example, we will use CRI-O runtime and podman driver, 
-#    though we also support Containerd - the default runtime for Minikube
-$ minikube start --container-runtime=cri-o --driver=podman
+[OPTIONAL steps]
+# if you want to reset your old cluster
+$ minikube delete
+
+# OR start a new cluster named "kontain
+$ minikube start -p kontain --container-runtime=cri-o --driver=podman
+...
+Done! kubectl is now configured to use "kontain" cluster and "default" namespace by default
+
+# to see status of clusters
+$ minikube profile list
+
 
 # Check if the kube-system pods have been launched correctly and are in "Running" state:
 $ kubectl get pods -n kube-system
