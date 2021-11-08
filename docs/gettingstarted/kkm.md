@@ -5,7 +5,6 @@ import TOCInline from '@theme/TOCInline';
 # KKM
 Kontain runs on Local, Azure, Google Cloud, and AWS Linux instances supporting “nested virtualization”, i.e. with KVM enabled.
 
-
 ![Kontain System Diagram](https://raw.githubusercontent.com/kontainapp/km/master/docs/images/kontain-system-diagram.jpg)
 
 
