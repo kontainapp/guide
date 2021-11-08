@@ -9,7 +9,6 @@ $ tree
 ├── Dockerfile
 ├── pom.xml
 ├── resources
-│   ├── crunchify.xml
 │   └── placeholder.txt
 └── src
     ├── main
