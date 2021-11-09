@@ -1,14 +1,9 @@
-import TOCInline from '@theme/TOCInline';
-
-<TOCInline toc={toc} />;
-
 # KKM
-Kontain runs on Local, Azure, Google Cloud, and AWS Linux instances supporting “nested virtualization”, i.e. with KVM enabled.
+Kontain runs on Local, Azure, Google Cloud, and AWS Linux instances supporting “nested virtualization”, i.e. with KVM enabled (KM), or by using a Software Virtualization Module (KKM).
 
 ![Kontain System Diagram](https://raw.githubusercontent.com/kontainapp/km/master/docs/images/kontain-system-diagram.jpg)
 
-
-# Overview
+## Overview
 Containerization tools and processes provide the foundation for deploying today’s cloud-native software applications, but containers are far from perfect for many modern workloads. For example, workloads that require very strong security isolation take on additional risk if they are run as containers on shared OS kernels. Some workloads need to scale up—then scale down to zero—much quicker, more easily, and more cost-effectively than is possible using standard containers.
 
 Kontain leverages existing container workflows, development tools, and processes, but builds containers with special characteristics:
@@ -21,8 +16,7 @@ A smaller container image—sometimes much smaller—than a standard container.
 
 Kontain is a way to run container workloads "secure, fast, and small – choose three."
 
-
-# How Kontain Works
+## How Kontain Works
 The Kontain solution integrates two foundational technologies: containers and unikernels.
 
 A unikernel is a single-address-space machine image that contains an application workload—the program you want to run in a container—combined with a minimal set of library functions which provide the OS services required to run the workload.
@@ -44,7 +38,7 @@ By virtue of its small size and targeted functionality, a Kontain VM provides a 
 Compatible with Existing Container Workflows
 Kontain plugs into Docker and Kubernetes runtime environments. Kontain’s OCI-compliant image and CRI-compatible runtime deliver command-line and API compatibility with existing tools in your container workflow. Kontain requires little or no change to existing CI/CD systems, orchestration configurations, and monitoring systems.
 
-# Kontain System Overview
+## Kontain System Overview
 In this section, we’ll take a closer look at the Kontain system components and how they work together to run workloads.
 
 ![Kontain System Diagram](https://raw.githubusercontent.com/kontainapp/km/master/docs/images/kontain-system-diagram.jpg)
@@ -70,7 +64,7 @@ System calls are handled differently depending on how the Kontain unikernel is b
 
 The Kontain runtime library does not use syscalls to request services as regular libraries—including musl and glibc—do. Instead, it uses ‘out’ command-based hypercalls. An application that has been linked with the provided Kontain runtime libraries will issue hypercalls directly to the Kontain Monitor (KM).
 
-# Linux Platform Portability
+## Linux Platform Portability
 Kontain runs on Linux hosts that meet these minimum requirements:
 
 CPU: Intel or AMD
@@ -96,7 +90,7 @@ In short, KKM enables nested virtualization wherever you can install a kernel mo
 
 Kontain’s implementation of a OCI Runtime compliant container interface is krun (based on RedHat crun), which is used to build and run an application as a Kontain unikernel in a nested VM.
 
-# How Kontain Works with Docker
+## How Kontain Works with Docker
 NOTE: Although this section refers to using Kontain with Docker, Kontain works equally well with other container management tools, e.g. RedHat Podman.
 
 You can use Docker to build and run a Kontain workload, as a unikernel, in a kontainer.
