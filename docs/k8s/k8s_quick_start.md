@@ -65,4 +65,12 @@ $ kubectl exec -it kontain-test-app-647874765d-7ftrp  -- uname -r
 5.13.7-100.fc33.x86_64.kontain.KVM
 ```
 
-Tip: To load images built in the local docker registry to minikube, you can use: $ docker save <image_name:tag> | (eval $(minikube podman-env) && podman load)
+### Tip
+To load images built with the local docker on host to minikube, you can use: $ docker save <image_name:tag> | (eval $(minikube -p kontain podman-env) && podman-remote load).
+It gets renamed to localhost/<image_name:tag> in the Minikube "kontain" cluster.  
+
+Now you can use this image in your Kubernetes Deployment Yaml file to deploy the app.
+You can check your images inside Minikube using:
+$ minikube -p kontain ssh
+$ sudo podman images
+...list of images...
