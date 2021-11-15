@@ -11,15 +11,20 @@ You can install Minikube using the instructions [here](https://minikube.sigs.k8s
 $ minikube delete
 
 # and, start a new separate cluster named "kontain" with CRI-O runtime and podman as the container driver
-minikube start -p kontain --container-runtime=cri-o --driver=podman
+$ minikube start -p kontain --container-runtime=cri-o --driver=podman --wait=all
 
-# or as an alternative use CRIO and podmnan as driver
-$ minikube start -p kontain --container-runtime=cri-o --driver=podman
+# OR, as an alternative use CRIO and podmnan as driver
+$ minikube start -p kontain --container-runtime=cri-o --driver=podman --wait=all
 ...
 Done! kubectl is now configured to use "kontain" cluster and "default" namespace by default
 
 # to see status of clusters
 $ minikube profile list
+|----------|-----------|------------|--------------|------|---------|---------|-------|
+| Profile  | VM Driver |  Runtime   |      IP      | Port | Version | Status  | Nodes |
+|----------|-----------|------------|--------------|------|---------|---------|-------|
+| kontain  | docker    | containerd | 192.168.58.2 | 8443 | v1.22.2 | Running |     1 |
+|----------|-----------|------------|--------------|------|---------|---------|-------|
 ...
 
 
@@ -41,7 +46,10 @@ Now, to install Kontain runtime in Minikube, we will need to use a Daemonset.  T
 # Deploy Kontain Runtime
 
 ```bash
-$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/k8s-deploy.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/runtime-class.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/cm-install-lib.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/cm-containerd-install.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/kontain-deploy.yaml
 
 # To verify the installation, kontain-deploy should appear.
 $ kubectl get daemonsets.apps -A
@@ -69,7 +77,9 @@ $ kubectl exec -it kontain-test-app-647874765d-7ftrp  -- uname -r
 ```
 
 ### Tip
-To load images built with the local docker on host to minikube, you can use: $ docker save <image_name:tag> | (eval $(minikube -p kontain podman-env) && podman-remote load).
+To load images built with the local docker on host to minikube, you can use: $ docker save <image_name:tag> | (eval $(minikube -p kontain docker-env) && docker load).
+Or, to load images built with the local docker on host to minikube with podman as driver, you can use: $ docker save <image_name:tag> | (eval $(minikube -p kontain podman-env) && podman-remote load).
+
 It gets renamed to localhost/<image_name:tag> in the Minikube "kontain" cluster.  
 
 Now you can use this image in your Kubernetes Deployment Yaml file to deploy the app.
