@@ -25,6 +25,7 @@ $ minikube profile list
 |----------|-----------|------------|--------------|------|---------|---------|-------|
 | kontain  | docker    | containerd | 192.168.58.2 | 8443 | v1.22.2 | Running |     1 |
 |----------|-----------|------------|--------------|------|---------|---------|-------|
+# Note that the above would have podman with "crio" if launched with those as driver and runtime
 ...
 
 
@@ -46,12 +47,21 @@ Now, to install Kontain runtime in Minikube, we will need to use a Daemonset.  T
 # Deploy Kontain Runtime
 
 ```bash
+# For Containerd and Docker use the following yaml files:
 $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/runtime-class.yaml
 $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/cm-install-lib.yaml
 $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/cm-containerd-install.yaml
 $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/kontain-deploy.yaml
 
-# To verify the installation, kontain-deploy should appear.
+# OR
+# For CRI-O and podman use:
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/runtime-class.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/cm-install-lib.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/cm-crio-install.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/kontain-deploy.yaml
+
+
+# To verify the installation, kontain-deploy daemonset should appear
 $ kubectl get daemonsets.apps -A
 NAMESPACE     NAME             DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
 kube-system   kindnet          1         1         1       1            1           <none>                   168m
