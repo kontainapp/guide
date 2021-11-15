@@ -10,7 +10,10 @@ You can install Minikube using the instructions [here](https://minikube.sigs.k8s
 # if you want to delete your "default" minikube cluster
 $ minikube delete
 
-# OR start a new separate cluster named "kontain" with CRI-O runtime and podman as the container driver
+# and, start a new separate cluster named "kontain" with CRI-O runtime and podman as the container driver
+minikube start -p kontain --container-runtime=cri-o --driver=podman
+
+# or as an alternative use CRIO and podmnan as driver
 $ minikube start -p kontain --container-runtime=cri-o --driver=podman
 ...
 Done! kubectl is now configured to use "kontain" cluster and "default" namespace by default
@@ -38,7 +41,7 @@ Now, to install Kontain runtime in Minikube, we will need to use a Daemonset.  T
 # Deploy Kontain Runtime
 
 ```bash
-$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/latest/cloud/k8s/deploy/k8s-deploy.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/k8s-deploy.yaml
 
 # To verify the installation, kontain-deploy should appear.
 $ kubectl get daemonsets.apps -A
@@ -53,7 +56,7 @@ kube-system   kube-proxy       1         1         1       1            1       
 Run a test app to verify Kontain running in Kubernetes.
 
 ```bash
-$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/latest/demo/k8s/test.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/demo/k8s/test.yaml
 
 # A new pod, kontain-test-app-xxxxx should appear.
 $ kubectl get pods -n default
@@ -65,4 +68,12 @@ $ kubectl exec -it kontain-test-app-647874765d-7ftrp  -- uname -r
 5.13.7-100.fc33.x86_64.kontain.KVM
 ```
 
-Tip: To load images built in the local docker registry to minikube, you can use: $ docker save <image_name:tag> | (eval $(minikube podman-env) && podman load)
+### Tip
+To load images built with the local docker on host to minikube, you can use: $ docker save <image_name:tag> | (eval $(minikube -p kontain podman-env) && podman-remote load).
+It gets renamed to localhost/<image_name:tag> in the Minikube "kontain" cluster.  
+
+Now you can use this image in your Kubernetes Deployment Yaml file to deploy the app.
+You can check your images inside Minikube using:
+$ minikube -p kontain ssh
+$ sudo podman images
+...list of images...
