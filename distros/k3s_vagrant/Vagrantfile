@@ -1,0 +1,123 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+# check with virsh first
+# sudo virsh net-dumpxml  default
+
+server_ip = "192.168.122.10"
+
+# not using fixed IPs right now as libvirt provider has not been figured out
+agents = { "agent1" => "192.168.122.20",
+          #  "agent2" => "192.168.122.21",
+          #  "agent3" => "192.168.122.22" 
+    }
+
+#system("virsh net-update my-network add ip-dhcp-host \"<host mac='52:54:00:fb:95:91' ip='10.11.12.13' />\" --live --config")
+
+
+# Extra parameters in INSTALL_K3S_EXEC variable because of
+# K3s picking up the wrong interface when starting server and agent
+# https://github.com/alexellis/k3sup/issues/306
+
+# server_script = <<-SHELL
+#     sudo -i
+#     apk add curl
+#     export INSTALL_K3S_EXEC="--bind-address=#{server_ip} --node-external-ip=#{server_ip} --flannel-iface=eth1"
+#     curl -sfL https://get.k3s.io | sh -
+#     echo "Sleeping for 5 seconds to wait for k3s to start"
+#     sleep 5
+#     cp /var/lib/rancher/k3s/server/token /vagrant
+#     cp /etc/rancher/k3s/k3s.yaml /vagrant
+#     SHELL
+
+# agent_script = <<-SHELL
+#     sudo -i
+#     apk add curl
+#     export K3S_TOKEN_FILE=/vagrant/token
+#     export K3S_URL=https://#{server_ip}:6443
+#     export INSTALL_K3S_EXEC="--flannel-iface=eth1"
+#     curl -sfL https://get.k3s.io | sh -
+#     SHELL
+
+server_script = <<-SHELL
+    sudo -i
+    # echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
+    #hostname -I | cut -d' ' -f2 2>/dev/null > /vagrant/SERVER1_IP
+    hostname -I | cut -d' ' -f2 2>/dev/null > /vagrant/SERVER_IP
+    chmod +x /dev/kvm
+    sed 's/DNSSEC=yes/DNSSEC=no/1'  /etc/systemd/resolved.conf | sudo tee /etc/systemd/resolved.conf
+    systemctl restart systemd-resolved.service
+    apt-get -y update
+    # install k3s
+    # mkdir -p /opt/kontain/bin
+    # cp /vagrant/kontain-artifacts/km/km /opt/kontain/bin/
+    # cp /vagrant/kontain-artifacts/container-runtime/krun /opt/kontain/bin/
+    # cp /vagrant/kontain-artifacts/cloud/k8s/deploy/shim/containerd-shim-krun-v2 /usr/local/bin/
+
+    curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s -
+    # cp /vagrant/config_toml_tmpl/config.toml.tmpl /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl
+    systemctl restart k3s.service
+    SHELL
+
+agent_script = <<-SHELL
+    sudo -i
+    # echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
+    hostname -I | cut -d' ' -f2 2>/dev/null > /vagrant/AGENT1_IP
+    chmod +x /dev/kvm
+    sed 's/DNSSEC=yes/DNSSEC=no/1'  /etc/systemd/resolved.conf | sudo tee /etc/systemd/resolved.conf
+    sudo systemctl restart systemd-resolved.service
+    sudo apt-get -y update
+    SHELL
+
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "generic/ubuntu1804" #"generic/alpine314"
+
+  config.vm.define "server", primary: true do |server|
+    server.vm.network :public_network, ip: server_ip, dev: "virbr0", mode: "bridge", type: "bridge"
+    server.vm.synced_folder "./shared", "/vagrant", type: "rsync",
+      rsync__exclude: ".git/"
+
+    # add ssh - hangs
+    # config.ssh.private_key_path = "~/.ssh/id_rsa"
+    # config.ssh.forward_agent = true
+
+    server.vm.hostname = "server"
+    server.vm.provider "libvirt" do |vb|
+      vb.nested = true
+      vb.cpu_mode = "host-passthrough"
+      vb.memory = "2048"
+      vb.cpus = "2"
+
+      # turn off inputs
+      vb.inputs = []
+    end
+
+    args = []
+    # server.vm.provision "shell", inline: server_script
+    server.vm.provision "k3s shell script", type: "shell",
+        path: "scripts/k3s_server_provisioning.sh",
+        args: args
+  end
+
+  agents.each do |agent_name, agent_ip|
+    config.vm.define agent_name do |agent|
+      agent.vm.network :public_network, ip: agent_ip, dev: "virbr0", mode: "bridge", type: "bridge"
+      agent.vm.synced_folder "./shared", "/vagrant", type: "rsync",
+        rsync__exclude: ".git/"
+
+      agent.vm.hostname = agent_name
+      agent.vm.provider "libvirt" do |vb|
+        vb.nested = true
+        vb.cpu_mode = "host-passthrough"
+        vb.memory = "1024"
+        vb.cpus = "2"
+      end
+
+      # agent.vm.provision "shell", inline: agent_script
+      args = []
+      agent.vm.provision "k3s agent shell script", type: "shell",
+      path: "scripts/k3s_agent_provisioning.sh",
+      args: args
+  end
+  end
+end
