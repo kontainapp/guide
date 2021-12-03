@@ -31,3 +31,9 @@ All deployed!! to leverage the new cluster you can do one of the following:
 or
 2. you can add this as a new context ./shared/server_details/kubeconfig to your config at .kube config
 ```
+
+# configuring kubectl to use the new cluster
+```bash
+$ export KUBECONFIG=./shared/server_details/kubeconfig
+$ kubectl get po
+```
