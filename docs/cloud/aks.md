@@ -1,2 +1,2 @@
 # Description
-[static krun](/files/krun)
+[static krun](/files/krun-linux-amd64)
