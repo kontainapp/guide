@@ -7,6 +7,8 @@ npm-debug.log
 .nyc
 .env
 
+# retype
+.retype/
 
 #-------------
 # Python

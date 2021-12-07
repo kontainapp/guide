@@ -1,7 +1,7 @@
 input: .
 output: .retype
 url: # Add your website address here
-favicon: /images/kon.png
+# favicon: /images/kon.png
 branding:
   title: Kontain User Guide
   label: v0.1
