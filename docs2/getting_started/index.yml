@@ -1,0 +1,5 @@
+icon: gear
+order: 1000
+expanded: true
+Label: Getting Started
+#visibility: hidden or use _ in front of folder name

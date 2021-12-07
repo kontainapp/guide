@@ -1,0 +1,5 @@
+icon: gear
+order: 900
+expanded: true
+Label: Appendix
+#visibility: hidden or use _ in front of folder name
