@@ -1,18 +1,20 @@
 ---
 label: Install
 icon: gear
-order: 900
+order: 1000
 ---
 
 # Install
-*Pre-requisites:* Kontain runs on Linux kernel version 4.15 or newer, running on Intel VT (vmx) or AMD (svm) with virtualization enabled. For enabling KVM on Ubuntu 18.04 or higher, you can refer to this [article](https://linuxize.com/post/how-to-install-kvm-on-ubuntu-18-04/).
+### Pre-requisites
+Kontain runs on Linux kernel version 4.15 or newer, running on Intel VT (vmx) or AMD (svm) with virtualization enabled. For enabling KVM on Ubuntu 18.04 or higher, you can refer to this [article](https://linuxize.com/post/how-to-install-kvm-on-ubuntu-18-04/).
 
 Recommended distros are Ubuntu 20.04 and Fedora 32, or newer.  Note that this also assumes that your user has access to /dev/kvm.
 
 To package Kontain images, it is also necessary to have a recent version of Docker or Moby-engine is installed.
 
+### Environments
 +++ Local (Docker)
-#### check for pre-requisites
+##### check for pre-requisites
 ```shell
 $ verify that you have a 64-bit Linux kernel version 4.15 or higher
 $ uname -m
@@ -32,7 +34,7 @@ $ systemctl|grep docker.service
   docker.service                                                                            loaded active running   Docker Application Container Engine
 ```
 
-#### install Kontain
+##### install Kontain
 ```shell
 # create the kontain folder for install
 $ sudo mkdir -p /opt/kontain ; sudo chown root /opt/kontain
@@ -74,7 +76,7 @@ drwxr-xr-x 1 smijar  121 194 Nov 10 09:32 runtime
 
 This installs the necessary files in your /opt/kontain directory and configures the Kontain runtime (/opt/bin/km) for docker or podman. It also executes a smoke test of the unikernel virtual machine.
 
-+++ On Managed or Regular Kubernetes
++++ on Minikube or Managed or Regular Kubernetes
 ##### Check for pre-requisites on Kubernetes Worker Nodes
 You will need to verify pre-requisites on Kubernetes Nodes.  This applies for both Managed Kubernetes and Regular Kubernetes nodes.
 
@@ -118,6 +120,7 @@ kube-system   kube-proxy       1         1         1       1            1       
 ```
 
 +++ On a K3s Edge Cluster
+##### Check for pre-requisites on Kubernetes Worker Nodes
 You will need to verify pre-requisites on Kubernetes Nodes.  This applies for both Managed Kubernetes and Regular Kubernetes nodes.
 
 ```shell

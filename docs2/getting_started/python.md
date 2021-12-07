@@ -1,7 +1,7 @@
 ---
 label: Python Flask
 icon: gear
-order: 800
+order: 900
 ---
 
 Below is a short example of bundling a python microservice in a Kontain-based Container with Docker:

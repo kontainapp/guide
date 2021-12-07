@@ -4,6 +4,7 @@ icon: home
 ---
 
 # Introduction
+## Kontain
 “Inside every large program is a small program struggling to get out.”
 — Tony Hoare
 
@@ -24,6 +25,7 @@ To use Kontain, view the [Install Guide](/gettingstarted/install)
 <!-- ![test](images/vms-ctrs-unikernels.png) -->
 ![test](/images/kontain_vs_containers.gif)
 
+## A new approach (with no change in code or DevOps tooling)
 A new approach to Containers but fully integrated with Docker and Kubernetes.
 With the current ongoing tectonic shift to cloud-based shared tenant, microservice based architectures, where containers, VMs all run on shared cloud hardware, it is time that these microservices are packaged into strongly isolated, secure, specialized packages that only includes the application code and just the required OS code and nothing more to run fast and securely on the shared multi-tenant cloud hardware with strong isolation.  It almost literally packages and employs only the functions needed to make an application work, and nothing more.
 
@@ -44,6 +46,7 @@ Scale to zero with instantaneous startup time
 * Edge computing
 * Anyplace where security, speed, cost and resource constraints are a high priority
 
+## Fast, secure, minimal resources
 You can watch the video from [Abhay Bhargav](https://www.abhaybhargav.com), the founder of Application Security Company, we45, talk about security aspects of Containers and Unikernels.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/V5g50QiGArc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

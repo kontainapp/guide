@@ -1,16 +1,17 @@
 ---
-label: Docker Compose Example
+label: Docker Compose (Python Flask)
 icon: gear
-order: 500
+order: 800
 ---
 
 ## Usage with Docker-compose
 Below we show how Kontain works with Docker compose as well just like regular Docker images.  We extend the [Python Flask Microservice example](/gettingstarted/python_flask) to build and run it using Docker compose and invoke the http microservice using curl.
 
-Below is the Docker Compose file for running the Kontain-based micoservice.  Please note the use of the *runtime* stanza in the Docker Compose yaml.  This indicates to Docker compose to run this microservice using the **Kontain (krun)** runtime, rather than the default **runc** runtime.
 
 ## Docker Compose file
-docker-compose.yml:
+Below is the Docker Compose file for running the Kontain-based micoservice.  Please note the use of the *runtime* stanza in the Docker Compose yaml.  This indicates to Docker compose to run this microservice using the **Kontain (krun)** runtime, rather than the default **runc** runtime.
+
+##### docker-compose.yml:
 ```yaml
 version: "3"
 
