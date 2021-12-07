@@ -14,6 +14,9 @@ To package Kontain images, it is also necessary to have a recent version of Dock
 
 ### Environments
 +++ Local (Docker)
+##### Optional: Install for Docker
+If not present, you can install Docker On Fedora/RHEL systems using [instructions from here](https://developer.fedoraproject.org/tools/docker/docker-installation.html)
+
 ##### check for pre-requisites
 ```shell
 $ verify that you have a 64-bit Linux kernel version 4.15 or higher
@@ -77,6 +80,9 @@ drwxr-xr-x 1 smijar  121 194 Nov 10 09:32 runtime
 This installs the necessary files in your /opt/kontain directory and configures the Kontain runtime (/opt/bin/km) for docker or podman. It also executes a smoke test of the unikernel virtual machine.
 
 +++ on Minikube or Managed or Regular Kubernetes
+##### Optional: Installing Minikube
+As a convenience for testing Kontain in a desktop version of Kubernetes, you can use Minikube in Docker [view instructions here](/appendix/minikube/) before continuing.
+
 ##### Check for pre-requisites on Kubernetes Worker Nodes
 You will need to verify pre-requisites on Kubernetes Nodes.  This applies for both Managed Kubernetes and Regular Kubernetes nodes.
 
