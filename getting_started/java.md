@@ -1,6 +1,6 @@
 ---
 label: Java
-icon: gear
+icon: /images/java.png
 order: 600
 ---
 

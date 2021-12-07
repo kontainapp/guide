@@ -1,6 +1,6 @@
 ---
 label: Docker Integration Overview
-icon: gear
+icon: /images/docker.png
 order: 1000
 ---
 

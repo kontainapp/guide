@@ -1,12 +1,21 @@
 input: .
 output: .retype
 url: https://kontainapp.github.io/guide/
+favicon: images/favicon.png
+
 # favicon: /images/kon.png
 branding:
   title: Kontain User Guide
   label: v0.1
+  logo: /images/logo2.png
+
 links:
-- text: Getting Started
-  link: https://kontainapp.github.io/guide/getting_started/install/
+- text: Kontain
+  link: https://kontain.app
+  icon: home
+- text: GitHub
+  link: https://github.com/kontainapp/km
+  icon: mark-github
+
 footer:
   copyright: "&copy; Copyright Kontain {{ year }}. All rights reserved."

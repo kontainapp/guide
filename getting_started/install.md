@@ -1,6 +1,6 @@
 ---
-label: Install
-icon: gear
+label: Install (Local, Docker, Kubernetes)
+icon: /images/docker-kube.png
 order: 1000
 ---
 

@@ -1,6 +1,6 @@
 ---
 label: Docker Compose (Python Flask)
-icon: gear
+icon: /images/compose.png
 order: 800
 ---
 

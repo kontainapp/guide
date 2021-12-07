@@ -1,6 +1,6 @@
 ---
 label: Kubernetes Integration Overview
-icon: gear
+icon: /images/k8s.png
 order: 900
 ---
 

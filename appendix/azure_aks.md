@@ -1,5 +1,5 @@
 ---
 label: Azure AKS
-icon: gear
+icon: /images/aks.png
 order: 700
 ---

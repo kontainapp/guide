@@ -1,5 +1,5 @@
 ---
 label: Minikube
-icon: gear
+icon: /images/minikube.png
 order: 800
 ---

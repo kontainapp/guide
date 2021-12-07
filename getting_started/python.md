@@ -1,6 +1,6 @@
 ---
 label: Python Flask
-icon: gear
+icon: /images/python.png
 order: 900
 ---
 

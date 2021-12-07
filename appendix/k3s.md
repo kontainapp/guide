@@ -1,5 +1,5 @@
 ---
 label: k3s
-icon: gear
+icon: /images/k3s.png
 order: 600
 ---

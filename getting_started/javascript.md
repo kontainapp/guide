@@ -1,6 +1,6 @@
 ---
 label: Javascript and Node (ExpressJS)
-icon: gear
+icon: /images/Expressjs.svg
 order: 700
 ---
 

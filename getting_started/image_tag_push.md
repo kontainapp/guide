@@ -1,6 +1,6 @@
 ---
 label: Image Tagging and Image Registry
-icon: gear
+icon: /images/docker.png
 order: 300
 ---
 

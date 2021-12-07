@@ -1,6 +1,6 @@
 ---
 label: Language Runtime Images
-icon: gear
+icon: /images/docker.png
 order: 400
 ---
 
