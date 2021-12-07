@@ -1,6 +1,7 @@
 input: .
 output: .retype
 url: # Add your website address here
+favicon: /images/kon.png
 branding:
   title: Kontain User Guide
   label: v0.1
@@ -8,4 +9,4 @@ links:
 - text: Getting Started
   link: https://retype.com/guides/getting-started/
 footer:
-  copyright: "&copy; Copyright {{ year }}. All rights reserved."
+  copyright: "&copy; Copyright Kontain {{ year }}. All rights reserved."
