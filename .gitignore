@@ -691,7 +691,9 @@ $RECYCLE.BIN/
 *_LOCAL_*.txt
 *_REMOTE_*.txt
 
+
 # kontain artifacts
 kontain-artifacts/
 shared/
 .vagrant/
+kontain_bin.tar.gz

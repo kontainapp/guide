@@ -1,0 +1,28 @@
+apiVersion: k3d.io/v1alpha3
+kind: Simple
+volumes:
+  - volume: /home/smijar/dev/investigate/k3d/kontain-artifacts/config_toml_tmpl/config.toml.tmpl:/var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl
+    nodeFilters:
+      - server:0
+      - agent:*
+  - volume: /home/smijar/dev/investigate/k3d/kontain-artifacts/cloud/k8s/deploy/shim/containerd-shim-krun-v2:/bin/containerd-shim-krun-v2 
+    nodeFilters:
+      - server:0
+      - agent:*
+  - volume: /home/smijar/dev/investigate/k3d/kontain-artifacts/container-runtime/krun:/opt/kontain/bin/krun
+    nodeFilters:
+      - server:0
+      - agent:*
+  - volume: /home/smijar/dev/investigate/k3d/kontain-artifacts/km/km:/opt/kontain/bin/km
+    nodeFilters:
+      - server:0
+      - agent:*
+options:
+  k3d:
+    disableRollback: true
+  k3s:
+    extraArgs:
+      - arg: --kube-proxy-arg=conntrack-max-per-core=0
+        nodeFilters:
+          - server:*
+          - agent:*

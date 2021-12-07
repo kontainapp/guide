@@ -1,0 +1,1 @@
+vagrant ssh server -c "hostname -I" 2>/dev/null | cut -d' ' -f2
