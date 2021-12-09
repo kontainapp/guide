@@ -13,11 +13,7 @@ For this, Kontain needs a minimum version of Minikube, which can be installed fr
 
 to start Minikube use:
 ```shell
-$ minikube start 
-# or
-$ minikube start --container-runtime=containerd --driver=docker --wait=all
-# or (to start a cluster named 'kontain')
-$ minikube start -p kontain 
+$ minikube start --container-runtime=cri-o --driver=podman --wait=all
 
 # to see status of cluster (s) - cluster name is 'default'
 $ minikube profile list

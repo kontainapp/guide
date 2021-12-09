@@ -4,7 +4,7 @@ icon: /images/aks.png
 order: 700
 ---
 
-# Using Kontain in AKS
+# Using Kontain in Azure AKS
 Below we describe how we can launch and use Kontain in an Azure AKS (Kubernetes) cluster.
 
 ##### Starting up an AKS cluster
@@ -26,17 +26,21 @@ $ az account set --subscription "<your-subscription-id>"
 ```
 Note: This approach may not work with Microsoft accounts or accounts that have two-factor authentication enabled.
 
-+++ Start a Kubernetes (AKS) cluster
++++ AKS Kubernetes cluster with ***Nested*** Virtualization
 Below is an example of starting a kubernetes cluster in US-West region 1.
 
-We use an instance that enables use of "Nested" Virutalization using KVM, and in case of Azure, the minimum instance that enables this is "Standard_D4s_v3".
+As a reference, the various instances available in Azure are outlined [here](https://docs.microsoft.com/en-us/azure/virtual-machines/dv3-dsv3-series).
+
+We use an instance type that enables use of **"Nested"** Virutalization using KVM, and in case of Azure, the minimum instance that enables this is "Standard_D4s_v3".
+
 
 ```
-# create a resource using which you can dispose of your cluster later
-az group create --name kdocs --location westus2
+# create a Resource Group using which you can dispose of your cluster later
+# a Resource Group is like a project, a grouping of all resources used for sake of billing
+$ az group create --name kdocs --location westus2
 
-# create a 1 node cluster for testing with an instance that enables nested virutalization using KVM
-az aks create \
+# Initially, create a 1 node cluster for testing with an instance that enables nested virutalization using KVM
+$ az aks create \
 -g kdocs \
 -n kdocscluster \
 --enable-managed-identity \
@@ -48,9 +52,10 @@ az aks create \
 # --network-plugin kubenet
 # --enable-addons monitoring
 
-# takes a little time to start
+# wait for a bit, as it takes a little time to start
+# Now, you are ready for testing Kontain
 
-# if you want to add a node with nested virtualization turned on, add custom node
+# Now, ONLY if you want to add additional nodes using a node pool with nested virtualization turned on, add a custom node
 $ az aks nodepool add \
 --resource-group kdocs \
 --cluster-name kdocscluster \
@@ -67,15 +72,18 @@ $ az aks get-credentials --resource-group kdocs --name kdocscluster
 
 # check the nodes
 $ kubectl get nodes -o wide
-
-
-# after using it
-# to delete the nodepool
-$ az aks nodepool delete --resource-group kdocs --cluster-name kdocscluster --name nested
-
-# to delete cluster
-$ az group delete --name kdocs --yes #--no-wait
 ```
 
-+++ Installing Kontain in Azure AKS
-You can follow instructions from [here](/guide/getting_started/install/#on-minikube-or-managed-or-regular-kubernetes) to use Kontain in Azure AKS.
++++ Install Kontain
+You can follow instructions from [here](/guide/getting_started/install/#on-minikube-or-managed-or-regular-kubernetes) to install Kontain in a Azure AKS cluster.
+
++++ Clean up
+```
+#--------
+# clean up after using it
+# to delete the nodepool only use:
+$ az aks nodepool delete --resource-group kdocs --cluster-name kdocscluster --name nested
+
+# to delete cluster and corresponding, delete the resource group itself
+$ az group delete --name kdocs --yes #--no-wait
+```

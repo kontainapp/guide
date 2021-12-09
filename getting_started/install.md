@@ -81,7 +81,7 @@ This installs the necessary files in your /opt/kontain directory and configures 
 
 +++ on Minikube or Managed or Regular Kubernetes
 ##### Optional: Installing Minikube
-As a convenience for testing Kontain in a desktop version of Kubernetes, you can use Minikube in Docker [view instructions here](/appendix/minikube/) before continuing.
+As a convenience for testing Kontain on a desktop version of Kubernetes, you can use Minikube in Docker [view instructions here](/appendix/minikube/) before continuing.
 
 ##### Check for pre-requisites on Kubernetes Worker Nodes
 You will need to verify pre-requisites on Kubernetes Nodes.  This applies for both Managed Kubernetes and Regular Kubernetes nodes.
@@ -103,7 +103,7 @@ $ cat /proc/cpuinfo| egrep "vmx|svm" | wc -l
 $ ls -l /dev/kvm
 ```
 
-##### Install Kontain using Daemonset
+##### Install Kontain using Daemonset if using Containerd (runtime)
 Deploy Kontain Runtime using the Kubernetes client CLI
 
 ```shell
@@ -124,6 +124,27 @@ kube-system   kindnet          1         1         1       1            1       
 kube-system   kube-proxy       1         1         1       1            1           kubernetes.io/os=linux   168m
 
 ```
+
+##### If using CRIO (runtime)
+```shell
+# For Containerd runtime, use the following yaml files:
+# install the runtime class
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/runtime-class.yaml
+# install configmaps
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/cm-install-lib.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/cm-containerd-install.yaml
+# deploy Kontain runtime using kustomize
+$ kubectl apply -k https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/base
+
+# To verify the installation, check for kontain-deploy daemonset should appear
+$ kubectl get daemonsets.apps -A
+NAMESPACE     NAME             DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+kube-system   kontain-deploy   1         1         1       1            1           <none>                   163m
+kube-system   kindnet          1         1         1       1            1           <none>                   168m
+kube-system   kube-proxy       1         1         1       1            1           kubernetes.io/os=linux   168m
+
+```
+
 
 +++ On a K3s Edge Cluster
 ##### Check for pre-requisites on Kubernetes Worker Nodes
