@@ -74,6 +74,7 @@ $ az aks get-credentials --resource-group kdocs --name kdocscluster
 $ kubectl get nodes -o wide
 ```
 
+
 +++ Install Kontain
 You can follow instructions from [here](/guide/getting_started/install/#on-minikube-or-managed-or-regular-kubernetes) to install Kontain in a Azure AKS cluster.
 

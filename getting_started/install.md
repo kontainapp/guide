@@ -87,8 +87,14 @@ As a convenience for testing Kontain on a desktop version of Kubernetes, you can
 You will need to verify pre-requisites on Kubernetes Nodes.  This applies for both Managed Kubernetes and Regular Kubernetes nodes.
 
 ```shell
-# ssh into the Kubernetes nodes where you want to test Kontain
-$ verify that you have a 64-bit Linux kernel version 4.15 or higher
+# to ssh into the Kubernetes nodes where you want to test Kontain
+# This command starts a privileged container on your node and connects to it over SSH
+$ kubectl debug node/<nodeid> --image=busybox
+or
+$ kubectl debug node<nodeid> image=mcr.microsoft.com/aks/fundamental/base-ubuntu:v0.0.11
+
+
+# verify that you have a 64-bit Linux kernel version 4.15 or higher
 $ uname -m
 x86_64
 

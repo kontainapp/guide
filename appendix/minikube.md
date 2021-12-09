@@ -1,5 +1,5 @@
 ---
-label: Minikube
+label: Minikube (Containerd)
 icon: /images/minikube.png
 order: 800
 ---
@@ -11,7 +11,7 @@ Minikube is a great little Kubernetes distribution that can be used to verify Ko
 ### Start Minikube in Docker in Docker mode (DIND)
 For this, Kontain needs a minimum version of Minikube, which can be installed from [here](https://minikube.sigs.k8s.io/docs/start/)
 
-to start Minikube use:
+To start Minikube use:
 ```shell
 $ minikube start 
 # or
