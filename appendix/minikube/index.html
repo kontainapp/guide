@@ -26,12 +26,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.1.692233508135" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.1.692345782343" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.1.692233508135" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.1.692345782343" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.1" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.1.692233508135" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.1.692233508135" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.1.692345782343" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.1.692345782343" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -216,6 +216,9 @@
     </h2>
 </doc-anchor-target>
 <p>Minikube is a great little Kubernetes distribution that can be used to verify Kontain working with Vanilla Kubernetes distributions.  Usually, Minikube comes with VirtualBox in order to create the relevant Kubernetes Master and Worker nodes.  But, Minikube can also launch in Docker in Docker (DIND) mode, where it launches quickly in Docker, where the Master and Worker nodes are plain Docker containers.</p>
+<doc-tabs>
+<doc-tab id="starting-minikube">
+<template #title>starting Minikube</template>
 <doc-anchor-target id="start-minikube-in-docker-in-docker-mode-dind">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#start-minikube-in-docker-in-docker-mode-dind">#</doc-anchor-trigger>
@@ -246,6 +249,11 @@ kube-system   kindnet-d7xwr                       1/1     Running   0          2
 kube-system   kube-apiserver-minikube             1/1     Running   0          2d21h</code></pre>
 </doc-codeblock></div>
 <p>Now we can use the <a href="/guide/getting_started/install/#on-minikube-or-managed-or-regular-kubernetes">instructions here</a> to install and use Kontain.</p>
+</doc-tab>
+<doc-tab id="kontain-in-minikube">
+<template #title>Kontain in Minikube</template>
+<p>You can follow instructions from <a href="/guide/getting_started/install/#on-minikube-or-managed-or-regular-kubernetes">here</a> to use Kontain in Minikube.</p>
+</doc-tab>
 
 
 
