@@ -26,12 +26,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.1.692345782343" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.1.692386948936" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.1.692345782343" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.1.692386948936" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.1" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.1.692345782343" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.1.692345782343" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.1.692386948936" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.1.692386948936" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -217,8 +217,8 @@
 </doc-anchor-target>
 <p>Minikube is a great little Kubernetes distribution that can be used to verify Kontain working with Vanilla Kubernetes distributions.  Usually, Minikube comes with VirtualBox in order to create the relevant Kubernetes Master and Worker nodes.  But, Minikube can also launch in Docker in Docker (DIND) mode, where it launches quickly in Docker, where the Master and Worker nodes are plain Docker containers.</p>
 <doc-tabs>
-<doc-tab id="starting-minikube">
-<template #title>starting Minikube</template>
+<doc-tab id="starting-a-minikube-cluster">
+<template #title>Starting a Minikube cluster</template>
 <doc-anchor-target id="start-minikube-in-docker-in-docker-mode-dind">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#start-minikube-in-docker-in-docker-mode-dind">#</doc-anchor-trigger>
@@ -231,13 +231,15 @@
 <pre class="language-bash"><code v-pre class="language-bash">$ minikube start 
 # or
 $ minikube start --container-runtime=containerd --driver=docker --wait=all
+# or (to start a cluster named 'kontain')
+$ minikube start -p kontain 
 
-# to see status of cluster
+# to see status of cluster (s) - cluster name is 'default'
 $ minikube profile list
 |----------|-----------|------------|--------------|------|---------|---------|-------|
 | Profile  | VM Driver |  Runtime   |      IP      | Port | Version | Status  | Nodes |
 |----------|-----------|------------|--------------|------|---------|---------|-------|
-| kontain  | docker    | containerd | 192.168.58.2 | 8443 | v1.22.2 | Running |     1 |
+| default  | docker    | containerd | 192.168.58.2 | 8443 | v1.22.2 | Running |     1 |
 |----------|-----------|------------|--------------|------|---------|---------|-------|
 
 # check if the kube-system pods have launched properly
@@ -250,9 +252,18 @@ kube-system   kube-apiserver-minikube             1/1     Running   0          2
 </doc-codeblock></div>
 <p>Now we can use the <a href="/guide/getting_started/install/#on-minikube-or-managed-or-regular-kubernetes">instructions here</a> to install and use Kontain.</p>
 </doc-tab>
-<doc-tab id="kontain-in-minikube">
-<template #title>Kontain in Minikube</template>
+<doc-tab id="install-kontain">
+<template #title>Install Kontain</template>
 <p>You can follow instructions from <a href="/guide/getting_started/install/#on-minikube-or-managed-or-regular-kubernetes">here</a> to use Kontain in Minikube.</p>
+</doc-tab>
+<doc-tab id="clean-up">
+<template #title>Clean up</template>
+<p>You can remove the Minikube cluster by using the following:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">$ minikube delete
+or 
+$ minikube delete -p &lt;default&gt;</code></pre>
+</doc-codeblock></div>
 </doc-tab>
 
 
@@ -275,10 +286,10 @@ kube-system   kube-apiserver-minikube             1/1     Running   0          2
     </div>
 
     <div class="w-1/2">
-        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/guide/appendix/azure_aks/">
+        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/guide/appendix/minikube_crio/">
             <span>
                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                <span class="block mt-1">Azure AKS</span>
+                <span class="block mt-1">Minikube</span>
             </span>
             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
         </a>

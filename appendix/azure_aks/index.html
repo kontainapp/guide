@@ -7,31 +7,31 @@
     <meta name="turbo-cache-control" content="no-cache">
 
     <!-- Primary Meta Tags -->
-    <title>Using Kontain in AKS</title>
-    <meta name="title" content="Using Kontain in AKS">
+    <title>Using Kontain in Azure AKS</title>
+    <meta name="title" content="Using Kontain in Azure AKS">
     <meta name="description" content="Below we describe how we can launch and use Kontain in an Azure AKS (Kubernetes) cluster." />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kontainapp.github.io/guide/appendix/azure_aks/">
-    <meta property="og:title" content="Using Kontain in AKS">
+    <meta property="og:title" content="Using Kontain in Azure AKS">
     <meta property="og:description" content="Below we describe how we can launch and use Kontain in an Azure AKS (Kubernetes) cluster.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://kontainapp.github.io/guide/appendix/azure_aks/">
-    <meta property="twitter:title" content="Using Kontain in AKS">
+    <meta property="twitter:title" content="Using Kontain in Azure AKS">
     <meta property="twitter:description" content="Below we describe how we can launch and use Kontain in an Azure AKS (Kubernetes) cluster.">
     
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.1.692345782343" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.1.692386948936" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.1.692345782343" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.1.692386948936" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.1" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.1.692345782343" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.1.692345782343" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.1.692386948936" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.1.692386948936" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -203,10 +203,10 @@
                 <div id="docs-sidebar-right-toggle"></div>
                
                 <!-- Page content  -->
-<doc-anchor-target id="using-kontain-in-aks" class="break-words">
+<doc-anchor-target id="using-kontain-in-azure-aks" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-in-aks">#</doc-anchor-trigger>
-        <span>Using Kontain in AKS</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-in-azure-aks">#</doc-anchor-trigger>
+        <span>Using Kontain in Azure AKS</span>
     </h1>
 </doc-anchor-target>
 <p>Below we describe how we can launch and use Kontain in an Azure AKS (Kubernetes) cluster.</p>
@@ -234,16 +234,18 @@ $ az account set --subscription &quot;&lt;your-subscription-id&gt;&quot;
 </doc-codeblock></div>
 <p>Note: This approach may not work with Microsoft accounts or accounts that have two-factor authentication enabled.</p>
 </doc-tab>
-<doc-tab id="start-a-kubernetes-aks-cluster">
-<template #title>Start a Kubernetes (AKS) cluster</template>
+<doc-tab id="aks-kubernetes-cluster-with-nested-virtualization">
+<template #title>AKS Kubernetes cluster with <em><strong>Nested</strong></em> Virtualization</template>
 <p>Below is an example of starting a kubernetes cluster in US-West region 1.</p>
-<p>We use an instance that enables use of &quot;Nested&quot; Virutalization using KVM, and in case of Azure, the minimum instance that enables this is &quot;Standard_D4s_v3&quot;.</p>
+<p>As a reference, the various instances available in Azure are outlined <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/dv3-dsv3-series">here</a>.</p>
+<p>We use an instance type that enables use of <strong>&quot;Nested&quot;</strong> Virutalization using KVM, and in case of Azure, the minimum instance that enables this is &quot;Standard_D4s_v3&quot;.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none"># create a resource using which you can dispose of your cluster later
-az group create --name kdocs --location westus2
+<pre class="language-none"><code v-pre class="language-none"># create a Resource Group using which you can dispose of your cluster later
+# a Resource Group is like a project, a grouping of all resources used for sake of billing
+$ az group create --name kdocs --location westus2
 
-# create a 1 node cluster for testing with an instance that enables nested virutalization using KVM
-az aks create \
+# Initially, create a 1 node cluster for testing with an instance that enables nested virutalization using KVM
+$ az aks create \
 -g kdocs \
 -n kdocscluster \
 --enable-managed-identity \
@@ -255,9 +257,10 @@ az aks create \
 # --network-plugin kubenet
 # --enable-addons monitoring
 
-# takes a little time to start
+# wait for a bit, as it takes a little time to start
+# Now, you are ready for testing Kontain
 
-# if you want to add a node with nested virtualization turned on, add custom node
+# Now, ONLY if you want to add additional nodes using a node pool with nested virtualization turned on, add a custom node
 $ az aks nodepool add \
 --resource-group kdocs \
 --cluster-name kdocscluster \
@@ -273,20 +276,24 @@ $ az aks list -o table
 $ az aks get-credentials --resource-group kdocs --name kdocscluster
 
 # check the nodes
-$ kubectl get nodes -o wide
-
-
-# after using it
-# to delete the nodepool
-$ az aks nodepool delete --resource-group kdocs --cluster-name kdocscluster --name nested
-
-# to delete cluster
-$ az group delete --name kdocs --yes #--no-wait</code></pre>
+$ kubectl get nodes -o wide</code></pre>
 </doc-codeblock></div>
 </doc-tab>
-<doc-tab id="installing-kontain-in-azure-aks">
-<template #title>Installing Kontain in Azure AKS</template>
-<p>You can follow instructions from <a href="/guide/getting_started/install/#on-minikube-or-managed-or-regular-kubernetes">here</a> to use Kontain in Azure AKS.</p>
+<doc-tab id="install-kontain">
+<template #title>Install Kontain</template>
+<p>You can follow instructions from <a href="/guide/getting_started/install/#on-minikube-or-managed-or-regular-kubernetes">here</a> to install Kontain in a Azure AKS cluster.</p>
+</doc-tab>
+<doc-tab id="clean-up">
+<template #title>Clean up</template>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">#--------
+# clean up after using it
+# to delete the nodepool only use:
+$ az aks nodepool delete --resource-group kdocs --cluster-name kdocscluster --name nested
+
+# to delete cluster and corresponding, delete the resource group itself
+$ az group delete --name kdocs --yes #--no-wait</code></pre>
+</doc-codeblock></div>
 </doc-tab>
 
 
@@ -299,7 +306,7 @@ $ az group delete --name kdocs --yes #--no-wait</code></pre>
             
 <nav class="flex mt-14">
     <div class="w-1/2">
-        <a class="px-5 py-4 h-full flex items-center break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/guide/appendix/minikube/">
+        <a class="px-5 py-4 h-full flex items-center break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/guide/appendix/minikube_crio/">
             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
             <span>
                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
