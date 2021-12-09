@@ -1,0 +1,192 @@
+#-------------------------------------------------------------
+# Fedora34 based Vagrant box
+# --------------------------
+# This is a Vagrantfile that installs azure, aws, gcloud CLIs
+#      along with pyenv, sdkman (for java), golang, nodejs
+#       minikube, kind, k3s
+#-------------------------------------------------------------
+vm_script = <<-SHELL
+    # sudo -i
+    # echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
+    # set -euxo pipefail
+    set -euxo pipefail
+
+    sudo chmod +x /dev/kvm
+    sudo lscpu | grep Virtualization
+
+    sudo dnf update -y
+
+    # install docker
+    echo "installing Docker CE"
+    sudo dnf remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-selinux \
+                  docker-engine-selinux \
+                  docker-engine -y
+
+    sudo dnf install dnf-plugins-core -y
+
+    sudo dnf config-manager \
+    --add-repo \
+    https://download.docker.com/linux/fedora/docker-ce.repo
+
+    sudo dnf install docker-ce docker-ce-cli containerd.io -y
+
+    # install qemu-kvm and libvirt
+    echo "installing qemu-kvm and libvirt"
+    sudo dnf install qemu-kvm libvirt libguestfs-tools virt-install rsync -y
+    #sudo dnf install @virtualization # installs the above group
+    sudo usermod --append --groups libvirt $(whoami)
+
+    # enable libvirt service daemon
+    sudo systemctl enable --now libvirtd
+
+    # enable and start docker daemon
+    echo "service enable and start docker"
+    sudo systemctl enable docker
+    if [ groupadd docker ]; then echo "group added"; fi
+    sudo usermod -aG docker $USER
+
+
+    # isntall vagrant
+    sudo dnf install vagrant -y
+
+    # isntall vagrant libvirtd plugin
+    sudo vagrant plugin install vagrant-libvirt
+
+    # install git
+    sudo dnf install git -y
+
+    # install node
+    sudo dnf install nodejs -y
+
+    # install golang
+    sudo dnf -y install go
+
+
+    # install retype
+    sudo npm install retypeapp --global
+
+    # install kubectl
+    cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+    sudo yum install -y kubectl
+
+    # install sdkman and java and maven
+    echo "installing sdkman and java"
+    curl -s "https://get.sdkman.io" | bash
+
+    echo 'source "$HOME/.sdkman/bin/sdkman-init.sh"' | tee -a $HOME/.bash_profile
+
+    # install java and maven
+    # have to do this as the sdkman script has unbounded variable or something
+    set +u
+    source "$HOME/.sdkman/bin/sdkman-init.sh"
+    sdk install java 11.0.11.hs-adpt
+    sdk install maven
+
+    # install 
+    git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+    # for Bash
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
+    echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
+    echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
+
+    # pyenv install 3.9.0
+
+    # k3s
+    # echo "installing k3s single node"
+    # to install single node k3s worker, agent locally
+    # https://rancher.com/docs/k3s/latest/en/quick-start/
+    #
+    # curl -sfL https://get.k3s.io | sh -
+    # curl -sfL https://get.k3s.io | K3S_URL=https://myserver:6443 K3S_TOKEN=mynodetoken sh -
+    # A kubeconfig file will be written to /etc/rancher/k3s/k3s.yaml
+    # K3S_URL parameter causes K3s to run in worker mode. The K3s agent will register with the K3s server listening at the supplied URL
+    # value K3S_TOKEN is stored at /var/lib/rancher/k3s/server/node-token
+    # Note: Each machine must have a unique hostname. If your machines do not have unique hostnames, pass the K3S_NODE_NAME environment variable and provide a value with a valid and unique hostname for each node.
+
+    # minikube
+    # https://minikube.sigs.k8s.io/docs/start/
+    curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
+    sudo rpm -ivh minikube-latest.x86_64.rpm
+    # minikube dashboard to launch the dashboard
+
+    # kind
+    # https://kind.sigs.k8s.io/docs/user/quick-start/#installing-with-a-package-manager
+    curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
+    chmod +x ./kind
+    sudo mv ./kind /usr/local/bin/
+
+    # Install AWS CLI
+    # https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+    echo "installing AWS CLI"
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    unzip awscliv2.zip
+    sudo ./aws/install
+
+    # Install Google Cloud CLI
+    # https://cloud.google.com/sdk/docs/install#rpm
+    echo "installing Google Cloud CLI"
+    sudo tee -a /etc/yum.repos.d/google-cloud-sdk.repo << EOM
+[google-cloud-sdk]
+name=Google Cloud SDK
+baseurl=https://packages.cloud.google.com/yum/repos/cloud-sdk-el8-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=0
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
+        https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOM
+
+    sudo dnf install google-cloud-sdk -y
+
+    # install azure-cli
+    # https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=dnf
+    echo "installing Azure CLI"
+    sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+    echo -e "[azure-cli]
+name=Azure CLI
+baseurl=https://packages.microsoft.com/yumrepos/azure-cli
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/azure-cli.repo
+    sudo dnf install azure-cli -y 
+
+
+    SHELL
+
+
+    # https://www.vagrantup.com/docs/disks/usage
+Vagrant.configure("2") do |config|
+  config.vm.define "fedora34" do |h|
+    #h.vm.box = "hashicorp/bionic64"
+    h.vm.box = "fedora/34-cloud-base"
+    h.vm.provider :virtualbox
+
+    h.vm.disk :disk, size: "10GB", primary: true
+
+    h.vm.provider "virtualbox" do |vb|
+      vb.customize ['modifyvm', :id, '--nested-hw-virt', 'on']
+      vb.memory = "6144"
+      vb.cpus = "4"
+      # vb.inputs = []
+    end
+
+    h.vm.synced_folder "~/dev/kontain", "/vagrant/dev/kontain"
+    h.vm.provision "shell", inline: vm_script, privileged: false
+
+  end
+end

@@ -7,6 +7,7 @@ order: 800
 ## Using Kontain in Minikube (in Docker mode for usage without using VirtualBox)
 Minikube is a great little Kubernetes distribution that can be used to verify Kontain working with Vanilla Kubernetes distributions.  Usually, Minikube comes with VirtualBox in order to create the relevant Kubernetes Master and Worker nodes.  But, Minikube can also launch in Docker in Docker (DIND) mode, where it launches quickly in Docker, where the Master and Worker nodes are plain Docker containers.
 
++++ starting Minikube
 ### Start Minikube in Docker in Docker mode (DIND)
 For this, Kontain needs a minimum version of Minikube, which can be installed from [here](https://minikube.sigs.k8s.io/docs/start/)
 
@@ -34,3 +35,6 @@ kube-system   kube-apiserver-minikube             1/1     Running   0          2
 ```
 
 Now we can use the [instructions here](/getting_started/install/#on-minikube-or-managed-or-regular-kubernetes) to install and use Kontain.
+
++++ Kontain in Minikube
+You can follow instructions from [here](/guide/getting_started/install/#on-minikube-or-managed-or-regular-kubernetes) to use Kontain in Minikube.
