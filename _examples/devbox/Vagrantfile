@@ -38,10 +38,14 @@ vm_script = <<-SHELL
     sudo dnf install docker-ce docker-ce-cli containerd.io -y
 
     # install qemu-kvm and libvirt
+    # ref: https://docs.fedoraproject.org/en-US/quick-docs/getting-started-with-virtualization/
     echo "installing qemu-kvm and libvirt"
+    # Note that: $ sudo dnf install @virtualization # installs the below group
     sudo dnf install qemu-kvm libvirt libguestfs-tools virt-install rsync -y
-    #sudo dnf install @virtualization # installs the above group
     sudo usermod --append --groups libvirt $(whoami)
+    # apply changes without logging out
+    sudo newgrp libvirt
+
 
     # enable libvirt service daemon
     sudo systemctl enable --now libvirtd
@@ -51,13 +55,19 @@ vm_script = <<-SHELL
     sudo systemctl enable docker
     if [ groupadd docker ]; then echo "group added"; fi
     sudo usermod -aG docker $USER
+    # apply changes without logging out
+    sudo newgrp docker
 
 
-    # isntall vagrant
-    sudo dnf install vagrant -y
+    # install vagrant and libvirt as provider
+    # https://developer.fedoraproject.org/tools/vagrant/vagrant-libvirt.html
+    # install all requirements for vagrant and libvirt as provider with the group install shown below
+    sudo dnf install @vagrant
 
-    # isntall vagrant libvirtd plugin
-    sudo vagrant plugin install vagrant-libvirt
+    # normally, but @vagrant does everything shown below
+    # sudo dnf install vagrant vagrant-libvirt -y
+    # or
+    # sudo vagrant plugin install vagrant-libvirt
 
     # install git
     sudo dnf install git -y
@@ -151,7 +161,11 @@ gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
         https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOM
 
-    sudo dnf install google-cloud-sdk -y
+    #sudo dnf install google-cloud-sdk -y
+    # 366 throws an error (library on fedora 34, hence have to exclude)
+    # or could use $ export CLOUDSDK_PYTHON=python3
+    sudo dnf install --exclude=google-cloud-sdk-366.0.0-1 google-cloud-sdk
+    echo "please use $ gcloud init --console-only # to continue"
 
     # install azure-cli
     # https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=dnf
