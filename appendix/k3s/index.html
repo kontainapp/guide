@@ -7,27 +7,31 @@
     <meta name="turbo-cache-control" content="no-cache">
 
     <!-- Primary Meta Tags -->
-    <title>k3s</title>
-    <meta name="title" content="k3s">
+    <title>k3s multi-node cluster lab</title>
+    <meta name="title" content="k3s multi-node cluster lab">
+    <meta name="description" content="Below we use Vagrant to start a multi-node K3s cluster to test Kontain in K3s using Vagrant and libvirt as a provider since we are enabling nested..." />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kontainapp.github.io/guide/appendix/k3s/">
-    <meta property="og:title" content="k3s">
+    <meta property="og:title" content="k3s multi-node cluster lab">
+    <meta property="og:description" content="Below we use Vagrant to start a multi-node K3s cluster to test Kontain in K3s using Vagrant and libvirt as a provider since we are enabling nested...">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://kontainapp.github.io/guide/appendix/k3s/">
-    <meta property="twitter:title" content="k3s">
+    <meta property="twitter:title" content="k3s multi-node cluster lab">
+    <meta property="twitter:description" content="Below we use Vagrant to start a multi-node K3s cluster to test Kontain in K3s using Vagrant and libvirt as a provider since we are enabling nested...">
     
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.1.692387992156" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.1.692410243070" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.1.692387992156" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.1.692410243070" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.1" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.1.692387992156" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.1.692410243070" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.1.692410243070" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -199,12 +203,232 @@
                 <div id="docs-sidebar-right-toggle"></div>
                
                 <!-- Page content  -->
-<doc-anchor-target id="k3s" class="break-words">
+<doc-anchor-target id="k3s-multi-node-cluster-lab" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#k3s">#</doc-anchor-trigger>
-        <span>k3s</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#k3s-multi-node-cluster-lab">#</doc-anchor-trigger>
+        <span>k3s multi-node cluster lab</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="overview">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#overview">#</doc-anchor-trigger>
+        <span>Overview</span>
+    </h3>
+</doc-anchor-target>
+<p>Below we use Vagrant to start a multi-node K3s cluster to test Kontain in K3s using Vagrant and libvirt as a provider since we are enabling nested virtualization using KVM.</p>
+<p>A more common use-case is to use VirtualBox as the Vagrant provider, but we haven&#x27;t really so that will be left as an exercise for the user.</p>
+<p>To install Kontain in K3s, we use the instructions from <a href="http://localhost:5000/guide/getting_started/install/#on-a-k3s-edge-cluster">here</a></p>
+<doc-anchor-target id="requirements-for-lab-cluster-with-nested-virtualization">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#requirements-for-lab-cluster-with-nested-virtualization">#</doc-anchor-trigger>
+        <span>Requirements for Lab cluster with nested virtualization</span>
+    </h3>
+</doc-anchor-target>
+<p>We would need a Linux (ideally, Ubuntu or Fedora/Centos) machine with KVM virtualization installed as outlined <a href="https://docs.fedoraproject.org/en-US/quick-docs/getting-started-with-virtualization/">here</a></p>
+<p>After that, we installed Vagrant with libvirt as the provider as outlined <a href="https://developer.fedoraproject.org/tools/vagrant/vagrant-libvirt.html">here</a>.</p>
+<doc-anchor-target id="vagrant-up-helper-script">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#vagrant-up-helper-script">#</doc-anchor-trigger>
+        <span>vagrant up helper script</span>
+    </h3>
+</doc-anchor-target>
+<p>We provide a helper script below to install the server (master/control plane) node at first, and then to install the worker nodes (known as agents).</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">#!/bin/bash
+# up.sh
+set -euxo pipefail
+
+# first, bring up the server
+vagrant up server
+
+sleep 10
+
+# save server details post-provisioning for agent nodes to use
+./scripts/save_server_details.sh
+
+sleep 5
+
+# bring up the agent
+vagrant up agent1
+
+echo &quot;All deployed!! to leverage the new cluster you can do one of the following:&quot;
+echo &quot;you do $ export KUBECONFIG=./shared/server_details/kubeconfig&quot;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="save-server-details-script">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#save-server-details-script">#</doc-anchor-trigger>
+        <span>save server details script</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none"># saver_server_details.sh
+set -euxo pipefail
+
+# get node-token for agent
+vagrant ssh -c &quot;sudo cat /etc/rancher/k3s/k3s.yaml&quot; 2&gt;/dev/null &gt; ./shared/server_details/kubeconfig
+
+# get node-token for agent
+vagrant ssh -c &quot;sudo cat /var/lib/rancher/k3s/server/node-token&quot; 2&gt;/dev/null &gt; ./shared/server_details/node-token
+
+# get IP
+vagrant ssh server -c &quot;hostname -I&quot; 2&gt;/dev/null | cut -d' ' -f2 &gt; ./shared/server_details/server_ip
+
+export SERVER_IP=$(cat ./shared/server_details/server_ip)
+echo $SERVER_IP
+
+# replace IP in kubeconfig
+sed -i 's/127\.0\.0\.1/'&quot;$SERVER_IP&quot;'/g' ./shared/server_details/kubeconfig</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="vagrantfile">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#vagrantfile">#</doc-anchor-trigger>
+        <span>VagrantFile</span>
+    </h3>
+</doc-anchor-target>
+<p>The Vagrant file that stands up both the Server VM and Agent VM (worker node) is given below:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none"># -*- mode: ruby -*-
+# vi: set ft=ruby :
+# check network IP CIDR with virsh first
+# sudo virsh net-dumpxml default (normally: 192.168.122.10)
+
+server_ip = &quot;192.168.122.10&quot;
+
+# not using fixed IPs right now as libvirt provider has not been figured out
+agents = { &quot;agent1&quot; =&gt; &quot;192.168.122.20&quot;,
+    }
+
+#system(&quot;virsh net-update my-network add ip-dhcp-host \&quot;&lt;host mac='52:54:00:fb:95:91' ip='10.11.12.13' /&gt;\&quot; --live --config&quot;)
+
+
+# Extra parameters in INSTALL_K3S_EXEC variable because of
+# K3s picking up the wrong interface when starting server and agent
+# https://github.com/alexellis/k3sup/issues/306
+
+Vagrant.configure(&quot;2&quot;) do |config|
+  config.vm.box = &quot;generic/ubuntu1804&quot; #&quot;generic/alpine314&quot;
+
+  config.vm.define &quot;server&quot;, primary: true do |server|
+    server.vm.network :public_network, ip: server_ip, dev: &quot;virbr0&quot;, mode: &quot;bridge&quot;, type: &quot;bridge&quot;
+    server.vm.synced_folder &quot;./shared&quot;, &quot;/vagrant&quot;, type: &quot;rsync&quot;,
+      rsync__exclude: &quot;.git/&quot;
+
+    # add ssh - hangs
+    # config.ssh.private_key_path = &quot;~/.ssh/id_rsa&quot;
+    # config.ssh.forward_agent = true
+
+    server.vm.hostname = &quot;server&quot;
+    server.vm.provider &quot;libvirt&quot; do |vb|
+      vb.nested = true
+      vb.cpu_mode = &quot;host-passthrough&quot;
+      vb.memory = &quot;2048&quot;
+      vb.cpus = &quot;2&quot;
+
+      # turn off inputs
+      vb.inputs = []
+    end
+
+    args = []
+    # server.vm.provision &quot;shell&quot;, inline: server_script
+    server.vm.provision &quot;k3s shell script&quot;, type: &quot;shell&quot;,
+        path: &quot;scripts/k3s_server_provisioning.sh&quot;,
+        args: args
+  end
+
+  agents.each do |agent_name, agent_ip|
+    config.vm.define agent_name do |agent|
+      agent.vm.network :public_network, ip: agent_ip, dev: &quot;virbr0&quot;, mode: &quot;bridge&quot;, type: &quot;bridge&quot;
+      agent.vm.synced_folder &quot;./shared&quot;, &quot;/vagrant&quot;, type: &quot;rsync&quot;,
+        rsync__exclude: &quot;.git/&quot;
+
+      agent.vm.hostname = agent_name
+      agent.vm.provider &quot;libvirt&quot; do |vb|
+        vb.nested = true
+        vb.cpu_mode = &quot;host-passthrough&quot;
+        vb.memory = &quot;1024&quot;
+        vb.cpus = &quot;2&quot;
+      end
+
+      # agent.vm.provision &quot;shell&quot;, inline: agent_script
+      args = []
+      agent.vm.provision &quot;k3s agent shell script&quot;, type: &quot;shell&quot;,
+      path: &quot;scripts/k3s_agent_provisioning.sh&quot;,
+      args: args
+  end
+  end
+end</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="server-provisioning-script">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#server-provisioning-script">#</doc-anchor-trigger>
+        <span>Server Provisioning script</span>
+    </h3>
+</doc-anchor-target>
+<p>The server provisioning script referred to in the Vagrantfile is given below:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">set -euox pipefail
+sudo -i
+
+# echo &quot;nameserver 8.8.8.8&quot; | sudo tee -a /etc/resolv.conf
+#hostname -I | cut -d' ' -f2 2&gt;/dev/null &gt; /vagrant/SERVER1_IP
+
+chmod +x /dev/kvm
+sed -i 's/DNSSEC=yes/DNSSEC=no/1'  /etc/systemd/resolved.conf
+systemctl restart systemd-resolved.service
+apt-get -y update
+
+ufw allow 6443/tcp
+
+echo &quot;**** Begin installing k3s&quot;
+
+SERVER_IP=&quot;192.168.122.10&quot;
+# INSTALL_K3S_EXEC=&quot;--bind-address ${SERVER_IP} --node-external-ip ${SERVER_IP} --tls-san $SERVER_IP --tls-san server --disable-agent&quot; # --flannel-iface=eth1
+# curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE=&quot;644&quot; sh -s - --bind-address ${SERVER_IP} --node-external-ip ${SERVER_IP} --tls-san $SERVER_IP --tls-san server
+curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE=&quot;644&quot; sh -s - --tls-san $SERVER_IP --tls-san server
+
+echo &quot;**** End installing k3s&quot;
+
+# systemctl enable --now k3s
+# systemctl start k3s</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="agent-provisioning-script">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#agent-provisioning-script">#</doc-anchor-trigger>
+        <span>Agent Provisioning script</span>
+    </h3>
+</doc-anchor-target>
+<p>The agent provisioning script referred to in the Vagrantfile is given below:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">set -euox pipefail
+sudo -i
+chmod +x /dev/kvm
+sed -i 's/DNSSEC=yes/DNSSEC=no/1'  /etc/systemd/resolved.conf
+systemctl restart systemd-resolved.service
+apt-get -y update
+
+echo &quot;**** Begin installing k3s&quot;
+
+SERVER_IP=&quot;192.168.122.10&quot; # $(cat /vagrant/server_details/server_ip)
+K3S_TOKEN=$(cat /vagrant/server_details/node-token)
+K3S_URL=&quot;https://$SERVER_IP:6443&quot;
+
+# INSTALL_K3S_EXEC=&quot;K3S_URL=https://192.168.122.10:6443 K3S_TOKEN_FILE=/vagrant/server_details/node-token SERVER_IP=\&quot;192.168.122.10\&quot; &quot;
+curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE=&quot;644&quot; K3S_URL=https://192.168.122.10:6443 K3S_TOKEN_FILE=/vagrant/server_details/node-token SERVER_IP=\&quot;192.168.122.10\&quot; sh -s -
+
+# copying custom service file because agent install doesn't add the 
+#cp /vagrant/server_details/k3s-agent.service /etc/systemd/system/k3s-agent.service
+echo &quot;**** End installing k3s&quot;
+
+# truncate -s -1 /etc/systemd/system/k3s-agent.service
+# cat &lt;&lt;-EOT | tee -a /etc/systemd/system/k3s-agent.service
+#     --token-file /vagrant/server_details/node-token \
+#     --server https://192.168.122.10:6443
+# EOT
+
+# systemctl enable --now k3s-agent
+# systemctl daemon-reload k3s-agent
+# systemctl restart k3s-agent.service</code></pre>
+</doc-codeblock></div>
 
 
 
@@ -270,6 +494,6 @@
 
         <div id="docs-overlay-target"></div>
 
-        <script>window.__DOCS__ = { "title": "k3s", icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+        <script>window.__DOCS__ = { "title": "k3s multi-node cluster lab", icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
     </body>
 </html>
