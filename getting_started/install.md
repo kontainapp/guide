@@ -193,4 +193,41 @@ kube-system   kontain-deploy   1         1         1       1            1       
 kube-system   kindnet          1         1         1       1            1           <none>                   168m
 kube-system   kube-proxy       1         1         1       1            1           kubernetes.io/os=linux   168m
 ```
+
++++ Verify Install
+##### Verify that Kontain has been deployed successfully
+```shell
+# verify that the kontain-node-initializer ran successfully and is in "Running" state and not "Error" state
+$ kubectl get po -n kube-system
+kube-system   azure-ip-masq-agent-tr7c7             1/1     Running   0          37m
+kube-system   coredns-58567c6d46-ncsqq              1/1     Running   0          38m
+kube-system   coredns-58567c6d46-rrb4m              1/1     Running   0          36m
+kube-system   coredns-autoscaler-54d55c8b75-j97sj   1/1     Running   0          38m
+kube-system   kontain-node-initializer-tvr84        1/1     Running   0          39s
+kube-system   kube-proxy-7hkjc                      1/1     Running   0          37m
+kube-system   metrics-server-569f6547dd-flsb4       1/1     Running   1          38m
+kube-system   tunnelfront-7d8df6bfdc-dr6z2          1/1     Running   0          38m
+
+# to debug an "Error" state, you can view its logs:
+$ kubectl logs kontain-node-initializer-<id>
+...
+```
+
+##### Run a Kontain test app to verify that the runtime class is working as designed
+```shell
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/latest/demo/k8s/test.yaml
+
+# a new Kontain test app should appear as 'Running'
+
+$ kubectl get pods 
+NAMESPACE     NAME                                READY   STATUS    RESTARTS   AGE
+default       kontain-test-app-647874765d-7ftrp   1/1     Running   0          23m
+
+# Use kubectl exec to run uname -r on the test pod. When running under the Kontain Runtime, the uname(2) system call appends the string "kontain." to the release name. 
+# (Note: Please replace the kontain-test-app-xxxxx with the appropriate pod id).
+
+$ kubectl exec -it kontain-test-<appropriate-pod-id>  -- uname -r
+5.13.7-100.fc33.x86_64.kontain.KVM
+```
+
 +++
