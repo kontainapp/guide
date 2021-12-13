@@ -26,12 +26,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.1.692725673419" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.1.692726313540" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.1.692725673419" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.1.692726313540" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.1" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.1.692725673419" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.1.692725673419" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.1.692726313540" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.1.692726313540" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -440,6 +440,48 @@ NAMESPACE     NAME             DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABL
 kube-system   kontain-deploy   1         1         1       1            1           &lt;none&gt;                   163m
 kube-system   kindnet          1         1         1       1            1           &lt;none&gt;                   168m
 kube-system   kube-proxy       1         1         1       1            1           kubernetes.io/os=linux   168m</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="verify-that-kontain-has-been-deployed-successfully">
+    <h5>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#verify-that-kontain-has-been-deployed-successfully">#</doc-anchor-trigger>
+        <span>Verify that Kontain has been deployed successfully</span>
+    </h5>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># verify that the kontain-node-initializer ran successfully and is in &quot;Running&quot; state and not &quot;Error&quot; state
+$ kubectl get po -n kube-system
+kube-system   azure-ip-masq-agent-tr7c7             1/1     Running   0          37m
+kube-system   coredns-58567c6d46-ncsqq              1/1     Running   0          38m
+kube-system   coredns-58567c6d46-rrb4m              1/1     Running   0          36m
+kube-system   coredns-autoscaler-54d55c8b75-j97sj   1/1     Running   0          38m
+kube-system   kontain-node-initializer-tvr84        1/1     Running   0          39s
+kube-system   kube-proxy-7hkjc                      1/1     Running   0          37m
+kube-system   metrics-server-569f6547dd-flsb4       1/1     Running   1          38m
+kube-system   tunnelfront-7d8df6bfdc-dr6z2          1/1     Running   0          38m
+
+# to debug an &quot;Error&quot; state, you can view its logs:
+$ kubectl logs kontain-node-initializer-&lt;id&gt;
+...</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="run-a-kontain-test-app-to-verify-that-the-runtime-class-is-working-as-designed">
+    <h5>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#run-a-kontain-test-app-to-verify-that-the-runtime-class-is-working-as-designed">#</doc-anchor-trigger>
+        <span>Run a Kontain test app to verify that the runtime class is working as designed</span>
+    </h5>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/latest/demo/k8s/test.yaml
+
+# a new Kontain test app should appear as 'Running'
+
+$ kubectl get pods 
+NAMESPACE     NAME                                READY   STATUS    RESTARTS   AGE
+default       kontain-test-app-647874765d-7ftrp   1/1     Running   0          23m
+
+# Use kubectl exec to run uname -r on the test pod. When running under the Kontain Runtime, the uname(2) system call appends the string &quot;kontain.&quot; to the release name. (note to please replace the kontain-test-app-xxxxx with the appropriate pod id).
+
+$ kubectl exec -it kontain-test-app-647874765d-7ftrp  -- uname -r
+5.13.7-100.fc33.x86_64.kontain.KVM</code></pre>
 </doc-codeblock></div>
 </doc-tab>
 </doc-tabs>
