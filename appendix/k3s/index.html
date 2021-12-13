@@ -26,12 +26,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.1.692733593106" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.1.692742782373" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.1.692733593106" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.1.692742782373" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.1" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.1.692733593106" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.1.692733593106" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.1.692742782373" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.1.692742782373" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -210,27 +210,27 @@
     </h1>
 </doc-anchor-target>
 <doc-anchor-target id="overview">
-    <h3>
+    <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#overview">#</doc-anchor-trigger>
         <span>Overview</span>
-    </h3>
+    </h2>
 </doc-anchor-target>
 <p>Below we use Vagrant to start a multi-node K3s cluster to test Kontain in K3s using Vagrant and libvirt as a provider since we are enabling nested virtualization using KVM.</p>
 <p>A more common use-case is to use VirtualBox as the Vagrant provider, but we haven&#x27;t really so that will be left as an exercise for the user.</p>
 <p>To install Kontain in K3s, we use the instructions from <a href="http://localhost:5000/guide/getting_started/install/#on-a-k3s-edge-cluster">here</a></p>
 <doc-anchor-target id="requirements-for-lab-cluster-with-nested-virtualization">
-    <h3>
+    <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#requirements-for-lab-cluster-with-nested-virtualization">#</doc-anchor-trigger>
         <span>Requirements for Lab cluster with nested virtualization</span>
-    </h3>
+    </h2>
 </doc-anchor-target>
 <p>We would need a Linux (ideally, Ubuntu or Fedora/Centos) machine with KVM virtualization installed as outlined <a href="https://docs.fedoraproject.org/en-US/quick-docs/getting-started-with-virtualization/">here</a></p>
 <p>After that, we installed Vagrant with libvirt as the provider as outlined <a href="https://developer.fedoraproject.org/tools/vagrant/vagrant-libvirt.html">here</a>.</p>
-<doc-anchor-target id="vagrant-up-helper-script">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#vagrant-up-helper-script">#</doc-anchor-trigger>
-        <span>vagrant up helper script</span>
-    </h3>
+<doc-anchor-target id="bring-up-the-cluster-vagrant-up-helper-script">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#bring-up-the-cluster-vagrant-up-helper-script">#</doc-anchor-trigger>
+        <span>Bring up the cluster: vagrant up helper script</span>
+    </h2>
 </doc-anchor-target>
 <p>We provide a helper script below to install the server (master/control plane) node at first, and then to install the worker nodes (known as agents).</p>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -254,11 +254,24 @@ vagrant up agent1
 echo &quot;All deployed!! to leverage the new cluster you can do one of the following:&quot;
 echo &quot;you do $ export KUBECONFIG=./shared/server_details/kubeconfig&quot;</code></pre>
 </doc-codeblock></div>
+<doc-anchor-target id="kubectl">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#kubectl">#</doc-anchor-trigger>
+        <span>kubectl</span>
+    </h3>
+</doc-anchor-target>
 <p>After bringng up the multi-node k3s cluster in Vagrant, you can use the following to run kubectl commands on the cluster:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">$ export KUBECONFIG=./shared/server_details/kubeconfig
-</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">$ export KUBECONFIG=`pwd`/shared/server_details/kubeconfig
+
+$ kubectl get nodes -o wide</code></pre>
 </doc-codeblock></div>
+<doc-anchor-target id="the-files">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#the-files">#</doc-anchor-trigger>
+        <span>The files</span>
+    </h2>
+</doc-anchor-target>
 <doc-anchor-target id="save-server-details-script">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#save-server-details-script">#</doc-anchor-trigger>
@@ -266,7 +279,7 @@ echo &quot;you do $ export KUBECONFIG=./shared/server_details/kubeconfig&quot;</
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none"># saver_server_details.sh
+<pre class="language-none"><code v-pre class="language-none"># save_server_details.sh
 set -euxo pipefail
 
 # get node-token for agent
