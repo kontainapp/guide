@@ -222,9 +222,10 @@ $ kubectl get pods
 NAMESPACE     NAME                                READY   STATUS    RESTARTS   AGE
 default       kontain-test-app-647874765d-7ftrp   1/1     Running   0          23m
 
-# Use kubectl exec to run uname -r on the test pod. When running under the Kontain Runtime, the uname(2) system call appends the string "kontain." to the release name. (note to please replace the kontain-test-app-xxxxx with the appropriate pod id).
+# Use kubectl exec to run uname -r on the test pod. When running under the Kontain Runtime, the uname(2) system call appends the string "kontain." to the release name. 
+# (Note: Please replace the kontain-test-app-xxxxx with the appropriate pod id).
 
-$ kubectl exec -it kontain-test-app-647874765d-7ftrp  -- uname -r
+$ kubectl exec -it kontain-test-<appropriate-pod-id>  -- uname -r
 5.13.7-100.fc33.x86_64.kontain.KVM
 ```
 
