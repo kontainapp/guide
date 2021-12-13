@@ -41,6 +41,12 @@ echo "All deployed!! to leverage the new cluster you can do one of the following
 echo "you do $ export KUBECONFIG=./shared/server_details/kubeconfig"
 ```
 
+After bringng up the multi-node k3s cluster in Vagrant, you can use the following to run kubectl commands on the cluster:
+```
+$ export KUBECONFIG=./shared/server_details/kubeconfig
+
+```
+
 ### save server details script
 ```
 # saver_server_details.sh
