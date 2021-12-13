@@ -2,6 +2,7 @@
 
 set -euxo pipefail
 
+mkdir -p ./shared/server_details
 # first, bring up the server
 vagrant up server
 
