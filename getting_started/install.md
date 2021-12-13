@@ -194,6 +194,7 @@ kube-system   kindnet          1         1         1       1            1       
 kube-system   kube-proxy       1         1         1       1            1           kubernetes.io/os=linux   168m
 ```
 
++++ Verify Install
 ##### Verify that Kontain has been deployed successfully
 ```shell
 # verify that the kontain-node-initializer ran successfully and is in "Running" state and not "Error" state
