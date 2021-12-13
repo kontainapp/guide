@@ -38,7 +38,7 @@ sleep 5
 vagrant up agent1
 
 echo "All deployed!! to leverage the new cluster you can do one of the following:"
-echo "you do $ export KUBECONFIG=./shared/server_details/kubeconfig"
+echo "you do $ export KUBECONFIG=`pwd`/shared/server_details/kubeconfig"
 ```
 
 ### kubectl
