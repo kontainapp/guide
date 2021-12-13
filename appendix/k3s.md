@@ -4,19 +4,19 @@ icon: /images/k3s.png
 order: 600
 ---
 
-### Overview
+## Overview
 Below we use Vagrant to start a multi-node K3s cluster to test Kontain in K3s using Vagrant and libvirt as a provider since we are enabling nested virtualization using KVM.  
 
 A more common use-case is to use VirtualBox as the Vagrant provider, but we haven't really so that will be left as an exercise for the user.
 
 To install Kontain in K3s, we use the instructions from [here](http://localhost:5000/guide/getting_started/install/#on-a-k3s-edge-cluster)
 
-### Requirements for Lab cluster with nested virtualization
+## Requirements for Lab cluster with nested virtualization
 We would need a Linux (ideally, Ubuntu or Fedora/Centos) machine with KVM virtualization installed as outlined [here](https://docs.fedoraproject.org/en-US/quick-docs/getting-started-with-virtualization/)
 
 After that, we installed Vagrant with libvirt as the provider as outlined [here](https://developer.fedoraproject.org/tools/vagrant/vagrant-libvirt.html).
 
-### vagrant up helper script
+## Bring up the cluster: vagrant up helper script
 We provide a helper script below to install the server (master/control plane) node at first, and then to install the worker nodes (known as agents).
 
 ```
@@ -41,15 +41,18 @@ echo "All deployed!! to leverage the new cluster you can do one of the following
 echo "you do $ export KUBECONFIG=./shared/server_details/kubeconfig"
 ```
 
+### kubectl
 After bringng up the multi-node k3s cluster in Vagrant, you can use the following to run kubectl commands on the cluster:
-```
-$ export KUBECONFIG=./shared/server_details/kubeconfig
+```shell
+$ export KUBECONFIG=`pwd`/shared/server_details/kubeconfig
 
+$ kubectl get nodes -o wide
 ```
 
+## The files
 ### save server details script
 ```
-# saver_server_details.sh
+# save_server_details.sh
 set -euxo pipefail
 
 # get node-token for agent
