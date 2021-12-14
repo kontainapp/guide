@@ -14,7 +14,7 @@ To package Kontain images, it is also necessary to have a recent version of Dock
 
 ### Environments
 +++ Local (Docker)
-##### Optional: Install for Docker
+#### Optional: Install for Docker
 If not present, you can install Docker On Fedora/RHEL systems using [instructions from here](https://developer.fedoraproject.org/tools/docker/docker-installation.html)
 
 ##### check for pre-requisites
@@ -80,10 +80,16 @@ drwxr-xr-x 1 smijar  121 194 Nov 10 09:32 runtime
 This installs the necessary files in your /opt/kontain directory and configures the Kontain runtime (/opt/bin/km) for docker or podman. It also executes a smoke test of the unikernel virtual machine.
 
 +++ on Minikube or Managed or Regular Kubernetes
-##### Optional: Installing Minikube
-As a convenience for testing Kontain on a desktop version of Kubernetes, you can use Minikube in Docker [view instructions here](/appendix/minikube/) before continuing.
+#### Optional: Appendix contains instructions for launching various versions of Kubernetes
+As a convenience, we have provided convenient for installing or running various versions of Kubernetes for testing Kontain.
 
-##### Check for pre-requisites on Kubernetes Worker Nodes
+For example, on a **desktop version of Kubernetes**, you can use Minikube with Docker Desktop [view instructions here](/appendix/minikube/).
+
+For launching a **managed cluster in Azure AKS**, the instrutions are [here](/appendix/azure_aks.md)
+
+For simulating an **edge cluster with k3s using Vagrant**, the instrutions are [here](/appendix/k3s.md)
+
+#### Check for pre-requisites on Kubernetes Worker Nodes
 You will need to verify pre-requisites on Kubernetes Nodes.  This applies for both Managed Kubernetes and Regular Kubernetes nodes.
 
 ```shell
@@ -109,7 +115,8 @@ $ cat /proc/cpuinfo| egrep "vmx|svm" | wc -l
 $ ls -l /dev/kvm
 ```
 
-##### Install Kontain using Daemonset if using Containerd (runtime)
+#### Install Kontain using Daemonset 
+##### if using Containerd (runtime)
 Deploy Kontain Runtime using the Kubernetes client CLI
 
 ```shell
@@ -119,11 +126,12 @@ $ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_
 
 ##### If using CRIO (runtime)
 ```shell
+# If using CRIO as the runtime, use the following install script
 $ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_k8s_crio_install.sh | sh
 ```
 
 +++ On a K3s Edge Cluster
-##### Check for pre-requisites on Kubernetes Worker Nodes
+#### Check for pre-requisites on Kubernetes Worker Nodes
 You will need to verify pre-requisites on Kubernetes Nodes.  This applies for both Managed Kubernetes and Regular Kubernetes nodes.
 
 ```shell
@@ -143,15 +151,17 @@ $ cat /proc/cpuinfo| egrep "vmx|svm" | wc -l
 $ ls -l /dev/kvm
 ```
 
-##### Install Kontain using Daemonset
+#### Install Kontain using Daemonset
 Deploy Kontain Runtime using the Kubernetes client CLI
 
 ```shell
+# For installing Kontain on a k3s cluster, use the following install script
 $ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_k3s_containerd_install.sh | sh
+
 ```
 
 +++ Verify Install
-##### Verify that Kontain has been deployed successfully
+#### Verify that Kontain has been deployed successfully
 ```shell
 # verify that the kontain-node-initializer ran successfully and is in "Running" state and not "Error" state
 $ kubectl get po -n kube-system
@@ -177,7 +187,7 @@ kube-system   kube-proxy       1         1         1       1            1       
 
 ```
 
-##### Run a Kontain test app to verify that the runtime class is working as designed
+#### Run a Kontain test app to verify that the runtime class is working as designed
 ```shell
 $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/latest/demo/k8s/test.yaml
 
