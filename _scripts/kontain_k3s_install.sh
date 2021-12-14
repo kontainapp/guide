@@ -7,4 +7,4 @@ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/sm/k3s/cloud/k8
 kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/sm/k3s/cloud/k8s/deploy/cm-containerd-install.yaml
 
 # deploy the runtime using kustomize
-kubectl apply -k https://raw.githubusercontent.com/kontainapp/km/v0.9.2/cloud/k8s/deploy/kontain-deploy/base
+kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/sm/k3s/cloud/k8s/deploy/kontain-deploy/base/kontain-deploy.yaml

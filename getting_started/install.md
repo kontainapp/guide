@@ -116,7 +116,7 @@ $ ls -l /dev/kvm
 ```
 
 #### Install Kontain using Daemonset 
-##### if using Containerd (runtime)
+##### if using Containerd (default runtime for almost all Kubernetes installations)
 Deploy Kontain Runtime using the Kubernetes client CLI
 
 ```shell
