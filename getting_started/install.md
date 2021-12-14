@@ -121,7 +121,7 @@ Deploy Kontain Runtime using the Kubernetes client CLI
 
 ```shell
 # For Containerd runtime, use the following install script
-$ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_k8s_containerd_install.sh | sh
+$ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_k8s_install.sh | sh
 ```
 
 ##### If using CRIO (runtime)
@@ -156,7 +156,7 @@ Deploy Kontain Runtime using the Kubernetes client CLI
 
 ```shell
 # For installing Kontain on a k3s cluster, use the following install script
-$ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_k3s_containerd_install.sh | sh
+$ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_k3s_install.sh | sh
 
 ```
 
