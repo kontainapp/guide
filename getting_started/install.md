@@ -113,44 +113,14 @@ $ ls -l /dev/kvm
 Deploy Kontain Runtime using the Kubernetes client CLI
 
 ```shell
-# For Containerd runtime, use the following yaml files:
-# install the runtime class
-$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/runtime-class.yaml
-# install configmaps
-$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/cm-install-lib.yaml
-$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/cm-containerd-install.yaml
-# deploy Kontain runtime using kustomize
-$ kubectl apply -k https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/base
-
-# To verify the installation, check for kontain-deploy daemonset should appear
-$ kubectl get daemonsets.apps -A
-NAMESPACE     NAME             DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
-kube-system   kontain-deploy   1         1         1       1            1           <none>                   163m
-kube-system   kindnet          1         1         1       1            1           <none>                   168m
-kube-system   kube-proxy       1         1         1       1            1           kubernetes.io/os=linux   168m
-
+# For Containerd runtime, use the following install script
+$ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_k8s_containerd_install.sh | sh
 ```
 
 ##### If using CRIO (runtime)
 ```shell
-# For Containerd runtime, use the following yaml files:
-# install the runtime class
-$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/runtime-class.yaml
-# install configmaps
-$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/cm-install-lib.yaml
-$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/cm-containerd-install.yaml
-# deploy Kontain runtime using kustomize
-$ kubectl apply -k https://raw.githubusercontent.com/kontainapp/km/master/cloud/k8s/deploy/base
-
-# To verify the installation, check for kontain-deploy daemonset should appear
-$ kubectl get daemonsets.apps -A
-NAMESPACE     NAME             DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
-kube-system   kontain-deploy   1         1         1       1            1           <none>                   163m
-kube-system   kindnet          1         1         1       1            1           <none>                   168m
-kube-system   kube-proxy       1         1         1       1            1           kubernetes.io/os=linux   168m
-
+$ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_k8s_crio_install.sh | sh
 ```
-
 
 +++ On a K3s Edge Cluster
 ##### Check for pre-requisites on Kubernetes Worker Nodes
@@ -177,21 +147,7 @@ $ ls -l /dev/kvm
 Deploy Kontain Runtime using the Kubernetes client CLI
 
 ```shell
-# For Containerd runtime, use the following yaml files:
-# install the runtime class that uses Kontain as the pod runtime class
-$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/sm/k3s/cloud/k8s/deploy/runtime-class.yaml
-# install configmaps
-$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/sm/k3s/cloud/k8s/deploy/cm-install-lib.yaml
-$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/sm/k3s/cloud/k8s/deploy/cm-containerd-install.yaml
-# deploy Kontain runtime
-$ kubectl apply -k https://raw.githubusercontent.com/kontainapp/km/sm/k3s/cloud/k8s/deploy/base
-
-# To verify the installation, check for kontain-deploy daemonset should appear
-$ kubectl get daemonsets.apps -A
-NAMESPACE     NAME             DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
-kube-system   kontain-deploy   1         1         1       1            1           <none>                   163m
-kube-system   kindnet          1         1         1       1            1           <none>                   168m
-kube-system   kube-proxy       1         1         1       1            1           kubernetes.io/os=linux   168m
+$ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_k3s_containerd_install.sh | sh
 ```
 
 +++ Verify Install
@@ -211,6 +167,14 @@ kube-system   tunnelfront-7d8df6bfdc-dr6z2          1/1     Running   0         
 # to debug an "Error" state, you can view its logs:
 $ kubectl logs kontain-node-initializer-<id>
 ...
+
+# check the daemonset
+$ kubectl get daemonsets.apps -A
+NAMESPACE     NAME             DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+kube-system   kontain-deploy   1         1         1       1            1           <none>                   163m
+kube-system   kindnet          1         1         1       1            1           <none>                   168m
+kube-system   kube-proxy       1         1         1       1            1           kubernetes.io/os=linux   168m
+
 ```
 
 ##### Run a Kontain test app to verify that the runtime class is working as designed
