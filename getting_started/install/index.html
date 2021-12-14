@@ -26,12 +26,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.1.692756089973" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.1.692756906275" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.1.692756089973" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.1.692756906275" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.1" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.1.692756089973" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.1.692756089973" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.1.692756906275" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.1.692756906275" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -228,10 +228,10 @@
 <doc-tab id="local-docker">
 <template #title>Local (Docker)</template>
 <doc-anchor-target id="optional-install-for-docker">
-    <h5>
+    <h4>
         <doc-anchor-trigger class="header-anchor-trigger" to="#optional-install-for-docker">#</doc-anchor-trigger>
         <span>Optional: Install for Docker</span>
-    </h5>
+    </h4>
 </doc-anchor-target>
 <p>If not present, you can install Docker On Fedora/RHEL systems using <a href="https://developer.fedoraproject.org/tools/docker/docker-installation.html">instructions from here</a></p>
 <doc-anchor-target id="check-for-pre-requisites">
@@ -306,18 +306,21 @@ drwxr-xr-x 1 smijar  121 194 Nov 10 09:32 runtime
 </doc-tab>
 <doc-tab id="on-minikube-or-managed-or-regular-kubernetes">
 <template #title>on Minikube or Managed or Regular Kubernetes</template>
-<doc-anchor-target id="optional-installing-minikube">
-    <h5>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#optional-installing-minikube">#</doc-anchor-trigger>
-        <span>Optional: Installing Minikube</span>
-    </h5>
+<doc-anchor-target id="optional-appendix-contains-instructions-for-launching-various-versions-of-kubernetes">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#optional-appendix-contains-instructions-for-launching-various-versions-of-kubernetes">#</doc-anchor-trigger>
+        <span>Optional: Appendix contains instructions for launching various versions of Kubernetes</span>
+    </h4>
 </doc-anchor-target>
-<p>As a convenience for testing Kontain on a desktop version of Kubernetes, you can use Minikube in Docker <a href="/guide/appendix/minikube/">view instructions here</a> before continuing.</p>
+<p>As a convenience, we have provided convenient for installing or running various versions of Kubernetes for testing Kontain.</p>
+<p>For example, on a <strong>desktop version of Kubernetes</strong>, you can use Minikube with Docker Desktop <a href="/guide/appendix/minikube/">view instructions here</a>.</p>
+<p>For launching a <strong>managed cluster in Azure AKS</strong>, the instrutions are <a href="/guide/appendix/azure_aks/">here</a></p>
+<p>For simulating an <strong>edge cluster with k3s using Vagrant</strong>, the instrutions are <a href="/guide/appendix/k3s/">here</a></p>
 <doc-anchor-target id="check-for-pre-requisites-on-kubernetes-worker-nodes">
-    <h5>
+    <h4>
         <doc-anchor-trigger class="header-anchor-trigger" to="#check-for-pre-requisites-on-kubernetes-worker-nodes">#</doc-anchor-trigger>
         <span>Check for pre-requisites on Kubernetes Worker Nodes</span>
-    </h5>
+    </h4>
 </doc-anchor-target>
 <p>You will need to verify pre-requisites on Kubernetes Nodes.  This applies for both Managed Kubernetes and Regular Kubernetes nodes.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -342,10 +345,16 @@ $ cat /proc/cpuinfo| egrep &quot;vmx|svm&quot; | wc -l
 # verify that you have KVM already installed /dev/kvm enabled by checking:
 $ ls -l /dev/kvm</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="install-kontain-using-daemonset-if-using-containerd-runtime">
+<doc-anchor-target id="install-kontain-using-daemonset">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain-using-daemonset">#</doc-anchor-trigger>
+        <span>Install Kontain using Daemonset</span>
+    </h4>
+</doc-anchor-target>
+<doc-anchor-target id="if-using-containerd-runtime">
     <h5>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain-using-daemonset-if-using-containerd-runtime">#</doc-anchor-trigger>
-        <span>Install Kontain using Daemonset if using Containerd (runtime)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#if-using-containerd-runtime">#</doc-anchor-trigger>
+        <span>if using Containerd (runtime)</span>
     </h5>
 </doc-anchor-target>
 <p>Deploy Kontain Runtime using the Kubernetes client CLI</p>
@@ -360,16 +369,17 @@ $ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_
     </h5>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_k8s_crio_install.sh | sh</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash"># If using CRIO as the runtime, use the following install script
+$ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_k8s_crio_install.sh | sh</code></pre>
 </doc-codeblock></div>
 </doc-tab>
 <doc-tab id="on-a-k3s-edge-cluster">
 <template #title>On a K3s Edge Cluster</template>
 <doc-anchor-target id="check-for-pre-requisites-on-kubernetes-worker-nodes-1">
-    <h5>
+    <h4>
         <doc-anchor-trigger class="header-anchor-trigger" to="#check-for-pre-requisites-on-kubernetes-worker-nodes-1">#</doc-anchor-trigger>
         <span>Check for pre-requisites on Kubernetes Worker Nodes</span>
-    </h5>
+    </h4>
 </doc-anchor-target>
 <p>You will need to verify pre-requisites on Kubernetes Nodes.  This applies for both Managed Kubernetes and Regular Kubernetes nodes.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -388,24 +398,26 @@ $ cat /proc/cpuinfo| egrep &quot;vmx|svm&quot; | wc -l
 # verify that you have KVM already installed /dev/kvm enabled by checking:
 $ ls -l /dev/kvm</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="install-kontain-using-daemonset">
-    <h5>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain-using-daemonset">#</doc-anchor-trigger>
+<doc-anchor-target id="install-kontain-using-daemonset-1">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain-using-daemonset-1">#</doc-anchor-trigger>
         <span>Install Kontain using Daemonset</span>
-    </h5>
+    </h4>
 </doc-anchor-target>
 <p>Deploy Kontain Runtime using the Kubernetes client CLI</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_k3s_containerd_install.sh | sh</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash"># For installing Kontain on a k3s cluster, use the following install script
+$ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_k3s_containerd_install.sh | sh
+</code></pre>
 </doc-codeblock></div>
 </doc-tab>
 <doc-tab id="verify-install">
 <template #title>Verify Install</template>
 <doc-anchor-target id="verify-that-kontain-has-been-deployed-successfully">
-    <h5>
+    <h4>
         <doc-anchor-trigger class="header-anchor-trigger" to="#verify-that-kontain-has-been-deployed-successfully">#</doc-anchor-trigger>
         <span>Verify that Kontain has been deployed successfully</span>
-    </h5>
+    </h4>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash"># verify that the kontain-node-initializer ran successfully and is in &quot;Running&quot; state and not &quot;Error&quot; state
@@ -432,10 +444,10 @@ kube-system   kube-proxy       1         1         1       1            1       
 </code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="run-a-kontain-test-app-to-verify-that-the-runtime-class-is-working-as-designed">
-    <h5>
+    <h4>
         <doc-anchor-trigger class="header-anchor-trigger" to="#run-a-kontain-test-app-to-verify-that-the-runtime-class-is-working-as-designed">#</doc-anchor-trigger>
         <span>Run a Kontain test app to verify that the runtime class is working as designed</span>
-    </h5>
+    </h4>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/latest/demo/k8s/test.yaml
