@@ -7,21 +7,23 @@
     <meta name="turbo-cache-control" content="no-cache">
 
     <!-- Primary Meta Tags -->
-    <title>Python Flask</title>
-    <meta name="title" content="Python Flask">
-    <meta name="description" content="Below is a short example of bundling a python microservice in a Kontain-based Container with Docker:" />
+    <title>Introduction</title>
+    <meta name="title" content="Introduction">
+    <meta name="description" content="“Inside every large program is a small program struggling to get out.”— Tony Hoare" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kontainapp.github.io/guide/getting_started/python/">
-    <meta property="og:title" content="Python Flask">
-    <meta property="og:description" content="Below is a short example of bundling a python microservice in a Kontain-based Container with Docker:">
+    <meta property="og:url" content="https://kontainapp.github.io/guide/overview/">
+    <meta property="og:title" content="Introduction">
+    <meta property="og:description" content="“Inside every large program is a small program struggling to get out.”— Tony Hoare">
+    <meta property="og:image" content="https://kontainapp.github.io/guide/guide/images/kontain_vs_containers.gif">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://kontainapp.github.io/guide/getting_started/python/">
-    <meta property="twitter:title" content="Python Flask">
-    <meta property="twitter:description" content="Below is a short example of bundling a python microservice in a Kontain-based Container with Docker:">
+    <meta property="twitter:url" content="https://kontainapp.github.io/guide/overview/">
+    <meta property="twitter:title" content="Introduction">
+    <meta property="twitter:description" content="“Inside every large program is a small program struggling to get out.”— Tony Hoare">
+    <meta property="twitter:image" content="https://kontainapp.github.io/guide/guide/images/kontain_vs_containers.gif">
     
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
@@ -31,7 +33,6 @@
     <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.1.692911035326" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.1" defer data-turbo-track="reload"></script>
     <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.1.692911035326" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.1.692911035326" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -203,186 +204,65 @@
                 <div id="docs-sidebar-right-toggle"></div>
                
                 <!-- Page content  -->
-<doc-anchor-target id="python-flask" class="break-words">
+<doc-anchor-target id="introduction" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#python-flask">#</doc-anchor-trigger>
-        <span>Python Flask</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#introduction">#</doc-anchor-trigger>
+        <span>Introduction</span>
     </h1>
 </doc-anchor-target>
-<p>Below is a short example of bundling a python microservice in a Kontain-based Container with Docker:</p>
-<doc-anchor-target id="apphellopy">
+<doc-anchor-target id="kontain">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#apphellopy">#</doc-anchor-trigger>
-        <span>app/hello.py</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#kontain">#</doc-anchor-trigger>
+        <span>Kontain</span>
     </h2>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-python"><code v-pre class="language-python">from flask import Flask
-app = Flask(__name__)
- 
-@app.route(&quot;/&quot;)
-def hello():
-    return &quot;Hello from Kontain!&quot;
- 
-if __name__ == &quot;__main__&quot;:
-    app.run(host='0.0.0.0')</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="docker">
+<p>“Inside every large program is a small program struggling to get out.”
+— Tony Hoare</p>
+<p>It’s a misconception to think of Containers as a way of securely isolating their deployments. Rather, containers are a ‘packaging technology’.</p>
+<p>How do you secure Containers and containerised deployments?
+However Containers can actually be isolated to avoid the security risks that they create.</p>
+<p><a href="https://kontain.app">Kontain</a> was founded on the insight that 2013-era containers are far too insecure, slow, and bloated for the demands of the 2020s as explained here.</p>
+<p><em>Kontain creates strongly isolated containers with fortress-strong security isolation, thousands of times faster startup, and vastly smaller footprint.</em></p>
+<p><em>Kontain is fully integrated with Docker and Kubernetes with a OCI and CRI compliant approach, and requiring no changes to source code, CI, or DevOps tooling.</em></p>
+<p>To use Kontain, view the <a href="/gettingstarted/install">Install Guide</a></p>
+<!-- ![test](images/vms-ctrs-unikernels.png) -->
+<p><figure class="content-center">
+    <img src="/guide/images/kontain_vs_containers.gif" alt="test" />
+    <figcaption class="caption">test</figcaption>
+</figure>
+</p>
+<doc-anchor-target id="a-new-approach-with-no-change-in-code-or-devops-tooling">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#docker">#</doc-anchor-trigger>
-        <span>Docker</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#a-new-approach-with-no-change-in-code-or-devops-tooling">#</doc-anchor-trigger>
+        <span>A new approach (with no change in code or DevOps tooling)</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="dockerfile">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#dockerfile">#</doc-anchor-trigger>
-        <span>Dockerfile:</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">FROM python:3.8-slim AS build
-WORKDIR /opt/src/app
- 
-RUN python -m venv /opt/venv
-# Make sure we use the virtualenv:
-ENV PATH=&quot;/opt/venv/bin:$PATH&quot;
- 
-ADD . /opt/src/
-RUN pip install -r /opt/src/requirements.txt
- 
-ADD app/main.py /opt/src/app/
-#RUN find /opt/src/
- 
- 
-FROM kontainapp/runenv-python as release
-COPY --from=build /opt/venv /opt/venv
-COPY --from=build /opt/src/app /opt/src/app
-ENV PATH=&quot;/opt/venv/bin:$PATH&quot;
-WORKDIR /opt/src/app
- 
-EXPOSE 5000
-CMD [&quot;python&quot;, &quot;main.py&quot;]</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="build-the-kontain-container-image">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#build-the-kontain-container-image">#</doc-anchor-trigger>
-        <span>Build the Kontain Container image</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ docker build -t kg/pyflask .</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="run-using-docker">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#run-using-docker">#</doc-anchor-trigger>
-        <span>Run using Docker</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ docker run --rm  --runtime=krun -p 5000:5000 kg/pyflask
-$ curl http://localhost:5000/
-Hello from Kontain!</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="check-container-image-size">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#check-container-image-size">#</doc-anchor-trigger>
-        <span>Check Container image size</span>
-    </h3>
-</doc-anchor-target>
-<p>Check out the size of the Kontain based image for Pyflask microservice with Python runtime, code and libraries - <strong>40.2 MB</strong></p>
+<p>A new approach to Containers but fully integrated with Docker and Kubernetes.
+With the current ongoing tectonic shift to cloud-based shared tenant, microservice based architectures, where containers, VMs all run on shared cloud hardware, it is time that these microservices are packaged into strongly isolated, secure, specialized packages that only includes the application code and just the required OS code and nothing more to run fast and securely on the shared multi-tenant cloud hardware with strong isolation.  It almost literally packages and employs only the functions needed to make an application work, and nothing more.</p>
+<p>This sort of packaging into a minimalistic unikernel image allows the application to leverage a Single Address Space, Single Process model and  run at screaming speeds.  There is no context switching, so the Application almost runs at the speed of the host Operating system.  Some more advantages are outlined here.  This enables it to be secure by nature since they do not share a kernel and present a minimal to no attack surface at the OS level.</p>
+<p>A unikernel is a single-address-space machine image that contains an application workload—the program you want to run in a container—combined with a minimal set of library functions which provide the OS services required to run the workload.  This approach comes with a ton of advantages in terms of:
+Security - highly secure, isolated, minimal attack surface packages in multi-tenant environments
+Shared-nothing architecture with very high density
+Speed - almost instantaneous startup time (in milliseconds rather than seconds)
+Resource consumption reduced by orders of magnitude - compute and size
+Really Immutable packages of code</p>
+<p>This Docker workflow/tools compatible approach offers huge advantages in the following areas:</p>
 <ul>
-<li>Size of the Base Python-slim Image without code and libraries - <strong>122 MB</strong></li>
-<li>Size of the Python bullseye base image - <strong>909MB</strong></li>
+<li>For packaging microservices in minimalistic, fast, secure containers</li>
+<li>Functions as a service without the security, startup downsides
+Scale to zero with instantaneous startup time</li>
+<li>IOT where security, speed, resource size are critical</li>
+<li>Edge computing</li>
+<li>Anyplace where security, speed, cost and resource constraints are a high priority</li>
 </ul>
-<doc-anchor-target id="kubernetes">
+<doc-anchor-target id="fast-secure-minimal-resources">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#kubernetes">#</doc-anchor-trigger>
-        <span>Kubernetes</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#fast-secure-minimal-resources">#</doc-anchor-trigger>
+        <span>Fast, secure, minimal resources</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="kubernetes-deployment-manifest">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#kubernetes-deployment-manifest">#</doc-anchor-trigger>
-        <span>Kubernetes Deployment Manifest</span>
-    </h3>
-</doc-anchor-target>
-<p>The K8s deployment yaml (flaskapp_k8s.yml) along with the service at port 5000 is shown below:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-yaml"><code v-pre class="language-yaml">---
-apiVersion: v1
-kind: Service
-metadata:
-  name: flaskapp
-  labels:
-    app: flaskapp
-spec:
-  type: ClusterIP 
-  ports:
-  - port: 5000
-    targetPort: 5000
-    protocol: TCP
-  selector:
-    app: flaskapp
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: flaskapp
-  labels:
-    app: flaskapp
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: flaskapp
-  template:
-    metadata:
-      labels:
-        app: flaskapp
-    spec:
-      runtimeClassName: kontain
-      containers:
-      - name: flaskapp
-        image: sandman2k/pyflask:1.0
-        ports:
-        - containerPort: 5000</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="deploy-to-kubernetes">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#deploy-to-kubernetes">#</doc-anchor-trigger>
-        <span>Deploy to Kubernetes</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ kubectl apply -f flaskapp_k8s.yml
-
-# verify that the pod is running
-$ kubectl get pods
-NAME                                READY   STATUS    RESTARTS   AGE
-flaskapp-955645cf8-mfrtj            1/1     Running   0          15m</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="verify-deployment">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#verify-deployment">#</doc-anchor-trigger>
-        <span>Verify Deployment</span>
-    </h3>
-</doc-anchor-target>
-<p>Now we port forward the service&#x27;s port to local port to test out that the service is running:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ kubectl port-forward po/flaskapp-955645cf8-mfrtj 5000:5000
-
-# please note that you have to keep this terminal window open before the next step</code></pre>
-</doc-codeblock></div>
-<p>In another terminal window we test using curl to verify the output from the service:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ curl http://localhost:5000
-Hello from Kontain!</code></pre>
-</doc-codeblock></div>
-<p>Above we see the output from our Python app wrapped in a Kontain based image.</p>
-<p>To clean up:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ kubectl delete -f flaskapp_k8s</code></pre>
-</doc-codeblock></div>
+<p>You can watch the video from <a href="https://www.abhaybhargav.com">Abhay Bhargav</a>, the founder of Application Security Company, we45, talk about security aspects of Containers and Unikernels.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/V5g50QiGArc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 
@@ -394,20 +274,20 @@ Hello from Kontain!</code></pre>
             
 <nav class="flex mt-14">
     <div class="w-1/2">
-        <a class="px-5 py-4 h-full flex items-center break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/guide/getting_started/install/">
+        <a class="px-5 py-4 h-full flex items-center break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/guide/appendix/k3s/">
             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
             <span>
                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                <span class="block mt-1">Install (Local, Docker, Kubernetes)</span>
+                <span class="block mt-1">k3s multi-node cluster lab</span>
             </span>
         </a>
     </div>
 
     <div class="w-1/2">
-        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/guide/getting_started/docker_compose/">
+        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/guide/casts/">
             <span>
                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                <span class="block mt-1">Docker Compose (Python Flask)</span>
+                <span class="block mt-1">Videos</span>
             </span>
             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
         </a>
@@ -455,6 +335,6 @@ Hello from Kontain!</code></pre>
 
         <div id="docs-overlay-target"></div>
 
-        <script>window.__DOCS__ = { "title": "Python Flask", icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+        <script>window.__DOCS__ = { "title": "Background", icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
     </body>
 </html>

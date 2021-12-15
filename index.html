@@ -9,30 +9,30 @@
     <!-- Primary Meta Tags -->
     <title>Introduction</title>
     <meta name="title" content="Introduction">
-    <meta name="description" content="“Inside every large program is a small program struggling to get out.”— Tony Hoare" />
+    <meta name="description" content="We are rapidly progressing towards a world of decentralized computing where applications are broken down into hundreds of connected microservices and..." />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kontainapp.github.io/guide/">
     <meta property="og:title" content="Introduction">
-    <meta property="og:description" content="“Inside every large program is a small program struggling to get out.”— Tony Hoare">
-    <meta property="og:image" content="https://kontainapp.github.io/guide/guide/images/kontain_vs_containers.gif">
+    <meta property="og:description" content="We are rapidly progressing towards a world of decentralized computing where applications are broken down into hundreds of connected microservices and...">
+    <meta property="og:image" content="https://kontainapp.github.io/guide/guide/images/microservices_anim_medium.gif">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://kontainapp.github.io/guide/">
     <meta property="twitter:title" content="Introduction">
-    <meta property="twitter:description" content="“Inside every large program is a small program struggling to get out.”— Tony Hoare">
-    <meta property="twitter:image" content="https://kontainapp.github.io/guide/guide/images/kontain_vs_containers.gif">
+    <meta property="twitter:description" content="We are rapidly progressing towards a world of decentralized computing where applications are broken down into hundreds of connected microservices and...">
+    <meta property="twitter:image" content="https://kontainapp.github.io/guide/guide/images/microservices_anim_medium.gif">
     
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.1.692779416095" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.1.692911035326" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.1.692779416095" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.1.692911035326" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.1" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.1.692779416095" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.1.692911035326" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -210,59 +210,36 @@
         <span>Introduction</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="kontain">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#kontain">#</doc-anchor-trigger>
-        <span>Kontain</span>
-    </h2>
-</doc-anchor-target>
-<p>“Inside every large program is a small program struggling to get out.”
-— Tony Hoare</p>
-<p>It’s a misconception to think of Containers as a way of securely isolating their deployments. Rather, containers are a ‘packaging technology’.</p>
-<p>How do you secure Containers and containerised deployments?
-However Containers can actually be isolated to avoid the security risks that they create.</p>
-<p><a href="https://kontain.app">Kontain</a> was founded on the insight that 2013-era containers are far too insecure, slow, and bloated for the demands of the 2020s as explained here.</p>
-<p><em>Kontain creates strongly isolated containers with fortress-strong security isolation, thousands of times faster startup, and vastly smaller footprint.</em></p>
-<p><em>Kontain is fully integrated with Docker and Kubernetes with a OCI and CRI compliant approach, and requiring no changes to source code, CI, or DevOps tooling.</em></p>
-<p>To use Kontain, view the <a href="/gettingstarted/install">Install Guide</a></p>
-<!-- ![test](images/vms-ctrs-unikernels.png) -->
-<p><figure class="content-center">
-    <img src="/guide/images/kontain_vs_containers.gif" alt="test" />
-    <figcaption class="caption">test</figcaption>
+<p><figure class="content-left">
+    <img src="/guide/images/microservices_anim_medium.gif" alt="" />
+    <figcaption class="caption caption-float"></figcaption>
 </figure>
 </p>
-<doc-anchor-target id="a-new-approach-with-no-change-in-code-or-devops-tooling">
+<p><figure class="content-right">
+    <img src="/guide/images/5g_edge_small.png" alt="" />
+    <figcaption class="caption caption-float"></figcaption>
+</figure>
+</p>
+<doc-anchor-target id="introduction">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#a-new-approach-with-no-change-in-code-or-devops-tooling">#</doc-anchor-trigger>
-        <span>A new approach (with no change in code or DevOps tooling)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#introduction">#</doc-anchor-trigger>
+        <span>Introduction</span>
     </h2>
 </doc-anchor-target>
-<p>A new approach to Containers but fully integrated with Docker and Kubernetes.
-With the current ongoing tectonic shift to cloud-based shared tenant, microservice based architectures, where containers, VMs all run on shared cloud hardware, it is time that these microservices are packaged into strongly isolated, secure, specialized packages that only includes the application code and just the required OS code and nothing more to run fast and securely on the shared multi-tenant cloud hardware with strong isolation.  It almost literally packages and employs only the functions needed to make an application work, and nothing more.</p>
-<p>This sort of packaging into a minimalistic unikernel image allows the application to leverage a Single Address Space, Single Process model and  run at screaming speeds.  There is no context switching, so the Application almost runs at the speed of the host Operating system.  Some more advantages are outlined here.  This enables it to be secure by nature since they do not share a kernel and present a minimal to no attack surface at the OS level.</p>
-<p>A unikernel is a single-address-space machine image that contains an application workload—the program you want to run in a container—combined with a minimal set of library functions which provide the OS services required to run the workload.  This approach comes with a ton of advantages in terms of:
-Security - highly secure, isolated, minimal attack surface packages in multi-tenant environments
-Shared-nothing architecture with very high density
-Speed - almost instantaneous startup time (in milliseconds rather than seconds)
-Resource consumption reduced by orders of magnitude - compute and size
-Really Immutable packages of code</p>
-<p>This Docker workflow/tools compatible approach offers huge advantages in the following areas:</p>
-<ul>
-<li>For packaging microservices in minimalistic, fast, secure containers</li>
-<li>Functions as a service without the security, startup downsides
-Scale to zero with instantaneous startup time</li>
-<li>IOT where security, speed, resource size are critical</li>
-<li>Edge computing</li>
-<li>Anyplace where security, speed, cost and resource constraints are a high priority</li>
-</ul>
-<doc-anchor-target id="fast-secure-minimal-resources">
+<p>We are rapidly progressing towards a world of decentralized computing where applications are broken down into hundreds of connected microservices and significant computing power is being pushed to the edges of the network.</p>
+<p>The key characteristics for enabling this new era are: Instantaneous Scale-out capabilities, low resource/cost usage, with high density and most importantly security of these computing services.</p>
+<p>The current Unit of computing workloads is a Container that is bloated, inefficient, insecure and vulnerable, running on a shared kernel with a huge attack surface that needs to be secured using various mechanisms in a multi-tenant cloud environment.</p>
+<p>We need a new unit of computing for this new era, a new type of &quot;Container&quot;.</p>
+<doc-anchor-target id="a-new-unit-of-computing-workloads---introducing-kontainer">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#fast-secure-minimal-resources">#</doc-anchor-trigger>
-        <span>Fast, secure, minimal resources</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#a-new-unit-of-computing-workloads---introducing-kontainer">#</doc-anchor-trigger>
+        <span>A new unit of computing workloads - Introducing &quot;Kontainer&quot;</span>
     </h2>
 </doc-anchor-target>
-<p>You can watch the video from <a href="https://www.abhaybhargav.com">Abhay Bhargav</a>, the founder of Application Security Company, we45, talk about security aspects of Containers and Unikernels.</p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/V5g50QiGArc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p>Introducing &quot;Kontainer&quot;, a Docker-comptabile &quot;Container&quot; that retains all the advantages and tooling of Docker/Containers while having none of the issues above.</p>
+<p>A Kontainer supports almost instantaneous startup, eliminates resource bloat, works in highly dense computing environments, supports all the important runtimes, and is highly secure with almost no attack surface.</p>
+<p>In addition, it works with no changes to current source code, and works with all the DevOps and CI/CD tooling, and Orchestration systems available today.</p>
+<p>Please see below on how to use &quot;Kontainers&quot;.</p>
 
 
 
@@ -328,6 +305,6 @@ Scale to zero with instantaneous startup time</li>
 
         <div id="docs-overlay-target"></div>
 
-        <script>window.__DOCS__ = { "title": "Welcome", icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+        <script>window.__DOCS__ = { "title": "Introduction", icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
     </body>
 </html>
