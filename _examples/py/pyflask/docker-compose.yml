@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+
+  # build 1
+  app:
+    runtime: krun
+    build:
+      context: .
+      args:
+        - BUILD_IMAGE_VERSION=python:3.8-slim
+        - KONTAIN_RELEASE_IMAGE_VERSION=kontainapp/runenv-python
+    environment:
+      - ENV=development
+    ports:
+      - 5000:5000
+    command: |
+      python main.py
