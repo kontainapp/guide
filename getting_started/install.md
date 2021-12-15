@@ -19,7 +19,7 @@ If not present, you can install Docker On Fedora/RHEL systems using [instruction
 
 ##### check for pre-requisites
 ```shell
-$ verify that you have a 64-bit Linux kernel version 4.15 or higher
+# verify that you have a 64-bit Linux kernel version 4.15 or higher
 $ uname -m
 x86_64
 $ uname -r
@@ -68,16 +68,18 @@ krun already configured in /etc/docker/daemon.json
   "path": "/opt/kontain/bin/krun"
 }
 
-# this installs Kontain in /opt/kontain folder
+# check for Kontain in /opt/kontain folder
 $ ls -l /opt/kontain
 ...
 drwxr-xr-x 1 smijar  121 296 Nov 10 09:32 bin
 drwxr-xr-x 1 smijar  121 140 Nov 10 09:32 lib
 drwxr-xr-x 1 smijar  121 194 Nov 10 09:32 runtime
 ...
+
+# This installed Kontain in /opt/kontain and added the Kontain runtime (/opt/bin/km) to docker. 
+# This also executed a smoke test of the unikernel virtual machine.
 ```
 
-This installs the necessary files in your /opt/kontain directory and configures the Kontain runtime (/opt/bin/km) for docker or podman. It also executes a smoke test of the unikernel virtual machine.
 
 +++ on Minikube or Managed or Regular Kubernetes
 #### Optional: Appendix contains instructions for launching various versions of Kubernetes

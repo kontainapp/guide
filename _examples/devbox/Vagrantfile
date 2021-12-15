@@ -62,10 +62,10 @@ vm_script = <<-SHELL
     # install vagrant and libvirt as provider
     # https://developer.fedoraproject.org/tools/vagrant/vagrant-libvirt.html
     # install all requirements for vagrant and libvirt as provider with the group install shown below
-    sudo dnf install @vagrant
+    # sudo dnf install @vagrant
 
     # normally, but @vagrant does everything shown below
-    # sudo dnf install vagrant vagrant-libvirt -y
+    sudo dnf install vagrant vagrant-libvirt -y
     # or
     # sudo vagrant plugin install vagrant-libvirt
 
@@ -164,7 +164,7 @@ EOM
     #sudo dnf install google-cloud-sdk -y
     # 366 throws an error (library on fedora 34, hence have to exclude)
     # or could use $ export CLOUDSDK_PYTHON=python3
-    sudo dnf install --exclude=google-cloud-sdk-366.0.0-1 google-cloud-sdk
+    sudo dnf install --exclude=google-cloud-sdk-366.0.0-1 google-cloud-sdk -y
     echo "please use $ gcloud init --console-only # to continue"
 
     # install azure-cli
@@ -177,8 +177,11 @@ baseurl=https://packages.microsoft.com/yumrepos/azure-cli
 enabled=1
 gpgcheck=1
 gpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/azure-cli.repo
-    sudo dnf install azure-cli -y 
-
+    sudo dnf install azure-cli -y
+    
+    # recording
+    sudo dnf install asciinema -y
+    sudo dnf install jq -y
 
     SHELL
 
