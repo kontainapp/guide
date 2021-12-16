@@ -21,7 +21,7 @@ if __name__ == "__main__":
 ```
 
 ## Docker
-### Dockerfile:
+### Dockerfile
 
 ```docker
 FROM python:3.8-slim AS build

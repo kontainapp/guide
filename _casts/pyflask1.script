@@ -1,7 +1,9 @@
-# Kontain is a new type of Docker and Kubernetes compatible "Container" runtime that packages 
-# your app into a tiny "Kontainer" with instantaneous startup time, strong isolation boundaries, 
+# Kontain is a new Docker and Kubernetes compatible "Container" runtime that packages 
+# your app into a tiny "Kontainer" with:
+# instantaneous startup time
+# minimal resources
+# Virtual Machine level strong isolation boundaries
 # and almost no attack surface
-
 
 # Here, we show Kontain working with a simple Python Flask service
 $ ls app
@@ -15,10 +17,14 @@ $ cat Dockerfile
 # Now lets build the Kontain container image
 $ docker build -t kg/pyflask .
 
+# Now lets run the Kontain container image
+$ docker run --rm -d --runtime=krun -p 5000:5000 kg/pyflask
+
+# let's try to invoke it
+$ curl http://localhost:5000/
 
 
-
-
+# we have successfully invoked it
 
 
 # now lets check the size of the container images
@@ -33,6 +39,7 @@ $ docker images | grep "kg/pyflask"
 
 # notice that its much smaller by a factor of 3
 
+$ clear
 
 # Now let's check for vulnerabilities
 
@@ -41,3 +48,14 @@ $ docker images | grep "kg/pyflask"
 $ grype python:3.8-slim | wc -l
 
 # now, let's check for vulnerabilities in the Kontain Container image
+
+$ grype kg/pyflask
+
+# notice that we trimmed down the image and reduced the vulnerabilities by using 
+# the Kontain based Container image
+
+$ clear
+
+# thank you for watching and checkout Kontain at https://kontain.app 
+# and on github at https://github.com/kontainapp/km/ 
+# and the guide at https://kontainapp.github.io/guide
