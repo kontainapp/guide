@@ -1,5 +1,5 @@
 ---
-label: Install (Local, Docker, Kubernetes)
+label: Install (in Docker, in K8s)
 icon: /images/docker-kube.png
 order: 1000
 ---

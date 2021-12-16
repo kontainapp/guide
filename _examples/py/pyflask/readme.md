@@ -1,7 +1,8 @@
 # reference
+Docker python packaging: https://pythonspeed.com/articles/activate-virtualenv-dockerfile/
 For flask From: https://medium.com/analytics-vidhya/build-a-python-flask-app-and-deploy-with-kubernetes-ccc99bbec5dc
 For compose from: https://takacsmark.com/docker-compose-tutorial-beginners-by-example-basics/
-extended: https://www.python4networkengineers.com/posts/python-intermediate/how_to_run_an_app_with_docker/
+Extended: https://www.python4networkengineers.com/posts/python-intermediate/how_to_run_an_app_with_docker/
 
 ```bash
 # build and run the container

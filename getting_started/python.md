@@ -1,5 +1,5 @@
 ---
-label: Python Flask
+label: Python Flask (Docker/K8s)
 icon: /images/python.png
 order: 900
 ---
@@ -23,10 +23,10 @@ if __name__ == "__main__":
 ## Docker
 ### Dockerfile:
 
-```shell
+```docker
 FROM python:3.8-slim AS build
 WORKDIR /opt/src/app
- 
+
 RUN python -m venv /opt/venv
 # Make sure we use the virtualenv:
 ENV PATH="/opt/venv/bin:$PATH"
@@ -36,16 +36,17 @@ RUN pip install -r /opt/src/requirements.txt
  
 ADD app/main.py /opt/src/app/
 #RUN find /opt/src/
- 
- 
-FROM kontainapp/runenv-python as release
+
+
+FROM kontainapp/runenv-python-3.8:v0.9.1 as release
 COPY --from=build /opt/venv /opt/venv
 COPY --from=build /opt/src/app /opt/src/app
 ENV PATH="/opt/venv/bin:$PATH"
 WORKDIR /opt/src/app
  
 EXPOSE 5000
-CMD ["python", "main.py"]
+# CMD ["python", "main.py"]
+CMD . /opt/venv/bin/activate && exec python main.py
 ```
 
 ### Build the Kontain Container image
@@ -62,10 +63,35 @@ $ curl http://localhost:5000/
 Hello from Kontain!
 ```
 
-### Check Container image size
-Check out the size of the Kontain based image for Pyflask microservice with Python runtime, code and libraries - **40.2 MB**
-- Size of the Base Python-slim Image without code and libraries - **122 MB**
-- Size of the Python bullseye base image - **909MB**
+### Check Kontain Container image size
+```sh
+$ docker images|grep "3.8-slim"
+python       3.8-slim                 d30b976a9197   2 months ago    122MB
+
+$ docker images | grep "kg/pyflask"
+kg/pyflask   latest                   3c038d3aebef   2 hours ago     **40.2MB**
+```
+
+### Check for vulnerabilities
+```sh
+# first, check the base python image
+$ grype python:3.8-slim|wc -l
+ ✔ Vulnerability DB        [no update available]
+ ✔ Loaded image
+ ✔ Parsed image
+ ✔ Cataloged packages      [108 packages]
+ ✔ Scanned image           [68 vulnerabilities]
+67
+
+# now check the Kontain container image
+$ grype kg/pyflask:1.0
+ ✔ Vulnerability DB        [no update available]
+ ✔ Loaded image
+ ✔ Parsed image
+ ✔ Cataloged packages      [8 packages]
+ ✔ Scanned image           [0 vulnerabilities]
+No vulnerabilities found
+```
 
 ## Kubernetes
 ### Kubernetes Deployment Manifest
@@ -112,7 +138,7 @@ spec:
 ```
 
 ### Deploy to Kubernetes
-```bash
+```sh
 $ kubectl apply -f flaskapp_k8s.yml
 
 # verify that the pod is running
@@ -123,14 +149,14 @@ flaskapp-955645cf8-mfrtj            1/1     Running   0          15m
 
 ### Verify Deployment
 Now we port forward the service's port to local port to test out that the service is running:
-```bash
+```sh
 $ kubectl port-forward po/flaskapp-955645cf8-mfrtj 5000:5000
 
 # please note that you have to keep this terminal window open before the next step
 ```
 
 In another terminal window we test using curl to verify the output from the service:
-```bash
+```sh
 $ curl http://localhost:5000
 Hello from Kontain!
 ```
@@ -138,6 +164,6 @@ Hello from Kontain!
 Above we see the output from our Python app wrapped in a Kontain based image.
 
 To clean up:
-```bash
+```sh
 $ kubectl delete -f flaskapp_k8s
 ```
