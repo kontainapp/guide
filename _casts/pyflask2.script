@@ -1,9 +1,13 @@
-# Kontain is a new Docker and Kubernetes compatible "Container" runtime that packages 
-# your app into a tiny "Kontainer" with:
-# instantaneous startup time
-# minimal resources
-# Virtual Machine level strong isolation boundaries
-# and almost no attack surface
+# docker ps
+
+# docker stop
+
+# Kontain is a new Docker and Kubernetes compatible "Container" runtime that
+#  packages your app into a tiny "Kontainer" with benefits like:
+#    instantaneous startup time
+#    minimal resources
+#    Virtual Machine level strong isolation boundaries
+#    and almost no attack surface
 
 # Here, we show Kontain working with a simple Python Flask service
 $ ls app
@@ -39,9 +43,9 @@ $ docker images | grep "kg/pyflask"
 
 # notice that its much smaller by a factor of 3
 
-$ clear
 
-# Now let's check for vulnerabilities
+# Now that we have seen Kontain work with Docker and Python Flask,
+# let's check for vulnerabilities
 
 # first, lets check for vulnerabilities in the python base image used to build the Kontain Container
 
@@ -59,3 +63,9 @@ $ clear
 # thank you for watching and checkout Kontain at https://kontain.app 
 # and on github at https://github.com/kontainapp/km/ 
 # and the guide at https://kontainapp.github.io/guide
+
+# stop the docker service
+$ docker ps
+....
+
+$ docker stop <container-id>

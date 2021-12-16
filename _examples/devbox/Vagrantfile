@@ -16,6 +16,9 @@ vm_script = <<-SHELL
 
     sudo dnf update -y
 
+    # install wget
+    sudo dnf install wget -y
+
     # install docker
     echo "installing Docker CE"
     sudo dnf remove docker \
@@ -58,6 +61,8 @@ vm_script = <<-SHELL
     # apply changes without logging out
     sudo newgrp docker
 
+    # start docker once machine starts up after provisioning using:
+    # $ sudo systemctl start docker.service
 
     # install vagrant and libvirt as provider
     # https://developer.fedoraproject.org/tools/vagrant/vagrant-libvirt.html
@@ -182,6 +187,9 @@ gpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.re
     # recording
     sudo dnf install asciinema -y
     sudo dnf install jq -y
+
+    # grype for vulnerabilities
+    curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
 
     SHELL
 
