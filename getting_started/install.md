@@ -95,7 +95,10 @@ For simulating an **edge cluster with k3s using Vagrant**, the instrutions are [
 You will need to verify pre-requisites on Kubernetes Nodes.  This applies for both Managed Kubernetes and Regular Kubernetes nodes.
 
 ```shell
-# to ssh into the Kubernetes nodes where you want to test Kontain
+# get the list of nodes
+$ kubectl get nodes -o wide
+
+# to ssh into the Kubernetes nodes where you want to test or install Kontain
 # This command starts a privileged container on your node and connects to it over SSH
 $ kubectl debug node/<nodeid> --image=busybox
 or
