@@ -26,12 +26,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.1.693038467312" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.1.693105534913" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.1.693038467312" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.1.693105534913" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.1" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.1.693038467312" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.1.693038467312" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.1.693105534913" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.1.693105534913" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -408,6 +408,99 @@ public class HelloController {
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash">$ curl http://localhost:8080/
 Hello from Kontain!</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="kubernetes">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#kubernetes">#</doc-anchor-trigger>
+        <span>Kubernetes</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="kubernetes-deployment-manifest">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#kubernetes-deployment-manifest">#</doc-anchor-trigger>
+        <span>Kubernetes Deployment Manifest</span>
+    </h3>
+</doc-anchor-target>
+<p>The K8s deployment yaml (flaskapp_k8s.yml) along with the service at port 8080 is shown below:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-yaml"><code v-pre class="language-yaml">---
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboothello
+  labels:
+    app: springboothello
+spec:
+  type: ClusterIP 
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    app: springboothello
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboothello
+  labels:
+    app: springboothello
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springboothello
+  template:
+    metadata:
+      labels:
+        app: springboothello
+    spec:
+      runtimeClassName: kontain
+      containers:
+      - name: springboothello
+        image: sandman2k/springboothello:1.0
+        ports:
+        - containerPort: 8080</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="deploy-to-kubernetes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#deploy-to-kubernetes">#</doc-anchor-trigger>
+        <span>Deploy to Kubernetes</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ kubectl apply -f k8s.yml
+service/springboothello created
+deployment.apps/springboothello created
+
+# verify that the pod is running
+$ kubectl get pods
+NAME                               READY   STATUS    RESTARTS   AGE
+flaskapp-955645cf8-9sqm5           1/1     Running   0          146m
+springboothello-6b5b5f7d6b-2vb48   1/1     Running   0          22m
+</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="verify-deployment">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#verify-deployment">#</doc-anchor-trigger>
+        <span>Verify Deployment</span>
+    </h3>
+</doc-anchor-target>
+<p>Now we port forward the service&#x27;s port to local port to test out that the service is running:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ kubectl port-forward svc/springboothello 8080:8080
+
+# please note that you have to keep this terminal window open before the next step</code></pre>
+</doc-codeblock></div>
+<p>In another terminal window we test using curl to verify the output from the service:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ curl http://localhost:8080
+Hello from Kontain!</code></pre>
+</doc-codeblock></div>
+<p>Above we see the output from our Java Spring Boot app wrapped in a Kontain based image.</p>
+<p>If you wish to delete Spring Boot app from your Kubernetes distribution you can use:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ kubectl delete -f k8s.yml</code></pre>
 </doc-codeblock></div>
 
 
