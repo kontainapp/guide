@@ -9,6 +9,7 @@ order: 2000
 ![](/images/5g_edge_small.png)--
 
 [Kontain Guide](https://kontainapp.github.io/guide/)
+
 [Video Tutorials](https://kontainapp.github.io/guide/video_tuts/)
 
 ## Introduction
