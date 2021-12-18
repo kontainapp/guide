@@ -150,7 +150,7 @@ flaskapp-955645cf8-mfrtj            1/1     Running   0          15m
 ### Verify Deployment
 Now we port forward the service's port to local port to test out that the service is running:
 ```sh
-$ kubectl port-forward po/flaskapp-955645cf8-mfrtj 5000:5000
+$ kubectl port-forward svc/flaskapp 5000:5000
 
 # please note that you have to keep this terminal window open before the next step
 ```

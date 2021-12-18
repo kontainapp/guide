@@ -188,6 +188,10 @@ gpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.re
     sudo dnf install asciinema -y
     sudo dnf install jq -y
 
+    # asciicast to gif
+    # https://github.com/asciinema/asciicast2gif
+    npm install --global asciicast2gif
+
     # grype for vulnerabilities
     curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
 

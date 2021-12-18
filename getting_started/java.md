@@ -179,3 +179,81 @@ $ curl http://localhost:8080/
 Hello from Kontain!
 ```
 
+## Kubernetes
+### Kubernetes Deployment Manifest
+The K8s deployment yaml (flaskapp_k8s.yml) along with the service at port 8080 is shown below:
+```yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboothello
+  labels:
+    app: springboothello
+spec:
+  type: ClusterIP 
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    app: springboothello
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboothello
+  labels:
+    app: springboothello
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springboothello
+  template:
+    metadata:
+      labels:
+        app: springboothello
+    spec:
+      runtimeClassName: kontain
+      containers:
+      - name: springboothello
+        image: sandman2k/springboothello:1.0
+        ports:
+        - containerPort: 8080
+```
+
+### Deploy to Kubernetes
+```sh
+$ kubectl apply -f k8s.yml
+service/springboothello created
+deployment.apps/springboothello created
+
+# verify that the pod is running
+$ kubectl get pods
+NAME                               READY   STATUS    RESTARTS   AGE
+flaskapp-955645cf8-9sqm5           1/1     Running   0          146m
+springboothello-6b5b5f7d6b-2vb48   1/1     Running   0          22m
+
+```
+
+### Verify Deployment
+Now we port forward the service's port to local port to test out that the service is running:
+```sh
+$ kubectl port-forward svc/springboothello 8080:8080
+
+# please note that you have to keep this terminal window open before the next step
+```
+
+In another terminal window we test using curl to verify the output from the service:
+```sh
+$ curl http://localhost:8080
+Hello from Kontain!
+```
+
+Above we see the output from our Java Spring Boot app wrapped in a Kontain based image.
+
+If you wish to delete Spring Boot app from your Kubernetes distribution you can use:
+```sh
+$ kubectl delete -f k8s.yml
+```

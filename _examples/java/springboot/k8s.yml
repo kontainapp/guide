@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboothello
+  labels:
+    app: springboothello
+spec:
+  type: ClusterIP 
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    app: springboothello
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboothello
+  labels:
+    app: springboothello
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springboothello
+  template:
+    metadata:
+      labels:
+        app: springboothello
+    spec:
+      runtimeClassName: kontain
+      containers:
+      - name: springboothello
+        image: sandman2k/springboothello:1.0
+        ports:
+        - containerPort: 8080

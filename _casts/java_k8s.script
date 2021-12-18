@@ -1,0 +1,53 @@
+$ mvn clean
+
+
+# Kontain is a new Docker and Kubernetes compatible "Container" runtime that
+#  packages your app into a tiny "Kontainer" with benefits like:
+#    instantaneous startup time
+#    minimal resources
+#    Virtual Machine level strong isolation boundaries
+#    and almost no attack surface
+
+# Here we show Kontain working with Spring Boot and Kubernetes
+
+# first, let's checkout the app
+$ tree
+$ cat src/main/java/com/example/HelloWorldApp.java
+
+# and the Dockerfile
+$ cat Dockerfile
+
+# now let's build the Spring Boot Application
+$ mvn clean test package
+
+# now lets build the Docker Image
+$ docker build -t kg/springboothello:latest .
+
+# now lets take a look at the Kubernetes Manifest
+$ cat k8s.yml
+
+# now lets deploy to Kubernetes
+$ kubectl apply -f k8s.yml
+
+# verify that the pod is running
+$ kubectl get pods
+
+# Make a note of the pod id and now, verify Deployment by invoking the service
+$ kubectl port-forward svc/springboothello 8080:8080 &
+
+# now, invoke the service
+$ curl http://localhost:8080
+
+# now lets check the size of the container images
+# checking the JDK image size
+$ docker images | grep ""
+
+# now lets check the size of the Kontain based Spring Boot app
+$ docker images | grep ""
+
+
+$ clear
+
+# thank you for watching and checkout Kontain at https://kontain.app 
+# and on github at https://github.com/kontainapp/km/ 
+# and the guide at https://kontainapp.github.io/guide
