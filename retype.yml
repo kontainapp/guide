@@ -6,7 +6,7 @@ favicon: images/favicon.png
 # favicon: /images/kon.png
 branding:
   title: Kontain User Guide
-  label: v0.1
+  label: v0.9.3
   logo: /images/logo2.png
 
 links:
