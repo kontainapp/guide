@@ -1,0 +1,23 @@
+# Kontain is a new Docker and Kubernetes compatible "Container" runtime that
+#  packages your app into a tiny "Kontainer" with benefits like:
+#    instantaneous startup time
+#    minimal resources
+#    Virtual Machine level strong isolation boundaries
+#    and almost no attack surface
+
+# first, lets check for vulnerabilities in the JDK image
+$ grype openjdk:11-jdk-slim-buster
+
+# that's a lot, lets count
+$ grype openjdk:11-jdk-slim-buster | wc -l
+
+# now lets check for vulnerabilities in the Kontain based spring boot image
+$ grype kg/springboothello
+
+# a few, now lets count 
+$ grype kg/springboothello | wc -l
+
+
+# thank you for watching and checkout Kontain at https://kontain.app 
+# and on github at https://github.com/kontainapp/km/ 
+# and the guide at https://kontainapp.github.io/guide
