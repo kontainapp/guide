@@ -8,6 +8,9 @@ order: 2000
 
 ![](/images/5g_edge_small.png)--
 
+## Kontain Guide
+https://kontainapp.github.io/guide/
+
 
 We are rapidly progressing towards a world of decentralized computing where applications are broken down into hundreds of connected microservices and significant computing power is being pushed to the edges of the network.
 
