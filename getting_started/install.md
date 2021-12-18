@@ -14,7 +14,7 @@ To package Kontain images, it is also necessary to have a recent version of Dock
 
 ### Environments
 +++ Local (Docker)
-#### Optional: Install for Docker
+#### Optional: Installing Docker in Fedora/RHEL systems
 If not present, you can install Docker On Fedora/RHEL systems using [instructions from here](https://developer.fedoraproject.org/tools/docker/docker-installation.html)
 
 ##### check for pre-requisites
@@ -81,7 +81,7 @@ drwxr-xr-x 1 smijar  121 194 Nov 10 09:32 runtime
 ```
 
 
-+++ on Minikube or Managed or Regular Kubernetes
++++ in Minikube or Managed or Regular Kubernetes
 #### Optional: Appendix contains instructions for launching various versions of Kubernetes
 As a convenience, we have provided convenient for installing or running various versions of Kubernetes for testing Kontain.
 

@@ -1,0 +1,29 @@
+# Kontain is a new Docker and Kubernetes compatible "Container" runtime that
+#  packages your app into a tiny "Kontainer" with benefits like:
+#    instantaneous startup time
+#    minimal resources
+#    Virtual Machine level strong isolation boundaries
+#    and almost no attack surface
+
+# first, let's quickly check some pre-requisites on the K8s nodes
+
+# check if you are running Containerd
+$ kubectl get nodes -o wide
+
+# verify that you have a 64-bit Linux kernel version 4.15 or higher
+$ uname -m && uname -r
+
+# verify that you have nested virtualization turned on
+$ cat /proc/cpuinfo| egrep "vmx|svm" | wc -l
+
+# output must be greater than 0
+
+# verify that you have KVM already installed /dev/kvm enabled by checking:
+$ ls -l /dev/kvm
+
+# Install Kontain using Daemonset
+$ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_k8s_install.sh | sh
+
+# thank you for watching and checkout Kontain at https://kontain.app 
+# and on github at https://github.com/kontainapp/km/ 
+# and the guide at https://kontainapp.github.io/guide
