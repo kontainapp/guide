@@ -9,7 +9,7 @@ Below is an example of packaging and running a Spring Boot Application as a Kont
 
 Given a simple Spring Boot application with a tree structure as outlined below:
 
-### the Spring Boot application and Maven files
+### The Spring Boot application and Maven files
 ```bash
 $ tree
 ├── Dockerfile
