@@ -1,5 +1,5 @@
 ---
-label: Java
+label: Java (Spring Boot)
 icon: /images/java.png
 order: 600
 ---
