@@ -1,5 +1,5 @@
 ---
-label: Kubernetes Integration Overview
+label: Log4J Shell Attack mitigation
 icon: /images/k8s.png
 order: 900
 ---
