@@ -2,6 +2,8 @@
 Example from: https://mkyong.com/spring-boot/spring-boot-hello-world-example/
 tar gz from here: https://crunchify.com/maven-assembly-plugin-how-to-create-tar-gz-or-zip-archive-for-java-enterprise-project-using-maven/
 
+Excellent more complete sample: https://github.com/jecklgamis/spring-boot-java-example
+
 # for running in java
 ```bash
 # run with maven
