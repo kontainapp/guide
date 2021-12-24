@@ -7,21 +7,23 @@
     <meta name="turbo-cache-control" content="no-cache">
 
     <!-- Primary Meta Tags -->
-    <title>Minikube (Containerd)</title>
-    <meta name="title" content="Minikube (Containerd)">
-    <meta name="description" content="Minikube is a great little Kubernetes distribution that can be used to verify Kontain working with Vanilla Kubernetes distributions." />
+    <title>Kubernetes Integration Overview</title>
+    <meta name="title" content="Kubernetes Integration Overview">
+    <meta name="description" content="Video showing how a Spring Boot Application gets compromised with a reverse shell when packaged and run as a Docker Container, when attacked using..." />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kontainapp.github.io/guide/appendix/minikube/">
-    <meta property="og:title" content="Minikube (Containerd)">
-    <meta property="og:description" content="Minikube is a great little Kubernetes distribution that can be used to verify Kontain working with Vanilla Kubernetes distributions.">
+    <meta property="og:url" content="https://kontainapp.github.io/guide/appendix/log4jshell/">
+    <meta property="og:title" content="Kubernetes Integration Overview">
+    <meta property="og:description" content="Video showing how a Spring Boot Application gets compromised with a reverse shell when packaged and run as a Docker Container, when attacked using...">
+    <meta property="og:image" content="https://asciinema.org/a/458347.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://kontainapp.github.io/guide/appendix/minikube/">
-    <meta property="twitter:title" content="Minikube (Containerd)">
-    <meta property="twitter:description" content="Minikube is a great little Kubernetes distribution that can be used to verify Kontain working with Vanilla Kubernetes distributions.">
+    <meta property="twitter:url" content="https://kontainapp.github.io/guide/appendix/log4jshell/">
+    <meta property="twitter:title" content="Kubernetes Integration Overview">
+    <meta property="twitter:description" content="Video showing how a Spring Boot Application gets compromised with a reverse shell when packaged and run as a Docker Container, when attacked using...">
+    <meta property="twitter:image" content="https://asciinema.org/a/458347.svg">
     
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
@@ -31,7 +33,6 @@
     <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.693667209900" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
     <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.693667209900" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.693667209900" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -203,68 +204,45 @@
                 <div id="docs-sidebar-right-toggle"></div>
                
                 <!-- Page content  -->
-<doc-anchor-target id="minikube-containerd" class="break-words">
+<doc-anchor-target id="kubernetes-integration-overview" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#minikube-containerd">#</doc-anchor-trigger>
-        <span>Minikube (Containerd)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#kubernetes-integration-overview">#</doc-anchor-trigger>
+        <span>Kubernetes Integration Overview</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="using-kontain-in-minikube-in-docker-mode-for-usage-without-using-virtualbox">
+<doc-anchor-target id="spring-boot-application-packaged-and-run-as-a-docker-container">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-in-minikube-in-docker-mode-for-usage-without-using-virtualbox">#</doc-anchor-trigger>
-        <span>Using Kontain in Minikube (in Docker mode for usage without using VirtualBox)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#spring-boot-application-packaged-and-run-as-a-docker-container">#</doc-anchor-trigger>
+        <span>Spring Boot Application packaged and run as a Docker Container</span>
     </h2>
 </doc-anchor-target>
-<p>Minikube is a great little Kubernetes distribution that can be used to verify Kontain working with Vanilla Kubernetes distributions.  Usually, Minikube comes with VirtualBox in order to create the relevant Kubernetes Master and Worker nodes.  But, Minikube can also launch in Docker in Docker (DIND) mode, where it launches quickly in Docker, where the Master and Worker nodes are plain Docker containers.</p>
-<doc-tabs>
-<doc-tab id="starting-a-minikube-cluster">
-<template #title>Starting a Minikube cluster</template>
-<doc-anchor-target id="start-minikube-in-docker-in-docker-mode-dind">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#start-minikube-in-docker-in-docker-mode-dind">#</doc-anchor-trigger>
-        <span>Start Minikube in Docker in Docker mode (DIND)</span>
-    </h3>
+<ul>
+<li>Video showing how a Spring Boot Application gets compromised with a reverse shell when packaged and run as a Docker Container, when attacked using Log4JShell attack</li>
+<li>Attacker can execute shell commands in the container
+<figure class="content-center">
+    <a href="https://asciinema.org/a/458347?speed=1.3&amp;t=4">
+        <img src="https://asciinema.org/a/458347.svg" alt="asciicast" />
+    </a>
+    <figcaption class="caption">asciicast</figcaption>
+</figure>
+</li>
+</ul>
+<doc-anchor-target id="spring-boot-application-packaged-and-run-as-a-kontain-based-container">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#spring-boot-application-packaged-and-run-as-a-kontain-based-container">#</doc-anchor-trigger>
+        <span>Spring Boot Application packaged and run as a Kontain based Container</span>
+    </h2>
 </doc-anchor-target>
-<p>For this, Kontain needs a minimum version of Minikube, which can be installed from <a href="https://minikube.sigs.k8s.io/docs/start/">here</a></p>
-<p>To start Minikube use:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ minikube start 
-# or
-$ minikube start --container-runtime=containerd --driver=docker --wait=all
-# or (to start a cluster named 'kontain')
-$ minikube start -p kontain 
-
-# to see status of cluster (s) - cluster name is 'default'
-$ minikube profile list
-|----------|-----------|------------|--------------|------|---------|---------|-------|
-| Profile  | VM Driver |  Runtime   |      IP      | Port | Version | Status  | Nodes |
-|----------|-----------|------------|--------------|------|---------|---------|-------|
-| default  | docker    | containerd | 192.168.58.2 | 8443 | v1.22.2 | Running |     1 |
-|----------|-----------|------------|--------------|------|---------|---------|-------|
-
-# check if the kube-system pods have launched properly
-$ kubectl get pods -n kube-system
-NAMESPACE     NAME                                READY   STATUS    RESTARTS   AGE
-kube-system   coredns-78fcd69978-gqz46            1/1     Running   0          2d21h
-kube-system   etcd-minikube                       1/1     Running   0          2d21h
-kube-system   kindnet-d7xwr                       1/1     Running   0          2d21h
-kube-system   kube-apiserver-minikube             1/1     Running   0          2d21h</code></pre>
-</doc-codeblock></div>
-<p>Now we can use the <a href="/guide/getting_started/install/#on-minikube-or-managed-or-regular-kubernetes">instructions here</a> to install and use Kontain.</p>
-</doc-tab>
-<doc-tab id="install-kontain">
-<template #title>Install Kontain</template>
-<p>You can follow instructions from <a href="/guide/getting_started/install/#on-minikube-or-managed-or-regular-kubernetes">here</a> to use Kontain in Minikube.</p>
-</doc-tab>
-<doc-tab id="clean-up">
-<template #title>Clean up</template>
-<p>You can remove the Minikube cluster by using the following:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">$ minikube delete
-or 
-$ minikube delete -p &lt;default&gt;</code></pre>
-</doc-codeblock></div>
-</doc-tab>
+<ul>
+<li>Video showing how a Spring Boot Application when packaged and run as a Kontain based Container, and when attacked using Log4JShell, and even if compromised due to Log4J, the attacker cannot do anything
+<figure class="content-center">
+    <a href="https://asciinema.org/a/458372?speed=1.4">
+        <img src="https://asciinema.org/a/458372.svg" alt="asciicast" />
+    </a>
+    <figcaption class="caption">asciicast</figcaption>
+</figure>
+</li>
+</ul>
 
 
 
@@ -276,20 +254,20 @@ $ minikube delete -p &lt;default&gt;</code></pre>
             
 <nav class="flex mt-14">
     <div class="w-1/2">
-        <a class="px-5 py-4 h-full flex items-center break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/guide/appendix/minikube_crio/">
+        <a class="px-5 py-4 h-full flex items-center break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/guide/appendix/k8s_int/">
             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
             <span>
                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                <span class="block mt-1">CRIO</span>
+                <span class="block mt-1">Kubernetes Integration Overview</span>
             </span>
         </a>
     </div>
 
     <div class="w-1/2">
-        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/guide/appendix/ssh_k8s_nodes/">
+        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/guide/appendix/minikube_crio/">
             <span>
                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                <span class="block mt-1">SSH into K8s nodes</span>
+                <span class="block mt-1">CRIO</span>
             </span>
             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
         </a>
@@ -337,6 +315,6 @@ $ minikube delete -p &lt;default&gt;</code></pre>
 
         <div id="docs-overlay-target"></div>
 
-        <script>window.__DOCS__ = { "title": "Minikube (Containerd)", icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+        <script>window.__DOCS__ = { "title": "Kubernetes Integration Overview", icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
     </body>
 </html>
