@@ -5,7 +5,7 @@ order: 900
 ---
 
 ## Blog entry
-Here is a [blog entry](https://smijar.medium.com/log4j-shell-attack-mitigation-with-kontain-containers-e226ca2a3172) discussing in detail the Log4jShell attack with and without Kontain based containers.
+Here is a [blog entry](https://medium.com/kontain/log4j-shell-attack-mitigation-with-kontain-containers-e226ca2a3172) discussing in detail the Log4jShell attack with and without Kontain based containers.
 
 ## Spring Boot Application packaged and run as a Docker Container
 * Video showing how a Spring Boot Application gets compromised with a reverse shell when packaged and run as a Docker Container, when attacked using Log4JShell attack

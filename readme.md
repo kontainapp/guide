@@ -1,16 +1,16 @@
 ---
-label: Introduction to Kontainer
+label: Introduction to Kontain
 icon: home
 order: 2000
 ---
 
-![](/images/microservices_anim_medium.gif)
+<!-- ![](/images/microservices_anim_medium.gif) -->
 
-![](/images/5g_edge_small.png)--
+![](/images/5g_edge.png)--
 
-[Kontain Guide](https://kontainapp.github.io/guide/)
+[Kontain Guide](/guide)
 
-[Video Tutorials](https://kontainapp.github.io/guide/video_tuts/)
+[Video Tutorials](/guide/video_tuts/)
 
 ## Introduction
 We are rapidly progressing towards a world of decentralized computing where applications are broken down into hundreds of connected microservices and significant computing power is being pushed to the edges of the network.
