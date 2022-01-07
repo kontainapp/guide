@@ -8,10 +8,6 @@ order: 2000
 
 ![](/images/5g_edge.png)--
 
-[Kontain Guide](/guide)
-
-[Video Tutorials](/guide/video_tuts/)
-
 ## Introduction
 We are rapidly progressing towards a world of decentralized computing where applications are broken down into hundreds of connected microservices and significant computing power is being pushed to the edges of the network.
 
