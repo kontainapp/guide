@@ -4,8 +4,10 @@ icon: /images/k8s.png
 order: 1100
 ---
 
-## Kontain vs Firecracker vs gVisor and others
+## Kontain compared to regular Linux Containers vs Firecracker vs gVisor and others
 Below we have outlined some important concise information and differences on the System Architectures of Kontain vs gVisor and Firecracker, and how Kontain provides both security and high performance without any tradeoffs between the two.
+
+For a summary 1-pager document on this, please [see here](https://drive.google.com/file/d/1PgkveMvC8ctsmRlFfEJS5ONnkCDg_Sk1/view?usp=sharing)
 
 ## Kontain "Kontainer"
 A Kontain "Kontainer" allows you to have the best combination of Performance, Strong Isolation and Security of Virtualization as well as a minimal footprint along with compatibility with Docker based tooling used to package and run Linux Containers.  
