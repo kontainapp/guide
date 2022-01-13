@@ -6,6 +6,7 @@ build
 npm-debug.log
 .nyc
 .env
+kmsnap
 
 # retype
 .retype/
