@@ -114,6 +114,5 @@ kg/express                                                      latest          
 ```
 
 As can be seen:
-- Kontain-based image - kg/express is 46.1MB in size
-- Whereas, the Original node image is 918MB in size
-`
+- Kontain-based image - kg/express is *46.1MB* in size
+- Whereas, the Original node image is *918MB* in size
