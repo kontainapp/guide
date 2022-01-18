@@ -7,31 +7,31 @@
     <meta name="turbo-cache-control" content="no-cache">
 
     <!-- Primary Meta Tags -->
-    <title>Javascript/NodeJS (ExpressJS)</title>
-    <meta name="title" content="Javascript/NodeJS (ExpressJS)">
-    <meta name="description" content="And a package.json identifying its dependencies:" />
+    <title>Javascript and Node (ExpressJS)</title>
+    <meta name="title" content="Javascript and Node (ExpressJS)">
+    <meta name="description" content="Following is the layout" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kontainapp.github.io/guide/getting_started/javascript/">
-    <meta property="og:title" content="Javascript/NodeJS (ExpressJS)">
-    <meta property="og:description" content="And a package.json identifying its dependencies:">
+    <meta property="og:title" content="Javascript and Node (ExpressJS)">
+    <meta property="og:description" content="Following is the layout">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://kontainapp.github.io/guide/getting_started/javascript/">
-    <meta property="twitter:title" content="Javascript/NodeJS (ExpressJS)">
-    <meta property="twitter:description" content="And a package.json identifying its dependencies:">
+    <meta property="twitter:title" content="Javascript and Node (ExpressJS)">
+    <meta property="twitter:description" content="Following is the layout">
     
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.2.695789063957" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.2.695789581807" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.695789063957" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.695789581807" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.695789063957" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.695789063957" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.695789581807" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.695789581807" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -203,17 +203,31 @@
                 <div id="docs-sidebar-right-toggle"></div>
                
                 <!-- Page content  -->
-<doc-anchor-target id="javascriptnodejs-expressjs" class="break-words">
+<doc-anchor-target id="javascript-and-node-expressjs" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#javascriptnodejs-expressjs">#</doc-anchor-trigger>
-        <span>Javascript/NodeJS (ExpressJS)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#javascript-and-node-expressjs">#</doc-anchor-trigger>
+        <span>Javascript and Node (ExpressJS)</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="javascript-express-server">
+<doc-anchor-target id="files">
     <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#files">#</doc-anchor-trigger>
+        <span>files</span>
+    </h2>
+</doc-anchor-target>
+<p>Following is the layout</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">$ tree
+.
+├── Dockerfile
+├── package.json
+└── server.js</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="javascript-express-server">
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#javascript-express-server">#</doc-anchor-trigger>
         <span>Javascript Express server</span>
-    </h2>
+    </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-javascript"><code v-pre class="language-javascript">'use strict';
@@ -233,6 +247,12 @@ app.get('/', (req, res) =&gt; {
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);</code></pre>
 </doc-codeblock></div>
+<doc-anchor-target id="packagejson">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#packagejson">#</doc-anchor-trigger>
+        <span>package.json</span>
+    </h3>
+</doc-anchor-target>
 <p>And a package.json identifying its dependencies:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-javascript"><code v-pre class="language-javascript">{
@@ -317,9 +337,19 @@ Hello from Kontain!</code></pre>
         <span>Check the Container Image size</span>
     </h3>
 </doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">$ docker images|grep node
+node                                                            12                       9f5f1136afe0   2 months ago    918MB
+
+$ docker images|grep kg/express
+kg/express                                                      latest                   90d2737e9a79   2 months ago    46.1MB
+</code></pre>
+</doc-codeblock></div>
+<p>As can be seen:</p>
 <ul>
 <li>Kontain-based image - kg/express is 46.1MB in size</li>
-<li>Whereas, the Original node image is 918MB in size</li>
+<li>Whereas, the Original node image is 918MB in size
+&#x60;</li>
 </ul>
 
 
