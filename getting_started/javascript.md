@@ -4,9 +4,18 @@ icon: /images/Expressjs.svg
 order: 700
 ---
 
-# Javascript/NodeJS (ExpressJS)
+## files
+Following is the layout
 
-## Javascript Express server
+```
+$ tree
+.
+├── Dockerfile
+├── package.json
+└── server.js
+```
+
+### Javascript Express server
 
 ```javascript
 'use strict';
@@ -27,6 +36,7 @@ app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
 ```
 
+### package.json
 And a package.json identifying its dependencies:
 
 ```javascript
@@ -94,6 +104,16 @@ Hello from Kontain!
 ```
 
 ### Check the Container Image size
+```
+$ docker images|grep node
+node                                                            12                       9f5f1136afe0   2 months ago    918MB
 
+$ docker images|grep kg/express
+kg/express                                                      latest                   90d2737e9a79   2 months ago    46.1MB
+
+```
+
+As can be seen:
 - Kontain-based image - kg/express is 46.1MB in size
 - Whereas, the Original node image is 918MB in size
+`
