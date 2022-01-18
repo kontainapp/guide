@@ -6,7 +6,18 @@ order: 900
 
 Below is a short example of bundling a python microservice in a Kontain-based Container with Docker:
 
-## app/hello.py
+## files
+
+### tree
+```
+├── app
+│   ├── __init__.py
+│   └── main.py
+├── Dockerfile
+└── requirements.txt
+```
+
+### python application app/main.py
 
 ```python
 from flask import Flask
@@ -19,6 +30,15 @@ def hello():
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
 ```
+
+### requirements.txt
+```
+$ cat requirements.txt
+flask
+
+$ touch app/__init__.py
+```
+
 
 ## Docker
 ### Dockerfile
