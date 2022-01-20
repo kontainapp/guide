@@ -7,23 +7,21 @@
     <meta name="turbo-cache-control" content="no-cache">
 
     <!-- Primary Meta Tags -->
-    <title>Docker Integration Overview</title>
-    <meta name="title" content="Docker Integration Overview">
-    <meta name="description" content="Kontain integrates with Docker by adding itself as a runtime in Containerd." />
+    <title>Instantly starting your Spring Boot Application</title>
+    <meta name="title" content="Instantly starting your Spring Boot Application">
+    <meta name="description" content="How many times have you wished that your Spring Boot Java microservice would start instantaneously without any delay whatsoever? How many times did..." />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kontainapp.github.io/guide/appendix/docker_int/">
-    <meta property="og:title" content="Docker Integration Overview">
-    <meta property="og:description" content="Kontain integrates with Docker by adding itself as a runtime in Containerd.">
-    <meta property="og:image" content="https://kontainapp.github.io/guide/guide/images/docker-runk.png">
+    <meta property="og:url" content="https://kontainapp.github.io/guide/getting_started/instastart/">
+    <meta property="og:title" content="Instantly starting your Spring Boot Application">
+    <meta property="og:description" content="How many times have you wished that your Spring Boot Java microservice would start instantaneously without any delay whatsoever? How many times did...">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://kontainapp.github.io/guide/appendix/docker_int/">
-    <meta property="twitter:title" content="Docker Integration Overview">
-    <meta property="twitter:description" content="Kontain integrates with Docker by adding itself as a runtime in Containerd.">
-    <meta property="twitter:image" content="https://kontainapp.github.io/guide/guide/images/docker-runk.png">
+    <meta property="twitter:url" content="https://kontainapp.github.io/guide/getting_started/instastart/">
+    <meta property="twitter:title" content="Instantly starting your Spring Boot Application">
+    <meta property="twitter:description" content="How many times have you wished that your Spring Boot Java microservice would start instantaneously without any delay whatsoever? How many times did...">
     
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
@@ -204,26 +202,265 @@
                 <div id="docs-sidebar-right-toggle"></div>
                
                 <!-- Page content  -->
-<doc-anchor-target id="docker-integration-overview" class="break-words">
+<doc-anchor-target id="instantly-starting-your-spring-boot-application" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#docker-integration-overview">#</doc-anchor-trigger>
-        <span>Docker Integration Overview</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#instantly-starting-your-spring-boot-application">#</doc-anchor-trigger>
+        <span>Instantly starting your Spring Boot Application</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="kontain-integration-with-docker">
+<doc-anchor-target id="instantly-starting-spring-boot-microservice">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#kontain-integration-with-docker">#</doc-anchor-trigger>
-        <span>Kontain Integration with Docker</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#instantly-starting-spring-boot-microservice">#</doc-anchor-trigger>
+        <span>Instantly starting Spring Boot microservice</span>
     </h2>
 </doc-anchor-target>
-<p>Kontain integrates with Docker by adding itself as a runtime in Containerd.  Containerd supports multiple runtimes and thus a Kontain container can be launched and used using the same Docker CLI and tools that Docker uses.</p>
-<p>Below we show what the integration with Docker looks like:</p>
-<p><figure class="content-center">
-    <img src="/guide/images/docker-runk.png" alt="test" />
-    <figcaption class="caption">test</figcaption>
+<p>How many times have you wished that your Spring Boot Java microservice would start instantaneously without any delay whatsoever? How many times did you wish you could scale down your Java Containers with faith that you would be able to relaunch them in an instant during a spike in request load.
+If only a big heavy JVM could start as quick as those other language runtimes?
+How many times did you wish you had tiny Java microservices that could be launched instantly on an event, respond to the event and shut down.
+Did you wish you could shut down your service and launch it only when necessary without any &quot;warm&quot; up time?</p>
+<p>Well, read on to see how we can do this with Kontain Containers.</p>
+<doc-anchor-target id="video-demo">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#video-demo">#</doc-anchor-trigger>
+        <span>Video demo</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="starting-a-spring-boot-application-the-normal-way">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#starting-a-spring-boot-application-the-normal-way">#</doc-anchor-trigger>
+        <span>starting a Spring Boot Application the normal way</span>
+    </h3>
+</doc-anchor-target>
+<p>
+<figure>
+    <div class="relative w-full mb-6 overflow-hidden pt-9/16">
+        <iframe class="w-full h-full border-0 absolute inset-0" src="https://www.youtube.com/embed/jrg8mRHrafI" allowfullscreen></iframe>
+    </div>
 </figure>
 </p>
-<p>Kontain also maintains a set of Docker images as listed <a href="../../getting_started/base_images/">here</a>.</p>
+<doc-anchor-target id="staring-a-spring-boot-microservice-the-instant-way">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#staring-a-spring-boot-microservice-the-instant-way">#</doc-anchor-trigger>
+        <span>staring a Spring Boot microservice the &quot;instant&quot; way</span>
+    </h3>
+</doc-anchor-target>
+<p>
+<figure>
+    <div class="relative w-full mb-6 overflow-hidden pt-9/16">
+        <iframe class="w-full h-full border-0 absolute inset-0" src="https://www.youtube.com/embed/bwgVp1Hpybo" allowfullscreen></iframe>
+    </div>
+</figure>
+</p>
+<doc-anchor-target id="how-do-we-dothis">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#how-do-we-dothis">#</doc-anchor-trigger>
+        <span>How do we do this?</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="install-kontain">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain">#</doc-anchor-trigger>
+        <span>Install Kontain</span>
+    </h3>
+</doc-anchor-target>
+<p>To install Kontain on your Linux machine, you can follow the steps in the guide. Please note that you need a recent version of Fedora or Ubuntu OS (Linux kernel version 4.15 or newer) for this as specified in the guide.</p>
+<doc-anchor-target id="reviewing-the-spring-boot-application">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#reviewing-the-spring-boot-application">#</doc-anchor-trigger>
+        <span>Reviewing the Spring Boot Application</span>
+    </h3>
+</doc-anchor-target>
+<p>We will use a very simple Spring Boot application as our example as shown below:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">$ tree
+├── Dockerfile
+├── pom.xml
+├── resources
+│   └── placeholder.txt
+└── src
+    ├── main
+    │   └── java
+    │       └── com
+    │           └── example
+    │               ├── HelloController.java
+    │               └── HelloWorldApp.java
+    └── test
+        └── java
+            └── com
+                └── example
+                    └── HelloControllerTest.java</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="application-files">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#application-files">#</doc-anchor-trigger>
+        <span>Application files</span>
+    </h3>
+</doc-anchor-target>
+<p>The Spring Boot Application:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">// HelloWorldApp.java
+package com.example;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+@SpringBootApplication
+public class HelloWorldApp {
+public static void main(String[] args) {
+        SpringApplication.run(HelloWorldApp.class, args);
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="the-spring-boot-controller">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#the-spring-boot-controller">#</doc-anchor-trigger>
+        <span>The Spring Boot Controller:</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">// HelloController.java
+package com.example;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+@RestController
+public class HelloController {
+@RequestMapping(&quot;/&quot;)
+    String hello() {
+        return &quot;Hello from Kontain!&quot;;
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="dockerfile">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#dockerfile">#</doc-anchor-trigger>
+        <span>Dockerfile</span>
+    </h3>
+</doc-anchor-target>
+<p>Its Dockerfile:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">FROM openjdk:11-jdk-slim-buster as build
+RUN mkdir -p /tmp
+WORKDIR /opt/src/app
+# copy jar
+COPY target/spring-boot-hello-1.0.jar app.jar
+FROM kontainapp/runenv-jdk-11 as release
+COPY --from=build /opt/src /opt/src
+COPY --from=build /tmp /tmp
+WORKDIR /opt/src/app
+EXPOSE 8080
+ENV KM_MGTPIPE=/tmp/km.sock
+CMD [ &quot;KM_MGTPIPE=/tmp/km.sock&quot;, &quot;/opt/kontain/java/bin/java&quot;, &quot;-XX:-UseCompressedOops&quot;, &quot;-jar&quot;, &quot;/opt/src/app/app.jar&quot; ]</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="build-and-run">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#build-and-run">#</doc-anchor-trigger>
+        <span>Build and Run</span>
+    </h3>
+</doc-anchor-target>
+<p>To build the code and the container, we can do:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">$ mvn clean package test
+$ docker build -t kg/springboothello:latest .</code></pre>
+</doc-codeblock></div>
+<p>To run using Docker:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">$ docker run --rm --runtime=krun -p 8080:8080  kg/springboothello:latest
+...
+</code></pre>
+</doc-codeblock></div>
+<p>As you can see, it takes a few seconds (about 9–10 seconds) before the Spring Boot Application starts up and is ready.</p>
+<p>Now, let&#x27;s serve a request from this Container just to verify.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">$ curl http://localhost:8080
+Hello from Kontain!</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="using-an-instastart-container">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#using-an-instastart-container">#</doc-anchor-trigger>
+        <span>Using an &quot;Instastart&quot; Container</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="prep-for-creating-an-instastart-container">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#prep-for-creating-an-instastart-container">#</doc-anchor-trigger>
+        <span>Prep for creating an &quot;Instastart&quot; Container</span>
+    </h3>
+</doc-anchor-target>
+<p>Now let&#x27;s restart the application container with a few other parameters so that we can create an alternate &quot;instantly&quot; starting container for the same Spring Boot Application.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">$ docker run --runtime=krun --name=KM_springboothello -p 8080:8080 -v /opt/kontain/bin/km_cli:/opt/kontain/bin/km_cli -v $(pwd):/mnt:rw kg/springboothello:latest
+....</code></pre>
+</doc-codeblock></div>
+<p>Serve a request to verify:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">$ curl http://localhost:8080
+Hello from Kontain!</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="creating-an-instastart-container">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#creating-an-instastart-container">#</doc-anchor-trigger>
+        <span>Creating an &quot;Instastart&quot; Container</span>
+    </h3>
+</doc-anchor-target>
+<p>Now let&#x27;s take an Application Container Snapshot and copy it so as to create an &quot;Instastart&quot; container.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">$ docker exec KM_springboothello /opt/kontain/bin/km_cli -s /tmp/km.sock
+$ docker cp KM_springboothello:/opt/src/app/kmsnap .
+$ chmod +x kmsnap</code></pre>
+</doc-codeblock></div>
+<p>This will generate a kmsnap file with a re-usable Application Snapshot. Note that KM will report it as saving a core dump, since core dumps and snapshots have the same format and are generated using the same mechanism.</p>
+<p>Now, let&#x27;s package up the Snapshot as an &quot;Instastart&quot; Container. This bundles the Application Snapshot into a new Docker container that can be used to &quot;instantly&quot; run the Spring Boot application.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none"># build
+$ docker build -t kg/springboothellosnap -f Dockerfile.snap .</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="running-the-instastart-container">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#running-the-instastart-container">#</doc-anchor-trigger>
+        <span>Running the &quot;Instastart&quot; Container</span>
+    </h3>
+</doc-anchor-target>
+<p>Now let&#x27;s start up the &quot;Instastart&quot; Container:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none"># Run in terminal 1
+$ docker run --runtime=krun --rm -it --name=KM_springboothello_snap -p 8080:8080 kg/springboothellosnap
+
+# Run in terminal 2, you will &quot;instantly&quot; get a response
+
+$ curl http://localhost:8080
+Hello from Kontain!</code></pre>
+</doc-codeblock></div>
+<p>You will notice that the container starts up instantly (with almost all of the overhead being Docker startup cost) and that the request gets a response &quot;instantly&quot; as well.</p>
+<doc-anchor-target id="conclusion">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#conclusion">#</doc-anchor-trigger>
+        <span>Conclusion</span>
+    </h2>
+</doc-anchor-target>
+<p>&quot;Instastart&quot; provides a rather amazing opportunity for Java Spring Boot Containers to be scaled down to 0 during times when there are no events or when there no customers waiting for a request, and provides a way to respond &quot;Instantly&quot; and scale up when the request load suddenly spikes.</p>
+<doc-anchor-target id="measuring-start-time-approximately">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#measuring-start-time-approximately">#</doc-anchor-trigger>
+        <span>Measuring start time approximately</span>
+    </h2>
+</doc-anchor-target>
+<p>This measurement is skewed by the method below because of I/O and Docker Container startup overhead but provides a way to measure relative start time.</p>
+<p>For Instastart container:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none"># in terminal 1, run:
+$ ./get_time.sh</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none"># and in terminal 2, do:
+$ touch start_time &amp;docker run --rm --runtime=krun  -p 8080:8080  kg/springboothellosnap</code></pre>
+</doc-codeblock></div>
+<p>For normal container:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none"># in terminal 1, run:
+$ ./get_time.sh</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none"># and in terminal 2, do:
+$ touch start_time &amp;docker run --rm --runtime=krun  -p 8080:8080  kg/springboothello</code></pre>
+</doc-codeblock></div>
 
 
 
@@ -235,20 +472,20 @@
             
 <nav class="flex mt-14">
     <div class="w-1/2">
-        <a class="px-5 py-4 h-full flex items-center break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/guide/appendix/kontain_vs/">
+        <a class="px-5 py-4 h-full flex items-center break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/guide/getting_started/javascript/">
             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
             <span>
                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                <span class="block mt-1">Kontain vs similar technologies</span>
+                <span class="block mt-1">Javascript and Node (ExpressJS)</span>
             </span>
         </a>
     </div>
 
     <div class="w-1/2">
-        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/guide/appendix/k8s_int/">
+        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/guide/getting_started/java/">
             <span>
                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                <span class="block mt-1">Kubernetes Integration Overview</span>
+                <span class="block mt-1">Java (Spring Boot)</span>
             </span>
             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
         </a>
@@ -296,6 +533,6 @@
 
         <div id="docs-overlay-target"></div>
 
-        <script>window.__DOCS__ = { "title": "Docker Integration Overview", icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+        <script>window.__DOCS__ = { "title": "Instantly starting your Spring Boot Application", icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
     </body>
 </html>
