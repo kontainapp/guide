@@ -6,6 +6,8 @@ order: 2000
 
 <!-- ![](/images/microservices_anim_medium.gif) -->
 
+[The guide to Kontain](https://kontainapp.github.io/guide/)
+
 ![](/images/5g_edge.png)--
 
 ## Introduction
