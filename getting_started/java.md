@@ -4,7 +4,7 @@ icon: /images/java.png
 order: 600
 ---
 
-# Java
+## Java
 Below is an example of packaging and running a Spring Boot Application as a Kontain based Container.
 
 Given a simple Spring Boot application with a tree structure as outlined below:
