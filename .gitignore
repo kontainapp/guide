@@ -7,6 +7,7 @@ npm-debug.log
 .nyc
 .env
 kmsnap
+start_time
 
 # retype
 .retype/

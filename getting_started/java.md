@@ -179,6 +179,16 @@ $ curl http://localhost:8080/
 Hello from Kontain!
 ```
 
+### Container sizes
+```
+$ docker images|grep openjdk
+...
+openjdk ...               422MB
+kg/springboothello        227MB 
+```
+
+Note that the Kontain'erized Spring Boot Application is 1/2 the size of the OpenJDK container.
+
 ## Kubernetes
 ### Kubernetes Deployment Manifest
 The K8s deployment yaml (flaskapp_k8s.yml) along with the service at port 8080 is shown below:
