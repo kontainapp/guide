@@ -8,6 +8,10 @@ npm-debug.log
 .env
 kmsnap
 start_time
+CHANGELOG.md
+LICENSE
+.terraform*
+terraform.*
 
 # retype
 .retype/
