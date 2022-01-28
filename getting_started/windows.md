@@ -30,9 +30,23 @@ To run a Vagrant VM, you can download
 
 
 ```bash
-C:\Users\user> mkdir ubuntu
-C:\Users\user> cd ubuntu
-C:\Users\user\ubuntu> cd ubuntu
-C:\Users\user\ubuntu> vagrant init generic/ubuntu2010
+C:\Users\user> mkdir kontain
+C:\Users\user> cd kontain
+C:\Users\user\kontain> cd kontain
+C:\Users\user\kontain> curl -o VagrantFile  https://raw.githubusercontent.com/kontainapp/guide/main/_vagrantfiles/vagrantfile_win
 
-# this initializes a Vagrantfile with the appropriate
+# this initializes a Vagrantfile with the appropriate vm that gets auto-provisioned with Kontain
+C:\Users\user\kontain> vagrant up
+....
+
+# now that a Vagrant VM is up and running you can ssh into it and try out all the kontain examples
+
+# lets try out the simplest one
+C:\Users\user\kontain> /opt/kontain/bin/km /opt/kontain/tests/hello_test.km Hello, Kontain!
+Hello, world
+Hello, argv[0] = '/opt/kontain/tests/hello_test.km'
+Hello, argv[1] = 'Hello,'
+Hello, argv[2] = 'Kontain!'
+```
+
+Hopefully, this gets you started on trying out Kontain on Windows.
