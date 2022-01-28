@@ -39,14 +39,21 @@ C:\Users\user\kontain> curl -o VagrantFile  https://raw.githubusercontent.com/ko
 C:\Users\user\kontain> vagrant up
 ....
 
-# now that a Vagrant VM is up and running you can ssh into it and try out all the kontain examples
+# a Vagrant VM is starts up with Kontain and docker pre-installed
+# now you can ssh into it
+C:\Users\user\kontain> vagrant ssh
 
-# lets try out the simplest one
-C:\Users\user\kontain> /opt/kontain/bin/km /opt/kontain/tests/hello_test.km Hello, Kontain!
+# now that you are in the vagrant bash prompt. Let's switch to root
+vagrant $ sudo -i
+
+# run the kontain example to verify Kontain install
+root # /opt/kontain/bin/km /opt/kontain/tests/hello_test.km Hello, Kontain!
 Hello, world
 Hello, argv[0] = '/opt/kontain/tests/hello_test.km'
 Hello, argv[1] = 'Hello,'
 Hello, argv[2] = 'Kontain!'
 ```
 
-Hopefully, this gets you started on trying out Kontain on Windows.
+Hopefully, this gets you started on trying out Kontain on Windows and using Vagrant.
+
+Please note that if you want to test out Kontain with docker-compose on Vagrant, please see the instructions in the Vagrantfile
