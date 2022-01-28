@@ -17,9 +17,6 @@ sudo dnf config-manager --set-enabled docker-ce-nightly
 
 sudo dnf install docker-ce docker-ce-cli containerd.io
 
-# (Optional) version lock containerd.io
-sudo dnf versionlock containerd.io.x86_64
-
 # install Kontain
 sudo mkdir -p /opt/kontain ; sudo chown root /opt/kontain
 curl -s https://raw.githubusercontent.com/kontainapp/km/latest/km-releases/kontain-install.sh | sudo bash
