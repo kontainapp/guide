@@ -9,25 +9,29 @@
     <!-- Primary Meta Tags -->
     <title>Install on Mac (Vagrant)</title>
     <meta name="title" content="Install on Mac (Vagrant)">
+    <meta name="description" content="Developers can try out Kontain on Mac OS X using any virtualization software that can run Linux with a modern Kernel version greater than 4.15." />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kontainapp.github.io/guide/getting_started/mac_os/">
     <meta property="og:title" content="Install on Mac (Vagrant)">
+    <meta property="og:description" content="Developers can try out Kontain on Mac OS X using any virtualization software that can run Linux with a modern Kernel version greater than 4.15.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://kontainapp.github.io/guide/getting_started/mac_os/">
     <meta property="twitter:title" content="Install on Mac (Vagrant)">
+    <meta property="twitter:description" content="Developers can try out Kontain on Mac OS X using any virtualization software that can run Linux with a modern Kernel version greater than 4.15.">
     
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.2.696734092852" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.2.696735014232" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.696734092852" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.696735014232" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.696734092852" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.696735014232" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.696735014232" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -205,6 +209,69 @@
         <span>Install on Mac (Vagrant)</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="installing-on-mac-os-x">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#installing-on-mac-os-x">#</doc-anchor-trigger>
+        <span>Installing on Mac OS X</span>
+    </h2>
+</doc-anchor-target>
+<p>Developers can try out Kontain on Mac OS X using any virtualization software that can run Linux with a modern Kernel version greater than 4.15.  Below we show  one of the easier ways to do this using Vagrant from HashiCorp software.</p>
+<doc-anchor-target id="pre-requisite-for-installing-vagrant">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#pre-requisite-for-installing-vagrant">#</doc-anchor-trigger>
+        <span>Pre-requisite for installing Vagrant</span>
+    </h3>
+</doc-anchor-target>
+<p>At this point, you need to have a computer capable of Nested Virtualization.</p>
+<p>You also need to turn on <a href="https://ostechnix.com/how-to-enable-nested-virtualization-in-virtualbox/">Nested Virtualization in VirtualBox</a></p>
+<doc-anchor-target id="installing-vagrant-on-the-mac-os-x">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#installing-vagrant-on-the-mac-os-x">#</doc-anchor-trigger>
+        <span>Installing Vagrant on the Mac OS X</span>
+    </h3>
+</doc-anchor-target>
+<p>To install the 64-bit version of Vagrant, you need to download it and install from <a href="https://www.vagrantup.com/downloads">here</a>.</p>
+<doc-anchor-target id="run-vagrant-vm">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#run-vagrant-vm">#</doc-anchor-trigger>
+        <span>Run Vagrant VM</span>
+    </h3>
+</doc-anchor-target>
+<p>After installing Vagrant, we can now use it to run a Ubuntu 18.04 Linux VM.</p>
+<p>To run a Vagrant VM, you need to first launch the terminal:</p>
+<p>Below we show the steps we use to launch a Vagrant VM with Kontain on:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ mkdir kontain
+$ cd kontain
+$ curl -o VagrantFile  https://raw.githubusercontent.com/kontainapp/guide/main/_vagrantfiles/vagrantfile_mac
+
+# this initializes a Vagrantfile with the appropriate vm that gets auto-provisioned with Kontain
+$ vagrant up
+....
+
+# a Vagrant VM is starts up with Kontain and docker pre-installed
+# now you can ssh into it
+$ vagrant ssh
+
+# now that you are in the vagrant bash prompt. Let's switch to root
+vagrant $ sudo -i
+
+# run the kontain example to verify Kontain install
+root # /opt/kontain/bin/km /opt/kontain/tests/hello_test.km Hello, Kontain!
+Hello, world
+Hello, argv[0] = '/opt/kontain/tests/hello_test.km'
+Hello, argv[1] = 'Hello,'
+Hello, argv[2] = 'Kontain!'</code></pre>
+</doc-codeblock></div>
+<p>Hopefully, this gets you started on trying out Kontain on the Mac using Vagrant.</p>
+<p>Please note that if you want to test out Kontain with docker-compose on Vagrant, please see the instructions in the <a href="https://raw.githubusercontent.com/kontainapp/guide/main/_vagrantfiles/vagrantfile_mac">Vagrantfile</a>.</p>
+<doc-anchor-target id="the-vagrantfile">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#the-vagrantfile">#</doc-anchor-trigger>
+        <span>The Vagrantfile</span>
+    </h3>
+</doc-anchor-target>
+<p>Here is the <a href="https://raw.githubusercontent.com/kontainapp/guide/main/_vagrantfiles/vagrantfile_mac">link</a> to the Vagrantfile used to create a self-provisioning Vagrant VM with Kontain installed.</p>
 
 
 
@@ -277,6 +344,6 @@
 
         <div id="docs-overlay-target"></div>
 
-        <script>window.__DOCS__ = { "title": "Install on Mac (Vagrant)", icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+        <script>window.__DOCS__ = { "title": "Install on Mac (Vagrant)", icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
     </body>
 </html>

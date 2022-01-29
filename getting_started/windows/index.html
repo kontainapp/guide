@@ -9,31 +9,31 @@
     <!-- Primary Meta Tags -->
     <title>Install on Windows (Vagrant)</title>
     <meta name="title" content="Install on Windows (Vagrant)">
-    <meta name="description" content="Developers can try out Kontain on Windows Desktop Pro using any virtualization software that can run Linux with a modern Kernel version greater than..." />
+    <meta name="description" content="Developers can try out Kontain on Windows 10 Pro or above using any virtualization software that can run Linux with a modern Kernel version greater..." />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kontainapp.github.io/guide/getting_started/windows/">
     <meta property="og:title" content="Install on Windows (Vagrant)">
-    <meta property="og:description" content="Developers can try out Kontain on Windows Desktop Pro using any virtualization software that can run Linux with a modern Kernel version greater than...">
+    <meta property="og:description" content="Developers can try out Kontain on Windows 10 Pro or above using any virtualization software that can run Linux with a modern Kernel version greater...">
     <meta property="og:image" content="https://kontainapp.github.io/guide/guide/images/windows-features.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://kontainapp.github.io/guide/getting_started/windows/">
     <meta property="twitter:title" content="Install on Windows (Vagrant)">
-    <meta property="twitter:description" content="Developers can try out Kontain on Windows Desktop Pro using any virtualization software that can run Linux with a modern Kernel version greater than...">
+    <meta property="twitter:description" content="Developers can try out Kontain on Windows 10 Pro or above using any virtualization software that can run Linux with a modern Kernel version greater...">
     <meta property="twitter:image" content="https://kontainapp.github.io/guide/guide/images/windows-features.png">
     
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.2.696734092852" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.2.696735014232" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.696734092852" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.696735014232" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.696734092852" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.696734092852" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.696735014232" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.696735014232" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -217,7 +217,7 @@
         <span>Installing on Windows 10 and above</span>
     </h2>
 </doc-anchor-target>
-<p>Developers can try out Kontain on Windows Desktop Pro using any virtualization software that can run Linux with a modern Kernel version greater than 4.15.  Below we show  one of the easier ways to do this using Vagrant from HashiCorp software.</p>
+<p>Developers can try out Kontain on Windows 10 Pro or above using any virtualization software that can run Linux with a modern Kernel version greater than 4.15.  Below we show  one of the easier ways to do this using Vagrant from HashiCorp software.</p>
 <doc-anchor-target id="pre-requisite-for-installing-vagrant">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#pre-requisite-for-installing-vagrant">#</doc-anchor-trigger>
@@ -261,7 +261,6 @@
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash">C:\Users\user&gt; mkdir kontain
 C:\Users\user&gt; cd kontain
-C:\Users\user\kontain&gt; cd kontain
 C:\Users\user\kontain&gt; curl -o VagrantFile  https://raw.githubusercontent.com/kontainapp/guide/main/_vagrantfiles/vagrantfile_win
 
 # this initializes a Vagrantfile with the appropriate vm that gets auto-provisioned with Kontain
