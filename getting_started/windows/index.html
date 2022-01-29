@@ -28,12 +28,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.2.696727716950" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.2.696734092852" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.696727716950" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.696734092852" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.696727716950" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.696727716950" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.696734092852" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.696734092852" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -251,12 +251,13 @@
     </h3>
 </doc-anchor-target>
 <p>After installing Vagrant, we can now use it to run a Ubuntu 20.10 Linux VM.</p>
-<p>To run a Vagrant VM, you can download
+<p>To run a Vagrant VM, you need to first launch the Windows Command Prompt in Administrative mode as shown in the screenshot below:
 <figure class="content-center">
     <img src="/guide/images/run_cmd_prompt.jpg" alt="starting cmd terminal" />
     <figcaption class="caption">starting cmd terminal</figcaption>
 </figure>
 </p>
+<p>Below we show the steps we use to run a Vagrant VM with Kontain on Windows:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash">C:\Users\user&gt; mkdir kontain
 C:\Users\user&gt; cd kontain
@@ -282,7 +283,14 @@ Hello, argv[1] = 'Hello,'
 Hello, argv[2] = 'Kontain!'</code></pre>
 </doc-codeblock></div>
 <p>Hopefully, this gets you started on trying out Kontain on Windows and using Vagrant.</p>
-<p>Please note that if you want to test out Kontain with docker-compose on Vagrant, please see the instructions in the Vagrantfile</p>
+<p>Please note that if you want to test out Kontain with docker-compose on Vagrant, please see the instructions in the <a href="https://raw.githubusercontent.com/kontainapp/guide/main/_vagrantfiles/vagrantfile_win">Vagrantfile</a>.</p>
+<doc-anchor-target id="the-vagrantfile">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#the-vagrantfile">#</doc-anchor-trigger>
+        <span>The Vagrantfile</span>
+    </h3>
+</doc-anchor-target>
+<p>Here is the <a href="https://raw.githubusercontent.com/kontainapp/guide/main/_vagrantfiles/vagrantfile_win">link</a> to the Vagrantfile used to create a self-provisioning Vagrant VM with Kontain installed.</p>
 
 
 
