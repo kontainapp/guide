@@ -32,10 +32,10 @@ Vagrant.configure("2") do |config|
   # config.vm.provision :docker_compose
   config.vm.provision "shell", inline: $script
 
-  config.vm.provider "hyperv" do |vb|
+  config.vm.provider "virtualbox" do |vb|
       #   # Customize the amount of memory on the VM:
       #   vb.memory = "1024"
-      # for windows/hyperv, enable nested virtualization
-      vb.enable_virtualization_extensions = true
+      # for mac/virtualbox, enable nested virtualization
+      vb.customize ['modifyvm', :id, '--nested-hw-virt', 'on']
   end
 end

@@ -5,7 +5,7 @@ order: 995
 ---
 
 ## Installing on Windows 10 and above
-Developers can try out Kontain on Windows Desktop Pro using any virtualization software that can run Linux with a modern Kernel version greater than 4.15.  Below we show  one of the easier ways to do this using Vagrant from HashiCorp software.
+Developers can try out Kontain on Windows 10 Pro or above using any virtualization software that can run Linux with a modern Kernel version greater than 4.15.  Below we show  one of the easier ways to do this using Vagrant from HashiCorp software.
 
 ### Pre-requisite for installing Vagrant
 You need to have nested virtualization turned on in your BIOS to be able to install Vagrant.
@@ -34,7 +34,6 @@ Below we show the steps we use to run a Vagrant VM with Kontain on Windows:
 ```bash
 C:\Users\user> mkdir kontain
 C:\Users\user> cd kontain
-C:\Users\user\kontain> cd kontain
 C:\Users\user\kontain> curl -o VagrantFile  https://raw.githubusercontent.com/kontainapp/guide/main/_vagrantfiles/vagrantfile_win
 
 # this initializes a Vagrantfile with the appropriate vm that gets auto-provisioned with Kontain
@@ -61,5 +60,4 @@ Hopefully, this gets you started on trying out Kontain on Windows and using Vagr
 Please note that if you want to test out Kontain with docker-compose on Vagrant, please see the instructions in the [Vagrantfile](https://raw.githubusercontent.com/kontainapp/guide/main/_vagrantfiles/vagrantfile_win).
 
 ### The Vagrantfile
-Here is the [link](https://raw.githubusercontent.com/kontainapp/guide/main/_vagrantfiles/vagrantfile_win
-) to the Vagrantfile used to create a self-provisioning Vagrant VM with Kontain installed.
+Here is the [link](https://raw.githubusercontent.com/kontainapp/guide/main/_vagrantfiles/vagrantfile_win) to the Vagrantfile used to create a self-provisioning Vagrant VM with Kontain installed.
