@@ -26,9 +26,9 @@ Vagrant.configure("2") do |config|
   config.vm.provision :docker
 
   # If you want to have docker-compose installed as well, 
-  # you need to do this first:
+  # you need to do this first before bringing up the vagrant VM
   #   $ vagrant plugin install vagrant-docker-compose
-  # and then uncomment the line below
+  # and uncomment the line below to have the provisioner install Docker-compose
   # config.vm.provision :docker_compose
   config.vm.provision "shell", inline: $script
 

@@ -25,9 +25,11 @@ To install the 64-bit version of Vagrant, you need to download it and install fr
 ### Run Vagrant VM
 After installing Vagrant, we can now use it to run a Ubuntu 20.10 Linux VM.
 
-To run a Vagrant VM, you can download
+To run a Vagrant VM, you need to first launch the Windows Command Prompt in Administrative mode as shown in the screenshot below:
 ![starting cmd terminal](/images/run_cmd_prompt.jpg)
 
+
+Below we show the steps we use to run a Vagrant VM with Kontain on Windows:
 
 ```bash
 C:\Users\user> mkdir kontain
@@ -56,4 +58,8 @@ Hello, argv[2] = 'Kontain!'
 
 Hopefully, this gets you started on trying out Kontain on Windows and using Vagrant.
 
-Please note that if you want to test out Kontain with docker-compose on Vagrant, please see the instructions in the Vagrantfile
+Please note that if you want to test out Kontain with docker-compose on Vagrant, please see the instructions in the [Vagrantfile](https://raw.githubusercontent.com/kontainapp/guide/main/_vagrantfiles/vagrantfile_win).
+
+### The Vagrantfile
+Here is the [link](https://raw.githubusercontent.com/kontainapp/guide/main/_vagrantfiles/vagrantfile_win
+) to the Vagrantfile used to create a self-provisioning Vagrant VM with Kontain installed.
