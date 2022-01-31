@@ -26,12 +26,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.2.696735014232" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.2.696963408247" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.696735014232" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.696963408247" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.696735014232" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.696735014232" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.696963408247" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.696963408247" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -230,16 +230,20 @@
         <span>Installing Vagrant on the Mac OS X</span>
     </h3>
 </doc-anchor-target>
-<p>To install the 64-bit version of Vagrant, you need to download it and install from <a href="https://www.vagrantup.com/downloads">here</a>.</p>
-<doc-anchor-target id="run-vagrant-vm">
+<p>To install the 64-bit version of Vagrant, you need to download it and install:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ brew install vagrant</code></pre>
+</doc-codeblock></div>
+<p>If you want more details on installing Vagrant they are <a href="https://www.vagrantup.com/downloads">here</a>.</p>
+<doc-anchor-target id="run-kontain-in-ubuntu">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#run-vagrant-vm">#</doc-anchor-trigger>
-        <span>Run Vagrant VM</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#run-kontain-in-ubuntu">#</doc-anchor-trigger>
+        <span>Run Kontain in Ubuntu</span>
     </h3>
 </doc-anchor-target>
-<p>After installing Vagrant, we can now use it to run a Ubuntu 18.04 Linux VM.</p>
-<p>To run a Vagrant VM, you need to first launch the terminal:</p>
-<p>Below we show the steps we use to launch a Vagrant VM with Kontain on:</p>
+<p>After installing Vagrant, we can now use it to run a Ubuntu 18.04 Linux VM
+that will automatically install the latest version of Kontain.</p>
+<p>Below we show the steps we use to launch a Vagrant VM with Kontain:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash">$ mkdir kontain
 $ cd kontain
@@ -257,7 +261,9 @@ $ vagrant ssh
 vagrant $ sudo -i
 
 # run the kontain example to verify Kontain install
-root # /opt/kontain/bin/km /opt/kontain/tests/hello_test.km Hello, Kontain!
+root $# /opt/kontain/bin/km /opt/kontain/tests/hello_test.km 
+
+Hello, Kontain!
 Hello, world
 Hello, argv[0] = '/opt/kontain/tests/hello_test.km'
 Hello, argv[1] = 'Hello,'
