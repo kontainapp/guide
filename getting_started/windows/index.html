@@ -28,12 +28,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.2.696963408247" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.2.696964033821" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.696963408247" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.696964033821" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.696963408247" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.696963408247" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.696964033821" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.696964033821" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -218,10 +218,10 @@
     </h2>
 </doc-anchor-target>
 <p>Developers can try out Kontain on Windows 10 Pro or above using any virtualization software that can run Linux with a modern Kernel version greater than 4.15.  Below we show  one of the easier ways to do this using Vagrant from HashiCorp software.</p>
-<doc-anchor-target id="pre-requisite-for-installing-vagrant">
+<doc-anchor-target id="pre-requisite-turn-on-hyper-v">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#pre-requisite-for-installing-vagrant">#</doc-anchor-trigger>
-        <span>Pre-requisite for installing Vagrant</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#pre-requisite-turn-on-hyper-v">#</doc-anchor-trigger>
+        <span>Pre-requisite: turn on Hyper-V</span>
     </h3>
 </doc-anchor-target>
 <p>You need to have nested virtualization turned on in your BIOS to be able to install Vagrant.</p>
@@ -250,7 +250,7 @@
         <span>Run Vagrant VM</span>
     </h3>
 </doc-anchor-target>
-<p>After installing Vagrant, we can now use it to run a Ubuntu 20.10 Linux VM.</p>
+<p>After installing Vagrant, we can now use it to run a Ubuntu 18.04 Linux VM.</p>
 <p>To run a Vagrant VM, you need to first launch the Windows Command Prompt in Administrative mode as shown in the screenshot below:
 <figure class="content-center">
     <img src="/guide/images/run_cmd_prompt.jpg" alt="starting cmd terminal" />
