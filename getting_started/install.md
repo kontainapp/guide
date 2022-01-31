@@ -166,7 +166,17 @@ $ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_
 ```
 
 +++ Verify Install
-#### Verify that Kontain has been deployed successfully
+#### Verify that Kontain is installed
+```shell
+# check if Kontain Monitor is installed
+$ /opt/kontain/bin/km /opt/kontain/tests/hello_test.km
+Hello, world
+Hello, argv[0] = '/opt/kontain/tests/hello_test.km'
+Hello, argv[1] = 'Hello,'
+Hello, argv[2] = 'Kontain!'
+```
+
+#### In Kubernetes:
 ```shell
 # verify that the kontain-node-initializer ran successfully and is in "Running" state and not "Error" state
 $ kubectl get po -n kube-system
