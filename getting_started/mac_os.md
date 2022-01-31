@@ -13,17 +13,21 @@ At this point, you need to have a computer capable of Nested Virtualization.
 You also need to turn on [Nested Virtualization in VirtualBox](https://ostechnix.com/how-to-enable-nested-virtualization-in-virtualbox/)
 
 ### Installing Vagrant on the Mac OS X
-To install the 64-bit version of Vagrant, you need to download it and install from [here](https://www.vagrantup.com/downloads).
-
-
-### Run Vagrant VM
-After installing Vagrant, we can now use it to run a Ubuntu 18.04 Linux VM.
-
-To run a Vagrant VM, you need to first launch the terminal:
-
-Below we show the steps we use to launch a Vagrant VM with Kontain on:
+To install the 64-bit version of Vagrant, you need to download it and install:
 
 ```bash
+$ brew install vagrant
+```
+
+If you want more details on installing Vagrant they are [here](https://www.vagrantup.com/downloads).
+
+### Run Kontain in Ubuntu
+After installing Vagrant, we can now use it to run a Ubuntu 18.04 Linux VM 
+that will automatically install the latest version of Kontain.
+
+Below we show the steps we use to launch a Vagrant VM with Kontain:
+
+```sh
 $ mkdir kontain
 $ cd kontain
 $ curl -o VagrantFile  https://raw.githubusercontent.com/kontainapp/guide/main/_vagrantfiles/vagrantfile_mac
@@ -40,7 +44,9 @@ $ vagrant ssh
 vagrant $ sudo -i
 
 # run the kontain example to verify Kontain install
-root # /opt/kontain/bin/km /opt/kontain/tests/hello_test.km Hello, Kontain!
+root $# /opt/kontain/bin/km /opt/kontain/tests/hello_test.km 
+
+Hello, Kontain!
 Hello, world
 Hello, argv[0] = '/opt/kontain/tests/hello_test.km'
 Hello, argv[1] = 'Hello,'
