@@ -1,0 +1,12 @@
+version: '3'
+services:
+  pyflask:
+    image: sandman2k/pyflaskdocker
+    ports:
+      - "5000:5000"
+    logging:
+      driver: awslogs
+      options: 
+        awslogs-group: ecstestclstr2 
+        awslogs-region: us-west-2
+        awslogs-stream-prefix: pyflask
