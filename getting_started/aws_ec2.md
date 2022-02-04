@@ -4,7 +4,7 @@ icon: /images/windows_os_logo_icon.png
 order: 979
 ---
 
-## AWS EC2 VM from AMI
+#### AWS EC2 VM from AMI
 To use Kontain on an AWS EC2 VM, you can either:
 - you can use an existing Kontain AMI with **Kontain pre-installed**
 - or install Kontain on a VM of your own if its one of the following (with kernel version above 4.15)
