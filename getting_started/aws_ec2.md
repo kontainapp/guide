@@ -8,9 +8,9 @@ order: 979
 To use Kontain on an AWS EC2 VM, you can either:
 - you can use an existing Kontain AMI with **Kontain pre-installed**
 - or install Kontain on a VM of your own if its one of the following (with kernel version above 4.15)
-- Fedora
-- Ubuntu
-- Amazon Linux 2
+    - Fedora
+    - Ubuntu
+    - Amazon Linux 2
 
 Below we will show how for both the cases.
 
