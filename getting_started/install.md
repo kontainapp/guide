@@ -5,14 +5,14 @@ order: 1000
 ---
 
 # Install
-### Pre-requisites
+#### Pre-requisites
 Kontain runs on *Linux kernel version 4.15 or newer*, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled. For enabling KVM on Ubuntu 18.04 or higher, you can refer to this [article](https://linuxize.com/post/how-to-install-kvm-on-ubuntu-18-04/).
 
 Recommended distros are Ubuntu 20.04 and Fedora 32, or newer.  Note that this also assumes that your user has access to /dev/kvm.
 
 To package Kontain images, it is also necessary to have a recent version of Docker or Moby-engine is installed.
 
-### Environments
+#### Environments
 +++ Local Install on Linux
 #### Optional: Installing Docker in Fedora/RHEL systems
 If Docker is not present, you can install Docker On Fedora/RHEL systems using [instructions from here](https://developer.fedoraproject.org/tools/docker/docker-installation.html) or for Ubuntu using these [instructions](https://docs.docker.com/engine/install/ubuntu/).
