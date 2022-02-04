@@ -176,6 +176,31 @@ Hello, argv[1] = 'Hello,'
 Hello, argv[2] = 'Kontain!'
 ```
 
+#### In Docker:
+```shell
+# lets verify with Docker
+$ cp /opt/kontain/tests/hello_test.km
+
+# use a Dockerfile to bundle this simple program
+$ cat Dockerfile
+FROM scratch
+ADD hello_test.km /
+ENTRYPOINT ["/hello_test.km"]
+CMD ["from", "docker"]
+
+# build the image
+$ docker build -t try-kontain .
+
+# run with kontain as the runtime
+$ docker run --runtime=krun --rm try-kontain:latest
+Hello, world
+Hello, argv[0] = '/hello_test.km'
+Hello, argv[1] = 'from'
+Hello, argv[2] = 'docker'
+
+# this verifies that Kontain is being used as a runtime in Docker
+```
+
 #### In Kubernetes:
 ```shell
 # verify that the kontain-node-initializer ran successfully and is in "Running" state and not "Error" state
