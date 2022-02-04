@@ -22,6 +22,7 @@ services:
     runtime: krun
     build:
       context: .
+      file: ./Dockerfile.kontain
       args:
         - BUILD_IMAGE_VERSION=python:3.8-slim
         - KONTAIN_RELEASE_IMAGE_VERSION=kontainapp/runenv-python
