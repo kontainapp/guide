@@ -26,12 +26,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.2.697253468802" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.2.697307986651" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.697253468802" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.697307986651" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.697253468802" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.697253468802" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.697307986651" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.697307986651" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -311,6 +311,29 @@ Hello, world
 Hello, argv[0] = '/opt/kontain/tests/hello_test.km'
 Hello, argv[1] = 'Hello,'
 Hello, argv[2] = 'Kontain!'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none"># lets verify with Docker
+$ cp /opt/kontain/tests/hello_test.km
+
+# use a Dockerfile to bundle this simple program
+$ cat Dockerfile
+FROM scratch
+ADD hello_test.km /
+ENTRYPOINT [&quot;/hello_test.km&quot;]
+CMD [&quot;from&quot;, &quot;docker&quot;]
+
+# build the image
+$ docker build -t try-kontain .
+
+# run with kontain as the runtime
+$ docker run --runtime=krun --rm try-kontain:latest
+Hello, world
+Hello, argv[0] = '/hello_test.km'
+Hello, argv[1] = 'from'
+Hello, argv[2] = 'docker'
+
+# this verifies that Kontain is being used as a runtime in Docker</code></pre>
 </doc-codeblock></div>
 </doc-tab>
 
