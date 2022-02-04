@@ -1,7 +1,7 @@
 ---
 label: Instantly starting your Spring Boot Application
 icon: /images/java.png
-order: 600
+order: 595
 ---
 
 ## Instantly starting Spring Boot microservice
@@ -16,7 +16,7 @@ Well, read on to see how we can do this with Kontain Containers.
 ### starting a Spring Boot Application the normal way
 [!embed](https://youtu.be/jrg8mRHrafI)
 
-### staring a Spring Boot microservice the "instant" way
+### starting a Spring Boot microservice the "instant" way
 [!embed](https://youtu.be/bwgVp1Hpybo)
 
 ## How do we do this?
