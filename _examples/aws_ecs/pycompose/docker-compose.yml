@@ -1,9 +1,15 @@
 version: '3'
 services:
   pyflask:
+    build:
+      dockerfile: ./Dockerfile.docker
+      context: .
+      # labels:
+      #   containerType: "kontain"
     image: sandman2k/pyflaskdocker
     ports:
       - "5000:5000"
+    container_name: pyflaskex
     logging:
       driver: awslogs
       options: 

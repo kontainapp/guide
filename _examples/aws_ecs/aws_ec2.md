@@ -80,7 +80,7 @@ Hello, argv[2] = 'Kontain!'
 
 ```
 # lets verify with Docker
-$ cp /opt/kontain/tests/hello_test.km
+$ cp /opt/kontain/tests/hello_test.km .
 
 # use a Dockerfile to bundle this simple program
 $ cat Dockerfile
