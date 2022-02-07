@@ -27,11 +27,13 @@ $ docker build -f Dockerfile.kontain -t sandman2k/pyflaskkontain .
 or
 # if you dont want to put the label inside the Dockerfile
 # https://codefresh.io/docs/docs/codefresh-yaml/docker-image-metadata/
+$ docker build -f Dockerfile.base -t kontain/pybase .
 $ docker build -t sandman2k/pyflaskdocker --label "container_type"="kontain" -f Dockerfile.docker
 $ docker push sandman2k/pyflaskkontain
 
 # to run a test locally
 $ docker run --rm  -p 5000:5000 --name pyflaskex sandman2k/pyflaskdocker
+
 # in another terminal
 $ curl http://localhost:5000/
 $ docker inspect --format='{{.Config.Labels.CONTAINER_TYPE}}' pyflaskex
@@ -41,7 +43,11 @@ kontain
 
 # to test on ECS
 # ecs UP - starts docker-compose app(docker image) in ECS
+# IMPORTANT - --force-update - restarts
 $ ecs-cli compose up --create-log-groups --cluster-config ecstestclstr2 --ecs-profile kontain
+
+# to FORCE a stop --> re-deploy of the service
+$ ecs-cli compose up --force-update
 
 # status and note the public IP and port
 # ecs-cli compose service ps
@@ -54,7 +60,7 @@ $ curl http://<public-ip-address>:5000
 $ aws ec2 describe-security-groups --filters Name=vpc-id,Values=vpc-03920d95558866f7a  --region us-west-2
 
 # ecs down - stops docker-compose app(docker image) in ECS
-$ ecs-cli compose service rm --cluster-config ecstestclstrec4 --ecs-profile kontain
+$ ecs-cli compose service rm --cluster-config ecstestclstr2 --ecs-profile kontain
 
 $ aws ecs list-clusters
 or
