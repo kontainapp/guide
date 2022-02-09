@@ -56,6 +56,6 @@ jobs:
       - name: Interact with object storage
         run: |
           cd downloads
-          s3cmd cp hellokontain.tar.gz s3://guide-assets/downloads/
+          s3cmd put hellokontain.tar.gz s3://guide-assets/downloads/
           s3cmd info s3://guide-assets/downloads/
 
