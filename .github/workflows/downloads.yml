@@ -30,7 +30,7 @@ jobs:
         run: |
           REPO_FOLDER=`pwd`
           cd downloads
-          tar cvf hellokontain.tar.gz $REPO_FOLDER/_examples/simple/*
+          tar -C $REPO_FOLDER/_examples/simple/ -cvf hellokontain.tar.gz .
           cd ..
 
       - name: Step 3 - Use the Upload Artifact GitHub Action
