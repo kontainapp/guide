@@ -5,8 +5,8 @@ name: CI
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ main ]
+#  push:
+#    branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -29,7 +29,8 @@ jobs:
       - name: step 2 - Add artifacts to publish to the temp folder
         run: |
           cd downloads
-          tar cvf hellokontain.tar.gz ~/guide/_examples/simple/*
+          # tar cvf hellokontain.tar.gz ~/guide/_examples/simple/*
+          ls ~/
           cd ..
 
       - name: Step 3 - Use the Upload Artifact GitHub Action
