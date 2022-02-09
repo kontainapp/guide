@@ -30,7 +30,7 @@ jobs:
         run: |
           cd downloads
           # tar cvf hellokontain.tar.gz ~/guide/_examples/simple/*
-          ls ~/
+          ls ~/work/
           cd ..
 
       - name: Step 3 - Use the Upload Artifact GitHub Action
