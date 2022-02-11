@@ -5,12 +5,12 @@ order: 979
 ---
 
 ## Using a Kontain AMI (Amazon Linux 2 OS)
-You can launch an AWS EC2 instance using the AMI id: 
+You can launch an AWS EC2 instance with Kontain pre-installed using the AMI id: 
 - *ami-029f3a63da2a4503a* (kontain-v0.1test-amzn2-ami-kernel-5.10-hvm-2.0.20220121.0-x86_64-gp2) in us-west-2 region.
 
-This AMI is based on the latest Amazon Linux 2 AMI but has Kontain v0.9.5 pre-installed.  You will need to select your own instance type, default VPC, subnets, IAM roles for your instance.  After your launch your own instance you can try out the examples in the docs below.
+This AMI is based on the latest Amazon Linux 2 AMI and has Kontain v0.9.5 pre-installed.  You will need to select your own instance type, default VPC, subnets, IAM roles for your instance.  After you launch your own instance you can try out the examples in the docs below.
 
-We can easily add other AMIs based on AMI preference types.
+We can also easily add other AMIs based on AMI preference types on feedback.
 
 ==- Video: Launch an Amazon AMI Linux 2 VM with Kontain pre-installed
 [!embed](https://youtu.be/YX8sUiFyb2k)
@@ -87,8 +87,16 @@ $ sudo chmod -v +x /usr/local/bin/docker-compose
 ===
 
 ### Installing Kontain
+First, let's update Amazon Linux 2 and automatically reboot if it needs it.
+```
+$ yum install -y yum-utils && yum update -y
+
+# checks if it needs rebooting after a yum update
+(test ! -f /var/run/yum.pid && needs-restarting -r) || (reboot)
+```
+
 ```bash
-# install relevant packages
+# install kontain
 $ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_bin_install.sh | sudo bash
 ```
 
