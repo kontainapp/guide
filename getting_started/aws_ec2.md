@@ -107,7 +107,7 @@ Run Kontain Monitor with a simple C program to test that Kontain Monitor and Kon
 # Note: start a ssh session with your EC2 instance
 
 # Run "Hello, Kontain!"
-$ curl  https://guide-assets.s3.us-west-2.amazonaws.com/downloads/hellokontain.tar.gz | tar xvz
+$ curl  https://guide-assets.s3.us-west-2.amazonaws.com/downloads/hellokontain.tar.gz | tar xv
 $ /opt/kontain/bin/km hello_test.km
 Hello, world
 Hello, argv[0] = '/opt/kontain/tests/hello_test.km'
