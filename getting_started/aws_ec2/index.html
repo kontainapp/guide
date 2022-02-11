@@ -9,29 +9,29 @@
     <!-- Primary Meta Tags -->
     <title>Using Kontain on AWS EC2</title>
     <meta name="title" content="Using Kontain on AWS EC2">
-    <meta name="description" content="You can launch an AWS EC2 instance using the AMI id:" />
+    <meta name="description" content="You can launch an AWS EC2 instance with Kontain pre-installed using the AMI id:" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kontainapp.github.io/guide/getting_started/aws_ec2/">
     <meta property="og:title" content="Using Kontain on AWS EC2">
-    <meta property="og:description" content="You can launch an AWS EC2 instance using the AMI id:">
+    <meta property="og:description" content="You can launch an AWS EC2 instance with Kontain pre-installed using the AMI id:">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://kontainapp.github.io/guide/getting_started/aws_ec2/">
     <meta property="twitter:title" content="Using Kontain on AWS EC2">
-    <meta property="twitter:description" content="You can launch an AWS EC2 instance using the AMI id:">
+    <meta property="twitter:description" content="You can launch an AWS EC2 instance with Kontain pre-installed using the AMI id:">
     
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.2.697789970195" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.2.697868893122" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.697789970195" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.697868893122" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.697789970195" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.697789970195" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.697868893122" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.697868893122" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -215,12 +215,12 @@
         <span>Using a Kontain AMI (Amazon Linux 2 OS)</span>
     </h2>
 </doc-anchor-target>
-<p>You can launch an AWS EC2 instance using the AMI id:</p>
+<p>You can launch an AWS EC2 instance with Kontain pre-installed using the AMI id:</p>
 <ul>
 <li><em>ami-029f3a63da2a4503a</em> (kontain-v0.1test-amzn2-ami-kernel-5.10-hvm-2.0.20220121.0-x86_64-gp2) in us-west-2 region.</li>
 </ul>
-<p>This AMI is based on the latest Amazon Linux 2 AMI but has Kontain v0.9.5 pre-installed.  You will need to select your own instance type, default VPC, subnets, IAM roles for your instance.  After your launch your own instance you can try out the examples in the docs below.</p>
-<p>We can easily add other AMIs based on AMI preference types.</p>
+<p>This AMI is based on the latest Amazon Linux 2 AMI and has Kontain v0.9.5 pre-installed.  You will need to select your own instance type, default VPC, subnets, IAM roles for your instance.  After you launch your own instance you can try out the examples in the docs below.</p>
+<p>We can also easily add other AMIs based on AMI preference types on feedback.</p>
 <doc-panel id="video-launch-an-amazon-ami-linux-2-vm-with-kontain-pre-installed" collapsed>
     <template #title>Video: Launch an Amazon AMI Linux 2 VM with Kontain pre-installed</template>
 <p>
@@ -312,8 +312,15 @@ $ sudo chmod -v +x /usr/local/bin/docker-compose</code></pre>
         <span>Installing Kontain</span>
     </h3>
 </doc-anchor-target>
+<p>First, let&#x27;s update Amazon Linux 2 and automatically reboot if it needs it.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># install relevant packages
+<pre class="language-none"><code v-pre class="language-none">$ yum install -y yum-utils &amp;&amp; yum update -y
+
+# checks if it needs rebooting after a yum update
+(test ! -f /var/run/yum.pid &amp;&amp; needs-restarting -r) || (reboot)</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># install kontain
 $ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_bin_install.sh | sudo bash</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="run-hello-kontain-1">
