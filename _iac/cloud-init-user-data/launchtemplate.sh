@@ -15,10 +15,10 @@ source /etc/os-release
 TAG='latest'
 if [[ $TAG = latest ]] ; then
    readonly URL_KONTAIN_TAR_GZ="https://github.com/kontainapp/km/releases/${TAG}/download/kontain.tar.gz"
-   readonly URL_KONTAIN_BIN="https://github.com/kontainapp/km/releases/${TAG}/download/kontain_bin.tar.gz"
+   readonly URL_KONTAIN_BIN="https://muth-scratch.s3.amazonaws.com/kontain_bin.tar.gz"
 else
    readonly URL_KONTAIN_TAR_GZ="https://github.com/kontainapp/km/releases/download/${TAG}/kontain.tar.gz"
-   readonly URL_KONTAIN_BIN="https://github.com/kontainapp/km/releases/download/${TAG}/kontain_bin.tar.gz"
+   readonly URL_KONTAIN_BIN="https://muth-scratch.s3.amazonaws.com/kontain_bin.tar.gz"
 fi
 readonly PREFIX="/opt/kontain"
 
@@ -31,27 +31,7 @@ yum update -y
 # ensure that cloud-init runs again after reboot by removing the instance record created
 (test ! -f /var/run/yum.pid && needs-restarting -r) || (rm -rf /var/lib/cloud/instances/;reboot)
 
-
-# install docker
-amazon-linux-extras install docker
-systemctl enable docker
-# systemctl enable --now docker
-# start/restart at the end
-
-# and include ec2-user in docker group
-usermod -a -G docker ec2-user
-newgrp docker
-
-# install docker-compose
-wget https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)
-mv docker-compose-$(uname -s)-$(uname -m) /usr/local/bin/docker-compose
-chmod -v +x /usr/local/bin/docker-compose
-
-# install utils
-cd /tmp
-yum install -y jq wget
-
-# download and move files into place
+# install Kontain with KKM
 mkdir /tmp/kontain
 cd /tmp/kontain
 wget $URL_KONTAIN_BIN
@@ -66,6 +46,29 @@ mv bin/docker_config.sh /opt/kontain/bin/
 # install KKM
 ./kkm.run
 
+
+# install docker
+amazon-linux-extras install -y docker ecs
+systemctl enable docker
+# systemctl enable --now docker
+# start/restart at the end
+
+# and include ec2-user in docker group
+usermod -a -G docker ec2-user
+newgrp docker
+
+# install docker-compose
+wget https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)
+mv docker-compose-$(uname -s)-$(uname -m) /usr/local/bin/docker-compose
+chmod -v +x /usr/local/bin/docker-compose
+
+# download and move files into place
 # configure and restart docker with Kontain as runtime
 # systemctl restart --no-block docker
+yum install -y wget jq
 bash /opt/kontain/bin/docker_config.sh
+
+cat<<EOF >> /etc/ecs/ecs.config
+ECS_CLUSTER=ecstestclstr3
+EOF
+systemctl restart --no-block ecs

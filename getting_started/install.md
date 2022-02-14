@@ -43,9 +43,9 @@ $ systemctl|grep docker.service
 $ sudo mkdir -p /opt/kontain ; sudo chown root /opt/kontain
 
 # download and install the latest Kontain release
-$ curl -s https://raw.githubusercontent.com/kontainapp/km/latest/km-releases/kontain-install.sh | sudo bash
+$ curl -s https://raw.githubusercontent.com/kontainapp/km/current/km-releases/kontain-install.sh | sudo bash
 
-Pulling https://github.com/kontainapp/km/releases/latest/download/kontain.tar.gz...
+Pulling https://github.com/kontainapp/km/releases/download/v0.9.5/kontain.tar.gz...
 Done.
 Hello, world
 Hello, argv[0] = '/opt/kontain/tests/hello_test.km'
