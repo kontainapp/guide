@@ -190,6 +190,7 @@ kg/springboothello        227MB
 Note that the Kontain'erized Spring Boot Application is 1/2 the size of the OpenJDK container.
 
 ## Kubernetes
+**Note**: Please note that the Container image built in the example above and referred to (kg/springboothello) to in the Kubernetes manifest should be pushed into an Image registry of your choice.  In the sample below, we have pushed it to Docker Hub under a different tag as an example.  You can alter the sample given below to reflect the location of the Container image for your situation.
 ### Kubernetes Deployment Manifest
 The K8s deployment yaml (flaskapp_k8s.yml) along with the service at port 8080 is shown below:
 ```yaml
