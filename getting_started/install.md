@@ -83,16 +83,30 @@ drwxr-xr-x 1 smijar  121 194 Nov 10 09:32 runtime
 
 +++ in Minikube or Managed or Regular Kubernetes
 #### Optional: Appendix contains instructions for launching various versions of Kubernetes
-As a convenience, we have provided convenient for installing or running various versions of Kubernetes for testing Kontain.
+For trying out Kontain with Kubernetes, you can launch Minikube with Docker Desktop [view instructions here](/appendix/minikube/).
+```shell
+$ minikube start --container-runtime=containerd --driver=docker --wait=all
+``` 
 
-For example, on a **desktop version of Kubernetes**, you can use Minikube with Docker Desktop [view instructions here](/appendix/minikube/).
+#### Install Kontain using Daemonset 
+##### if using Containerd (default runtime for almost all Kubernetes installations)
+Deploy Kontain Runtime using the Kubernetes client CLI
 
-For launching a **managed cluster in Azure AKS**, the instrutions are [here](/appendix/azure_aks.md)
+```shell
+# For Containerd runtime, use the following install script
+# install the config maps
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/current/cloud/k8s/deploy/runtime-class.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/current/cloud/k8s/deploy/cm-install-lib.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/current/cloud/k8s/deploy/cm-containerd-install.yaml
 
-For simulating an **edge cluster with k3s using Vagrant**, the instrutions are [here](/appendix/k3s.md)
+# deploy the daemonset
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/current/cloud/k8s/deploy/kontain-deploy/base/kontain-deploy.yaml
+```
 
-#### Check for pre-requisites on Kubernetes Worker Nodes
-You will need to verify pre-requisites on Kubernetes Nodes.  This applies for both Managed Kubernetes and Regular Kubernetes nodes.
+#### Tip: Checking for pre-requisites on Kubernetes Worker Nodes (skip if using Minikube)
+As a convenience, we have provided instructions for checking for pre-requisites on various versions of Kubernetes prior to installing Kontain.
+
+You will need to verify pre-requisites on Kubernetes Worker Nodes if you are using physical or VM based worker nodes.  This applies for both Managed Kubernetes as well as Regular Kubernetes nodes.
 
 ```shell
 # get the list of nodes
@@ -120,23 +134,13 @@ $ cat /proc/cpuinfo| egrep "vmx|svm" | wc -l
 $ ls -l /dev/kvm
 ```
 
-#### Install Kontain using Daemonset 
-##### if using Containerd (default runtime for almost all Kubernetes installations)
-Deploy Kontain Runtime using the Kubernetes client CLI
+#### Tip: launching various versions of Kubernetes
+- For launching a **managed cluster in Azure AKS**, the instructions are [here](/appendix/azure_aks.md)
+- For simulating a multi-node **edge cluster with k3s using Vagrant**, the instructions are [here](/appendix/k3s.md)
 
-```shell
-# For Containerd runtime, use the following install script
-$ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_k8s_install.sh | sh
-```
-
-##### If using CRIO (runtime)
-```shell
-# If using CRIO as the runtime, use the following install script
-$ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_k8s_crio_install.sh | sh
-```
 
 +++ On a K3s Edge Cluster
-#### Check for pre-requisites on Kubernetes Worker Nodes
+#### If using physical nodes or VMs on Kubernetes, check for pre-requisites (skip if using Minikube cluster)
 You will need to verify pre-requisites on Kubernetes Nodes.  This applies for both Managed Kubernetes and Regular Kubernetes nodes.
 
 ```shell
