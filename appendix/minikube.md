@@ -38,8 +38,8 @@ kube-system   kube-apiserver-minikube             1/1     Running   0          2
 
 Now we can use the [instructions here](/getting_started/install/#on-minikube-or-managed-or-regular-kubernetes) to install and use Kontain.
 
-+++ Install Kontain
-You can follow instructions from [here](/guide/getting_started/install/#on-minikube-or-managed-or-regular-kubernetes) to use Kontain in Minikube.
++++ Install Kontain in Minikube
+Here are instructions to install Kontain in Minikube - [here](/guide/getting_started/install/#in-minikube-or-managed-or-regular-kubernetes)
 
 +++ Clean up
 You can remove the Minikube cluster by using the following:

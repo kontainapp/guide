@@ -15,10 +15,10 @@ source /etc/os-release
 TAG='latest'
 if [[ $TAG = latest ]] ; then
    readonly URL_KONTAIN_TAR_GZ="https://github.com/kontainapp/km/releases/${TAG}/download/kontain.tar.gz"
-   readonly URL_KONTAIN_BIN="https://muth-scratch.s3.amazonaws.com/kontain_bin.tar.gz"
+   readonly URL_KONTAIN_BIN="https://guide-assets.s3.us-west-2.amazonaws.com/downloads/kontain_bin.tar.gz"
 else
    readonly URL_KONTAIN_TAR_GZ="https://github.com/kontainapp/km/releases/download/${TAG}/kontain.tar.gz"
-   readonly URL_KONTAIN_BIN="https://muth-scratch.s3.amazonaws.com/kontain_bin.tar.gz"
+   readonly URL_KONTAIN_BIN="https://guide-assets.s3.us-west-2.amazonaws.com/downloads/kontain_bin.tar.gz"
 fi
 readonly PREFIX="/opt/kontain"
 
@@ -39,16 +39,16 @@ tar xvzf kontain_bin.tar.gz
 
 # move files into /opt/kontain
 mkdir -p /opt/kontain/bin; chown root /opt/kontain
-mv container-runtime/krun /opt/kontain/bin/
+mv container-runtime/krun-label-trigger /opt/kontain/bin/krun
 mv km/km /opt/kontain/bin/
 mv bin/docker_config.sh /opt/kontain/bin/
 
 # install KKM
 ./kkm.run
 
-
 # install docker
-amazon-linux-extras install -y docker ecs
+amazon-linux-extras disable docker
+amazon-linux-extras install -y ecs
 systemctl enable docker
 # systemctl enable --now docker
 # start/restart at the end
@@ -58,17 +58,19 @@ usermod -a -G docker ec2-user
 newgrp docker
 
 # install docker-compose
-wget https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)
-mv docker-compose-$(uname -s)-$(uname -m) /usr/local/bin/docker-compose
-chmod -v +x /usr/local/bin/docker-compose
+#wget https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)
+#mv docker-compose-$(uname -s)-$(uname -m) /usr/local/bin/docker-compose
+#chmod -v +x /usr/local/bin/docker-compose
 
-# download and move files into place
-# configure and restart docker with Kontain as runtime
 # systemctl restart --no-block docker
 yum install -y wget jq
 bash /opt/kontain/bin/docker_config.sh
 
+# configure ecs cluster
 cat<<EOF >> /etc/ecs/ecs.config
 ECS_CLUSTER=ecstestclstr3
 EOF
+
+# configures and restart docker and ecs agent
+systemctl restart --no-block docker
 systemctl restart --no-block ecs
