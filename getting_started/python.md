@@ -115,6 +115,8 @@ No vulnerabilities found
 
 ## Kubernetes
 ### Kubernetes Deployment Manifest
+**Note**: Please note that the Container image built in the example above and referred to (kg/pyflask) to in the Kubernetes manifest should be pushed into an Image registry of your choice.  In the sample below, we have pushed it to Docker Hub under a different tag as an example.  You can alter the sample given below to reflect the location of the Container image for your situation.
+
 The K8s deployment yaml (flaskapp_k8s.yml) along with the service at port 5000 is shown below:
 ```yaml
 ---
