@@ -26,12 +26,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.2.698273021410" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.2.698276403947" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.698273021410" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.698276403947" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.698273021410" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.698273021410" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.698276403947" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.698276403947" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -314,17 +314,41 @@ drwxr-xr-x 1 smijar  121 194 Nov 10 09:32 runtime
         <span>Optional: Appendix contains instructions for launching various versions of Kubernetes</span>
     </h4>
 </doc-anchor-target>
-<p>As a convenience, we have provided convenient for installing or running various versions of Kubernetes for testing Kontain.</p>
-<p>For example, on a <strong>desktop version of Kubernetes</strong>, you can use Minikube with Docker Desktop <a href="/guide/appendix/minikube/">view instructions here</a>.</p>
-<p>For launching a <strong>managed cluster in Azure AKS</strong>, the instrutions are <a href="/guide/appendix/azure_aks/">here</a></p>
-<p>For simulating an <strong>edge cluster with k3s using Vagrant</strong>, the instrutions are <a href="/guide/appendix/k3s/">here</a></p>
-<doc-anchor-target id="check-for-pre-requisites-on-kubernetes-worker-nodes">
+<p>For trying out Kontain with Kubernetes, you can launch Minikube with Docker Desktop <a href="/guide/appendix/minikube/">view instructions here</a>.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ minikube start --container-runtime=containerd --driver=docker --wait=all</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="install-kontain-using-daemonset">
     <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#check-for-pre-requisites-on-kubernetes-worker-nodes">#</doc-anchor-trigger>
-        <span>Check for pre-requisites on Kubernetes Worker Nodes</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain-using-daemonset">#</doc-anchor-trigger>
+        <span>Install Kontain using Daemonset</span>
     </h4>
 </doc-anchor-target>
-<p>You will need to verify pre-requisites on Kubernetes Nodes.  This applies for both Managed Kubernetes and Regular Kubernetes nodes.</p>
+<doc-anchor-target id="if-using-containerd-default-runtime-for-almost-all-kubernetes-installations">
+    <h5>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#if-using-containerd-default-runtime-for-almost-all-kubernetes-installations">#</doc-anchor-trigger>
+        <span>if using Containerd (default runtime for almost all Kubernetes installations)</span>
+    </h5>
+</doc-anchor-target>
+<p>Deploy Kontain Runtime using the Kubernetes client CLI</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># For Containerd runtime, use the following install script
+# install the config maps
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/current/cloud/k8s/deploy/runtime-class.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/current/cloud/k8s/deploy/cm-install-lib.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/current/cloud/k8s/deploy/cm-containerd-install.yaml
+
+# deploy the daemonset
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/current/cloud/k8s/deploy/kontain-deploy/base/kontain-deploy.yaml</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="tip-checking-for-pre-requisites-on-kubernetes-worker-nodes-skip-if-using-minikube">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#tip-checking-for-pre-requisites-on-kubernetes-worker-nodes-skip-if-using-minikube">#</doc-anchor-trigger>
+        <span>Tip: Checking for pre-requisites on Kubernetes Worker Nodes (skip if using Minikube)</span>
+    </h4>
+</doc-anchor-target>
+<p>As a convenience, we have provided instructions for checking for pre-requisites on various versions of Kubernetes prior to installing Kontain.</p>
+<p>You will need to verify pre-requisites on Kubernetes Worker Nodes if you are using physical or VM based worker nodes.  This applies for both Managed Kubernetes as well as Regular Kubernetes nodes.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash"># get the list of nodes
 $ kubectl get nodes -o wide
@@ -350,40 +374,23 @@ $ cat /proc/cpuinfo| egrep &quot;vmx|svm&quot; | wc -l
 # verify that you have KVM already installed /dev/kvm enabled by checking:
 $ ls -l /dev/kvm</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="install-kontain-using-daemonset">
+<doc-anchor-target id="tip-launching-various-versions-of-kubernetes">
     <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain-using-daemonset">#</doc-anchor-trigger>
-        <span>Install Kontain using Daemonset</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#tip-launching-various-versions-of-kubernetes">#</doc-anchor-trigger>
+        <span>Tip: launching various versions of Kubernetes</span>
     </h4>
 </doc-anchor-target>
-<doc-anchor-target id="if-using-containerd-default-runtime-for-almost-all-kubernetes-installations">
-    <h5>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#if-using-containerd-default-runtime-for-almost-all-kubernetes-installations">#</doc-anchor-trigger>
-        <span>if using Containerd (default runtime for almost all Kubernetes installations)</span>
-    </h5>
-</doc-anchor-target>
-<p>Deploy Kontain Runtime using the Kubernetes client CLI</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># For Containerd runtime, use the following install script
-$ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_k8s_install.sh | sh</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="if-using-crio-runtime">
-    <h5>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#if-using-crio-runtime">#</doc-anchor-trigger>
-        <span>If using CRIO (runtime)</span>
-    </h5>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># If using CRIO as the runtime, use the following install script
-$ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_k8s_crio_install.sh | sh</code></pre>
-</doc-codeblock></div>
+<ul>
+<li>For launching a <strong>managed cluster in Azure AKS</strong>, the instructions are <a href="/guide/appendix/azure_aks/">here</a></li>
+<li>For simulating a multi-node <strong>edge cluster with k3s using Vagrant</strong>, the instructions are <a href="/guide/appendix/k3s/">here</a></li>
+</ul>
 </doc-tab>
 <doc-tab id="on-a-k3s-edge-cluster">
 <template #title>On a K3s Edge Cluster</template>
-<doc-anchor-target id="check-for-pre-requisites-on-kubernetes-worker-nodes-1">
+<doc-anchor-target id="if-using-physical-nodes-or-vms-on-kubernetes-check-for-pre-requisites-skip-if-using-minikube-cluster">
     <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#check-for-pre-requisites-on-kubernetes-worker-nodes-1">#</doc-anchor-trigger>
-        <span>Check for pre-requisites on Kubernetes Worker Nodes</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#if-using-physical-nodes-or-vms-on-kubernetes-check-for-pre-requisites-skip-if-using-minikube-cluster">#</doc-anchor-trigger>
+        <span>If using physical nodes or VMs on Kubernetes, check for pre-requisites (skip if using Minikube cluster)</span>
     </h4>
 </doc-anchor-target>
 <p>You will need to verify pre-requisites on Kubernetes Nodes.  This applies for both Managed Kubernetes and Regular Kubernetes nodes.</p>
