@@ -35,12 +35,17 @@ kube-system   kube-apiserver-minikube             1/1     Running   0          2
 Now we can use the [instructions here](/getting_started/install/#on-minikube-or-managed-or-regular-kubernetes) to install and use Kontain.
 
 +++ Install Kontain
-You can follow instructions from [here](/guide/getting_started/install/#on-minikube-or-managed-or-regular-kubernetes) to use Kontain in Minikube.
+If using CRIO (runtime)
+
+# If using CRIO as the runtime, use the following install script
+```shell
+$ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_k8s_crio_install
+```
 
 +++ Clean up
 You can remove the Minikube cluster by using the following:
 
-```
+```shell
 $ minikube delete
 or 
 $ minikube delete -p <default>
