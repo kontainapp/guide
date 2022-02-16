@@ -28,16 +28,15 @@ sudo dnf update -y
 (test ! -f /var/cache/dnf/*pid && needs-restarting -r) || (rm -rf /var/lib/cloud/instances/;reboot)
 
 # install Kontain with KKM
-mkdir /tmp/kontain
+mkdir -p /tmp/kontain
 cd /tmp/kontain
 wget $URL_BIN
 tar xvzf kontain_bin.tar.gz
 
 # move files into /opt/kontain
 mkdir -p /opt/kontain/bin; chown root /opt/kontain
-mv container-runtime/krun-label-trigger /opt/kontain/bin/krun
+mv container-runtime/krun /opt/kontain/bin/krun
 mv km/km /opt/kontain/bin/
-mv bin/docker_config.sh /opt/kontain/bin/
 
 # install KKM
 ./kkm.run
@@ -47,12 +46,13 @@ sudo dnf -y install dnf-plugins-core
 sudo dnf config-manager \
     --add-repo \
     https://download.docker.com/linux/fedora/docker-ce.repo
-sudo dnf install docker-ce docker-ce-cli containerd.io
+sudo dnf install -y docker-ce docker-ce-cli containerd.io
 
 systemctl enable docker
 
 usermod -a -G docker fedora
-newgrp docker
+# usermod -a -G docker ${USER}
+# newgrp docker
 
 # install docker-compose
 wget https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)
@@ -60,6 +60,7 @@ mv docker-compose-$(uname -s)-$(uname -m) /usr/local/bin/docker-compose
 chmod -v +x /usr/local/bin/docker-compose
 
 # systemctl restart --no-block docker
+mkdir -p /etc/docker/
 #!/bin/bash
 cat <<EOF >> /etc/docker/daemon.json
 {
@@ -76,4 +77,4 @@ EOF
 systemctl restart --no-block docker
 
 # install Kontain main release
-curl -s $URL | sudo bash
+# curl -s https://raw.githubusercontent.com/kontainapp/km/current/km-releases/kontain-install.sh | sudo bash
