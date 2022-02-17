@@ -32,45 +32,79 @@ yum -y --exclude=kernel* update
 (test ! -f /var/run/yum.pid && needs-restarting -r) || (rm -rf /var/lib/cloud/instances/;reboot)
 
 # install Kontain with KKM
-mkdir /tmp/kontain
+mkdir -p /tmp/kontain
 cd /tmp/kontain
 wget $URL_KONTAIN_BIN
 tar xvzf kontain_bin.tar.gz
 
 # move files into /opt/kontain
 mkdir -p /opt/kontain/bin; chown root /opt/kontain
-mv container-runtime/krun-label-trigger /opt/kontain/bin/krun
+mv container-runtime/krun /opt/kontain/bin/krun
 mv km/km /opt/kontain/bin/
-mv bin/docker_config.sh /opt/kontain/bin/
 
 # install KKM
 ./kkm.run
 
 # install docker
-amazon-linux-extras disable docker
-amazon-linux-extras install -y ecs
+amazon-linux-extras install -y docker
+
+
+
+
+# start docker at the end
 systemctl enable docker
-# systemctl enable --now docker
-# start/restart at the end
 
 # and include ec2-user in docker group
 usermod -a -G docker ec2-user
-newgrp docker
+# usermod -a -G docker ${USER}
+# newgrp docker
 
 # install docker-compose
-#wget https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)
-#mv docker-compose-$(uname -s)-$(uname -m) /usr/local/bin/docker-compose
-#chmod -v +x /usr/local/bin/docker-compose
+wget https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)
+mv docker-compose-$(uname -s)-$(uname -m) /usr/local/bin/docker-compose
+chmod -v +x /usr/local/bin/docker-compose
 
-# systemctl restart --no-block docker
-yum install -y wget jq
-bash /opt/kontain/bin/docker_config.sh
-
-# configure ecs cluster
-cat<<EOF >> /etc/ecs/ecs.config
-ECS_CLUSTER=ecstestclstr3
+mkdir -p /etc/docker/
+cat <<EOF >> /etc/docker/daemon.json
+{
+    "runtimes": {
+        "krun": {
+            "path": "/opt/kontain/bin/krun"
+        }
+    }
+}
 EOF
 
-# configures and restart docker and ecs agent
+# start docker without blocking since cloud-init can cause deadlock issues
 systemctl restart --no-block docker
-systemctl restart --no-block ecs
+
+# -----------------------------------
+# install Kontain main release
+curl -s https://raw.githubusercontent.com/kontainapp/km/current/km-releases/kontain-install.sh | sudo bash
+
+# installing JDK
+amazon-linux-extras install -y java-openjdk11
+
+# installing nodejs
+cd /tmp
+sudo yum install -y gcc-c++ make
+curl -sL https://rpm.nodesource.com/setup_12.x | sudo -E bash -
+sudo yum install -y nodejs
+
+# install golang
+mkdir -p /home/ec2-user/go/src
+
+# add golang path
+cd /tmp
+wget https://go.dev/dl/go1.17.7.linux-amd64.tar.gz
+rm -rf /usr/local/go && tar -C /usr/local -xzf /tmp/go1.17.7.linux-amd64.tar.gz
+
+cat <<EOF >> /home/ec2-user/.bash_profile
+export GOPATH='/home/feodra/go'
+export GOROOT='/usr/local/go'
+export PATH="$PATH:/usr/local/bin:/usr/local/go/bin"
+EOF
+
+#install minikube so we have kubernetes testing
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube

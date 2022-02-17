@@ -20,11 +20,12 @@ else
 fi
 readonly PREFIX="/opt/kontain"
 
+# install yum-utils which contains needs-restarting to check if a reboot is necessary after update
 sudo dnf install -y dnf-utils wget jq git
 # install kernel-devel for current package
 sudo dnf install -y "kernel-devel-uname-r == $(uname -r)"
 # update without updating kernel (IMPORTANT FOR KKM)
-sudo dnf update -y --exclude=kernel*
+sudo dnf -y --exclude=kernel* update
 
 # check if it needs rebooting while yum not running
 # ensure that cloud-init runs again after reboot by removing the instance record created
@@ -53,6 +54,7 @@ sudo dnf install -y docker-ce docker-ce-cli containerd.io
 
 systemctl enable docker
 
+# and include fedora in docker group
 usermod -a -G docker fedora
 # usermod -a -G docker ${USER}
 # newgrp docker
@@ -62,9 +64,7 @@ wget https://github.com/docker/compose/releases/latest/download/docker-compose-$
 mv docker-compose-$(uname -s)-$(uname -m) /usr/local/bin/docker-compose
 chmod -v +x /usr/local/bin/docker-compose
 
-# systemctl restart --no-block docker
 mkdir -p /etc/docker/
-#!/bin/bash
 cat <<EOF >> /etc/docker/daemon.json
 {
     "runtimes": {
@@ -75,6 +75,7 @@ cat <<EOF >> /etc/docker/daemon.json
 }
 EOF
 
+# start docker without blocking since cloud-init can cause deadlock issues
 systemctl restart --no-block docker
 
 # -----------------------------------
