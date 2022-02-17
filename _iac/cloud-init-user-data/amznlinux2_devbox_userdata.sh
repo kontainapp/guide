@@ -65,7 +65,7 @@ mv docker-compose-$(uname -s)-$(uname -m) /usr/local/bin/docker-compose
 chmod -v +x /usr/local/bin/docker-compose
 
 mkdir -p /etc/docker/
-cat <<EOF >> /etc/docker/daemon.json
+cat<<EOF >> /etc/docker/daemon.json
 {
     "runtimes": {
         "krun": {
@@ -99,7 +99,7 @@ cd /tmp
 wget https://go.dev/dl/go1.17.7.linux-amd64.tar.gz
 rm -rf /usr/local/go && tar -C /usr/local -xzf /tmp/go1.17.7.linux-amd64.tar.gz
 
-cat <<EOF >> /home/ec2-user/.bash_profile
+cat<<EOF >> /home/ec2-user/.bash_profile
 export GOPATH='/home/feodra/go'
 export GOROOT='/usr/local/go'
 export PATH="$PATH:/usr/local/bin:/usr/local/go/bin"
