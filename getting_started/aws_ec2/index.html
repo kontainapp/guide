@@ -26,12 +26,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.2.698428067601" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.2.698450912371" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.698428067601" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.698450912371" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.698428067601" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.698428067601" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.698450912371" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.698450912371" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -312,13 +312,18 @@ $ sudo chmod -v +x /usr/local/bin/docker-compose</code></pre>
         <span>Installing Kontain</span>
     </h3>
 </doc-anchor-target>
-<p>First, let&#x27;s update Amazon Linux 2 and automatically reboot if it needs it.</p>
+<p>First, let&#x27;s update Amazon Linux 2 and automatically reboot if it needed.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">$ yum install -y yum-utils &amp;&amp; yum update -y
+<pre class="language-none"><code v-pre class="language-none"># first, install reboot checker and couple of utilities
+$ yum install -y yum-utils wget jq &quot;kernel-devel-uname-r == $(uname -r)&quot;
 
-# checks if it needs rebooting after a yum update
-(test ! -f /var/run/yum.pid &amp;&amp; needs-restarting -r) || (reboot)</code></pre>
+# update without changing kernel version
+$ yum -y --exclude=kernel* update
+
+# check if it needs rebooting after the yum update
+$ (needs-restarting -r) || reboot</code></pre>
 </doc-codeblock></div>
+<p>Now, we can install Kontain.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash"># install kontain
 $ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_bin_install.sh | sudo bash</code></pre>
