@@ -21,7 +21,10 @@ fi
 readonly PREFIX="/opt/kontain"
 
 sudo dnf install -y dnf-utils wget jq git
-sudo dnf update -y
+# install kernel-devel for current package
+sudo dnf install -y "kernel-devel-uname-r == $(uname -r)"
+# update without updating kernel (IMPORTANT FOR KKM)
+sudo dnf update -y --exclude=kernel*
 
 # check if it needs rebooting while yum not running
 # ensure that cloud-init runs again after reboot by removing the instance record created
@@ -67,14 +70,31 @@ cat <<EOF >> /etc/docker/daemon.json
     "runtimes": {
         "krun": {
             "path": "/opt/kontain/bin/krun"
-        },
-        "runsc": {
-            "path": "/usr/local/bin/runsc"
         }
+    }
 }
 EOF
 
 systemctl restart --no-block docker
 
+# -----------------------------------
 # install Kontain main release
-# curl -s https://raw.githubusercontent.com/kontainapp/km/current/km-releases/kontain-install.sh | sudo bash
+curl -s https://raw.githubusercontent.com/kontainapp/km/current/km-releases/kontain-install.sh | sudo bash
+
+# installing JDK
+sudo dnf install -y java-11-openjdk.x86_64
+dnf module -y install nodejs:12
+
+# install golang
+dnf -y install go
+mkdir -p /home/fedora/go/src
+
+# add golang path
+cat <<EOF >> /home/fedora/.bash_profile
+export GOPATH='/home/feodra/go'
+export PATH="$PATH:/usr/local/go/bin"
+EOF
+
+#install minikube so we have kubernetes testing
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
