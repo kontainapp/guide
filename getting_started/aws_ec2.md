@@ -87,13 +87,20 @@ $ sudo chmod -v +x /usr/local/bin/docker-compose
 ===
 
 ### Installing Kontain
-First, let's update Amazon Linux 2 and automatically reboot if it needs it.
-```
-$ yum install -y yum-utils && yum update -y
+First, let's update Amazon Linux 2 and automatically reboot if it needed.
 
-# checks if it needs rebooting after a yum update
-(test ! -f /var/run/yum.pid && needs-restarting -r) || (reboot)
 ```
+# first, install reboot checker and couple of utilities
+$ yum install -y yum-utils wget jq "kernel-devel-uname-r == $(uname -r)"
+
+# update without changing kernel version
+$ yum -y --exclude=kernel* update
+
+# check if it needs rebooting after the yum update
+$ (needs-restarting -r) || reboot
+```
+
+Now, we can install Kontain.
 
 ```bash
 # install kontain
