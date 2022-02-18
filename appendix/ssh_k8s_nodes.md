@@ -10,9 +10,9 @@ To ssh into K8s worker nodes for checking pre-requisites or debugging purposes, 
 # to ssh into the Kubernetes nodes where you want to test Kontain
 # This command starts a privileged container on your node and connects to it over SSH
 
-$ kubectl debug node/<nodeid> --image=busybox
+$ kubectl debug node/<nodeid> -it --image=busybox
 or
-$ kubectl debug node<nodeid> image=mcr.microsoft.com/aks/fundamental/base-ubuntu:v0.0.11
+$ kubectl debug node/<nodeid> -it image=mcr.microsoft.com/aks/fundamental/base-ubuntu:v0.0.11
 
 # NOTE: After this, you have access to the worker node using a privileged pod launched on the target worker node 
 # this mounts the node FS at /host
