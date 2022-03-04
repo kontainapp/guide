@@ -238,7 +238,7 @@ gkecluster-apply-kkm:
 
 gkecluster-apply-flaskapp:
 	echo "deploying kontain flask app to cluster: kdocscluster-gke"
-
+	
 	# cleaning the app in case its already deployed, ignore error if present
 	- kubectl delete -f apps/pyflaskappkontain.yml
 	sleep 5
@@ -280,8 +280,23 @@ ekscluster:
 	kubectl wait --for=condition=Ready pods --all --all-namespaces --timeout=720s
 	sleep 10
 
-gkecluster-apply-flaskapp:
-	echo "deploying kontain flask app to cluster: kdocscluster-gke"
+ekscluster-apply-kkm:
+	echo "applying kkm to kind cluster: kdocscluster-eks-2"
+	# kubectl apply -f outputs/kkm.yaml && kubectl rollout status daemonset/kontain-node-initializer -n kube-system --timeout=240s
+	kubectl apply -f outputs/kkm.yaml
+	sleep 5
+
+	echo "waiting for kontain-node-initializer to be running and applying KKM"
+	kubectl -n kube-system wait pod --for=condition=Ready -l name=kontain-node-initializer --timeout=240s
+
+	sleep 60
+	echo "saving log output of kontain-node-initiliazer daemonset pod"
+	kubectl logs daemonset/kontain-node-initializer -n kube-system > /tmp/kontain-node-initializer-eks.log
+
+	sleep 5
+
+ekscluster-apply-flaskapp:
+	echo "deploying kontain flask app to cluster: kdocscluster-eks-2"
 
 	# cleaning the app in case its already deployed, ignore error if present
 	- kubectl delete -f apps/pyflaskappkontain.yml
@@ -301,7 +316,12 @@ gkecluster-apply-flaskapp:
 ekscluster-clean:
 	# takes too long to rebuild cluster hence not doing $ eksctl delete cluster --region=us-west-2 --name=kdocscluster-eks
 	# we will just remove the node group, and scale it down to 0 to remove the nodes, ignore the pod disruption budgets
+	echo "removing kontain-node-initializer"
+	- kubectl delete daemonset/kontain-node-initializer -n kube-system
+	sleep 5
+	echo "draining the nodegroup to clean: kdocscluster-eks"
 	eksctl drain nodegroup --cluster=kdocscluster-eks-2 --name=kdocscluster-eks-2-ng-1 --disable-eviction
 	eksctl scale nodegroup --cluster=kdocscluster-eks-2 --name=kdocscluster-eks-2-ng-1 --nodes=0
 	eksctl delete nodegroup --cluster=kdocscluster-eks-2 --name=kdocscluster-eks-2-ng-1 --disable-eviction
+
 	- kubectl config delete-context "kdocscluster-eks-2"
