@@ -1,0 +1,37 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flaskappdocker
+  labels:
+    app: flaskappdocker
+spec:
+  type: ClusterIP 
+  ports:
+  - port: 5000
+    targetPort: 5000
+    protocol: TCP
+  selector:
+    app: flaskappdocker
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaskappdocker
+  labels:
+    app: flaskappdocker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flaskappdocker
+  template:
+    metadata:
+      labels:
+        app: flaskappdocker
+    spec:
+      containers:
+      - name: flaskappdocker
+        image: sandman2k/pyflaskdocker:1.0
+        ports:
+        - containerPort: 5000

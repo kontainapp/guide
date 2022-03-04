@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flaskappkontain
+  labels:
+    app: flaskappkontain
+spec:
+  type: ClusterIP 
+  ports:
+  - port: 5000
+    targetPort: 5000
+    protocol: TCP
+  selector:
+    app: flaskappkontain
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaskappkontain
+  labels:
+    app: flaskappkontain
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flaskappkontain
+  template:
+    metadata:
+      labels:
+        app: flaskappkontain
+    spec:
+      runtimeClassName: kontain
+      containers:
+      - name: flaskappkontain
+        image: sandman2k/pyflaskkontain:1.0
+        ports:
+        - containerPort: 5000
