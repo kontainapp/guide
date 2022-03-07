@@ -1,7 +1,7 @@
 ---
 label: Install on Windows (Vagrant)
 icon: /images/windows_os_logo_icon.png
-order: 995
+order: 990
 ---
 
 ## Installing on Windows 10 and above

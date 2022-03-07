@@ -38,7 +38,7 @@ kindcluster:
 	kubectl config current-context
 
 	echo "waiting for all pods to be ready before cluster can be used"
-	kubectl wait --for=condition=Ready pods --all -n kube-system --timeout=720s
+	kubectl wait --for=condition=Ready pods --all --all-namespaces
 	sleep 10
 
 kindcluster-apply-km:
@@ -91,11 +91,7 @@ kindcluster-apply-flaskapp:
 
 kindcluster-clean:
 	echo "deleting kind cluster: kind-kind"
-
 	- kubectl config delete-context "kind-kind"
-	- kubectl delete deploy/flaskappkontain
-	- kubectl delete daemonset/kontain-node-initializer -n kube-system
-
 	kind delete cluster
 
 #-----------------
@@ -105,7 +101,7 @@ k3dcluster:
 	- kubectl config set-context "k3d"
 	kubectl config current-context
 	sleep 30
-	kubectl wait --for=condition=Ready pods --all -n kube-system --timeout=720s
+	kubectl wait --for=condition=Ready pods --all --all-namespaces --timeout=120s
 
 k3dcluster-apply-km:
 	echo "applying km to kind cluster: k3d"
@@ -122,12 +118,10 @@ k3dcluster-apply-km:
 
 	sleep 5
 
+
 k3dcluster-clean:
 	echo "deleting k3d cluster: k3s"
 	- kubectl config delete-context "k3d"
-	- kubectl delete deploy/flaskappkontain
-	- kubectl delete daemonset/kontain-node-initializer -n kube-system
-
 	k3d cluster delete k3d
 
 
@@ -142,10 +136,7 @@ minikubecluster-clean:
 	echo "deleting k3d cluster: minikube"
 	- kubectl config delete-context minikube
 	minikube delete
-	- kubectl delete deploy/flaskappkontain
-	- kubectl delete daemonset/kontain-node-initializer -n kube-system
-
-	minikube delete
+	k3d cluster delete
 
 #------------------
 akscluster:
@@ -159,7 +150,7 @@ akscluster:
 	kubectl config current-context
 
 	echo "waiting for all pods to be ready before cluster can be used"
-	kubectl wait --for=condition=Ready pods --all -n kube-system --timeout=720s
+	kubectl wait --for=condition=Ready pods --all --all-namespaces --timeout=720s
 	sleep 10
 
 
@@ -199,8 +190,6 @@ akscluster-apply-flaskapp:
 akscluster-clean:
 	echo "deleting cluster: kdocscluster_aks"
 	- kubectl config delete-context "kdocscluster-aks"
-	- kubectl delete deploy/flaskappkontain
-	- kubectl delete daemonset/kontain-node-initializer -n kube-system
 	az aks delete -y --name "kdocscluster-aks" --resource-group kdocs
 
 #------------------
@@ -229,7 +218,7 @@ gkecluster:
 	kubectl config current-context
 
 	echo "waiting for all pods to be ready before cluster can be used"
-	kubectl wait --for=condition=Ready pods --all -n kube-system --timeout=720s
+	kubectl wait --for=condition=Ready pods --all --all-namespaces --timeout=720s
 	sleep 10
 
 gkecluster-apply-kkm:
@@ -239,7 +228,7 @@ gkecluster-apply-kkm:
 	sleep 5
 
 	echo "waiting for kontain-node-initializer to be running and applying KKM"
-	kubectl -n kube-system wait pod --for=condition=Ready -l name=kontain-node-initializer --timeout=320s
+	kubectl -n kube-system wait pod --for=condition=Ready -l name=kontain-node-initializer --timeout=240s
 
 	sleep 60
 	echo "saving log output of kontain-node-initiliazer daemonset pod"
@@ -268,8 +257,6 @@ gkecluster-apply-flaskapp:
 gkecluster-clean:
 	echo "deleting cluster: kdocscluster-gke"
 	- kubectl config delete-context "kdocscluster-gke"
-	- kubectl delete deploy/flaskappkontain
-	- kubectl delete daemonset/kontain-node-initializer -n kube-system
 	gcloud container clusters delete --quiet "kdocscluster-gke"
 
 #------------------
@@ -290,7 +277,7 @@ ekscluster:
 	kubectl config current-context
 
 	echo "waiting for all pods to be ready before cluster can be used"
-	kubectl wait --for=condition=Ready pods --all -n kube-system --timeout=720s
+	kubectl wait --for=condition=Ready pods --all --all-namespaces --timeout=720s
 	sleep 10
 
 ekscluster-apply-kkm:
@@ -300,14 +287,11 @@ ekscluster-apply-kkm:
 	sleep 5
 
 	echo "waiting for kontain-node-initializer to be running and applying KKM"
-	kubectl -n kube-system wait pod --for=condition=Ready -l name=kontain-node-initializer --timeout=240s
+	kubectl -n kube-system wait pod --for=condition=Ready -l name=kontain-node-initializer --timeout=420s
 
-	sleep 60
+	sleep 100
 	echo "saving log output of kontain-node-initiliazer daemonset pod"
 	kubectl logs daemonset/kontain-node-initializer -n kube-system > /tmp/kontain-node-initializer-eks.log
-
-	# ideally wait for a signal from out of $ kubectl logs kontain-node-initalizer.... to conclude apply is complete
-	# + sleep infinity
 
 	sleep 5
 
@@ -332,14 +316,15 @@ ekscluster-apply-flaskapp:
 ekscluster-clean:
 	# takes too long to rebuild cluster hence not doing $ eksctl delete cluster --region=us-west-2 --name=kdocscluster-eks
 	# we will just remove the node group, and scale it down to 0 to remove the nodes, ignore the pod disruption budgets
-	echo "removing flask app and removing kontain-node-initializer"
+	echo "removing kontain-node-initializer"
 	- kubectl delete deploy/flaskappkontain
 	- kubectl delete daemonset/kontain-node-initializer -n kube-system
 	sleep 5
 	echo "draining the nodegroup to clean: kdocscluster-eks"
-	# eksctl drain nodegroup --cluster=kdocscluster-eks-2 --name=kdocscluster-eks-2-ng-1 --disable-eviction
-	# eksctl scale nodegroup --cluster=kdocscluster-eks-2 --name=kdocscluster-eks-2-ng-1 --nodes=0
-	# eksctl delete nodegroup --cluster=kdocscluster-eks-2 --name=kdocscluster-eks-2-ng-1 --disable-eviction
-	eksctl delete nodegroup --config-file=./conf/aws/kdocscluster-eks-2.yaml --approve
+	eksctl drain nodegroup --cluster=kdocscluster-eks-2 --name=kdocscluster-eks-2-ng-1 --disable-eviction
+	eksctl scale nodegroup --cluster=kdocscluster-eks-2 --name=kdocscluster-eks-2-ng-1 --nodes=0
+	eksctl delete nodegroup --cluster=kdocscluster-eks-2 --name=kdocscluster-eks-2-ng-1 --disable-eviction
+	# just to make sure node is removed
+	eksctl delete nodegroup  --config-file=conf/aws/kdocscluster-eks-2.yaml --approve
 
 	- kubectl config delete-context "kdocscluster-eks-2"
