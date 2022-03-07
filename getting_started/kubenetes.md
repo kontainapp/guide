@@ -1,10 +1,10 @@
 ---
-label: On Kubernetes
+label: In Kubernetes
 icon: /images/k8s.png
 order: 995
 ---
 
-# Install on Kubernetes
+# Install in Kubernetes
 ## Pre-requisites
 Kontain runs on *Linux kernel version 4.15 or newer*, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled. For enabling KVM on Ubuntu 18.04 or higher, you can refer to this [article](https://linuxize.com/post/how-to-install-kvm-on-ubuntu-18-04/).
 
