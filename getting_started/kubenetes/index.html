@@ -9,29 +9,29 @@
     <!-- Primary Meta Tags -->
     <title>Install in Kubernetes</title>
     <meta name="title" content="Install in Kubernetes">
-    <meta name="description" content="Kontain runs on Linux kernel version 4.15 or newer, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled." />
+    <meta name="description" content="Kontain runs on Linux kernel version 4.15 or newer, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled, ideally Ubuntu or..." />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kontainapp.github.io/guide/getting_started/kubenetes/">
     <meta property="og:title" content="Install in Kubernetes">
-    <meta property="og:description" content="Kontain runs on Linux kernel version 4.15 or newer, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled.">
+    <meta property="og:description" content="Kontain runs on Linux kernel version 4.15 or newer, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled, ideally Ubuntu or...">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://kontainapp.github.io/guide/getting_started/kubenetes/">
     <meta property="twitter:title" content="Install in Kubernetes">
-    <meta property="twitter:description" content="Kontain runs on Linux kernel version 4.15 or newer, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled.">
+    <meta property="twitter:description" content="Kontain runs on Linux kernel version 4.15 or newer, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled, ideally Ubuntu or...">
     
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.2.699943435326" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.2.699945682263" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.699943435326" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.699945682263" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.699943435326" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.699943435326" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.699945682263" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.699945682263" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -215,13 +215,14 @@
         <span>Pre-requisites</span>
     </h2>
 </doc-anchor-target>
-<p>Kontain runs on <em>Linux kernel version 4.15 or newer</em>, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled. For enabling KVM on Ubuntu 18.04 or higher, you can refer to this <a href="https://linuxize.com/post/how-to-install-kvm-on-ubuntu-18-04/">article</a>.</p>
+<p>Kontain runs on <em>Linux kernel version 4.15 or newer</em>, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled, ideally Ubuntu or Fedora.  For enabling KVM on Ubuntu 18.04 or higher, you can refer to this <a href="https://linuxize.com/post/how-to-install-kvm-on-ubuntu-18-04/">article</a>.</p>
+<p>For Kubernetes platforms that do not offer nested virtualization like GKE and AWS, we use a software virtualization module that gets installed as part of the Kontain install.  For other platforms that do offer nested virtualization, we recommend using the regular Kontain install.</p>
 <p>Recommended distros are Ubuntu 20.04 and Fedora 32, or newer.  Note that this also assumes that your user has access to /dev/kvm.</p>
 <p>To package Kontain images, it is also necessary to have a recent version of Docker or Moby-engine is installed.</p>
-<doc-anchor-target id="in-minikube-or-managed-or-regular-kubernetes">
+<doc-anchor-target id="in-minikube-or-kind">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#in-minikube-or-managed-or-regular-kubernetes">#</doc-anchor-trigger>
-        <span>in Minikube or Managed or Regular Kubernetes</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#in-minikube-or-kind">#</doc-anchor-trigger>
+        <span>in Minikube or kind</span>
     </h2>
 </doc-anchor-target>
 <doc-anchor-target id="optional-appendix-contains-instructions-for-launching-various-versions-of-kubernetes">
@@ -234,6 +235,10 @@
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash">$ minikube start --container-runtime=containerd --driver=docker --wait=all</code></pre>
 </doc-codeblock></div>
+<p>or kind:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ kind create cluster</code></pre>
+</doc-codeblock></div>
 <doc-anchor-target id="install-kontain-using-daemonset">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain-using-daemonset">#</doc-anchor-trigger>
@@ -242,14 +247,12 @@
 </doc-anchor-target>
 <p>Deploy Kontain Runtime using the Kubernetes client CLI</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"></code></pre>
+<pre class="language-bash"><code v-pre class="language-bash"># we install Kontain using a Daemonset
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide/main/_k8s/kustomize_outputs/km.yaml</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="tip-checking-for-pre-requisites-on-kubernetes-worker-nodes-skip-if-using-minikube">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#tip-checking-for-pre-requisites-on-kubernetes-worker-nodes-skip-if-using-minikube">#</doc-anchor-trigger>
-        <span>Tip: Checking for pre-requisites on Kubernetes Worker Nodes (skip if using Minikube)</span>
-    </h4>
-</doc-anchor-target>
+<p>The above yaml contains the Kontain runtime class and the install libraries for the Daemonset to work.</p>
+<doc-panel id="tip-to-check-for-pre-requisites-on-kubernetes-worker-nodes-skip-if-using-minikube" collapsed>
+    <template #title>Tip: to check for pre-requisites on Kubernetes Worker Nodes (skip if using Minikube)</template>
 <p>As a convenience, we have provided instructions for checking for pre-requisites on various versions of Kubernetes prior to installing Kontain.</p>
 <p>You will need to verify pre-requisites on Kubernetes Worker Nodes if you are using physical or VM based worker nodes.  This applies for both Managed Kubernetes as well as Regular Kubernetes nodes.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -281,16 +284,7 @@ $ cat /proc/cpuinfo| egrep &quot;vmx|svm&quot; | wc -l
 # verify that you have KVM already installed /dev/kvm enabled by checking:
 $ ls -l /dev/kvm</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="tip-launching-various-versions-of-kubernetes">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#tip-launching-various-versions-of-kubernetes">#</doc-anchor-trigger>
-        <span>Tip: launching various versions of Kubernetes</span>
-    </h3>
-</doc-anchor-target>
-<ul>
-<li>For launching a <strong>managed cluster in Azure AKS</strong>, the instructions are <a href="/guide/appendix/azure_aks/">here</a></li>
-<li>For simulating a multi-node <strong>edge cluster with k3s using Vagrant</strong>, the instructions are <a href="/guide/appendix/k3s/">here</a></li>
-</ul>
+</doc-panel>
 <doc-anchor-target id="verify-install">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#verify-install">#</doc-anchor-trigger>
@@ -341,6 +335,50 @@ kube-system   kontain-deploy   1         1         1       1            1       
 kube-system   kindnet          1         1         1       1            1           &lt;none&gt;                   168m
 kube-system   kube-proxy       1         1         1       1            1           kubernetes.io/os=linux   168m</code></pre>
 </doc-codeblock></div>
+<doc-anchor-target id="azure-aks">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#azure-aks">#</doc-anchor-trigger>
+        <span>Azure AKS</span>
+    </h2>
+</doc-anchor-target>
+<p>To install Kontain on AWS or GKE use:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide/main/_k8s/kustomize_outputs/km.yaml</code></pre>
+</doc-codeblock></div>
+<p>The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.</p>
+<doc-anchor-target id="aws-eks-and-google-cloud-gke">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#aws-eks-and-google-cloud-gke">#</doc-anchor-trigger>
+        <span>AWS EKS and Google Cloud GKE</span>
+    </h2>
+</doc-anchor-target>
+<p>To install Kontain on AWS or GKE use:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide/main/_k8s/kustomize_outputs/kkm.yaml</code></pre>
+</doc-codeblock></div>
+<p>The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.</p>
+<doc-anchor-target id="k3s">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#k3s">#</doc-anchor-trigger>
+        <span>K3s</span>
+    </h2>
+</doc-anchor-target>
+<p>To install Kontain on K3s:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide/main/_k8s/kustomize_outputs/k3s.yaml</code></pre>
+</doc-codeblock></div>
+<p>The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.</p>
+<doc-anchor-target id="openshift-with-crio">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#openshift-with-crio">#</doc-anchor-trigger>
+        <span>Openshift with CRIO</span>
+    </h2>
+</doc-anchor-target>
+<p>To install Kontain on Openshift with CRIO:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide/main/_k8s/kustomize_outputs/km-crio.yaml</code></pre>
+</doc-codeblock></div>
+<p>The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.</p>
 
 
 
