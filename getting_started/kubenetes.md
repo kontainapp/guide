@@ -1,5 +1,5 @@
 ---
-label: In Kubernetes
+label: In Kubernetes (local, cloud)
 icon: /images/k8s.png
 order: 995
 ---
@@ -133,9 +133,9 @@ $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide/main/_k8s/
 
 The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.
 
-As Docker shim is being deprecated in AWS EKS, please note that to use Kontain on AWS EKS, you will need to launch the cluster using containerd as the default runtime.  Please see: ![Docker shim deprecation](https://docs.aws.amazon.com/eks/latest/userguide/dockershim-deprecation.html)
+As Docker shim is being deprecated in AWS EKS, please note that to use Kontain on AWS EKS, you will need to launch the cluster using containerd as the default runtime.  Please see: [Docker shim deprecation](https://docs.aws.amazon.com/eks/latest/userguide/dockershim-deprecation.html)
 
- To enable containerd as default rutime, please see: ![Enabling Containerd in EKS](https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html#containerd-bootstrap)
+ To enable containerd as default rutime, please see: [Enabling Containerd in EKS](https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html#containerd-bootstrap)
 
 ## K3s
 To install Kontain on K3s:

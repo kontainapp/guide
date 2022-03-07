@@ -4,12 +4,12 @@ icon: /images/aks.png
 order: 700
 ---
 
-# Using Kontain in Azure AKS
+# Launching an AKS cluster
 Below we describe how we can launch and use Kontain in an Azure AKS (Kubernetes) cluster.
 
-##### Starting up an AKS cluster
+## Starting up an AKS cluster
 
-+++ Login to Azure
+### Login to Azure
 Here, we assume that you have Azure CLI [installed](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) have an Azure AKS account and are able to use the Azure CLI to be able to [login](https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli) to AKS using either:
 
 ```shell
@@ -26,7 +26,7 @@ $ az account set --subscription "<your-subscription-id>"
 ```
 Note: This approach may not work with Microsoft accounts or accounts that have two-factor authentication enabled.
 
-+++ AKS Kubernetes cluster with ***Nested*** Virtualization
+### AKS Kubernetes cluster with ***Nested*** Virtualization
 Below is an example of starting a kubernetes cluster in US-West region 1.
 
 As a reference, the various instances available in Azure are outlined [here](https://docs.microsoft.com/en-us/azure/virtual-machines/dv3-dsv3-series).
@@ -74,11 +74,9 @@ $ az aks get-credentials --resource-group kdocs --name kdocscluster
 $ kubectl get nodes -o wide
 ```
 
-
-+++ Install Kontain
-You can follow instructions from [here](/guide/getting_started/install/#on-minikube-or-managed-or-regular-kubernetes) to install Kontain in a Azure AKS cluster.
-
-+++ Clean up
+### Install Kontain
+Please refer to: [Install Kontain in Kubernetes](/getting_started/kubenetes.md)
+### Clean up
 ```
 #--------
 # clean up after using it
