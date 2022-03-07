@@ -1,7 +1,7 @@
 ---
 label: Using Kontain on AWS EC2
 icon: /images/windows_os_logo_icon.png
-order: 979
+order: 977
 ---
 
 ## Using a Kontain AMI (Amazon Linux 2 OS)

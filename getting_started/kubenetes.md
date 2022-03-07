@@ -124,14 +124,18 @@ $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide/main/_k8s/
 
 The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.
 
-## AWS EKS and Google Cloud GKE
-To install Kontain on AWS or GKE use:
+## AWS EKS (with Containerd) and Google Cloud GKE
+To install Kontain on AWS (with containerd) or GKE use:
 
 ```shell
 $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide/main/_k8s/kustomize_outputs/kkm.yaml
 ```
 
 The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.
+
+As Docker shim is being deprecated in AWS EKS, please note that to use Kontain on AWS EKS, you will need to launch the cluster using containerd as the default runtime.  Please see: ![Docker shim deprecation](https://docs.aws.amazon.com/eks/latest/userguide/dockershim-deprecation.html)
+
+ To enable containerd as default rutime, please see: ![Enabling Containerd in EKS](https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html#containerd-bootstrap)
 
 ## K3s
 To install Kontain on K3s:
