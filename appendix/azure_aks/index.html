@@ -7,31 +7,31 @@
     <meta name="turbo-cache-control" content="no-cache">
 
     <!-- Primary Meta Tags -->
-    <title>Using Kontain in Azure AKS</title>
-    <meta name="title" content="Using Kontain in Azure AKS">
+    <title>Launching an AKS cluster</title>
+    <meta name="title" content="Launching an AKS cluster">
     <meta name="description" content="Below we describe how we can launch and use Kontain in an Azure AKS (Kubernetes) cluster." />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kontainapp.github.io/guide/appendix/azure_aks/">
-    <meta property="og:title" content="Using Kontain in Azure AKS">
+    <meta property="og:title" content="Launching an AKS cluster">
     <meta property="og:description" content="Below we describe how we can launch and use Kontain in an Azure AKS (Kubernetes) cluster.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://kontainapp.github.io/guide/appendix/azure_aks/">
-    <meta property="twitter:title" content="Using Kontain in Azure AKS">
+    <meta property="twitter:title" content="Launching an AKS cluster">
     <meta property="twitter:description" content="Below we describe how we can launch and use Kontain in an Azure AKS (Kubernetes) cluster.">
     
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.2.699946134454" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.2.699946496889" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.699946134454" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.699946496889" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.699946134454" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.699946134454" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.699946496889" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.699946496889" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -203,22 +203,25 @@
                 <div id="docs-sidebar-right-toggle"></div>
                
                 <!-- Page content  -->
-<doc-anchor-target id="using-kontain-in-azure-aks" class="break-words">
+<doc-anchor-target id="launching-an-aks-cluster" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-in-azure-aks">#</doc-anchor-trigger>
-        <span>Using Kontain in Azure AKS</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#launching-an-aks-cluster">#</doc-anchor-trigger>
+        <span>Launching an AKS cluster</span>
     </h1>
 </doc-anchor-target>
 <p>Below we describe how we can launch and use Kontain in an Azure AKS (Kubernetes) cluster.</p>
 <doc-anchor-target id="starting-up-an-aks-cluster">
-    <h5>
+    <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#starting-up-an-aks-cluster">#</doc-anchor-trigger>
         <span>Starting up an AKS cluster</span>
-    </h5>
+    </h2>
 </doc-anchor-target>
-<doc-tabs>
-<doc-tab id="login-to-azure">
-<template #title>Login to Azure</template>
+<doc-anchor-target id="login-to-azure">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#login-to-azure">#</doc-anchor-trigger>
+        <span>Login to Azure</span>
+    </h3>
+</doc-anchor-target>
 <p>Here, we assume that you have Azure CLI <a href="https://docs.microsoft.com/en-us/cli/azure/install-azure-cli">installed</a> have an Azure AKS account and are able to use the Azure CLI to be able to <a href="https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli">login</a> to AKS using either:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash"># launches a browser for logging in with your credentials
@@ -233,9 +236,12 @@ $ az account set --subscription &quot;&lt;your-subscription-id&gt;&quot;
 </code></pre>
 </doc-codeblock></div>
 <p>Note: This approach may not work with Microsoft accounts or accounts that have two-factor authentication enabled.</p>
-</doc-tab>
-<doc-tab id="aks-kubernetes-cluster-with-nested-virtualization">
-<template #title>AKS Kubernetes cluster with <em><strong>Nested</strong></em> Virtualization</template>
+<doc-anchor-target id="aks-kubernetes-cluster-with-nested-virtualization">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#aks-kubernetes-cluster-with-nested-virtualization">#</doc-anchor-trigger>
+        <span>AKS Kubernetes cluster with <em><strong>Nested</strong></em> Virtualization</span>
+    </h3>
+</doc-anchor-target>
 <p>Below is an example of starting a kubernetes cluster in US-West region 1.</p>
 <p>As a reference, the various instances available in Azure are outlined <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/dv3-dsv3-series">here</a>.</p>
 <p>We use an instance type that enables use of <strong>&quot;Nested&quot;</strong> Virutalization using KVM, and in case of Azure, the minimum instance that enables this is &quot;Standard_D4s_v3&quot;.</p>
@@ -278,13 +284,19 @@ $ az aks get-credentials --resource-group kdocs --name kdocscluster
 # check the nodes
 $ kubectl get nodes -o wide</code></pre>
 </doc-codeblock></div>
-</doc-tab>
-<doc-tab id="install-kontain">
-<template #title>Install Kontain</template>
-<p>You can follow instructions from <a href="/guide/getting_started/install/#on-minikube-or-managed-or-regular-kubernetes">here</a> to install Kontain in a Azure AKS cluster.</p>
-</doc-tab>
-<doc-tab id="clean-up">
-<template #title>Clean up</template>
+<doc-anchor-target id="install-kontain">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain">#</doc-anchor-trigger>
+        <span>Install Kontain</span>
+    </h3>
+</doc-anchor-target>
+<p>Please refer to: <a href="/guide/getting_started/kubenetes/">Install Kontain in Kubernetes</a></p>
+<doc-anchor-target id="clean-up">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#clean-up">#</doc-anchor-trigger>
+        <span>Clean up</span>
+    </h3>
+</doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">#--------
 # clean up after using it
@@ -294,7 +306,6 @@ $ az aks nodepool delete --resource-group kdocs --cluster-name kdocscluster --na
 # to delete cluster and corresponding, delete the resource group itself
 $ az group delete --name kdocs --yes #--no-wait</code></pre>
 </doc-codeblock></div>
-</doc-tab>
 
 
 
