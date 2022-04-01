@@ -16,10 +16,6 @@ ifneq (,$(wildcard ./.env))
     export
 endif
 
-
-#------------------------------------------------
-#-------- list codebuild role names
-#------------------------------------------------
 build-overlays:
 	mkdir -p ./outputs/
 
