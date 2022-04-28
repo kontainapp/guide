@@ -22,10 +22,10 @@ build-overlays:
 	echo "building overlays"
 	# to apply directly, use:
 	# 	/usr/local/bin/kustomize build "https://github.com/kontainapp/km//cloud/k8s/deploy/kontain-deploy/base?ref=sm/k8sversionupdate" | kubectl apply -f -
-	/usr/local/bin/kustomize build "https://github.com/kontainapp/km//cloud/k8s/deploy/kontain-deploy/base?ref=sm/k8sversionupdate" > ./outputs/km.yaml
-	/usr/local/bin/kustomize build "https://github.com/kontainapp/km//cloud/k8s/deploy/kontain-deploy/overlays/km-crio?ref=sm/k8sversionupdate" > ./outputs/km-crio.yaml
-	/usr/local/bin/kustomize build "https://github.com/kontainapp/km//cloud/k8s/deploy/kontain-deploy/overlays/kkm?ref=sm/k8sversionupdate" > ./outputs/kkm.yaml
-	/usr/local/bin/kustomize build "https://github.com/kontainapp/km//cloud/k8s/deploy/kontain-deploy/overlays/k3s?ref=sm/k8sversionupdate" > ./outputs/k3s.yaml
+	/usr/local/bin/kustomize build "https://github.com/kontainapp/km//cloud/k8s/deploy/kontain-deploy/base?ref=sm/k8sversionupdate" > ./kustomize_outputs/km.yaml
+	/usr/local/bin/kustomize build "https://github.com/kontainapp/km//cloud/k8s/deploy/kontain-deploy/overlays/km-crio?ref=sm/k8sversionupdate" > ./kustomize_outputs/km-crio.yaml
+	/usr/local/bin/kustomize build "https://github.com/kontainapp/km//cloud/k8s/deploy/kontain-deploy/overlays/kkm?ref=sm/k8sversionupdate" > ./kustomize_outputs/kkm.yaml
+	/usr/local/bin/kustomize build "https://github.com/kontainapp/km//cloud/k8s/deploy/kontain-deploy/overlays/k3s?ref=sm/k8sversionupdate" > ./kustomize_outputs/k3s.yaml
 
 kindcluster:
 	echo "creating kind cluster: kind-kind"
