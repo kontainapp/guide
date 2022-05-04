@@ -17,7 +17,7 @@ ifneq (,$(wildcard ./.env))
 endif
 
 build-overlays:
-	mkdir -p ./outputs/
+	mkdir -p ./kustomize_outputs/
 
 	echo "building overlays"
 	# to apply directly, use:
@@ -39,8 +39,8 @@ kindcluster:
 
 kindcluster-apply-km:
 	echo "applying km to kind cluster: kind-kind"
-	# kubectl apply -f outputs/km.yaml && kubectl rollout status daemonset/kontain-node-initializer -n kube-system --timeout=240s
-	kubectl apply -f outputs/km.yaml
+	# kubectl apply -f kustomize_outputs/km.yaml && kubectl rollout status daemonset/kontain-node-initializer -n kube-system --timeout=240s
+	kubectl apply -f kustomize_outputs/km.yaml
 	sleep 5
 
 	echo "waiting for kontain-node-initializer to be ready"
@@ -54,8 +54,8 @@ kindcluster-apply-km:
 
 kindcluster-apply-kkm:
 	echo "applying kkm to kind cluster: kind-kind"
-	# kubectl apply -f outputs/kkm.yaml && kubectl rollout status daemonset/kontain-node-initializer -n kube-system --timeout=240s
-	kubectl apply -f outputs/kkm.yaml
+	# kubectl apply -f kustomize_outputs/kkm.yaml && kubectl rollout status daemonset/kontain-node-initializer -n kube-system --timeout=240s
+	kubectl apply -f kustomize_outputs/kkm.yaml
 	sleep 5
 
 	echo "waiting for kontain-node-initializer to be ready"
@@ -101,8 +101,8 @@ k3dcluster:
 
 k3dcluster-apply-km:
 	echo "applying km to kind cluster: k3d"
-	# kubectl apply -f outputs/km.yaml && kubectl rollout status daemonset/kontain-node-initializer -n kube-system --timeout=240s
-	kubectl apply -f outputs/k3s.yaml
+	# kubectl apply -f kustomize_outputs/km.yaml && kubectl rollout status daemonset/kontain-node-initializer -n kube-system --timeout=240s
+	kubectl apply -f kustomize_outputs/k3s.yaml
 	sleep 5
 
 	echo "waiting for kontain-node-initializer to be ready"
@@ -152,8 +152,8 @@ akscluster:
 
 akscluster-apply-km:
 	echo "applying km to kind cluster: kdocscluster-aks"
-	# kubectl apply -f outputs/km.yaml && kubectl rollout status daemonset/kontain-node-initializer -n kube-system --timeout=240s
-	kubectl apply -f outputs/km.yaml
+	# kubectl apply -f kustomize_outputs/km.yaml && kubectl rollout status daemonset/kontain-node-initializer -n kube-system --timeout=240s
+	kubectl apply -f kustomize_outputs/km.yaml
 	sleep 5
 
 	echo "waiting for kontain-node-initializer to be ready"
@@ -219,8 +219,8 @@ gkecluster:
 
 gkecluster-apply-kkm:
 	echo "applying kkm to kind cluster: kdocscluster-gke"
-	# kubectl apply -f outputs/kkm.yaml && kubectl rollout status daemonset/kontain-node-initializer -n kube-system --timeout=240s
-	kubectl apply -f outputs/kkm.yaml
+	# kubectl apply -f kustomize_outputs/kkm.yaml && kubectl rollout status daemonset/kontain-node-initializer -n kube-system --timeout=240s
+	kubectl apply -f kustomize_outputs/kkm.yaml
 	sleep 5
 
 	echo "waiting for kontain-node-initializer to be running and applying KKM"
@@ -278,8 +278,8 @@ ekscluster:
 
 ekscluster-apply-kkm:
 	echo "applying kkm to kind cluster: kdocscluster-eks-2"
-	# kubectl apply -f outputs/kkm.yaml && kubectl rollout status daemonset/kontain-node-initializer -n kube-system --timeout=240s
-	kubectl apply -f outputs/kkm.yaml
+	# kubectl apply -f kustomize_outputs/kkm.yaml && kubectl rollout status daemonset/kontain-node-initializer -n kube-system --timeout=240s
+	kubectl apply -f kustomize_outputs/kkm.yaml
 	sleep 5
 
 	echo "waiting for kontain-node-initializer to be running and applying KKM"
