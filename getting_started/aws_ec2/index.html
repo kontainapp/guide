@@ -26,12 +26,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.2.704989570974" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.2.705817080683" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.704989570974" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.705817080683" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.704989570974" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.704989570974" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.705817080683" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.705817080683" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -231,54 +231,15 @@
 </figure>
 </p>
 </doc-panel>
-<doc-anchor-target id="run-hello-kontain">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#run-hello-kontain">#</doc-anchor-trigger>
-        <span>Run &quot;Hello, Kontain!&quot;</span>
-    </h3>
-</doc-anchor-target>
-<p>Run Kontain Monitor with a simple C program to test that Kontain Monitor and Kontain Software Virtualization are installed properly.</p>
-<p>After that, we will verify the usage with Docker.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># Note: start a ssh session with your EC2 instance
-
-# Run &quot;Hello, Kontain!&quot;
-$ curl  https://guide-assets.s3.us-west-2.amazonaws.com/downloads/hellokontain.zip | tar xvz
-$ /opt/kontain/bin/km hello_test.km
-Hello, world
-Hello, argv[0] = '/opt/kontain/tests/hello_test.km'
-Hello, argv[1] = 'Hello,'
-Hello, argv[2] = 'Kontain!'
-
-# Now, lets verify docker integration.
-
-# view the Dockerfile that bundles this simple program
-$ cat Dockerfile
-FROM scratch
-ADD hello_test.km /
-ENTRYPOINT [&quot;/hello_test.km&quot;]
-CMD [&quot;from&quot;, &quot;docker&quot;]
-
-# build the image
-$ docker build -t try-kontain .
-
-# run with kontain as the runtime
-$ docker run --runtime=krun --rm try-kontain:latest
-Hello, world
-Hello, argv[0] = '/hello_test.km'
-Hello, argv[1] = 'from'
-Hello, argv[2] = 'docker'
-
-# this verifies that Kontain is being used as a runtime in Docker</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="or-install-on-your-amazon-linux-2-based-aws-ec2-vm">
+<doc-anchor-target id="or-install-on-your-own-amazon-linux-2-based-aws-ec2-vm">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#or-install-on-your-amazon-linux-2-based-aws-ec2-vm">#</doc-anchor-trigger>
-        <span>Or, Install on your Amazon Linux 2 based AWS EC2 VM</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#or-install-on-your-own-amazon-linux-2-based-aws-ec2-vm">#</doc-anchor-trigger>
+        <span>Or, Install on your own Amazon Linux 2 based AWS EC2 VM</span>
     </h2>
 </doc-anchor-target>
-<doc-panel id="docker-if-not-present" collapsed>
-    <template #title>Docker if not present</template>
+<p>Please note that this requires an Amazon Linux 2 based VM with Kernel version above 5.10.</p>
+<doc-panel id="tip-installing-docker-in-amazon-linux-2-if-not-present" collapsed>
+    <template #title>Tip: Installing Docker in Amazon Linux 2 if not present</template>
 <p>Instructions summarized from <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html">here</a></p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash"># login to your instance
@@ -306,66 +267,30 @@ $ sudo mv docker-compose-$(uname -s)-$(uname -m) /usr/local/bin/docker-compose
 $ sudo chmod -v +x /usr/local/bin/docker-compose</code></pre>
 </doc-codeblock></div>
 </doc-panel>
-<doc-anchor-target id="installing-kontain">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#installing-kontain">#</doc-anchor-trigger>
-        <span>Installing Kontain</span>
-    </h3>
-</doc-anchor-target>
-<p>First, let&#x27;s update Amazon Linux 2 and automatically reboot if it needed.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none"># first, install reboot checker and couple of utilities
-$ yum install -y yum-utils wget jq &quot;kernel-devel-uname-r == $(uname -r)&quot;
+<pre class="language-bash"><code v-pre class="language-bash"># verify that its an Amazon linux 2 OS with kernel 5.10 or above
+$ uname -a
 
-# update without changing kernel version
-$ yum -y --exclude=kernel* update
+# verify that docker is installed
+$ sudo systemctl status | grep docker
 
-# check if it needs rebooting after the yum update
-$ (needs-restarting -r) || reboot</code></pre>
-</doc-codeblock></div>
-<p>Now, we can install Kontain.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># install kontain
-$ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_bin_install.sh | sudo bash</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="run-hello-kontain-1">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#run-hello-kontain-1">#</doc-anchor-trigger>
-        <span>Run &quot;Hello, Kontain!&quot;</span>
-    </h3>
-</doc-anchor-target>
-<p>Run Kontain Monitor with a simple C program to test that Kontain Monitor and Kontain Software Virtualization are installed properly.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># Note: start a ssh session with your EC2 instance
+# Update your OS
+$ sudo yum update -y
 
-# Run &quot;Hello, Kontain!&quot;
-$ curl  https://guide-assets.s3.us-west-2.amazonaws.com/downloads/hellokontain.tar.gz | tar xv
-$ /opt/kontain/bin/km hello_test.km
-Hello, world
-Hello, argv[0] = '/opt/kontain/tests/hello_test.km'
-Hello, argv[1] = 'Hello,'
-Hello, argv[2] = 'Kontain!'
+# install kontain
+$ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_bin_install.sh | sudo bash
 
-# Now, lets verify docker integration.
+# Verify by running &quot;Hello, Kontain!&quot;
+$ /opt/kontain/bin/km /opt/kontain/tests/hello_test.km Hello, Kontain!
 
-# view the Dockerfile that bundles this simple program
-$ cat Dockerfile
-FROM scratch
-ADD hello_test.km /
-ENTRYPOINT [&quot;/hello_test.km&quot;]
-CMD [&quot;from&quot;, &quot;docker&quot;]
-
-# build the image
-$ docker build -t try-kontain .
-
-# run with kontain as the runtime
-$ docker run --runtime=krun --rm try-kontain:latest
+# Now, lets verify docker integration. Run the following in 1 terminal:
+$ docker run --rm --runtime=krun kontainguide/hello-kontain
 Hello, world
 Hello, argv[0] = '/hello_test.km'
 Hello, argv[1] = 'from'
 Hello, argv[2] = 'docker'
 
-# this verifies that Kontain is being used as a runtime in Docker</code></pre>
+# this verifies that Kontain is being used successfully as a runtime in Docker</code></pre>
 </doc-codeblock></div>
 
 
@@ -391,7 +316,7 @@ Hello, argv[2] = 'docker'
         <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/guide/getting_started/python/">
             <span>
                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                <span class="block mt-1">Python Flask (Docker/K8s)</span>
+                <span class="block mt-1">Python Flask and FastAPI (Docker/Compose/K8s)</span>
             </span>
             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
         </a>

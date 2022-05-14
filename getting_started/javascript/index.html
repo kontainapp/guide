@@ -7,31 +7,31 @@
     <meta name="turbo-cache-control" content="no-cache">
 
     <!-- Primary Meta Tags -->
-    <title>Javascript and Node (ExpressJS)</title>
-    <meta name="title" content="Javascript and Node (ExpressJS)">
-    <meta name="description" content="Following is the layout" />
+    <title>Using Kontain with Javascript and Node (ExpressJS)</title>
+    <meta name="title" content="Using Kontain with Javascript and Node (ExpressJS)">
+    <meta name="description" content="This example shows how to build, push, run a NodeJS based app in a Kontain container in Docker and Kubernetes." />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kontainapp.github.io/guide/getting_started/javascript/">
-    <meta property="og:title" content="Javascript and Node (ExpressJS)">
-    <meta property="og:description" content="Following is the layout">
+    <meta property="og:title" content="Using Kontain with Javascript and Node (ExpressJS)">
+    <meta property="og:description" content="This example shows how to build, push, run a NodeJS based app in a Kontain container in Docker and Kubernetes.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://kontainapp.github.io/guide/getting_started/javascript/">
-    <meta property="twitter:title" content="Javascript and Node (ExpressJS)">
-    <meta property="twitter:description" content="Following is the layout">
+    <meta property="twitter:title" content="Using Kontain with Javascript and Node (ExpressJS)">
+    <meta property="twitter:description" content="This example shows how to build, push, run a NodeJS based app in a Kontain container in Docker and Kubernetes.">
     
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.2.704989570974" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.2.705817080683" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.704989570974" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.705817080683" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.704989570974" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.704989570974" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.705817080683" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.705817080683" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -203,153 +203,88 @@
                 <div id="docs-sidebar-right-toggle"></div>
                
                 <!-- Page content  -->
-<doc-anchor-target id="javascript-and-node-expressjs" class="break-words">
+<doc-anchor-target id="using-kontain-with-javascript-and-node-expressjs" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#javascript-and-node-expressjs">#</doc-anchor-trigger>
-        <span>Javascript and Node (ExpressJS)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-with-javascript-and-node-expressjs">#</doc-anchor-trigger>
+        <span>Using Kontain with Javascript and Node (ExpressJS)</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="files">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#files">#</doc-anchor-trigger>
-        <span>files</span>
-    </h2>
-</doc-anchor-target>
-<p>Following is the layout</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">$ tree
-.
-├── Dockerfile
-├── package.json
-└── server.js</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="javascript-express-server">
+<p>This example shows how to build, push, run a NodeJS based app in a Kontain container in Docker and Kubernetes.</p>
+<p>The <a href="https://github.com/kontainapp/guide-examples/tree/master/examples/js/node-express-hello">implementation of this example is here</a>.</p>
+<doc-anchor-target id="to-build-this-example">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#javascript-express-server">#</doc-anchor-trigger>
-        <span>Javascript Express server</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#to-build-this-example">#</doc-anchor-trigger>
+        <span>to build this example</span>
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-javascript"><code v-pre class="language-javascript">'use strict';
-
-const express = require('express');
-
-// Constants
-const PORT = 8080;
-const HOST = '0.0.0.0';
-
-// App
-const app = express();
-app.get('/', (req, res) =&gt; {
-  res.send('Hello from Kontain!');
-});
-
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">$ docker build -t kontainguide/node-express-hello:1.0 .</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="packagejson">
+<doc-anchor-target id="see-image-sizes">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#packagejson">#</doc-anchor-trigger>
-        <span>package.json</span>
-    </h3>
-</doc-anchor-target>
-<p>And a package.json identifying its dependencies:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-javascript"><code v-pre class="language-javascript">{
-   &quot;name&quot;: &quot;docker_web_app&quot;,
-   &quot;version&quot;: &quot;1.0.0&quot;,
-   &quot;description&quot;: &quot;Node.js on Docker&quot;,
-   &quot;author&quot;: &quot;First Last &lt;first.last@example.com&gt;&quot;,
-   &quot;main&quot;: &quot;server.js&quot;,
-   &quot;scripts&quot;: {
-     &quot;start&quot;: &quot;node server.js&quot;
-   },
-   &quot;dependencies&quot;: {
-     &quot;express&quot;: &quot;^4.16.1&quot;
-   }
- }
-</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="docker">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#docker">#</doc-anchor-trigger>
-        <span>Docker</span>
-    </h2>
-</doc-anchor-target>
-<doc-anchor-target id="dockerfile">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#dockerfile">#</doc-anchor-trigger>
-        <span>Dockerfile</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#see-image-sizes">#</doc-anchor-trigger>
+        <span>see image sizes</span>
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">FROM node:12 as build
-
-# Create app directory
-WORKDIR /opt/src/app
-
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
-
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
-
-# Bundle app source
-COPY . .
-
-FROM kontainapp/runenv-node as release
-COPY --from=build /opt/src /opt/src
-WORKDIR /opt/src/app
-
-EXPOSE 8080
-CMD [ &quot;node&quot;, &quot;server.js&quot; ]</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">$ docker images | grep -E 'spring|jdk'
+...
+kontainguide/node-express-hello    1.0     84.2MB
+kontainapp/runenv-node             latest  81.3MB
+node                               12      918MB  
+...</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="to-build-docker-container">
+<p><strong>Please note that the image size for the Kontain based container is 84.2MB versus the base container being 918MB</strong></p>
+<doc-anchor-target id="to-run-this-example">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#to-build-docker-container">#</doc-anchor-trigger>
-        <span>To build Docker Container</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#to-run-this-example">#</doc-anchor-trigger>
+        <span>to run this example</span>
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">$ docker build -t kg/jsexpress:latest .
-</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="to-run-docker-container">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#to-run-docker-container">#</doc-anchor-trigger>
-        <span>To run Docker Container</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">$ docker run --rm --runtime=krun -p 8080:8080  kg/jsexpress:latest</code></pre>
-</doc-codeblock></div>
-<p>In another window:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">$ curl  http://localhost:8080/
-Hello from Kontain!</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="check-the-container-image-size">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#check-the-container-image-size">#</doc-anchor-trigger>
-        <span>Check the Container Image size</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">$ docker images|grep node
-node                                                            12                       9f5f1136afe0   2 months ago    918MB
+<pre class="language-bash"><code v-pre class="language-bash">$ docker run -d --rm -p 8080:8080 --runtime=krun --name node-express-hello kontainguide/node-express-hello:1.0
 
-$ docker images|grep kg/express
-kg/express                                                      latest                   90d2737e9a79   2 months ago    46.1MB
-</code></pre>
+# invoke the service
+$ curl -v http://localhost:8080
+
+$ docker stop node-express-hello</code></pre>
 </doc-codeblock></div>
-<p>As can be seen:</p>
-<ul>
-<li>Kontain-based image - kg/express is <em>46.1MB</em> in size</li>
-<li>Whereas, the Original node image is <em>918MB</em> in size</li>
-</ul>
+<doc-anchor-target id="to-run-this-example-in-docker-compose">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#to-run-this-example-in-docker-compose">#</doc-anchor-trigger>
+        <span>to run this example in docker-compose</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ docker-compose up -d
+
+# invoke the service
+$ curl -v http://localhost:8080
+
+# shut down compose
+$ docker-compose down</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="to-run-this-example-in-kubernetes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#to-run-this-example-in-kubernetes">#</doc-anchor-trigger>
+        <span>to run this example in kubernetes</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ kubectl apply -f k8s.yml
+
+# check that the pod is ready
+$ kubectl get pods -w
+
+# port-forward the port
+$ kubectl port-forward svc/node-express-hello 8080:8080 2&gt;/dev/null &amp;
+
+# invoke the service
+$ curl -v http://localhost:8080
+
+# kill the port-forward
+$ pkill -f &quot;port-forward&quot;</code></pre>
+</doc-codeblock></div>
 
 
 
@@ -361,11 +296,11 @@ kg/express                                                      latest          
             
 <nav class="flex mt-14">
     <div class="w-1/2">
-        <a class="px-5 py-4 h-full flex items-center break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/guide/getting_started/docker_compose/">
+        <a class="px-5 py-4 h-full flex items-center break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/guide/getting_started/golang/">
             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
             <span>
                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                <span class="block mt-1">Docker Compose (Python Flask)</span>
+                <span class="block mt-1">Using Kontain with Go in Docker, Compose, Kubernetes</span>
             </span>
         </a>
     </div>
@@ -374,7 +309,7 @@ kg/express                                                      latest          
         <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/guide/getting_started/java/">
             <span>
                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                <span class="block mt-1">Java (Spring Boot)</span>
+                <span class="block mt-1">Java (Spring Boot) in Docker/Compose/K8s</span>
             </span>
             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
         </a>
@@ -422,6 +357,6 @@ kg/express                                                      latest          
 
         <div id="docs-overlay-target"></div>
 
-        <script>window.__DOCS__ = { "title": "Javascript and Node (ExpressJS)", icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+        <script>window.__DOCS__ = { "title": "Using Kontain with Javascript and Node (ExpressJS)", icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
     </body>
 </html>
