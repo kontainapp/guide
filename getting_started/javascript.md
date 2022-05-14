@@ -1,118 +1,64 @@
 ---
-label: Javascript and Node (ExpressJS)
+label: Using Kontain with Javascript and Node (ExpressJS)
 icon: /images/Expressjs.svg
 order: 700
 ---
 
-## files
-Following is the layout
+This example shows how to build, push, run a NodeJS based app in a Kontain container in Docker and Kubernetes.
 
-```
-$ tree
-.
-├── Dockerfile
-├── package.json
-└── server.js
+The [implementation of this example is here](https://github.com/kontainapp/guide-examples/tree/master/examples/js/node-express-hello).
+
+### to build this example
+```bash
+$ docker build -t kontainguide/node-express-hello:1.0 .
 ```
 
-### Javascript Express server
-
-```javascript
-'use strict';
-
-const express = require('express');
-
-// Constants
-const PORT = 8080;
-const HOST = '0.0.0.0';
-
-// App
-const app = express();
-app.get('/', (req, res) => {
-  res.send('Hello from Kontain!');
-});
-
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+### see image sizes
+```bash
+$ docker images | grep -E 'spring|jdk'
+...
+kontainguide/node-express-hello    1.0     84.2MB
+kontainapp/runenv-node             latest  81.3MB
+node                               12      918MB  
+...
 ```
 
-### package.json
-And a package.json identifying its dependencies:
+**Please note that the image size for the Kontain based container is 84.2MB versus the base container being 918MB**
 
-```javascript
-{
-   "name": "docker_web_app",
-   "version": "1.0.0",
-   "description": "Node.js on Docker",
-   "author": "First Last <first.last@example.com>",
-   "main": "server.js",
-   "scripts": {
-     "start": "node server.js"
-   },
-   "dependencies": {
-     "express": "^4.16.1"
-   }
- }
+### to run this example
+```bash
+$ docker run -d --rm -p 8080:8080 --runtime=krun --name node-express-hello kontainguide/node-express-hello:1.0
 
+# invoke the service
+$ curl -v http://localhost:8080
+
+$ docker stop node-express-hello
 ```
 
-## Docker
-### Dockerfile
+### to run this example in docker-compose
+```bash
+$ docker-compose up -d
 
-```shell
-FROM node:12 as build
+# invoke the service
+$ curl -v http://localhost:8080
 
-# Create app directory
-WORKDIR /opt/src/app
-
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
-
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
-
-# Bundle app source
-COPY . .
-
-FROM kontainapp/runenv-node as release
-COPY --from=build /opt/src /opt/src
-WORKDIR /opt/src/app
-
-EXPOSE 8080
-CMD [ "node", "server.js" ]
+# shut down compose
+$ docker-compose down
 ```
 
-### To build Docker Container
+### to run this example in kubernetes
+```bash
+$ kubectl apply -f k8s.yml
 
-```
-$ docker build -t kg/jsexpress:latest .
+# check that the pod is ready
+$ kubectl get pods -w
 
-```
+# port-forward the port
+$ kubectl port-forward svc/node-express-hello 8080:8080 2>/dev/null &
 
-### To run Docker Container
-```
-$ docker run --rm --runtime=krun -p 8080:8080  kg/jsexpress:latest
-```
+# invoke the service
+$ curl -v http://localhost:8080
 
-In another window:
+# kill the port-forward
+$ pkill -f "port-forward"
 ```
-$ curl  http://localhost:8080/
-Hello from Kontain!
-```
-
-### Check the Container Image size
-```
-$ docker images|grep node
-node                                                            12                       9f5f1136afe0   2 months ago    918MB
-
-$ docker images|grep kg/express
-kg/express                                                      latest                   90d2737e9a79   2 months ago    46.1MB
-
-```
-
-As can be seen:
-- Kontain-based image - kg/express is *46.1MB* in size
-- Whereas, the Original node image is *918MB* in size

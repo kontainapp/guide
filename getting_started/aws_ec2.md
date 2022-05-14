@@ -3,7 +3,7 @@ label: Using Kontain on AWS EC2
 icon: /images/windows_os_logo_icon.png
 order: 977
 ---
-
+# Using Kontain on AWS EC2
 ## Using a Kontain AMI (Amazon Linux 2 OS)
 You can launch an AWS EC2 instance with Kontain pre-installed using the AMI id: 
 - *ami-029f3a63da2a4503a* (kontain-v0.1test-amzn2-ami-kernel-5.10-hvm-2.0.20220121.0-x86_64-gp2) in us-west-2 region.
@@ -16,47 +16,10 @@ We can also easily add other AMIs based on AMI preference types on feedback.
 [!embed](https://youtu.be/YX8sUiFyb2k)
 ===
 
-### Run "Hello, Kontain!"
-Run Kontain Monitor with a simple C program to test that Kontain Monitor and Kontain Software Virtualization are installed properly.
+## Or, Install on your own Amazon Linux 2 based AWS EC2 VM
+Please note that this requires an Amazon Linux 2 based VM with Kernel version above 5.10.
 
-After that, we will verify the usage with Docker.
-
-```shell
-# Note: start a ssh session with your EC2 instance
-
-# Run "Hello, Kontain!"
-$ curl  https://guide-assets.s3.us-west-2.amazonaws.com/downloads/hellokontain.zip | tar xvz
-$ /opt/kontain/bin/km hello_test.km
-Hello, world
-Hello, argv[0] = '/opt/kontain/tests/hello_test.km'
-Hello, argv[1] = 'Hello,'
-Hello, argv[2] = 'Kontain!'
-
-# Now, lets verify docker integration.
-
-# view the Dockerfile that bundles this simple program
-$ cat Dockerfile
-FROM scratch
-ADD hello_test.km /
-ENTRYPOINT ["/hello_test.km"]
-CMD ["from", "docker"]
-
-# build the image
-$ docker build -t try-kontain .
-
-# run with kontain as the runtime
-$ docker run --runtime=krun --rm try-kontain:latest
-Hello, world
-Hello, argv[0] = '/hello_test.km'
-Hello, argv[1] = 'from'
-Hello, argv[2] = 'docker'
-
-# this verifies that Kontain is being used as a runtime in Docker
-```
-
-## Or, Install on your Amazon Linux 2 based AWS EC2 VM
-
-==-Installing Docker if not present
+==- Tip: Installing Docker in Amazon Linux 2 if not present
 Instructions summarized from [here](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html)
 
 ```bash
@@ -86,59 +49,28 @@ $ sudo chmod -v +x /usr/local/bin/docker-compose
 ```
 ===
 
-### Installing Kontain
-First, let's update Amazon Linux 2 and automatically reboot if it needed.
-
-```
-# first, install reboot checker and couple of utilities
-$ yum install -y yum-utils wget jq "kernel-devel-uname-r == $(uname -r)"
-
-# update without changing kernel version
-$ yum -y --exclude=kernel* update
-
-# check if it needs rebooting after the yum update
-$ (needs-restarting -r) || reboot
-```
-
-Now, we can install Kontain.
-
 ```bash
+# verify that its an Amazon linux 2 OS with kernel 5.10 or above
+$ uname -a
+
+# verify that docker is installed
+$ sudo systemctl status | grep docker
+
+# Update your OS
+$ sudo yum update -y
+
 # install kontain
 $ curl https://raw.githubusercontent.com/kontainapp/guide/main/_scripts/kontain_bin_install.sh | sudo bash
-```
 
-### Run "Hello, Kontain!"
-Run Kontain Monitor with a simple C program to test that Kontain Monitor and Kontain Software Virtualization are installed properly.
+# Verify by running "Hello, Kontain!"
+$ /opt/kontain/bin/km /opt/kontain/tests/hello_test.km Hello, Kontain!
 
-```shell
-# Note: start a ssh session with your EC2 instance
-
-# Run "Hello, Kontain!"
-$ curl  https://guide-assets.s3.us-west-2.amazonaws.com/downloads/hellokontain.tar.gz | tar xv
-$ /opt/kontain/bin/km hello_test.km
-Hello, world
-Hello, argv[0] = '/opt/kontain/tests/hello_test.km'
-Hello, argv[1] = 'Hello,'
-Hello, argv[2] = 'Kontain!'
-
-# Now, lets verify docker integration.
-
-# view the Dockerfile that bundles this simple program
-$ cat Dockerfile
-FROM scratch
-ADD hello_test.km /
-ENTRYPOINT ["/hello_test.km"]
-CMD ["from", "docker"]
-
-# build the image
-$ docker build -t try-kontain .
-
-# run with kontain as the runtime
-$ docker run --runtime=krun --rm try-kontain:latest
+# Now, lets verify docker integration. Run the following in 1 terminal:
+$ docker run --rm --runtime=krun kontainguide/hello-kontain
 Hello, world
 Hello, argv[0] = '/hello_test.km'
 Hello, argv[1] = 'from'
 Hello, argv[2] = 'docker'
 
-# this verifies that Kontain is being used as a runtime in Docker
+# this verifies that Kontain is being used successfully as a runtime in Docker
 ```

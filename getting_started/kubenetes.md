@@ -4,77 +4,44 @@ icon: /images/k8s.png
 order: 995
 ---
 
-# Install in Kubernetes
+# Installing in Kubernetes
 ## Pre-requisites
 Kontain runs on *Linux kernel version 4.15 or newer*, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled, ideally Ubuntu or Fedora.  For enabling KVM on Ubuntu 18.04 or higher, you can refer to this [article](https://linuxize.com/post/how-to-install-kvm-on-ubuntu-18-04/).
 
 For Kubernetes platforms that do not offer nested virtualization like GKE and AWS, we use a software virtualization module that gets installed as part of the Kontain install.  For other platforms that do offer nested virtualization, we recommend using the regular Kontain install.
 
-Recommended distros are Ubuntu 20.04 and Fedora 32, or newer.  Note that this also assumes that your user has access to /dev/kvm.
+Recommended distros for Kubernetes are Ubuntu 20.04 and Amazon Linux 2, or newer.
 
 To package Kontain images, it is also necessary to have a recent version of Docker or Moby-engine is installed.
 
-## in Minikube or kind
-#### Optional: Appendix contains instructions for launching various versions of Kubernetes
+==- Tip: starting a Kubernetes cluster with Minikube or kind
+contains instructions for launching various versions of Kubernetes
 For trying out Kontain with Kubernetes, you can launch Minikube with Docker Desktop [view instructions here](/appendix/minikube/).
-```shell
-$ minikube start --container-runtime=containerd --driver=docker --wait=all
-``` 
-
-or kind:
 
 ```shell
 $ kind create cluster
 ```
 
-### Install Kontain using Daemonset 
+or Minikube:
+
+```shell
+$ minikube start --container-runtime=containerd --driver=docker --wait=all
+```
+===
+
+## Install Kontain using Daemonset 
 Deploy Kontain Runtime using the Kubernetes client CLI
 
 ```shell
 # we install Kontain using a Daemonset
-$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide/main/_k8s/kustomize_outputs/km.yaml
+$ $ kubectl apply -f curl https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/km.yaml
 ```
 
-The above yaml contains the Kontain runtime class and the install libraries for the Daemonset to work.
-
-==- Tip: to check for pre-requisites on Kubernetes Worker Nodes (skip if using Minikube)
-As a convenience, we have provided instructions for checking for pre-requisites on various versions of Kubernetes prior to installing Kontain.
-
-You will need to verify pre-requisites on Kubernetes Worker Nodes if you are using physical or VM based worker nodes.  This applies for both Managed Kubernetes as well as Regular Kubernetes nodes.
-
-```shell
-# get the list of nodes
-$ kubectl get nodes -o wide
-
-# to ssh into the Kubernetes nodes where you want to test or install Kontain
-# This command starts a privileged container on your node and connects to it over SSH
-$ kubectl debug node/<nodeid> --image=busybox
-or
-$ kubectl debug -it node<nodeid> image=mcr.microsoft.com/aks/fundamental/base-ubuntu:v0.0.11
-
-# either you are shell'ed into the debug pod automatically or you can exec shell into it
-$ kubectl exec -it <debug-pod-id> sh
-
-# NOTE: dont forget to dispose of the pod once done
-
-# verify that you have a 64-bit Linux kernel version 4.15 or higher
-$ uname -m
-x86_64
-
-$ uname -r
-5.14.14-200.fc34.x86_64
-
-# verify that you have nested virtualization turned on
-$ cat /proc/cpuinfo| egrep "vmx|svm" | wc -l
-# output must be greater than 0
-
-# verify that you have KVM already installed /dev/kvm enabled by checking:
-$ ls -l /dev/kvm
-```
-===
+The above yaml contains the Kontain runtime class and the install scripts for the Daemonset to be installed.
 
 ## Verify Install
 ### Run a Kontain test app to verify that the runtime class is working as designed
+
 ```shell
 $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/latest/demo/k8s/test.yaml
 
@@ -92,7 +59,7 @@ $ kubectl exec -it kontain-test-<appropriate-pod-id>  -- uname -r
 ```
 
 If you wish to view the Kontain Daemonset:
-```
+```shell
 # verify that the kontain-node-initializer ran successfully and is in "Running" state and not "Error" state
 $ kubectl get po -n kube-system
 kube-system   azure-ip-masq-agent-tr7c7             1/1     Running   0          37m
@@ -119,7 +86,7 @@ kube-system   kube-proxy       1         1         1       1            1       
 To install Kontain on AWS or GKE use:
 
 ```shell
-$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide/main/_k8s/kustomize_outputs/km.yaml
+$ kubectl apply -f curl https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/km.yaml
 ```
 
 The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.
@@ -128,7 +95,7 @@ The above installs the Kontain runtime class and contains the libraries for inst
 To install Kontain on AWS (with containerd) or GKE use:
 
 ```shell
-$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide/main/_k8s/kustomize_outputs/kkm.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/kkm.yaml
 ```
 
 The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.
@@ -141,7 +108,7 @@ As Docker shim is being deprecated in AWS EKS, please note that to use Kontain o
 To install Kontain on K3s:
 
 ```shell
-$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide/main/_k8s/kustomize_outputs/k3s.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/kkm.yaml
 ```
 
 The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.
@@ -150,7 +117,10 @@ The above installs the Kontain runtime class and contains the libraries for inst
 To install Kontain on Openshift with CRIO:
 
 ```shell
-$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide/main/_k8s/kustomize_outputs/km-crio.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/km-crio.yaml
 ```
 
 The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.
+
+# Using Kontain to deploy Java, Python, Golang and JS examples in Kubernetes
+Please see the [examples](https://github.com/kontainapp/guide-examples/tree/master/examples) from here for examples on deploying, running and testing Java, Python, Golang and JS examples in Kubernetes.
