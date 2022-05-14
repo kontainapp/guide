@@ -1,5 +1,5 @@
 ---
-label: Using Kontain with Go in Docker, Compose, Kubernetes
+label: Go (Docker, Compose, Kubernetes)
 icon: /images/golang_icon.png
 order: 700
 ---

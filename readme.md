@@ -1,5 +1,5 @@
 ---
-label: Introduction to Kontain
+label: Introduction to "Kontainers"
 icon: home
 order: 2000
 ---

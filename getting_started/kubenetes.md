@@ -1,5 +1,5 @@
 ---
-label: In Kubernetes (local, cloud)
+label: Install in Kubernetes (Minikube/Kind, AWS, AKS, GKE)
 icon: /images/k8s.png
 order: 995
 ---

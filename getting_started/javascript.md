@@ -1,5 +1,5 @@
 ---
-label: Using Kontain with Javascript and Node (ExpressJS)
+label: Javascript and Node (ExpressJS)
 icon: /images/Expressjs.svg
 order: 700
 ---
