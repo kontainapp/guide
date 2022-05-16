@@ -1,7 +1,7 @@
 ---
 label: SSH into K8s nodes
 icon: /images/minikube.png
-order: 800
+order: 790
 ---
 ## SSH into K8s nodes
 To ssh into K8s worker nodes for checking pre-requisites or debugging purposes, you can use the following command:

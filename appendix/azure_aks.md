@@ -1,5 +1,5 @@
 ---
-label: Azure AKS
+label: Starting Azure AKS Cluster
 icon: /images/aks.png
 order: 700
 ---
