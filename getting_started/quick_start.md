@@ -4,7 +4,7 @@ icon: /images/logo2.png
 order: 1000
 ---
 
-[!ref Examples](https://github.com/kontainapp/guide-examples/)
+[!ref text="Examples" target=_blank](https://github.com/kontainapp/guide-examples/)
 ## Pre-requisites
 Kontain runs on Linux kernel version 4.15 or newer, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled, ideally:
 
