@@ -5,20 +5,23 @@ order: 2000
 ---
 
 <!-- ![](/images/microservices_anim_medium.gif) -->
-
-[The guide to Kontain](https://kontainapp.github.io/guide/)
-
 ![](/images/5g_edge.png)--
 
 ## Introduction
+Kontain is a new secure runtime for Docker and Kubernetes that:
+- runs Containers in Docker and Kubernetes with VM-level hardware isolation
+- works as a secure runtime alongside default runtime in Docker and Kubernetes
+- uses normal Docker and Kubernetes tooling and CI/CD systems/processes
+- provides instant start capabilities for your functions and microservices thus providing better experience and ability to reduce your Opex
+
+## Why?
 We are rapidly progressing towards a world of decentralized computing where applications are broken down into hundreds of connected microservices and significant computing power is being pushed to the edges of the network.
 
 The key characteristics for enabling this new era are: Instantaneous Scale-out capabilities, low resource/cost usage, with high density and most importantly security of these computing services.
 
 The current Unit of computing workloads is a "Container" that is bloated, inefficient, insecure and vulnerable, running on a shared kernel with a huge attack surface that needs to be secured using various highly complex mechanisms in a multi-tenant cloud environment, thus contributing to DevSecOps risks and complexities.
 
-We need a new unit of computing for this new era, a new type of "Container".
-
+We need a new unit for Computing Workloads for this new era, a new type of "Container".
 
 ## A new unit of computing workloads for the new Era - Introducing "Kontainer"
 Introducing "Kontainer", a Docker-comptabile "Container" that retains all the advantages and tooling of Docker/Containers while having none of the issues above.  

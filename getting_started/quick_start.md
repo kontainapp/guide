@@ -4,6 +4,7 @@ icon: /images/logo2.png
 order: 1000
 ---
 
+[!ref Examples](https://github.com/kontainapp/guide-examples/)
 ## Pre-requisites
 Kontain runs on Linux kernel version 4.15 or newer, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled, ideally:
 
@@ -14,7 +15,7 @@ Recommended distros are Ubuntu 20.04 and Fedora 32, or newer. Note that this als
 
 Please note that although Kontain also runs on platforms that do not offer access to Nested Virtualization by using a Software Virtualization Module.
 
-### checking for pre-requisites
++++ checking for pre-requisites
 ```shell
 # verify that you have a 64-bit Linux kernel version 4.15 or higher
 $ uname -m
@@ -39,7 +40,7 @@ $ systemctl|grep docker.service
 If Docker is not present, you can install Docker On Fedora/RHEL systems using [instructions from here](https://developer.fedoraproject.org/tools/docker/docker-installation.html) or for Ubuntu using these [instructions](https://docs.docker.com/engine/install/ubuntu/).
 ===
 
-## Update your OS
++++ Update your OS
 To ensure a smooth install, we recommend updating your OS:
 ```shell
 # For Fedora:
@@ -51,6 +52,8 @@ $ sudo apt update -y
 # For Amazon Linux 2:
 $ sudo yum update -y
 ```
+
++++
 
 ## Install Kontain
 ```shell
@@ -83,7 +86,7 @@ $ docker run --runtime=krun kontainguide/hello-kontain
 ```
 
 ## Using Kontain with different Languages
-### Using Kontain with Docker and Java
++++ Java
 ```shell
 $ docker run -d --rm -p 8080:8080 --runtime=krun --name spring-boot-hello kontainguide/spring-boot-hello:1.0
 
@@ -93,10 +96,12 @@ $ curl -v http://localhost:8080
 $ docker stop spring-boot-hello
 ```
 
-For impelementation details, you can see:
-https://github.com/kontainapp/guide-examples/tree/master/examples/java
+For more details see [Using Kontain with Java](/getting_started/java)
 
-### Using Kontain with Docker and Python
+For impelementation details, you can see:
+[!ref target="blank" text="Java Examples"](https://github.com/kontainapp/guide-examples/tree/master/examples/java)
+
++++ Python
 ```shell
 $ docker run -d --rm -p 5000:5000 --runtime=krun --name py-flask-hello kontainguide/py-flask-hello:1.0
 
@@ -105,11 +110,12 @@ $ curl -v http://localhost:5000
 $ docker stop py-flask-hello
 ```
 
+For more details see [Using Kontain with Python](/getting_started/python)
+
 For impelementation details, you can see:
-https://github.com/kontainapp/guide-examples/tree/master/examples/python
+[!ref target="blank" text="Python Examples"](https://github.com/kontainapp/guide-examples/tree/master/examples/python)
 
-
-### Using Kontain with Docker and golang
++++ Go
 ```shell
 $ $ docker run -d --rm -e "PORT=8080" -e "TARGET=Kontain" -p 8080:8080 --runtime=krun --name golang-http-hello kontainguide/golang-http-hello:1.0
 
@@ -120,10 +126,12 @@ $ curl -v http://localhost:8080
 $ docker stop golang-http-hello
 ```
 
-For impelementation details, you can see:
-https://github.com/kontainapp/guide-examples/tree/master/examples/go/golang-http-hello
+For more details see [Using Kontain with Go](/getting_started/golang)
 
-### Using Kontain with Docker and Javascript/NodeJS
+For impelementation details, you can see:
+[!ref target="blank" text="Golang example"](https://github.com/kontainapp/guide-examples/tree/master/examples/go/golang-http-hello)
+
++++ Javascript/NodeJS
 ```shell
 $ docker run -d --rm -p 8080:8080 --runtime=krun --name node-express-hello kontainguide/node-express-hello:1.0
 
@@ -133,11 +141,13 @@ $ curl -v http://localhost:8080
 $ docker stop node-express-hello
 ```
 
+For more details see [Using Kontain with Javascript/NodeJS](/getting_started/javascript)
+
 For impelementation details, you can see:
-https://github.com/kontainapp/guide-examples/tree/master/examples/js/node-express-hello
+[!ref target="blank" text="JS/NodeJS example"](https://github.com/kontainapp/guide-examples/tree/master/examples/js/node-express-hello)
++++
 
-
-## Using the examples for more details
+## Using examples for more details
 You can see the [Kontain guide examples](https://github.com/kontainapp/guide-examples) for more details on how to use Kontain in Kubernetes and docker-compose.
 
 ```shell

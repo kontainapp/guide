@@ -10,11 +10,14 @@ branding:
   logo: /images/logo2.png
 
 links:
-- text: Kontain
+- text: Kontain website
   link: https://kontain.app
   icon: home
-- text: GitHub
+- text: Kontain Repo
   link: https://github.com/kontainapp/km
+  icon: mark-github
+- text: Examples
+  link: https://github.com/kontainapp/guide-examples
   icon: mark-github
 
 footer:

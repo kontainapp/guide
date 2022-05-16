@@ -10,7 +10,7 @@ Kontain runs on *Linux kernel version 4.15 or newer*, running on Intel VT (vmx) 
 
 For Kubernetes platforms that do not offer nested virtualization like GKE and AWS, we use a software virtualization module that gets installed as part of the Kontain install.  For other platforms that do offer nested virtualization, we recommend using the regular Kontain install.
 
-Recommended distros for Kubernetes are Ubuntu 20.04 and Amazon Linux 2, or newer.
+Recommended distros for Kubernetes Worker Nodes are Ubuntu 20.04 and Amazon Linux 2, or newer.
 
 To package Kontain images, it is also necessary to have a recent version of Docker or Moby-engine is installed.
 
@@ -34,13 +34,13 @@ Deploy Kontain Runtime using the Kubernetes client CLI
 
 ```shell
 # we install Kontain using a Daemonset
-$ $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/km.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/km.yaml
 ```
 
 The above yaml contains the Kontain runtime class and the install scripts for the Daemonset to be installed.
 
 ## Verify Install
-### Run a Kontain test app to verify that the runtime class is working as designed
+Let's run a Kontain test app to verify that the runtime class is working as designed
 
 ```shell
 $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/latest/demo/k8s/test.yaml
@@ -82,16 +82,18 @@ kube-system   kindnet          1         1         1       1            1       
 kube-system   kube-proxy       1         1         1       1            1           kubernetes.io/os=linux   168m
 ```
 
-## Azure AKS
-To install Kontain on AWS or GKE use:
+## Installing in other Kubernetes
++++ Azure AKS
+Deploy Kontain Runtime using the Kubernetes client CLI
 
 ```shell
+# we install Kontain using a Daemonset
 $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/km.yaml
 ```
 
-The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.
+The above yaml contains the Kontain runtime class and the install scripts for the Daemonset to be installed.
 
-## AWS EKS (with Containerd) and Google Cloud GKE
++++ AWS EKS (with Containerd) and Google Cloud GKE
 To install Kontain on AWS (with containerd) or GKE use:
 
 ```shell
@@ -104,7 +106,7 @@ As Docker shim is being deprecated in AWS EKS, please note that to use Kontain o
 
  To enable containerd as default rutime, please see: [Enabling Containerd in EKS](https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html#containerd-bootstrap)
 
-## K3s
++++ K3s
 To install Kontain on K3s:
 
 ```shell
@@ -113,7 +115,7 @@ $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/m
 
 The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.
 
-## Openshift with CRIO
++++ Openshift with CRIO
 To install Kontain on Openshift with CRIO:
 
 ```shell
@@ -122,5 +124,7 @@ $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/m
 
 The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.
 
-# Using Kontain to deploy Java, Python, Golang and JS examples in Kubernetes
-Please see the [examples](https://github.com/kontainapp/guide-examples/tree/master/examples) from here for examples on deploying, running and testing Java, Python, Golang and JS examples in Kubernetes.
++++
+
+## Using Kontain to deploy Java, Python, Golang and JS examples in Kubernetes
+[!ref text="examples" target=_blank](https://github.com/kontainapp/guide-examples/tree/master/examples)
