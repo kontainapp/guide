@@ -34,7 +34,7 @@ Deploy Kontain Runtime using the Kubernetes client CLI
 
 ```shell
 # we install Kontain using a Daemonset
-$ $ kubectl apply -f curl https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/km.yaml
+$ $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/km.yaml
 ```
 
 The above yaml contains the Kontain runtime class and the install scripts for the Daemonset to be installed.
@@ -86,7 +86,7 @@ kube-system   kube-proxy       1         1         1       1            1       
 To install Kontain on AWS or GKE use:
 
 ```shell
-$ kubectl apply -f curl https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/km.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/km.yaml
 ```
 
 The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.
