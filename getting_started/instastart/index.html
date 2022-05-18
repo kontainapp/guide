@@ -9,28 +9,28 @@
     <!-- Primary Meta Tags -->
     <title>Instantly starting your Spring Boot Application</title>
     <meta name="title" content="Instantly starting your Spring Boot Application">
-    <meta name="description" content="How many times have you wished that your Spring Boot Java microservice would start instantaneously without any delay whatsoever? How many times did..." />
+    <meta name="description" content="implementation of this example is here" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kontainapp.github.io/guide/getting_started/instastart/">
     <meta property="og:title" content="Instantly starting your Spring Boot Application">
-    <meta property="og:description" content="How many times have you wished that your Spring Boot Java microservice would start instantaneously without any delay whatsoever? How many times did...">
+    <meta property="og:description" content="implementation of this example is here">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://kontainapp.github.io/guide/getting_started/instastart/">
     <meta property="twitter:title" content="Instantly starting your Spring Boot Application">
-    <meta property="twitter:description" content="How many times have you wished that your Spring Boot Java microservice would start instantaneously without any delay whatsoever? How many times did...">
+    <meta property="twitter:description" content="implementation of this example is here">
     
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.2.706046772701" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.2.706228016342" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.706046772701" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.706228016342" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.706046772701" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.706228016342" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -221,17 +221,39 @@
         <span>Instantly starting your Spring Boot Application</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="instantly-starting-spring-boot-microservice">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#instantly-starting-spring-boot-microservice">#</doc-anchor-trigger>
-        <span>Instantly starting Spring Boot microservice</span>
-    </h2>
-</doc-anchor-target>
+<p>
+<div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
+    <div class="flex items-center text-blue-500 dark:text-blue-400">
+        <span class="inline-block mb-px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
+        </span>
+        <span class="inline-block font-medium ml-2">implementation of this example is here</span>
+    </div>
+    <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
+        <span>https://github.com/kontainapp/guide-examples/tree/master/examples/java/insta-start-spring-boot</span>
+    </div>
+    <a href="https://github.com/kontainapp/guide-examples/tree/master/examples/java/insta-start-spring-boot" target="_blank" class="absolute block inset-0"></a>
+</div>
+</p>
 <p>How many times have you wished that your Spring Boot Java microservice would start instantaneously without any delay whatsoever? How many times did you wish you could scale down your Java Containers with faith that you would be able to relaunch them in an instant during a spike in request load.
 If only a big heavy JVM could start as quick as those other language runtimes?
-How many times did you wish you had tiny Java microservices that could be launched instantly on an event, respond to the event and shut down.
-Did you wish you could shut down your service and launch it only when necessary without any &quot;warm&quot; up time?</p>
+How many times did you wish you had tiny Java microservices that could be launched instantly on an event, respond to the event and shut down.</p>
+<p>Did you wish you could shut down your service and launch it only when necessary without any &quot;warm&quot; up time?</p>
 <p>Well, read on to see how we can do this with Kontain Containers.</p>
+<p>The 
+<div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
+    <div class="flex items-center text-blue-500 dark:text-blue-400">
+        <span class="inline-block mb-px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
+        </span>
+        <span class="inline-block font-medium ml-2">implementation of this example is here</span>
+    </div>
+    <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
+        <span>https://github.com/kontainapp/guide-examples/tree/master/examples/java/insta-start-spring-boot</span>
+    </div>
+    <a href="https://github.com/kontainapp/guide-examples/tree/master/examples/java/insta-start-spring-boot" target="_blank" class="absolute block inset-0"></a>
+</div>
+ along with instructions to build and run the example in Docker.</p>
 <doc-anchor-target id="video-demo">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#video-demo">#</doc-anchor-trigger>
@@ -283,7 +305,7 @@ Did you wish you could shut down your service and launch it only when necessary 
         <span>Reviewing the Spring Boot Application</span>
     </h3>
 </doc-anchor-target>
-<p>We will use a very simple Spring Boot application as our example as shown below:</p>
+<p>We will use a simple Spring Boot application as our example as shown below:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">$ tree
 ├── Dockerfile
@@ -302,44 +324,6 @@ Did you wish you could shut down your service and launch it only when necessary 
             └── com
                 └── example
                     └── HelloControllerTest.java</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="application-files">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#application-files">#</doc-anchor-trigger>
-        <span>Application files</span>
-    </h3>
-</doc-anchor-target>
-<p>The Spring Boot Application:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">// HelloWorldApp.java
-package com.example;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-@SpringBootApplication
-public class HelloWorldApp {
-public static void main(String[] args) {
-        SpringApplication.run(HelloWorldApp.class, args);
-    }
-}</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="the-spring-boot-controller">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#the-spring-boot-controller">#</doc-anchor-trigger>
-        <span>The Spring Boot Controller:</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">// HelloController.java
-package com.example;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-@RestController
-public class HelloController {
-@RequestMapping(&quot;/&quot;)
-    String hello() {
-        return &quot;Hello from Kontain!&quot;;
-    }
-}</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="dockerfile">
     <h3>
@@ -360,7 +344,8 @@ COPY --from=build /tmp /tmp
 WORKDIR /opt/src/app
 EXPOSE 8080
 ENV KM_MGTPIPE=/tmp/km.sock
-CMD [ &quot;KM_MGTPIPE=/tmp/km.sock&quot;, &quot;/opt/kontain/java/bin/java&quot;, &quot;-XX:-UseCompressedOops&quot;, &quot;-jar&quot;, &quot;/opt/src/app/app.jar&quot; ]</code></pre>
+
+CMD [ &quot;java&quot;, &quot;-XX:-UseCompressedOops&quot;, &quot;-jar&quot;, &quot;/opt/src/app/app.jar&quot; ]</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="build-and-run">
     <h3>
@@ -371,11 +356,11 @@ CMD [ &quot;KM_MGTPIPE=/tmp/km.sock&quot;, &quot;/opt/kontain/java/bin/java&quot
 <p>To build the code and the container, we can do:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">$ mvn clean package test
-$ docker build -t kg/springboothello:latest .</code></pre>
+$ docker build -t kontainguide/insta-start-spring-boot:1.0 .</code></pre>
 </doc-codeblock></div>
 <p>To run using Docker:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">$ docker run --rm --runtime=krun -p 8080:8080  kg/springboothello:latest
+<pre class="language-none"><code v-pre class="language-none">$ docker run --rm --runtime=krun -p 8080:8080  kontainguide/insta-start-spring-boot:1.0
 ...
 </code></pre>
 </doc-codeblock></div>
@@ -398,14 +383,10 @@ Hello from Kontain!</code></pre>
     </h3>
 </doc-anchor-target>
 <p>Now let&#x27;s restart the application container with a few other parameters so that we can create an alternate &quot;instantly&quot; starting container for the same Spring Boot Application.</p>
+<p>In 1 terminal do:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">$ docker run --runtime=krun --name=KM_springboothello -p 8080:8080 -v /opt/kontain/bin/km_cli:/opt/kontain/bin/km_cli -v $(pwd):/mnt:rw kg/springboothello:latest
+<pre class="language-none"><code v-pre class="language-none">$ docker run --runtime=krun --name=KM_instaspringboothello -p 8080:8080 -v /opt/kontain/bin/km_cli:/opt/kontain/bin/km_cli -v $(pwd):/mnt:rw kontainguide/insta-start-spring-boot
 ....</code></pre>
-</doc-codeblock></div>
-<p>Serve a request to verify:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">$ curl http://localhost:8080
-Hello from Kontain!</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="creating-an-instastart-container">
     <h3>
@@ -413,18 +394,17 @@ Hello from Kontain!</code></pre>
         <span>Creating an &quot;Instastart&quot; Container</span>
     </h3>
 </doc-anchor-target>
-<p>Now let&#x27;s take an Application Container Snapshot and copy it so as to create an &quot;Instastart&quot; container.</p>
+<p>In another terminal do:
+Now let&#x27;s take an Application Container Snapshot and copy it so as to create an &quot;Instastart&quot; container.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">$ docker exec KM_springboothello /opt/kontain/bin/km_cli -s /tmp/km.sock
-$ docker cp KM_springboothello:/opt/src/app/kmsnap .
-$ chmod +x kmsnap</code></pre>
+<pre class="language-none"><code v-pre class="language-none">$ docker exec KM_instaspringboothello /opt/kontain/bin/km_cli -s /tmp/km.sock
+$ docker cp KM_instaspringboothello:/opt/src/app/kmsnap .
+$ chmod +x kmsnap
+$ docker build -t kontainguide/insta-start-spring-boot-snap:1.0 -f Dockerfile.snap .
+$ docker tag kontainguide/insta-start-spring-boot-snap:1.0 kontainguide/insta-start-spring-boot-snap:latest</code></pre>
 </doc-codeblock></div>
 <p>This will generate a kmsnap file with a re-usable Application Snapshot. Note that KM will report it as saving a core dump, since core dumps and snapshots have the same format and are generated using the same mechanism.</p>
-<p>Now, let&#x27;s package up the Snapshot as an &quot;Instastart&quot; Container. This bundles the Application Snapshot into a new Docker container that can be used to &quot;instantly&quot; run the Spring Boot application.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none"># build
-$ docker build -t kg/springboothellosnap -f Dockerfile.snap .</code></pre>
-</doc-codeblock></div>
+<p>Then it packages up the Snapshot as an &quot;Instastart&quot; Container. This bundles the Application Snapshot into a new Docker container that can be used to &quot;instantly&quot; run the Spring Boot application.</p>
 <doc-anchor-target id="running-the-instastart-container">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#running-the-instastart-container">#</doc-anchor-trigger>
@@ -436,8 +416,7 @@ $ docker build -t kg/springboothellosnap -f Dockerfile.snap .</code></pre>
 <pre class="language-none"><code v-pre class="language-none"># Run in terminal 1
 $ docker run --runtime=krun --rm -it --name=KM_springboothello_snap -p 8080:8080 kg/springboothellosnap
 
-# Run in terminal 2, you will &quot;instantly&quot; get a response
-
+# Immediately, Run in terminal 2, and you will &quot;instantly&quot; get a response
 $ curl http://localhost:8080
 Hello from Kontain!</code></pre>
 </doc-codeblock></div>
@@ -449,31 +428,6 @@ Hello from Kontain!</code></pre>
     </h2>
 </doc-anchor-target>
 <p>&quot;Instastart&quot; provides a rather amazing opportunity for Java Spring Boot Containers to be scaled down to 0 during times when there are no events or when there no customers waiting for a request, and provides a way to respond &quot;Instantly&quot; and scale up when the request load suddenly spikes.</p>
-<doc-anchor-target id="measuring-start-time-approximately">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#measuring-start-time-approximately">#</doc-anchor-trigger>
-        <span>Measuring start time approximately</span>
-    </h2>
-</doc-anchor-target>
-<p>This measurement is skewed by the method below because of I/O and Docker Container startup overhead but provides a way to measure relative start time.</p>
-<p>For Instastart container:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none"># in terminal 1, run:
-$ ./get_time.sh</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none"># and in terminal 2, do:
-$ touch start_time &amp;docker run --rm --runtime=krun  -p 8080:8080  kg/springboothellosnap</code></pre>
-</doc-codeblock></div>
-<p>For normal container:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none"># in terminal 1, run:
-$ ./get_time.sh</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none"># and in terminal 2, do:
-$ touch start_time &amp;docker run --rm --runtime=krun  -p 8080:8080  kg/springboothello</code></pre>
-</doc-codeblock></div>
 
 
 
