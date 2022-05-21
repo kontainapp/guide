@@ -7,21 +7,21 @@
     <meta name="turbo-cache-control" content="no-cache">
 
     <!-- Primary Meta Tags -->
-    <title>Minikube CRI-O</title>
-    <meta name="title" content="Minikube CRI-O">
-    <meta name="description" content="Minikube is a great little Kubernetes distribution that can be used to verify Kontain working with Vanilla Kubernetes distributions." />
+    <title>knative (serverless)</title>
+    <meta name="title" content="knative (serverless)">
+    <meta name="description" content="knative examples" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kontainapp.github.io/guide/appendix/minikube_crio/">
-    <meta property="og:title" content="Minikube CRI-O">
-    <meta property="og:description" content="Minikube is a great little Kubernetes distribution that can be used to verify Kontain working with Vanilla Kubernetes distributions.">
+    <meta property="og:url" content="https://kontainapp.github.io/guide/getting_started/knative/">
+    <meta property="og:title" content="knative (serverless)">
+    <meta property="og:description" content="knative examples">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://kontainapp.github.io/guide/appendix/minikube_crio/">
-    <meta property="twitter:title" content="Minikube CRI-O">
-    <meta property="twitter:description" content="Minikube is a great little Kubernetes distribution that can be used to verify Kontain working with Vanilla Kubernetes distributions.">
+    <meta property="twitter:url" content="https://kontainapp.github.io/guide/getting_started/knative/">
+    <meta property="twitter:title" content="knative (serverless)">
+    <meta property="twitter:description" content="knative examples">
     
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
@@ -216,64 +216,150 @@
                 <div id="docs-sidebar-right-toggle"></div>
                
                 <!-- Page content  -->
-<doc-anchor-target id="minikube-cri-o" class="break-words">
+<doc-anchor-target id="knative-serverless" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#minikube-cri-o">#</doc-anchor-trigger>
-        <span>Minikube CRI-O</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#knative-serverless">#</doc-anchor-trigger>
+        <span>knative (serverless)</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="using-kontain-in-minikube-with-cri-o">
+<p>
+<div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
+    <div class="flex items-center text-blue-500 dark:text-blue-400">
+        <span class="inline-block mb-px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
+        </span>
+        <span class="inline-block font-medium ml-2">knative examples</span>
+    </div>
+    <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
+        <span>https://github.com/kontainapp/guide-examples/tree/master/examples/knative/basics</span>
+    </div>
+    <a href="https://github.com/kontainapp/guide-examples/tree/master/examples/knative/basics" target="_blank" class="absolute block inset-0"></a>
+</div>
+</p>
+<p>This section shows how we can use Kontain in a serverless or funtions as a service environment to secure Functions using hardware virtualization based workload isolation.</p>
+<p>We can use the same guide-examples gihub repo to see the files associated with this example as linked to above.</p>
+<doc-anchor-target id="description">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-in-minikube-with-cri-o">#</doc-anchor-trigger>
-        <span>Using Kontain in Minikube with CRI-O</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#description">#</doc-anchor-trigger>
+        <span>Description</span>
     </h2>
 </doc-anchor-target>
-<p>Minikube is a great little Kubernetes distribution that can be used to verify Kontain working with Vanilla Kubernetes distributions.  Usually, Minikube comes with VirtualBox in order to create the relevant Kubernetes Master and Worker nodes.  But, Minikube can also launch in Docker in Docker (DIND) mode, where it launches quickly in Docker, where the Master and Worker nodes are plain Docker containers.</p>
-<doc-anchor-target id="minikube-cluster-with-cri-o">
+<p>This describes how to use Kontain with KNative.  It shows you how to:</p>
+<ul>
+<li>install KNative in a kind cluster</li>
+<li>and install Kontain</li>
+<li>deploy and run a KNative service that uses a secure Kontain Container to run the function</li>
+</ul>
+<doc-anchor-target id="starting-a-knative-kind-cluster-with-kontain">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#starting-a-knative-kind-cluster-with-kontain">#</doc-anchor-trigger>
+        <span>Starting a knative kind cluster with Kontain</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="installing-knative-kind-quickstart-plugins-on-your-local-desktop">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#minikube-cluster-with-cri-o">#</doc-anchor-trigger>
-        <span>Minikube cluster with CRI-O</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#installing-knative-kind-quickstart-plugins-on-your-local-desktop">#</doc-anchor-trigger>
+        <span>Installing knative kind quickstart plugins on your local desktop</span>
     </h3>
 </doc-anchor-target>
-<p>For this, Kontain needs a minimum version of Minikube, which can be installed from <a href="https://minikube.sigs.k8s.io/docs/start/">here</a></p>
-<p>To start Minikube use:</p>
+<p>Note that this has to be done <strong>only once</strong>.<br />
+Also, please note that this has to be done on an OS that satisfies the pre-requisites for Kontain as shown earlier.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ minikube start --container-runtime=cri-o --driver=podman --wait=all
-
-# to see status of cluster (s) - cluster name is 'default'
-$ minikube profile list
-|----------|-----------|------------|--------------|------|---------|---------|-------|
-| Profile  | VM Driver |  Runtime   |      IP      | Port | Version | Status  | Nodes |
-|----------|-----------|------------|--------------|------|---------|---------|-------|
-| default  | docker    | containerd | 192.168.58.2 | 8443 | v1.22.2 | Running |     1 |
-|----------|-----------|------------|--------------|------|---------|---------|-------|
-
-# check if the kube-system pods have launched properly
-$ kubectl get pods -n kube-system
-NAMESPACE     NAME                                READY   STATUS    RESTARTS   AGE
-kube-system   coredns-78fcd69978-gqz46            1/1     Running   0          2d21h
-kube-system   etcd-minikube                       1/1     Running   0          2d21h
-kube-system   kindnet-d7xwr                       1/1     Running   0          2d21h
-kube-system   kube-apiserver-minikube             1/1     Running   0          2d21h</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">$ make knativecluster-plugins-install</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="using-kontain-with-cri-o-minikube">
+<doc-anchor-target id="starting-the-kind-cluster-with-knative-and-kontain-installed">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-with-cri-o-minikube">#</doc-anchor-trigger>
-        <span>Using Kontain with CRI-O Minikube</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#starting-the-kind-cluster-with-knative-and-kontain-installed">#</doc-anchor-trigger>
+        <span>Starting the kind cluster with knative and kontain installed</span>
     </h3>
 </doc-anchor-target>
-<p>Now we can use the <a href="/guide/getting_started/kubenetes/">instructions here</a> to install and use Kontain.</p>
-<doc-anchor-target id="clean-up">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#clean-up">#</doc-anchor-trigger>
-        <span>Clean up</span>
-    </h3>
-</doc-anchor-target>
-<p>You can remove the Minikube cluster by using the following:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ minikube delete
-or 
-$ minikube delete -p &lt;default&gt;</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">$ make knativekindcluster-up</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="working-with-knative-kontain-enabled-services">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#working-with-knative-kontain-enabled-services">#</doc-anchor-trigger>
+        <span>Working with KNative Kontain-enabled services</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="deploy-the-service">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#deploy-the-service">#</doc-anchor-trigger>
+        <span>Deploy the service</span>
+    </h3>
+</doc-anchor-target>
+<p>The service manifest file:
+<a href="https://github.com/kontainapp/guide-examples/blob/master/examples/knative/basics/hello-kontain-svc.yml">hello-kontain-svc.yml</a></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># install the Kontain-enabled function as a service
+$ kubectl apply -f hello-kontain-svc.yml 
+
+# check the service
+$ kn service list
+NAME            URL                                               LATEST                AGE   CONDITIONS   READY   REASON
+hello-kontain   http://hello-kontain.default.127.0.0.1.sslip.io   hello-kontain-00001   27s   3 OK / 3     True</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="invoke-the-service">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#invoke-the-service">#</doc-anchor-trigger>
+        <span>Invoke the service</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ curl $(kn service describe hello-kontain -o url)
+Hello World!</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="deploy-an-update-to-the-service-with-a-revision">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#deploy-an-update-to-the-service-with-a-revision">#</doc-anchor-trigger>
+        <span>Deploy an update to the service with a revision</span>
+    </h3>
+</doc-anchor-target>
+<p>The revised service manifest file:</p>
+<p><a href="https://github.com/kontainapp/guide-examples/blob/master/examples/knative/basics/hello-kontain-svc-revised.yml">hello-kontain-svc-revised.yml</a></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ kubectl apply -f hello-kontain-svc-revised.yml
+
+$ curl $(kn service describe hello-kontain -o url)
+Hello knative!</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="check-for-traffic-being-routed-to-current-revision">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#check-for-traffic-being-routed-to-current-revision">#</doc-anchor-trigger>
+        <span>Check for traffic being routed to current revision</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ kn revisions list
+NAME                  SERVICE         TRAFFIC   TAGS   GENERATION   AGE     CONDITIONS   READY   REASON
+hello-kontain-00002   hello-kontain   100%             2            5m16s   3 OK / 4     True    
+hello-kontain-00001   hello-kontain                    1            34m     3 OK / 4     True</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="canary-service-deployment-50-to-revision">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#canary-service-deployment-50-to-revision">#</doc-anchor-trigger>
+        <span>Canary service deployment: 50% to revision</span>
+    </h3>
+</doc-anchor-target>
+<p>The service manifest wwith the traffic split direct for revisions:</p>
+<p><a href="https://github.com/kontainapp/guide-examples/blob/master/examples/knative/basics/hello-kontain-svc-traffic-split.yml">hello-kontain-svc-traffic-split.yml</a></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ kubectl apply -f hello-kontain-svc-traffic-split.yml
+
+# check the traffic split
+$ kn revisions list
+NAME                  SERVICE         TRAFFIC   TAGS   GENERATION   AGE   CONDITIONS   READY   REASON
+hello-kontain-00002   hello-kontain   50%              2            20m   4 OK / 4     True    
+hello-kontain-00001   hello-kontain   50%              1            49m   4 OK / 4     True
+
+$ echo checking the traffic split implementation by invoking service 20 times...
+$ for i in {1..20}; do curl $(kn service describe hello-kontain -o url); done76s
+Hello World!
+Hello Kontain!
+Hello World!
+Hello Kontain!
+...
+...</code></pre>
 </doc-codeblock></div>
 
 
@@ -286,20 +372,20 @@ $ minikube delete -p &lt;default&gt;</code></pre>
             
 <nav class="flex mt-14">
     <div class="w-1/2">
-        <a class="px-5 py-4 h-full flex items-center break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/guide/appendix/log4jshell/">
+        <a class="px-5 py-4 h-full flex items-center break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/guide/getting_started/instastart/">
             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
             <span>
                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                <span class="block mt-1">Log4J Shell Attack Mitigation with Kontain</span>
+                <span class="block mt-1">Instantly starting your Spring Boot Application</span>
             </span>
         </a>
     </div>
 
     <div class="w-1/2">
-        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/guide/appendix/minikube/">
+        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/guide/getting_started/base_images/">
             <span>
                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                <span class="block mt-1">Using Kontain in Minikube (with Containerd)</span>
+                <span class="block mt-1">Language Runtime Images</span>
             </span>
             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
         </a>
@@ -347,6 +433,6 @@ $ minikube delete -p &lt;default&gt;</code></pre>
 
         <div id="docs-overlay-target"></div>
 
-        <script>window.__DOCS__ = { "title": "Minikube CRI-O", icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+        <script>window.__DOCS__ = { "title": "knative (serverless)", icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
     </body>
 </html>
