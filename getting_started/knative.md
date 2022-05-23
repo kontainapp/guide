@@ -101,3 +101,57 @@ Hello Kontain!
 ...
 ...
 ```
+
+## Working with KNative Kontain-enabled Spring Boot service
+### From scale to zero state to starting up to respond to a request
+At first, we will show the regular spring boot knative service running, and replying to a request from scale to zero state.
+
+```shell
+# deploy the knative spring boot hello service
+$ kubectl apply -f springboothello-kontain.yml
+
+# watch it getting deployed
+$ kubectl get po -w
+
+# see list of kontain-enabled services
+$ kn service list
+NAME                             URL                                                                LATEST                                 AGE     CONDITIONS   READY   REASON
+hello-kontain                    http://hello-kontain.default.127.0.0.1.sslip.io                    hello-kontain-00001                    42m     3 OK / 3     True
+hello-kontain-spring-boot        http://hello-kontain-spring-boot.default.127.0.0.1.sslip.io        hello-kontain-spring-boot-00001        19m     3 OK / 3     True
+
+# sleep for a few seconds for the pod to be terminated to test scale to zero and up
+$ sleep 10
+
+# invoke the spring boot service
+$ curl $(kn service describe hello-kontain-spring-boot -o url)
+Hello from Kontain!
+
+# Note that it takes about 8 seconds for it to respond
+```
+
+### From scale to zero state to response, using a Snapshot of the Spring Boot service
+Now, we will show the same spring boot knative service in scale to zero state, and then starting up to reply to a request from scale to zero state.
+```shell
+# deploy the knative spring boot hello service
+$ kubectl apply -f springboothello-kontain-snap.yml
+
+# watch it getting deployed
+$ kubectl get po -w
+
+# see list of kontain-enabled services
+$ kn service list
+NAME                             URL                                                                LATEST                                 AGE     CONDITIONS   READY   REASON
+hello-kontain                    http://hello-kontain.default.127.0.0.1.sslip.io                    hello-kontain-00001                    42m     3 OK / 3     True
+hello-kontain-spring-boot        http://hello-kontain-spring-boot.default.127.0.0.1.sslip.io        hello-kontain-spring-boot-00001        19m     3 OK / 3     True
+hello-kontain-spring-boot-snap   http://hello-kontain-spring-boot-snap.default.127.0.0.1.sslip.io   hello-kontain-spring-boot-snap-00001   9m53s   3 OK / 3     True
+
+# sleep for a few seconds for the pod to be terminated to test scale to zero and up
+$ sleep 10
+
+# invoke the spring boot service
+$ curl $(kn service describe hello-kontain-spring-boot-snap -o url)
+Hello from Kontain!
+
+# Note that it takes only about 3 seconds for it to respond
+# - most of it is spent in starting up the container, for Kubernetes to get its liveness and readiness probe ready etc.
+```
