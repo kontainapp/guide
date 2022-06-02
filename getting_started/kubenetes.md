@@ -110,13 +110,13 @@ As Docker shim is being deprecated in AWS EKS, please note that to use Kontain o
 To install Kontain on K3s:
 
 ```shell
-$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/kkm.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/km.yaml
 ```
 
 The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.
 
 +++ Openshift with CRIO
-To install Kontain on Openshift with CRIO:
+To install Kontain on Openshift or Minikube with CRIO:
 
 ```shell
 $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/km-crio.yaml
