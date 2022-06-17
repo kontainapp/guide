@@ -7,21 +7,23 @@
     <meta name="turbo-cache-control" content="no-cache">
 
     <!-- Primary Meta Tags -->
-    <title>Installing in Kubernetes</title>
-    <meta name="title" content="Installing in Kubernetes">
-    <meta name="description" content="Kontain runs on Linux kernel version 4.15 or newer, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled, ideally Ubuntu or..." />
+    <title>Demo</title>
+    <meta name="title" content="Demo">
+    <meta name="description" content="Below we show a quick short demo of Kontain running docker \"hello-world\", Java Spring Boot, Python fastapi images to illustrate how easy it is to use..." />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kontainapp.github.io/guide/getting_started/kubenetes/">
-    <meta property="og:title" content="Installing in Kubernetes">
-    <meta property="og:description" content="Kontain runs on Linux kernel version 4.15 or newer, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled, ideally Ubuntu or...">
+    <meta property="og:url" content="https://kontainapp.github.io/guide/getting_started/docker_run_demo/">
+    <meta property="og:title" content="Demo">
+    <meta property="og:description" content="Below we show a quick short demo of Kontain running docker \"hello-world\", Java Spring Boot, Python fastapi images to illustrate how easy it is to use...">
+    <meta property="og:image" content="https://asciinema.org/a/5YK4OiEBn6pHoli8t5RqIhTqt.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://kontainapp.github.io/guide/getting_started/kubenetes/">
-    <meta property="twitter:title" content="Installing in Kubernetes">
-    <meta property="twitter:description" content="Kontain runs on Linux kernel version 4.15 or newer, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled, ideally Ubuntu or...">
+    <meta property="twitter:url" content="https://kontainapp.github.io/guide/getting_started/docker_run_demo/">
+    <meta property="twitter:title" content="Demo">
+    <meta property="twitter:description" content="Below we show a quick short demo of Kontain running docker \"hello-world\", Java Spring Boot, Python fastapi images to illustrate how easy it is to use...">
+    <meta property="twitter:image" content="https://asciinema.org/a/5YK4OiEBn6pHoli8t5RqIhTqt.svg">
     
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
@@ -31,7 +33,6 @@
     <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.708803962093" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
     <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.708803962093" defer></script>
-    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.708803962093" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -216,153 +217,25 @@
                 <div id="docs-sidebar-right-toggle"></div>
                
                 <!-- Page content  -->
-<doc-anchor-target id="installing-in-kubernetes" class="break-words">
+<doc-anchor-target id="demo" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#installing-in-kubernetes">#</doc-anchor-trigger>
-        <span>Installing in Kubernetes</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#demo">#</doc-anchor-trigger>
+        <span>Demo</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="pre-requisites">
+<doc-anchor-target id="kontain-running-sample-docker-images">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#pre-requisites">#</doc-anchor-trigger>
-        <span>Pre-requisites</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#kontain-running-sample-docker-images">#</doc-anchor-trigger>
+        <span>Kontain running sample Docker images</span>
     </h2>
 </doc-anchor-target>
-<p>Kontain runs on <em>Linux kernel version 4.15 or newer</em>, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled, ideally Ubuntu or Fedora.  For enabling KVM on Ubuntu 18.04 or higher, you can refer to this <a href="https://linuxize.com/post/how-to-install-kvm-on-ubuntu-18-04/">article</a>.</p>
-<p>For Kubernetes platforms that do not offer nested virtualization like GKE and AWS, we use a software virtualization module that gets installed as part of the Kontain install.  For other platforms that do offer nested virtualization, we recommend using the regular Kontain install.</p>
-<p>Recommended distros for Kubernetes Worker Nodes are Ubuntu 20.04 and Amazon Linux 2, or newer.</p>
-<p>To package Kontain images, it is also necessary to have a recent version of Docker or Moby-engine is installed.</p>
-<doc-panel id="tip-starting-a-kubernetes-cluster-with-minikube-or-kind" collapsed>
-    <template #title>Tip: starting a Kubernetes cluster with Minikube or kind</template>
-<p>contains instructions for launching various versions of Kubernetes
-For trying out Kontain with Kubernetes, you can launch Minikube with Docker Desktop <a href="/guide/appendix/minikube/">view instructions here</a>.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ kind create cluster</code></pre>
-</doc-codeblock></div>
-<p>or Minikube:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ minikube start --container-runtime=containerd --driver=docker --wait=all</code></pre>
-</doc-codeblock></div>
-</doc-panel>
-<doc-anchor-target id="install-kontain-using-daemonset">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain-using-daemonset">#</doc-anchor-trigger>
-        <span>Install Kontain using Daemonset</span>
-    </h2>
-</doc-anchor-target>
-<p>Deploy Kontain Runtime using the Kubernetes client CLI</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># we install Kontain using a Daemonset
-$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/km.yaml</code></pre>
-</doc-codeblock></div>
-<p>The above yaml contains the Kontain runtime class and the install scripts for the Daemonset to be installed.</p>
-<doc-anchor-target id="verify-install">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#verify-install">#</doc-anchor-trigger>
-        <span>Verify Install</span>
-    </h2>
-</doc-anchor-target>
-<p>Let&#x27;s run a Kontain test app to verify that the runtime class is working as designed</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/latest/demo/k8s/test.yaml
-
-# a new Kontain test app should appear as 'Running'
-
-$ kubectl get pods 
-NAMESPACE     NAME                                READY   STATUS    RESTARTS   AGE
-default       kontain-test-app-647874765d-7ftrp   1/1     Running   0          23m
-
-# Use kubectl exec to run uname -r on the test pod. When running under the Kontain Runtime, the uname(2) system call appends the string &quot;kontain.&quot; to the release name. 
-# (Note: Please replace the kontain-test-app-xxxxx with the appropriate pod id).
-
-$ kubectl exec -it kontain-test-&lt;appropriate-pod-id&gt;  -- uname -r
-5.13.7-100.fc33.x86_64.kontain.KVM</code></pre>
-</doc-codeblock></div>
-<p>If you wish to view the Kontain Daemonset:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># verify that the kontain-node-initializer ran successfully and is in &quot;Running&quot; state and not &quot;Error&quot; state
-$ kubectl get po -n kube-system
-kube-system   azure-ip-masq-agent-tr7c7             1/1     Running   0          37m
-kube-system   coredns-58567c6d46-ncsqq              1/1     Running   0          38m
-kube-system   coredns-58567c6d46-rrb4m              1/1     Running   0          36m
-kube-system   coredns-autoscaler-54d55c8b75-j97sj   1/1     Running   0          38m
-kube-system   kontain-node-initializer-tvr84        1/1     Running   0          39s
-kube-system   kube-proxy-7hkjc                      1/1     Running   0          37m
-kube-system   metrics-server-569f6547dd-flsb4       1/1     Running   1          38m
-kube-system   tunnelfront-7d8df6bfdc-dr6z2          1/1     Running   0          38m
-
-# if need be, to debug an &quot;Error&quot; state, you can view its logs:
-$ kubectl logs kontain-node-initializer-&lt;id&gt;
-
-# check the daemonset
-$ kubectl get daemonsets.apps -A
-NAMESPACE     NAME             DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
-kube-system   kontain-deploy   1         1         1       1            1           &lt;none&gt;                   163m
-kube-system   kindnet          1         1         1       1            1           &lt;none&gt;                   168m
-kube-system   kube-proxy       1         1         1       1            1           kubernetes.io/os=linux   168m</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="installing-in-other-kubernetes">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#installing-in-other-kubernetes">#</doc-anchor-trigger>
-        <span>Installing in other Kubernetes</span>
-    </h2>
-</doc-anchor-target>
-<doc-tabs>
-<doc-tab id="azure-aks">
-<template #title>Azure AKS</template>
-<p>Deploy Kontain Runtime using the Kubernetes client CLI</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># we install Kontain using a Daemonset
-$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/km.yaml</code></pre>
-</doc-codeblock></div>
-<p>The above yaml contains the Kontain runtime class and the install scripts for the Daemonset to be installed.</p>
-</doc-tab>
-<doc-tab id="aws-eks-with-containerd-and-google-cloud-gke">
-<template #title>AWS EKS (with Containerd) and Google Cloud GKE</template>
-<p>To install Kontain on AWS (with containerd) or GKE use:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/kkm.yaml</code></pre>
-</doc-codeblock></div>
-<p>The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.</p>
-<p>As Docker shim is being deprecated in AWS EKS, please note that to use Kontain on AWS EKS, you will need to launch the cluster using containerd as the default runtime.  Please see: <a href="https://docs.aws.amazon.com/eks/latest/userguide/dockershim-deprecation.html">Docker shim deprecation</a></p>
-<p>To enable containerd as default rutime, please see: <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html#containerd-bootstrap">Enabling Containerd in EKS</a></p>
-</doc-tab>
-<doc-tab id="k3s">
-<template #title>K3s</template>
-<p>To install Kontain on K3s:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/km.yaml</code></pre>
-</doc-codeblock></div>
-<p>The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.</p>
-</doc-tab>
-<doc-tab id="openshift-with-crio">
-<template #title>Openshift with CRIO</template>
-<p>To install Kontain on Openshift or Minikube with CRIO:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/km-crio.yaml</code></pre>
-</doc-codeblock></div>
-<p>The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.</p>
-</doc-tab>
-</doc-tabs>
-<doc-anchor-target id="using-kontain-to-deploy-java-python-golang-and-js-examples-in-kubernetes">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-to-deploy-java-python-golang-and-js-examples-in-kubernetes">#</doc-anchor-trigger>
-        <span>Using Kontain to deploy Java, Python, Golang and JS examples in Kubernetes</span>
-    </h2>
-</doc-anchor-target>
-<p>
-<div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
-    <div class="flex items-center text-blue-500 dark:text-blue-400">
-        <span class="inline-block mb-px">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
-        </span>
-        <span class="inline-block font-medium ml-2">examples</span>
-    </div>
-    <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
-        <span>https://github.com/kontainapp/guide-examples/tree/master/examples</span>
-    </div>
-    <a href="https://github.com/kontainapp/guide-examples/tree/master/examples" target="_blank" class="absolute block inset-0"></a>
-</div>
+<p>Below we show a quick short demo of Kontain running docker &quot;hello-world&quot;, Java Spring Boot, Python fastapi images to illustrate how easy it is to use Kontain.</p>
+<p><figure class="content-center">
+    <a href="https://asciinema.org/a/5YK4OiEBn6pHoli8t5RqIhTqt?speed=3&amp;t=1">
+        <img src="https://asciinema.org/a/5YK4OiEBn6pHoli8t5RqIhTqt.svg" alt="asciicast" />
+    </a>
+    <figcaption class="caption">asciicast</figcaption>
+</figure>
 </p>
 
 
@@ -375,20 +248,20 @@ $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/m
             
 <nav class="flex mt-14">
     <div class="w-1/2">
-        <a class="px-5 py-4 h-full flex items-center break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/guide/getting_started/quick_start/">
+        <a class="px-5 py-4 h-full flex items-center break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/guide/video_tuts/">
             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
             <span>
                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                <span class="block mt-1">Quick Start</span>
+                <span class="block mt-1">Video Tutorials</span>
             </span>
         </a>
     </div>
 
     <div class="w-1/2">
-        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/guide/getting_started/python/">
+        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/guide/getting_started/quick_start/">
             <span>
                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                <span class="block mt-1">Python Flask and FastAPI (Docker/Compose/K8s)</span>
+                <span class="block mt-1">Quick Start</span>
             </span>
             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
         </a>
@@ -436,6 +309,6 @@ $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/m
 
         <div id="docs-overlay-target"></div>
 
-        <script>window.__DOCS__ = { "title": "Install in Kubernetes (Minikube/Kind, AWS, AKS, GKE)", icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+        <script>window.__DOCS__ = { "title": "Demo", icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
     </body>
 </html>
