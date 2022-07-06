@@ -1,7 +1,7 @@
 ---
 label: Background
 icon: home
-order: 1900
+order: 1000
 ---
 
 # Introduction

@@ -1,0 +1,5 @@
+icon: home
+order: 1100
+expanded: false
+Label: Overview
+#visibility: hidden or use _ in front of folder name

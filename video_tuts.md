@@ -1,7 +1,7 @@
 ---
 label: Video Tutorials
 icon: home
-order: 1800
+order: 900
 ---
 
 ## Installs (Docker, Kubernetes)
