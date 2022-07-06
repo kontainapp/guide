@@ -1,7 +1,7 @@
 ---
 label: Docker Integration Overview
-icon: /images/docker.png
-order: 1000
+icon: /images/logo2.png
+order: 900
 ---
 
 ## Kontain Integration with Docker

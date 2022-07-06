@@ -30,4 +30,4 @@ A Kontainer supports almost instantaneous startup, eliminates resource bloat, wo
 
 In addition, it works with no changes to current source code, and works with all the DevOps and CI/CD tooling, and Orchestration systems available today.
 
-Please see [Install Guide](/gettingstarted/install) to start using "Kontainers".
+Please see [Install Guide](/gettingstarted/install_linux) to start using "Kontainers".

@@ -1,7 +1,7 @@
 ---
 label: Kubernetes Integration Overview
 icon: /images/k8s.png
-order: 900
+order: 800
 ---
 
 ## Kontain Integration with Kubernetes

@@ -1,5 +1,5 @@
 ---
-label: Getting started with Kontain
+label: Quick start
 icon: /images/docker.png
 order: 1950
 ---
