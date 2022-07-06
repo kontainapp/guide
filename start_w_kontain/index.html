@@ -7,32 +7,33 @@
     <meta name="turbo-cache-control" content="no-cache">
 
     <!-- Primary Meta Tags -->
-    <title>Docker run with kontain demo</title>
-    <meta name="title" content="Docker run with kontain demo">
-    <meta name="description" content="Below we show a quick short demo of Kontain running docker \"hello-world\", Java Spring Boot, Python fastapi images to illustrate how easy it is to use..." />
+    <title>Getting started with Kontain</title>
+    <meta name="title" content="Getting started with Kontain">
+    <meta name="description" content="Assuming that you are on a Linux system (either Ubuntu 20.04 or Amazon Linux 2 with Kernel version 5." />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kontainapp.github.io/guide/docker_run_demo/">
-    <meta property="og:title" content="Docker run with kontain demo">
-    <meta property="og:description" content="Below we show a quick short demo of Kontain running docker \"hello-world\", Java Spring Boot, Python fastapi images to illustrate how easy it is to use...">
+    <meta property="og:url" content="https://kontainapp.github.io/guide/start_w_kontain/">
+    <meta property="og:title" content="Getting started with Kontain">
+    <meta property="og:description" content="Assuming that you are on a Linux system (either Ubuntu 20.04 or Amazon Linux 2 with Kernel version 5.">
     <meta property="og:image" content="https://kontainapp.github.io/guide/guide/images/docker_run_demo.gif">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://kontainapp.github.io/guide/docker_run_demo/">
-    <meta property="twitter:title" content="Docker run with kontain demo">
-    <meta property="twitter:description" content="Below we show a quick short demo of Kontain running docker \"hello-world\", Java Spring Boot, Python fastapi images to illustrate how easy it is to use...">
+    <meta property="twitter:url" content="https://kontainapp.github.io/guide/start_w_kontain/">
+    <meta property="twitter:title" content="Getting started with Kontain">
+    <meta property="twitter:description" content="Assuming that you are on a Linux system (either Ubuntu 20.04 or Amazon Linux 2 with Kernel version 5.">
     <meta property="twitter:image" content="https://kontainapp.github.io/guide/guide/images/docker_run_demo.gif">
     
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/guide/images/favicon.png" rel="icon" />
-    <link href="/guide/resources/css/retype.css?v=1.11.2.708812925065" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/guide/resources/css/retype.css?v=1.11.2.710433004572" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.708812925065" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/guide/resources/js/config.js?v=1.11.2.710433004572" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/guide/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.708812925065" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/guide/resources/js/lunr.js?v=1.11.2.710433004572" defer></script>
+    <script id="prism-js" type="text/javascript" src="/guide/resources/js/prism.js?v=1.11.2.710433004572" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -217,12 +218,33 @@
                 <div id="docs-sidebar-right-toggle"></div>
                
                 <!-- Page content  -->
-<doc-anchor-target id="docker-run-with-kontain-demo" class="break-words">
+<doc-anchor-target id="getting-started-with-kontain" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#docker-run-with-kontain-demo">#</doc-anchor-trigger>
-        <span>Docker run with kontain demo</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#getting-started-with-kontain">#</doc-anchor-trigger>
+        <span>Getting started with Kontain</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="install-kontain-and-run-docker-images-with-kontain">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain-and-run-docker-images-with-kontain">#</doc-anchor-trigger>
+        <span>Install Kontain and run Docker images with Kontain</span>
+    </h2>
+</doc-anchor-target>
+<p>Assuming that you are on a Linux system (either Ubuntu 20.04 or Amazon Linux 2 with Kernel version 5.10 or above or Fedora 34 and above) with KVM enabled, we can install Kontain witn the following command:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># download and install
+$ curl -s https://raw.githubusercontent.com/kontainapp/km/current/km-releases/kontain-install.sh | sudo bash
+...
+
+# verify install by checking if kontain folder was created
+$ ls /opt/kontain
+
+# run classic docker hello-world image using Kontain
+$ docker run --runtime=krun hello-world
+
+# run Java hello world using Kontain
+$ docker run --runtime=krn</code></pre>
+</doc-codeblock></div>
 <doc-anchor-target id="kontain-running-sample-docker-images">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#kontain-running-sample-docker-images">#</doc-anchor-trigger>
@@ -264,7 +286,7 @@
     </div>
 
     <div class="w-1/2">
-        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/guide/overview/">
+        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/guide/overview/overview/">
             <span>
                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
                 <span class="block mt-1">Background</span>
@@ -315,6 +337,6 @@
 
         <div id="docs-overlay-target"></div>
 
-        <script>window.__DOCS__ = { "title": "Docker run with kontain demo", icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+        <script>window.__DOCS__ = { "title": "Getting started with Kontain", icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
     </body>
 </html>
