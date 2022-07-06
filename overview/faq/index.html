@@ -7,23 +7,21 @@
     <meta name="turbo-cache-control" content="no-cache">
 
     <!-- Primary Meta Tags -->
-    <title>Getting started with Kontain</title>
-    <meta name="title" content="Getting started with Kontain">
-    <meta name="description" content="Assuming that you are on a Linux system (either Ubuntu 20.04 or Amazon Linux 2 with Kernel version 5." />
+    <title>FAQ</title>
+    <meta name="title" content="FAQ">
+    <meta name="description" content="Yes, it runs Docker containers without any modifications securely." />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kontainapp.github.io/guide/start_w_kontain/">
-    <meta property="og:title" content="Getting started with Kontain">
-    <meta property="og:description" content="Assuming that you are on a Linux system (either Ubuntu 20.04 or Amazon Linux 2 with Kernel version 5.">
-    <meta property="og:image" content="https://kontainapp.github.io/guide/guide/images/docker_run_demo.gif">
+    <meta property="og:url" content="https://kontainapp.github.io/guide/overview/faq/">
+    <meta property="og:title" content="FAQ">
+    <meta property="og:description" content="Yes, it runs Docker containers without any modifications securely.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://kontainapp.github.io/guide/start_w_kontain/">
-    <meta property="twitter:title" content="Getting started with Kontain">
-    <meta property="twitter:description" content="Assuming that you are on a Linux system (either Ubuntu 20.04 or Amazon Linux 2 with Kernel version 5.">
-    <meta property="twitter:image" content="https://kontainapp.github.io/guide/guide/images/docker_run_demo.gif">
+    <meta property="twitter:url" content="https://kontainapp.github.io/guide/overview/faq/">
+    <meta property="twitter:title" content="FAQ">
+    <meta property="twitter:description" content="Yes, it runs Docker containers without any modifications securely.">
     
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
@@ -218,53 +216,125 @@
                 <div id="docs-sidebar-right-toggle"></div>
                
                 <!-- Page content  -->
-<doc-anchor-target id="getting-started-with-kontain" class="break-words">
+<doc-anchor-target id="faq" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#getting-started-with-kontain">#</doc-anchor-trigger>
-        <span>Getting started with Kontain</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#faq">#</doc-anchor-trigger>
+        <span>FAQ</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="install-kontain-and-run-docker-images-with-kontain">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain-and-run-docker-images-with-kontain">#</doc-anchor-trigger>
-        <span>Install Kontain and run Docker images with Kontain</span>
-    </h2>
+<doc-anchor-target id="does-kontain-run-docker-containers-without-modifications">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#does-kontain-run-docker-containers-without-modifications">#</doc-anchor-trigger>
+        <span><strong>Does Kontain run Docker containers without modifications?</strong></span>
+    </h3>
 </doc-anchor-target>
-<p>Assuming that you are on a Linux system (either Ubuntu 20.04 or Amazon Linux 2 with Kernel version 5.10 or above or Fedora 34 and above) with KVM enabled, we can install Kontain witn the following command:</p>
+<p>Yes, it runs Docker containers without any modifications securely.</p>
+<p>But if you would like more benefits, you can leverage Kontain&#x27;s smaller resources/image sizes capabilities with a little bit more effort in your Dockerfile construction, and can also use its instant start capabilities for your slower containers.</p>
+<doc-anchor-target id="how-do-i-run-a-docker-container-using-kontain">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#how-do-i-run-a-docker-container-using-kontain">#</doc-anchor-trigger>
+        <span><strong>How do I run a Docker Container using Kontain?</strong></span>
+    </h3>
+</doc-anchor-target>
+<p>Kontain runs whenever used as a runtime in docker or Kubernetes.  The following is an example of this:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># download and install
-$ curl -s https://raw.githubusercontent.com/kontainapp/km/current/km-releases/kontain-install.sh | sudo bash
-...
-
-# verify install by checking if kontain folder was created
-$ ls /opt/kontain
-
-# run classic docker hello-world image using Kontain
-$ docker run --runtime=krun hello-world
-
-# run Java hello world using Kontain
-$ docker run --runtime=krn</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">$ docker run -runtime=krun hello-world</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="kontain-running-sample-docker-images">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#kontain-running-sample-docker-images">#</doc-anchor-trigger>
-        <span>Kontain running sample Docker images</span>
-    </h2>
+<p>Here is an example of <a href="https://github.com/kontainapp/guide-examples/blob/master/examples/go/golang-http-hello/docker-compose.yml">Kontain in docker-compose</a>, and <a href="https://github.com/kontainapp/guide-examples/blob/master/examples/go/golang-http-hello/k8s.yml">in Kubernetes</a></p>
+<doc-anchor-target id="which-languages-does-it-support">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#which-languages-does-it-support">#</doc-anchor-trigger>
+        <span><strong>Which languages does it support?</strong></span>
+    </h3>
 </doc-anchor-target>
-<p>Below we show a quick short demo of Kontain running docker &quot;hello-world&quot;, Java Spring Boot, Python fastapi images to illustrate how easy it is to use Kontain.</p>
-<p><figure class="content-center">
-    <img src="/guide/images/docker_run_demo.gif" alt="demo" />
-    <figcaption class="caption">demo</figcaption>
-</figure>
-</p>
-<p>On Ascii Cinema:
-<figure class="content-center">
-    <a href="https://asciinema.org/a/5YK4OiEBn6pHoli8t5RqIhTqt?speed=3&amp;t=1">
-        <img src="https://asciinema.org/a/5YK4OiEBn6pHoli8t5RqIhTqt.svg" alt="asciicast" />
-    </a>
-    <figcaption class="caption">asciicast</figcaption>
-</figure>
-</p>
+<p>The Default is English (United States), but it is not language dependent, so should work anywhere where Docker or Kubernetes works.</p>
+<doc-anchor-target id="can-it-run-on-my-desktop">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#can-it-run-on-my-desktop">#</doc-anchor-trigger>
+        <span><strong>Can it run on my desktop?</strong></span>
+    </h3>
+</doc-anchor-target>
+<p>Yes, you can with the following Linux Operating Systems. If you are running Ubuntu 20.04 or above or Fedora 34 or above or Amazon Linux 2 with Kernel version 5.10 or above, it is very easy to install Kontain.</p>
+<p>If you ensure that you have docker pre-installed, you can just use:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ curl -s https://raw.githubusercontent.com/kontainapp/km/current/km-releases/kontain-install.sh | sudo bash</code></pre>
+</doc-codeblock></div>
+<p>For more detailed instructions, you can refer to this <a href="/guide/getting_started/install_linux/">link</a>.</p>
+<p>For running on a Windows 10 or above desktop, you can use Vagrant with Hyper-V as outlined <a href="/guide/getting_started/windows/">here</a></p>
+<p>For running on a Mac OS desktop, you can use <em>brew</em> to install Vagrant and install Kontain as outlined <a href="/guide/getting_started/mac_os/">here</a></p>
+<doc-anchor-target id="how-does-it-work">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#how-does-it-work">#</doc-anchor-trigger>
+        <span><strong>How does it work?</strong></span>
+    </h3>
+</doc-anchor-target>
+<p>Kontain works by adding a secure CRI-compliant Container runtime to Containerd, that is used by both Docker and Kubernetes to run containers.</p>
+<p>By working with Containerd, the user just has to specify <em>–runtime=krun</em> in Docker or <em>runtime:kontain</em> in Kubernetes for a container to run in Kontain alongside other containers.</p>
+<doc-anchor-target id="where-can-i-use-it-or-what-platforms-does-it-run-on">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#where-can-i-use-it-or-what-platforms-does-it-run-on">#</doc-anchor-trigger>
+        <span><strong>Where can I use it or What platforms does it run on?</strong></span>
+    </h3>
+</doc-anchor-target>
+<p>Kontain runs anywhere that <em>Linux, Docker and Kubernetes runs, including AWS, Azure and Google Cloud and on-premises</em> installations. It can be installed <em>as a secure runtime for Docker/Containerd in desktops, VMs, Kubernetes</em>.</p>
+<doc-anchor-target id="is-it-easy-to-install">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#is-it-easy-to-install">#</doc-anchor-trigger>
+        <span><strong>Is it easy to install?</strong></span>
+    </h3>
+</doc-anchor-target>
+<p>As seen above, so long as you are running the requisite OS with KVM enabled and docker installed, it is <a href="/guide/getting_started/install_linux/">very easy to install</a>.</p>
+<doc-anchor-target id="how-do-i-use-it-easily-in-2-minutes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#how-do-i-use-it-easily-in-2-minutes">#</doc-anchor-trigger>
+        <span><strong>How do I use it easily in 2 minutes?</strong></span>
+    </h3>
+</doc-anchor-target>
+<p>Once you have it installed as shown above, you can use it to run a docker container as shown
+below:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ docker run -runtime=krun hello-world</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="why-should-i-use-it-over-docker-for-running-my-container">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#why-should-i-use-it-over-docker-for-running-my-container">#</doc-anchor-trigger>
+        <span><strong>Why should I use it over Docker for running my container?</strong></span>
+    </h3>
+</doc-anchor-target>
+<p>Kontain:</p>
+<ul>
+<li>secures a container with VM-level hardware isolation</li>
+<li>provides smaller images thus consuming less resources,</li>
+<li>without changing your CI/CD workflow/tools.</li>
+<li>In addition, it provides instant start capabilities for your slow starting Docker containers.</li>
+<li>Also, it runs alongside Docker containers in Docker-compose and Kubernetes, hence
+you can try out Kontain incrementally.</li>
+</ul>
+<doc-anchor-target id="does-it-work-with-docker-compose">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#does-it-work-with-docker-compose">#</doc-anchor-trigger>
+        <span><strong>Does it work with docker-compose?</strong></span>
+    </h3>
+</doc-anchor-target>
+<p>Yes, you just have to add the line “runtime: krun” to docker-compose.yaml file.
+Here’s an example of Kontain in a docker-compose.yml file.
+It can run side by side with existing Docker containers, so you don’t have to run
+Here’s an example of Kontain in a Kubernetes manifest.
+It runs side by side with Docker containers.</p>
+<doc-anchor-target id="is-it-open-source">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#is-it-open-source">#</doc-anchor-trigger>
+        <span><strong>Is it open source?</strong></span>
+    </h3>
+</doc-anchor-target>
+<p>Yes</p>
+<doc-anchor-target id="is-it-free-to-try-and-use">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#is-it-free-to-try-and-use">#</doc-anchor-trigger>
+        <span><strong>Is it free to try and use?</strong></span>
+    </h3>
+</doc-anchor-target>
+<p>Yes</p>
 
 
 
@@ -276,20 +346,20 @@ $ docker run --runtime=krn</code></pre>
             
 <nav class="flex mt-14">
     <div class="w-1/2">
-        <a class="px-5 py-4 h-full flex items-center break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/guide/">
+        <a class="px-5 py-4 h-full flex items-center break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/guide/overview/overview/">
             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
             <span>
                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                <span class="block mt-1">Introduction to "Kontainers"</span>
+                <span class="block mt-1">Background</span>
             </span>
         </a>
     </div>
 
     <div class="w-1/2">
-        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/guide/overview/overview/">
+        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/guide/getting_started/install_linux/">
             <span>
                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                <span class="block mt-1">Background</span>
+                <span class="block mt-1">Install (Linux)</span>
             </span>
             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
         </a>
@@ -337,6 +407,6 @@ $ docker run --runtime=krn</code></pre>
 
         <div id="docs-overlay-target"></div>
 
-        <script>window.__DOCS__ = { "title": "Getting started with Kontain", icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+        <script>window.__DOCS__ = { "title": "FAQ", icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
     </body>
 </html>
