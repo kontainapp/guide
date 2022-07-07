@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/guide">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.710494207859">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.710525808040">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.3.0">
@@ -12,7 +12,7 @@
     <!-- Primary Meta Tags -->
     <title>Quick start</title>
     <meta name="title" content="Quick start">
-    <meta name="description" content="Assuming that you are on a Linux system (either Ubuntu 20.04 or Amazon Linux 2 with Kernel version 5.10 or above or Fedora 34 and above) with" />
+    <meta name="description" content="You can use Kontain to run existing or new Docker Images standalone or in Kubernetes with" />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://kontainapp.github.io/guide/quickstart/" />
@@ -21,23 +21,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kontainapp.github.io/guide/quickstart/">
     <meta property="og:title" content="Quick start">
-    <meta property="og:description" content="Assuming that you are on a Linux system (either Ubuntu 20.04 or Amazon Linux 2 with Kernel version 5.10 or above or Fedora 34 and above) with">
+    <meta property="og:description" content="You can use Kontain to run existing or new Docker Images standalone or in Kubernetes with">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://kontainapp.github.io/guide/quickstart/">
     <meta property="twitter:title" content="Quick start">
-    <meta property="twitter:description" content="Assuming that you are on a Linux system (either Ubuntu 20.04 or Amazon Linux 2 with Kernel version 5.10 or above or Fedora 34 and above) with">
+    <meta property="twitter:description" content="You can use Kontain to run existing or new Docker Images standalone or in Kubernetes with">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../images/favicon.png" rel="icon" />
-    <link href="../resources/css/retype.css?v=2.3.0.710494207859" rel="stylesheet" />
+    <link href="../resources/css/retype.css?v=2.3.0.710525808040" rel="stylesheet" />
 
-    <script type="text/javascript" src="../resources/js/config.js?v=2.3.0.710494207859" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../resources/js/config.js?v=2.3.0.710525808040" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../resources/js/retype.js?v=2.3.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../resources/js/lunr.js?v=2.3.0.710494207859" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../resources/js/prism.js?v=2.3.0.710494207859" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../resources/js/lunr.js?v=2.3.0.710525808040" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../resources/js/prism.js?v=2.3.0.710525808040" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -233,11 +233,23 @@
         <span>Quick start</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="install-kontain-and-run-docker-images-with-kontain">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain-and-run-docker-images-with-kontain">#</doc-anchor-trigger>
-        <span>Install Kontain and run Docker images with Kontain</span>
-    </h2>
+<doc-anchor-target id="description">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#description">#</doc-anchor-trigger>
+        <span>Description</span>
+    </h3>
+</doc-anchor-target>
+<p>You can use Kontain to run existing or new Docker Images standalone or in Kubernetes with</p>
+<ul>
+<li>secure VM-level hardware isolation</li>
+<li>reduce resource usage by building smaller Container images to reduce resource consumption</li>
+<li>and enable instant start capabilities for your slower starting contianers in Docker and Kubernetes</li>
+</ul>
+<doc-anchor-target id="install-kontain-and-run-existing-docker-container-images-with-kontain">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain-and-run-existing-docker-container-images-with-kontain">#</doc-anchor-trigger>
+        <span>Install Kontain and run existing Docker Container images with Kontain</span>
+    </h3>
 </doc-anchor-target>
 <p>Assuming that you are on a Linux system (either Ubuntu 20.04 or Amazon Linux 2 with Kernel version 5.10 or above or Fedora 34 and above) with <a href="https://phoenixnap.com/kb/ubuntu-install-kvm">KVM enabled</a>, and <a href="https://docs.docker.com/engine/install/ubuntu/">Docker</a> installed, we can install Kontain witn the following command:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -259,11 +271,36 @@ $ docker run --runtime=krun hello-world
 Hello from Docker!
 ...
 
-# run java hello world image
+# run the ubuntu Docker container image and echo a string
+$ docker run --runtime=krun ubuntu echo hello world
+hello world
+
+# run a java hello world image
 $ docker run --runtime=krun kontainguide/java-hello-world
-Hello world from Kontain!</code></pre>
+Hello world from Kontain!
+
+# run a C-based example
+$ docker run --runtime=krun kontainguide/hello-kontain
+Hello, world
+Hello, argv[0] = '/hello_test.km'
+Hello, argv[1] = 'from'
+Hello, argv[2] = 'docker'</code></pre>
 </doc-codeblock></div>
-<p>
+<p>For more details, you can view the <a href="https://github.com/kontainapp/guide-examples/examples">examples</a> or view the docs for each language using the links below.
+<div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
+    <div class="flex items-center text-blue-500 dark:text-blue-400">
+        <span class="inline-block mb-px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
+        </span>
+        <span class="inline-block font-medium ml-2">Kontain examples repo</span>
+    </div>
+    <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
+        <span>https://github.com/kontainapp/guide-examples</span>
+    </div>
+    <a href="https://github.com/kontainapp/guide-examples" class="absolute block inset-0"></a>
+</div>
+</p>
+<p>For more details on Install:
 <div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
     <div class="flex items-center text-blue-500 dark:text-blue-400">
         <span class="inline-block mb-px">
@@ -277,14 +314,41 @@ Hello world from Kontain!</code></pre>
     <a href="../getting_started/install_linux/" class="absolute block inset-0"></a>
 </div>
 </p>
-<doc-anchor-target id="using-kontain-with-golang-java-spring-boot-python-fastapi-and-nodejs">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-with-golang-java-spring-boot-python-fastapi-and-nodejs">#</doc-anchor-trigger>
-        <span>Using Kontain with golang, Java Spring Boot, Python FastAPI, and NodeJS</span>
-    </h2>
-</doc-anchor-target>
+<p>For more details to install Kontain as a secure runtime in Kubernetes:
+<div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
+    <div class="flex items-center text-blue-500 dark:text-blue-400">
+        <span class="inline-block mb-px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
+        </span>
+        <span class="inline-block font-medium ml-2">Install Kontain in Kubernetes</span>
+    </div>
+    <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
+        <span>/getting_started/kubernetes</span>
+    </div>
+    <a href="/getting_started/kubernetes" class="absolute block inset-0"></a>
+</div>
+</p>
 <p>Below we will some examples of how to use Kontain with golang, Java Spring Boot, Python FastAPI and NodeJS without changing any of your existing Docker or Kubernetes workflows.</p>
-<p>For more details, you can view the <a href="https://github.com/kontainapp/guide-examples">examples repository</a> or view the docs for each - <a href="../getting_started/golang/">Go</a>, <a href="../getting_started/java/">Java</a>, <a href="../getting_started/python/">Python</a>, <a href="../getting_started/javascript/">NodeJS</a></p>
+<doc-anchor-target id="using-kontain-with-golang-http-server-docker-container">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-with-golang-http-server-docker-container">#</doc-anchor-trigger>
+        <span>Using Kontain with Golang http server (Docker Container)</span>
+    </h3>
+</doc-anchor-target>
+<p>
+<div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
+    <div class="flex items-center text-blue-500 dark:text-blue-400">
+        <span class="inline-block mb-px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
+        </span>
+        <span class="inline-block font-medium ml-2">Kontain and Go (Docker and Kubernetes)</span>
+    </div>
+    <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
+        <span>../getting_started/golang/</span>
+    </div>
+    <a href="../getting_started/golang/" class="absolute block inset-0"></a>
+</div>
+</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash"># clone the examples repository
 $ git clone https://github.com/kontainapp/guide-examples.git
@@ -306,10 +370,30 @@ CONTAINER ID   IMAGE                            COMMAND     CREATED         STAT
 $ curl http://localhost:8080
 Hello World!
 
-$ docker stop golang-http-hello
-
-#---------------------
-# let's run a java spring boot hello world program
+$ docker stop golang-http-hello</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="using-kontain-with-a-java-spring-boot-service-docker-container">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-with-a-java-spring-boot-service-docker-container">#</doc-anchor-trigger>
+        <span>Using Kontain with a Java Spring boot service (Docker Container)</span>
+    </h3>
+</doc-anchor-target>
+<p>
+<div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
+    <div class="flex items-center text-blue-500 dark:text-blue-400">
+        <span class="inline-block mb-px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
+        </span>
+        <span class="inline-block font-medium ml-2">Using Kontain with Java/Spring Boot (Docker and Kubernetes)</span>
+    </div>
+    <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
+        <span>../getting_started/java/</span>
+    </div>
+    <a href="../getting_started/java/" class="absolute block inset-0"></a>
+</div>
+</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># let's run a java spring boot hello world program
 $ cd guide-examples/examples/java/java-hello-world/
 
 # build the image
@@ -327,10 +411,30 @@ $ curl http://localhost:8080
 Hello from Kontain!
 
 # stop the service
-$ docker stop spring-boot-hello
-
-#---------------------
-# now let's run a Flask python example
+$ docker stop spring-boot-hello</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="using-kontain-with-a-python-fastapi-service-docker-container">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-with-a-python-fastapi-service-docker-container">#</doc-anchor-trigger>
+        <span>Using Kontain with a Python FastAPI service (Docker Container)</span>
+    </h3>
+</doc-anchor-target>
+<p>
+<div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
+    <div class="flex items-center text-blue-500 dark:text-blue-400">
+        <span class="inline-block mb-px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
+        </span>
+        <span class="inline-block font-medium ml-2">Using Kontain with Python/FastAPI (Docker and Kubernetes)</span>
+    </div>
+    <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
+        <span>../getting_started/python/</span>
+    </div>
+    <a href="../getting_started/python/" class="absolute block inset-0"></a>
+</div>
+</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># now let's run a Flask python example
 $ cd guide-examples/examples/python/py-flask-hello
 
 # now let's build this example
@@ -344,10 +448,30 @@ $ curl  http://localhost:8080
 {&quot;Hello&quot;:&quot;Kontain!&quot;}
 
 # now let's stop the FastAPI container
-$ docker stop fastapi-hello
-
-#---------------------
-# now let's run a NodeJS express service
+$ docker stop fastapi-hello</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="using-kontain-with-a-nodejs-express-service-docker-container">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-with-a-nodejs-express-service-docker-container">#</doc-anchor-trigger>
+        <span>Using Kontain with a NodeJS Express service (Docker Container)</span>
+    </h3>
+</doc-anchor-target>
+<p>
+<div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
+    <div class="flex items-center text-blue-500 dark:text-blue-400">
+        <span class="inline-block mb-px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
+        </span>
+        <span class="inline-block font-medium ml-2">Using Kontain with NodeJS/Express (Docker and Kubernetes)</span>
+    </div>
+    <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
+        <span>../getting_started/javascript/</span>
+    </div>
+    <a href="../getting_started/javascript/" class="absolute block inset-0"></a>
+</div>
+</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># now let's run a NodeJS express service
 $ cd guide-examples/examples/js/node-hello-world
 $ docker build -t kontainguide/node-hello-world .
 
