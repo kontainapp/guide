@@ -2,6 +2,7 @@ input: .
 output: .retype
 url: https://kontainapp.github.io/guide/
 favicon: images/favicon.png
+poweredByRetype: true
 
 # favicon: /images/kon.png
 branding:

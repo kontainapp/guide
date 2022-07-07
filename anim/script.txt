@@ -1,0 +1,94 @@
+# verify that kvm is installed
+ls -l /dev/kvm
+
+# verify that docker is installed
+systemctl|grep docker.service
+
+# install kontain
+sudo mkdir -p /opt/kontain ; sudo chown root /opt/kontain
+curl -s https://raw.githubusercontent.com/kontainapp/km/current/km-releases/kontain-install.sh | sudo bash
+
+# run classic Docker container (hello-world)
+docker run --runtime=krun kontainguide/hello-kontain
+
+# now we have verifed that Kontain is installed
+clear
+
+#---------------------
+# now we will demonstrate Kontain with golang, java, python and NodeJS
+# let's run a golang server program
+cd examples/go/golang-http=hello
+tree
+
+cat Dockerfile
+
+# build the image
+docker build -t kontainguide/golang-http-hello:1.0 .
+
+# lets run this
+docker run -d --rm -p 8080:8080 --runtime=krun --name golang-http-hello kontainguide
+docker ps
+
+# invoke the service
+curl http://localhost:8080
+
+docker stop golang-http-hello
+
+clear
+
+#---------------------
+# let's run a java spring boot hello world program
+cd examples/java/java-hello-world/
+tree
+
+cat Dockerfile
+
+# build the image
+docker build -t kontainguide/spring-boot-hello
+
+# now run this
+docker run -d --rm -p 8080:8080 --runtime=krun --name spring-boot-hello kontainguide/spring-boot-hello:1.0
+docker ps
+
+# invoke the service
+curl http://localhost:8080
+
+# stop the service
+docker stop spring-boot-hello
+
+clear
+
+#---------------------
+# now let's run a FastAPI python example
+cd examples/python/fastapi-hello
+tree
+cat Dockerfile
+docker build -t kontainguide/fastapi-hello:1.0 .
+docker run -d --rm -p 5000:5000 --runtime=krun --name fastapi-hello kontainguide/fastapi-hello:1.0
+docker ps
+
+curl http://localhost:5000/
+
+# now let's stop the FastAPI container
+docker stop fastapi-hello
+
+clear
+
+#---------------------
+# now let's run a NodeJS express service
+cd examples/js/node-hello-world
+tree
+cat Dockerfile
+docker build -t kontainguide/node-hello-world .
+
+# run the example using Kontain
+docker run --runtime=krun -d -p 3000:3000 --name node-hello-world kontainguide/node-hello-world
+docker ps
+
+# invoke the service
+curl http://localhost:3000
+
+# now let's stop the nodejs container
+docker stop node-hello-world
+
+# thank you for watching
