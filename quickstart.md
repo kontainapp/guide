@@ -4,7 +4,13 @@ icon: /images/docker.png
 order: 1950
 ---
 
-## Install Kontain and run Docker images with Kontain
+### Description
+You can use Kontain to run existing or new Docker Images standalone or in Kubernetes with 
+* secure VM-level hardware isolation
+* reduce resource usage by building smaller Container images to reduce resource consumption
+* and enable instant start capabilities for your slower starting contianers in Docker and Kubernetes
+
+### Install Kontain and run existing Docker Container images with Kontain
 Assuming that you are on a Linux system (either Ubuntu 20.04 or Amazon Linux 2 with Kernel version 5.10 or above or Fedora 34 and above) with [KVM enabled](https://phoenixnap.com/kb/ubuntu-install-kvm), and [Docker](https://docs.docker.com/engine/install/ubuntu/) installed, we can install Kontain witn the following command:
 
 ```shell
@@ -26,18 +32,34 @@ $ docker run --runtime=krun hello-world
 Hello from Docker!
 ...
 
-# run java hello world image
+# run the ubuntu Docker container image and echo a string
+$ docker run --runtime=krun ubuntu echo hello world
+hello world
+
+# run a java hello world image
 $ docker run --runtime=krun kontainguide/java-hello-world
 Hello world from Kontain!
-```
 
+# run a C-based example
+$ docker run --runtime=krun kontainguide/hello-kontain
+Hello, world
+Hello, argv[0] = '/hello_test.km'
+Hello, argv[1] = 'from'
+Hello, argv[2] = 'docker'
+```
+For more details, you can view the [examples](https://github.com/kontainapp/guide-examples/examples) or view the docs for each language using the links below.
+[!ref text="Kontain examples repo"](https://github.com/kontainapp/guide-examples)
+
+For more details on Install:
 [!ref text="Install Kontain in Linux"](/getting_started/install_linux)
 
-## Using Kontain with golang, Java Spring Boot, Python FastAPI, and NodeJS
+For more details to install Kontain as a secure runtime in Kubernetes:
+[!ref text="Install Kontain in Kubernetes"](/getting_started/kubernetes)
+
 Below we will some examples of how to use Kontain with golang, Java Spring Boot, Python FastAPI and NodeJS without changing any of your existing Docker or Kubernetes workflows.  
 
-For more details, you can view the [examples repository](https://github.com/kontainapp/guide-examples) or view the docs for each - [Go](/getting_started/golang), [Java](/getting_started/java), [Python](/getting_started/python), [NodeJS](/getting_started/javascript)
-
+### Using Kontain with Golang http server (Docker Container)
+[!ref text="Kontain and Go (Docker and Kubernetes)"](/getting_started/golang)
 
 ```shell
 # clone the examples repository
@@ -61,8 +83,12 @@ $ curl http://localhost:8080
 Hello World!
 
 $ docker stop golang-http-hello
+```
 
-#---------------------
+### Using Kontain with a Java Spring boot service (Docker Container)
+[!ref text="Using Kontain with Java/Spring Boot (Docker and Kubernetes)"](/getting_started/java)
+
+```shell
 # let's run a java spring boot hello world program
 $ cd guide-examples/examples/java/java-hello-world/
 
@@ -82,8 +108,12 @@ Hello from Kontain!
 
 # stop the service
 $ docker stop spring-boot-hello
+```
 
-#---------------------
+### Using Kontain with a Python FastAPI service (Docker Container)
+[!ref text="Using Kontain with Python/FastAPI (Docker and Kubernetes)"](/getting_started/python)
+
+```shell
 # now let's run a Flask python example
 $ cd guide-examples/examples/python/py-flask-hello
 
@@ -99,8 +129,12 @@ $ curl  http://localhost:8080
 
 # now let's stop the FastAPI container
 $ docker stop fastapi-hello
+```
 
-#---------------------
+### Using Kontain with a NodeJS Express service (Docker Container)
+[!ref text="Using Kontain with NodeJS/Express (Docker and Kubernetes)"](/getting_started/javascript)
+
+```shell
 # now let's run a NodeJS express service
 $ cd guide-examples/examples/js/node-hello-world
 $ docker build -t kontainguide/node-hello-world .
