@@ -1,0 +1,25 @@
+
+user@dev:~/guide-examples/examples/js/node-express-hello$ docker images|grep node
+node                                        12                   6c8de432fc7f   2 months ago     918MB
+
+user@dev:~/guide-examples/examples/js/node-express-hello$ docker images|grep express
+kontainguide/node-express-hello             1.0                  5ff113aea34f   2 weeks ago   84.2MB
+
+user@smdev:~/guide-examples/examples/js/node-express-hello$ docker images|grep jdk
+openjdk                                     11                   f0e1438095c5   2 weeks ago     660MB
+kontainapp/runenv-jdk-shell-11.0.8          latest               b27a68b28700   2 weeks ago    179MB
+
+user@smdev:~/guide-examples/examples/js/node-express-hello$ docker images|grep spring-boot-hello
+kontainguide/spring-boot-hello              <none>               16c1704d8d1a   2 weeks ago     197MB
+
+user@smdev:~/guide-examples/examples/js/node-express-hello$ docker images|grep python
+python                                      3.9                  9ac24a438a75   2 weeks ago     915MB
+kontainapp/runenv-python-3.9                latest               e6f2dd305489   2 weeks ago    24.1MB
+
+user@smdev:~/guide-examples/examples/js/node-express-hello$ docker images|grep flask
+kontainguide/py-flask-hello                 1.0                  e2140ce2364d   2 weeks ago    44MB
+
+
+user@smdev:~/guide-examples/examples/js/node-express-hello$ docker images|grep go
+golang                                      1.14                 21a5635903d6   2 weeks ago    811MB
+kontainguide/golang-http-hello              1.0                  74e2bb62f830   2 weeks ago     6.24MB

@@ -5,8 +5,12 @@ order: 2000
 ---
 
 <!-- ![](/images/microservices_anim_medium.gif) -->
-![](/anim/quickstart.gif)
-
+**Installing Kontain**
+![](https://guide-assets.s3.us-west-2.amazonaws.com/downloads/install.gif)
+**Run existing Docker containers in Docker and Kubernetes**
+![](https://guide-assets.s3.us-west-2.amazonaws.com/downloads/run_docker_ctrs.gif)
+**Image sizes**
+![](/images/image_sizes.png)
 
 ## Introduction
 Kontain is a new secure runtime for Docker and Kubernetes that:

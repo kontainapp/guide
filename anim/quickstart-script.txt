@@ -1,3 +1,5 @@
+# overview for quickstart but eventually used the script on the guide website with explanations
+
 # verify that kvm is installed
 ls -l /dev/kvm
 
