@@ -5,11 +5,12 @@ order: 2000
 ---
 
 <!-- ![](/images/microservices_anim_medium.gif) -->
+## Usage
+**Run existing Docker containers securely in Docker and Kubernetes using Kontain**
+![](https://guide-assets.s3.us-west-2.amazonaws.com/downloads/run_docker_ctrs.gif)
 **Installing Kontain**
 ![](https://guide-assets.s3.us-west-2.amazonaws.com/downloads/install.gif)
-**Run existing Docker containers in Docker and Kubernetes**
-![](https://guide-assets.s3.us-west-2.amazonaws.com/downloads/run_docker_ctrs.gif)
-**Image sizes**
+**Image size benefits if using full capabilities of Kontain**
 ![](/images/image_sizes.png)
 
 ## Introduction
