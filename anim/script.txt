@@ -5,11 +5,11 @@ ls -l /dev/kvm
 systemctl|grep docker.service
 
 # install kontain
-sudo mkdir -p /opt/kontain ; sudo chown root /opt/kontain
-curl -s https://raw.githubusercontent.com/kontainapp/km/current/km-releases/kontain-install.sh | sudo bash
+$ sudo mkdir -p /opt/kontain ; sudo chown root /opt/kontain
+$ curl -s https://raw.githubusercontent.com/kontainapp/km/current/km-releases/kontain-install.sh | sudo bash
 
 # run classic Docker container (hello-world)
-docker run --runtime=krun kontainguide/hello-kontain
+$ docker run --runtime=krun kontainguide/hello-kontain
 
 # now we have verifed that Kontain is installed
 clear
