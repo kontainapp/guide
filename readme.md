@@ -3,7 +3,6 @@ label: Introduction to "Kontainers"
 icon: home
 order: 2000
 ---
-[Kontain User Guide](https://kontainapp.github.io/guide/)
 
 <!-- ![](/images/microservices_anim_medium.gif) -->
 ## Usage
