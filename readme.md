@@ -9,7 +9,7 @@ order: 2000
 ### Run existing Docker containers securely in Docker and Kubernetes using Kontain
 ![](https://guide-assets.s3.us-west-2.amazonaws.com/downloads/run_docker_ctrs.gif)
 
-### Installing Kontain**
+### Installing Kontain
 ![](https://guide-assets.s3.us-west-2.amazonaws.com/downloads/install.gif)
 
 ### Image size benefits if using full capabilities of Kontain
