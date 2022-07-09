@@ -3,9 +3,15 @@ label: Video Tutorials
 icon: home
 order: 600
 ---
+## Ease of use videos
+### Showing Easy Install
+[](https://s3.console.aws.amazon.com/s3/object/guide-assets?region=us-west-2&prefix=downloads/install.gif)
 
-## Installs (Docker, Kubernetes)
-### Checking Pre-requisites for Kontain
+### Running existing Docker Containers
+[](https://s3.console.aws.amazon.com/s3/object/guide-assets?region=us-west-2&prefix=downloads/run_docker_ctrs.gif)
+
+## Showing Detailed Install steps (Docker, Kubernetes)
+### Check Pre-requisites for Kontain
 [![asciicast](https://asciinema.org/a/456774.svg)](https://asciinema.org/a/456774?speed=2&t=55)
 
 ### Installing Kontain in Docker
