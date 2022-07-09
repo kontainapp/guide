@@ -1,5 +1,5 @@
 icon: home
 order: 1100
 expanded: false
-Label: Overview
+Label: Overview/Architecture
 #visibility: hidden or use _ in front of folder name
