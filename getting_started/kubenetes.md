@@ -5,7 +5,7 @@ order: 995
 ---
 
 # Installing in Kubernetes
-## Pre-requisites
+## Pre-requisites for Kubernetes Worker node to run Kontain
 Kontain runs on *Linux kernel version 4.15 or newer*, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled, ideally Ubuntu or Fedora.  For enabling KVM on Ubuntu 18.04 or higher, you can refer to this [article](https://linuxize.com/post/how-to-install-kvm-on-ubuntu-18-04/).
 
 For Kubernetes platforms that do not offer nested virtualization like GKE and AWS, we use a software virtualization module that gets installed as part of the Kontain install.  For other platforms that do offer nested virtualization, we recommend using the regular Kontain install.
@@ -14,7 +14,7 @@ Recommended distros for Kubernetes Worker Nodes are Ubuntu 20.04 and Amazon Linu
 
 To package Kontain images, it is also necessary to have a recent version of Docker or Moby-engine is installed.
 
-==- Tip: starting a Kubernetes cluster with Minikube or kind
+==- Tip: Starting a Kubernetes cluster with Minikube or kind
 contains instructions for launching various versions of Kubernetes
 For trying out Kontain with Kubernetes, you can launch Minikube with Docker Desktop [view instructions here](/appendix/minikube/).
 
@@ -29,7 +29,7 @@ $ minikube start --container-runtime=containerd --driver=docker --wait=all
 ```
 ===
 
-## Install Kontain using Daemonset 
+## Install Kontain using Daemonset in Kubernetes
 Deploy Kontain Runtime using the Kubernetes client CLI
 
 ```shell
@@ -82,7 +82,7 @@ kube-system   kindnet          1         1         1       1            1       
 kube-system   kube-proxy       1         1         1       1            1           kubernetes.io/os=linux   168m
 ```
 
-## Installing in other Kubernetes
+## Installing in Cloud Kubernetes/Openshift
 +++ Azure AKS
 Deploy Kontain Runtime using the Kubernetes client CLI
 
