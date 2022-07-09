@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/guide">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.710707679482">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.710708688643">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.3.0">
@@ -32,12 +32,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../images/favicon.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.3.0.710707679482" rel="stylesheet" />
+    <link href="../../resources/css/retype.css?v=2.3.0.710708688643" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.3.0.710707679482" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../resources/js/config.js?v=2.3.0.710708688643" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../resources/js/retype.js?v=2.3.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.3.0.710707679482" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.3.0.710707679482" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.3.0.710708688643" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.3.0.710708688643" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -233,10 +233,10 @@
         <span>Installing in Kubernetes</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="pre-requisites">
+<doc-anchor-target id="pre-requisites-for-kubernetes-worker-node-to-run-kontain">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#pre-requisites">#</doc-anchor-trigger>
-        <span>Pre-requisites</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#pre-requisites-for-kubernetes-worker-node-to-run-kontain">#</doc-anchor-trigger>
+        <span>Pre-requisites for Kubernetes Worker node to run Kontain</span>
     </h2>
 </doc-anchor-target>
 <p>Kontain runs on <em>Linux kernel version 4.15 or newer</em>, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled, ideally Ubuntu or Fedora.  For enabling KVM on Ubuntu 18.04 or higher, you can refer to this <a href="https://linuxize.com/post/how-to-install-kvm-on-ubuntu-18-04/">article</a>.</p>
@@ -244,7 +244,7 @@
 <p>Recommended distros for Kubernetes Worker Nodes are Ubuntu 20.04 and Amazon Linux 2, or newer.</p>
 <p>To package Kontain images, it is also necessary to have a recent version of Docker or Moby-engine is installed.</p>
 <doc-panel id="tip-starting-a-kubernetes-cluster-with-minikube-or-kind" collapsed>
-    <template #title>Tip: starting a Kubernetes cluster with Minikube or kind</template>
+    <template #title>Tip: Starting a Kubernetes cluster with Minikube or kind</template>
 <p>contains instructions for launching various versions of Kubernetes
 For trying out Kontain with Kubernetes, you can launch Minikube with Docker Desktop <a href="../../appendix/minikube/">view instructions here</a>.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -255,10 +255,10 @@ For trying out Kontain with Kubernetes, you can launch Minikube with Docker Desk
 <pre class="language-bash"><code v-pre class="language-bash">$ minikube start --container-runtime=containerd --driver=docker --wait=all</code></pre>
 </doc-codeblock></div>
 </doc-panel>
-<doc-anchor-target id="install-kontain-using-daemonset">
+<doc-anchor-target id="install-kontain-using-daemonset-in-kubernetes">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain-using-daemonset">#</doc-anchor-trigger>
-        <span>Install Kontain using Daemonset</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain-using-daemonset-in-kubernetes">#</doc-anchor-trigger>
+        <span>Install Kontain using Daemonset in Kubernetes</span>
     </h2>
 </doc-anchor-target>
 <p>Deploy Kontain Runtime using the Kubernetes client CLI</p>
@@ -312,10 +312,10 @@ kube-system   kontain-deploy   1         1         1       1            1       
 kube-system   kindnet          1         1         1       1            1           &lt;none&gt;                   168m
 kube-system   kube-proxy       1         1         1       1            1           kubernetes.io/os=linux   168m</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="installing-in-other-kubernetes">
+<doc-anchor-target id="installing-in-cloud-kubernetesopenshift">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#installing-in-other-kubernetes">#</doc-anchor-trigger>
-        <span>Installing in other Kubernetes</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#installing-in-cloud-kubernetesopenshift">#</doc-anchor-trigger>
+        <span>Installing in Cloud Kubernetes/Openshift</span>
     </h2>
 </doc-anchor-target>
 <doc-tabs>
