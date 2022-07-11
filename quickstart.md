@@ -56,7 +56,7 @@ For more details on Install:
 For more details to install Kontain as a secure runtime in Kubernetes:
 [!ref text="Install Kontain in Kubernetes"](/getting_started/kubernetes)
 
-Below we will some examples of how to use Kontain with golang, Java Spring Boot, Python FastAPI and NodeJS without changing any of your existing Docker or Kubernetes workflows.  
+Below we will some examples of how to use Kontain with golang, Java Spring Boot, Python Flask and NodeJS without changing any of your existing Docker or Kubernetes workflows.  
 
 ### Using Kontain with Golang http server (Docker Container)
 [!ref text="Kontain and Go (Docker and Kubernetes)"](/getting_started/golang)
@@ -127,7 +127,7 @@ CONTAINER ID   IMAGE                         COMMAND            CREATED         
 $ curl  http://localhost:5000
 Hello Kontain!
 
-# now let's stop the FastAPI container
+# now let's stop the python flask container
 $ docker stop py-flask-hello
 ```
 
