@@ -67,7 +67,7 @@ $ git clone https://github.com/kontainapp/guide-examples.git
 
 #---------------------
 # let's run a golang server program
-$ cd guide-examples/examples/go/golang-http=hello
+$ cd guide-examples/examples/go/golang-http-hello
 
 # build the image
 $ docker build -t kontainguide/golang-http-hello .
@@ -119,16 +119,16 @@ $ cd guide-examples/examples/python/py-flask-hello
 
 # now let's build this example
 $ docker build -t kontainguide/py-flask-hello .
-$ docker run -d --rm -p 8080:8080 --runtime=krun --name fastapi-hello kontainguide/fastapi-hello
+$ docker run -d --rm -p 5000:5000 --runtime=krun --name py-flask-hello kontainguide/py-flask-hello
 $ docker ps
 CONTAINER ID   IMAGE                         COMMAND            CREATED          STATUS          PORTS                                       NAMES
-d89b1dff1249   kontainguide/fastapi-hello   "uvicorn app.main:ap…"   51 seconds ago   Up 51 seconds   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   fastapi-hello
+45377d5dec4d   kontainguide/py-flask-hello   "python main.py"   6 seconds ago   Up 6 seconds   0.0.0.0:5000->5000/tcp, :::5000->5000/tcp   py-flask-hello
 
-$ curl  http://localhost:8080
+$ curl  http://localhost:5000
 {"Hello":"Kontain!"}
 
 # now let's stop the FastAPI container
-$ docker stop fastapi-hello
+$ docker stop py-flask-hello
 ```
 
 ### Using Kontain with a NodeJS Express service (Docker Container)
