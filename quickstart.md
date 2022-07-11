@@ -110,8 +110,8 @@ Hello from Kontain!
 $ docker stop spring-boot-hello
 ```
 
-### Using Kontain with a Python FastAPI service (Docker Container)
-[!ref text="Using Kontain with Python/FastAPI (Docker and Kubernetes)"](/getting_started/python)
+### Using Kontain with a Python Flask service (Docker Container)
+[!ref text="Using Kontain with Python/Flask (Docker and Kubernetes)"](/getting_started/python)
 
 ```shell
 # now let's run a Flask python example
@@ -125,7 +125,7 @@ CONTAINER ID   IMAGE                         COMMAND            CREATED         
 45377d5dec4d   kontainguide/py-flask-hello   "python main.py"   6 seconds ago   Up 6 seconds   0.0.0.0:5000->5000/tcp, :::5000->5000/tcp   py-flask-hello
 
 $ curl  http://localhost:5000
-{"Hello":"Kontain!"}
+Hello Kontain!
 
 # now let's stop the FastAPI container
 $ docker stop py-flask-hello
