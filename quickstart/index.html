@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/guide">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.710886358563">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.710886742451">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.3.0">
@@ -32,12 +32,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../images/favicon.png" rel="icon" />
-    <link href="../resources/css/retype.css?v=2.3.0.710886358563" rel="stylesheet" />
+    <link href="../resources/css/retype.css?v=2.3.0.710886742451" rel="stylesheet" />
 
-    <script type="text/javascript" src="../resources/js/config.js?v=2.3.0.710886358563" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../resources/js/config.js?v=2.3.0.710886742451" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../resources/js/retype.js?v=2.3.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../resources/js/lunr.js?v=2.3.0.710886358563" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../resources/js/prism.js?v=2.3.0.710886358563" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../resources/js/lunr.js?v=2.3.0.710886742451" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../resources/js/prism.js?v=2.3.0.710886742451" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -413,10 +413,10 @@ Hello from Kontain!
 # stop the service
 $ docker stop spring-boot-hello</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="using-kontain-with-a-python-fastapi-service-docker-container">
+<doc-anchor-target id="using-kontain-with-a-python-flask-service-docker-container">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-with-a-python-fastapi-service-docker-container">#</doc-anchor-trigger>
-        <span>Using Kontain with a Python FastAPI service (Docker Container)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-with-a-python-flask-service-docker-container">#</doc-anchor-trigger>
+        <span>Using Kontain with a Python Flask service (Docker Container)</span>
     </h3>
 </doc-anchor-target>
 <p>
@@ -425,7 +425,7 @@ $ docker stop spring-boot-hello</code></pre>
         <span class="inline-block mb-px">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
         </span>
-        <span class="inline-block font-medium ml-2">Using Kontain with Python/FastAPI (Docker and Kubernetes)</span>
+        <span class="inline-block font-medium ml-2">Using Kontain with Python/Flask (Docker and Kubernetes)</span>
     </div>
     <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
         <span>../getting_started/python/</span>
@@ -445,7 +445,7 @@ CONTAINER ID   IMAGE                         COMMAND            CREATED         
 45377d5dec4d   kontainguide/py-flask-hello   &quot;python main.py&quot;   6 seconds ago   Up 6 seconds   0.0.0.0:5000-&gt;5000/tcp, :::5000-&gt;5000/tcp   py-flask-hello
 
 $ curl  http://localhost:5000
-{&quot;Hello&quot;:&quot;Kontain!&quot;}
+Hello Kontain!
 
 # now let's stop the FastAPI container
 $ docker stop py-flask-hello</code></pre>
