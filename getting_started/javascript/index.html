@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/guide">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.710886872347">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.710946885497">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.3.0">
@@ -32,12 +32,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../images/favicon.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.3.0.710886872347" rel="stylesheet" />
+    <link href="../../resources/css/retype.css?v=2.3.0.710946885497" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.3.0.710886872347" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../resources/js/config.js?v=2.3.0.710946885497" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../resources/js/retype.js?v=2.3.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.3.0.710886872347" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.3.0.710886872347" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.3.0.710946885497" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.3.0.710946885497" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -234,7 +234,20 @@
     </h1>
 </doc-anchor-target>
 <p>This example shows how to build, push, run a NodeJS based app in a Kontain container in Docker and Kubernetes.</p>
-<p>The <a href="https://github.com/kontainapp/guide-examples/tree/master/examples/js/node-express-hello">implementation of this example is here</a>.</p>
+<p>
+<div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
+    <div class="flex items-center text-blue-500 dark:text-blue-400">
+        <span class="inline-block mb-px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
+        </span>
+        <span class="inline-block font-medium ml-2">implementation of this example</span>
+    </div>
+    <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
+        <span>https://github.com/kontainapp/guide-examples/tree/master/examples/js/node-express-hello</span>
+    </div>
+    <a href="https://github.com/kontainapp/guide-examples/tree/master/examples/js/node-express-hello" class="absolute block inset-0"></a>
+</div>
+</p>
 <doc-anchor-target id="to-build-this-example">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#to-build-this-example">#</doc-anchor-trigger>
@@ -244,21 +257,21 @@
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash">$ docker build -t kontainguide/node-express-hello:1.0 .</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="see-image-sizes">
+<doc-anchor-target id="see-image-sizes-for-benefits-of-using-kontain-base-image">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#see-image-sizes">#</doc-anchor-trigger>
-        <span>see image sizes</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#see-image-sizes-for-benefits-of-using-kontain-base-image">#</doc-anchor-trigger>
+        <span>see image sizes for benefits of using Kontain base image</span>
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ docker images | grep -E 'spring|jdk'
+<pre class="language-bash"><code v-pre class="language-bash">$ docker images | grep -E 'node'
 ...
+node                               12      918MB
 kontainguide/node-express-hello    1.0     84.2MB
 kontainapp/runenv-node             latest  81.3MB
-node                               12      918MB  
 ...</code></pre>
 </doc-codeblock></div>
-<p><strong>Please note that the image size for the Kontain based container is 84.2MB versus the base container being 918MB</strong></p>
+<p><strong>Please note that the image size for the Kontain based container is 84.2MB versus the base node image has a size of 918MB</strong></p>
 <doc-anchor-target id="to-run-this-example">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#to-run-this-example">#</doc-anchor-trigger>

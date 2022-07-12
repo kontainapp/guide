@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/guide">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.710886872347">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.710946885497">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.3.0">
@@ -32,12 +32,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../images/favicon.png" rel="icon" />
-    <link href="../resources/css/retype.css?v=2.3.0.710886872347" rel="stylesheet" />
+    <link href="../resources/css/retype.css?v=2.3.0.710946885497" rel="stylesheet" />
 
-    <script type="text/javascript" src="../resources/js/config.js?v=2.3.0.710886872347" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../resources/js/config.js?v=2.3.0.710946885497" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../resources/js/retype.js?v=2.3.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../resources/js/lunr.js?v=2.3.0.710886872347" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../resources/js/prism.js?v=2.3.0.710886872347" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../resources/js/lunr.js?v=2.3.0.710946885497" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../resources/js/prism.js?v=2.3.0.710946885497" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -450,10 +450,10 @@ Hello Kontain!
 # now let's stop the python flask container
 $ docker stop py-flask-hello</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="using-kontain-with-a-nodejs-express-service-docker-container">
+<doc-anchor-target id="using-kontain-with-a-nodejs-hello-world-http-service-docker-container">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-with-a-nodejs-express-service-docker-container">#</doc-anchor-trigger>
-        <span>Using Kontain with a NodeJS Express service (Docker Container)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-with-a-nodejs-hello-world-http-service-docker-container">#</doc-anchor-trigger>
+        <span>Using Kontain with a NodeJS hello world http service (Docker Container)</span>
     </h3>
 </doc-anchor-target>
 <p>
@@ -462,7 +462,7 @@ $ docker stop py-flask-hello</code></pre>
         <span class="inline-block mb-px">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
         </span>
-        <span class="inline-block font-medium ml-2">Using Kontain with NodeJS/Express (Docker and Kubernetes)</span>
+        <span class="inline-block font-medium ml-2">Using Kontain with NodeJS express service (Docker and Kubernetes)</span>
     </div>
     <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
         <span>../getting_started/javascript/</span>
@@ -487,6 +487,103 @@ Hello World!
 
 # now let's stop the nodejs container
 $ docker stop node-hello-world</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="observing-the-full-benefits-of-using-kontains-base-image">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#observing-the-full-benefits-of-using-kontains-base-image">#</doc-anchor-trigger>
+        <span>Observing the full benefits of using Kontain&#x27;s base image</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ docker images | grep -E 'node'
+...
+node                               12      918MB
+kontainguide/node-express-hello    1.0     84.2MB
+kontainapp/runenv-node             latest  81.3MB
+...</code></pre>
+</doc-codeblock></div>
+<p><strong>Please note that the image size for the Kontain based container is 84.2MB versus the base node image has a size of 918MB</strong></p>
+<doc-anchor-target id="using-kontain-with-docker-compose">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-with-docker-compose">#</doc-anchor-trigger>
+        <span>Using Kontain with docker-compose</span>
+    </h3>
+</doc-anchor-target>
+<p>
+<div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
+    <div class="flex items-center text-blue-500 dark:text-blue-400">
+        <span class="inline-block mb-px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
+        </span>
+        <span class="inline-block font-medium ml-2">Using Kontain with docker-compose example</span>
+    </div>
+    <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
+        <span>https://github.com/kontainapp/guide-examples/blob/master/examples/js/node-hello-world/docker-compose.yml</span>
+    </div>
+    <a href="https://github.com/kontainapp/guide-examples/blob/master/examples/js/node-hello-world/docker-compose.yml" class="absolute block inset-0"></a>
+</div>
+</p>
+<p>See below for an example.  Note the use of the Kontain runtime class in the docker-compose yaml file.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ cat docker-compose.yml
+version: &quot;3.7&quot;
+
+services:
+  demo:
+    runtime: krun
+    image: kontainguide/node-hello-world:1.0
+    ports:
+      - &quot;3000:3000&quot;
+    deploy:
+      replicas: 1</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="using-kontain-with-kubernetes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-with-kubernetes">#</doc-anchor-trigger>
+        <span>Using Kontain with Kubernetes</span>
+    </h3>
+</doc-anchor-target>
+<p>
+<div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
+    <div class="flex items-center text-blue-500 dark:text-blue-400">
+        <span class="inline-block mb-px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
+        </span>
+        <span class="inline-block font-medium ml-2">Using Kontain with Kubernetes example</span>
+    </div>
+    <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
+        <span>https://github.com/kontainapp/guide-examples/blob/master/examples/js/node-hello-world/k8s.yml</span>
+    </div>
+    <a href="https://github.com/kontainapp/guide-examples/blob/master/examples/js/node-hello-world/k8s.yml" class="absolute block inset-0"></a>
+</div>
+</p>
+<p>Below is an example of using Kontain with Kubernetes.</p>
+<p>In the app kubernetes manifest below, you will notice the <em>&quot;runtime: kontain&quot;</em> stanza.</p>
+<p>You will see that this enables Kontain launched containers to be deployed and run in Kubernetes alongside regular Docker or other Containers.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ cat k8s.yml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-hello-world
+...
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+...
+  template:
+    metadata:
+      labels:
+        app: node-hello-world
+    spec:
+      runtimeClassName: kontain
+      containers:
+      - name: node-hello-world
+        image: kontainguide/node-hello-world:1.0
+        ports:
+        - containerPort: 3000</code></pre>
 </doc-codeblock></div>
 
                                 
