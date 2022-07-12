@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/guide">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.710964229861">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.710966948516">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.3.0">
@@ -22,22 +22,24 @@
     <meta property="og:url" content="https://kontainapp.github.io/guide/quickstart/">
     <meta property="og:title" content="Quick start">
     <meta property="og:description" content="You can use Kontain to run existing or new Docker Images standalone or in Kubernetes with">
+    <meta property="og:image" content="https://kontainapp.github.io/guide/images/image_sizes.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://kontainapp.github.io/guide/quickstart/">
     <meta property="twitter:title" content="Quick start">
     <meta property="twitter:description" content="You can use Kontain to run existing or new Docker Images standalone or in Kubernetes with">
+    <meta property="twitter:image" content="https://kontainapp.github.io/guide/images/image_sizes.png">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../images/favicon.png" rel="icon" />
-    <link href="../resources/css/retype.css?v=2.3.0.710964229861" rel="stylesheet" />
+    <link href="../resources/css/retype.css?v=2.3.0.710966948516" rel="stylesheet" />
 
-    <script type="text/javascript" src="../resources/js/config.js?v=2.3.0.710964229861" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../resources/js/config.js?v=2.3.0.710966948516" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../resources/js/retype.js?v=2.3.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../resources/js/lunr.js?v=2.3.0.710964229861" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../resources/js/prism.js?v=2.3.0.710964229861" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../resources/js/lunr.js?v=2.3.0.710966948516" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../resources/js/prism.js?v=2.3.0.710966948516" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -488,21 +490,32 @@ Hello World!
 # now let's stop the nodejs container
 $ docker stop node-hello-world</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="observing-the-full-benefits-of-using-kontains-base-image">
+<doc-anchor-target id="using-kontains-base-images-to-enjoy-the-full-benefits-of-smaller-containers-and-lower-resources">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#observing-the-full-benefits-of-using-kontains-base-image">#</doc-anchor-trigger>
-        <span>Observing the full benefits of using Kontain&#x27;s base image</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontains-base-images-to-enjoy-the-full-benefits-of-smaller-containers-and-lower-resources">#</doc-anchor-trigger>
+        <span>using Kontain&#x27;s base images to enjoy the full benefits of smaller containers and lower resources</span>
     </h3>
 </doc-anchor-target>
+<p>Kontain can run existing Containers as is, but these can lead to bloated containers
+that are huge in size and consume significant computing resources when run.</p>
+<p>Although optional, usage of Kontain&#x27;s base images and enhanced build steps during the Container build process
+can produce significantly reduced image sizes.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash">$ docker images | grep -E 'node'
 ...
 node                               12      918MB
+
 kontainguide/node-express-hello    1.0     84.2MB
 kontainapp/runenv-node             latest  81.3MB
 ...</code></pre>
 </doc-codeblock></div>
-<p><strong>Please note that the image size for the Kontain based container is 84.2MB versus the base node image has a size of 918MB</strong></p>
+<p><strong>Please note that the image size for the the base node image has a size of 918MB whereas the Kontain based Application container image is 84.2MB because Kontain&#x27;s base node image is significantly smaller</strong></p>
+<p>More examples of the benefits of using Kontain base images:
+<figure class="content-center">
+    <img src="../images/image_sizes.png" alt="" />
+    <figcaption class="caption"></figcaption>
+</figure>
+</p>
 <doc-anchor-target id="using-kontain-with-docker-compose">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-with-docker-compose">#</doc-anchor-trigger>
@@ -523,7 +536,8 @@ kontainapp/runenv-node             latest  81.3MB
     <a href="https://github.com/kontainapp/guide-examples/blob/master/examples/js/node-hello-world/docker-compose.yml" class="absolute block inset-0"></a>
 </div>
 </p>
-<p>See below for an example.  Note the use of the Kontain runtime class in the docker-compose yaml file.</p>
+<p>See below for an example.  Note the use of the Kontain runtime stanza (runtime: krun) in the docker-compose yaml file.
+This is the same as using --runtime=krun in the CLI and shows how easy it is to use Kontain with your regular development tools.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash">$ cat docker-compose.yml
 version: &quot;3.7&quot;
