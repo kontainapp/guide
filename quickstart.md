@@ -96,11 +96,11 @@ $ cd guide-examples/examples/java/java-hello-world/
 $ docker build -t kontainguide/spring-boot-hello .
 
 # now run this
-docker run -d --rm -p 8080:8080 --runtime=krun --name spring-boot-hello kontainguide/spring-boot-hello
-docker ps
+$ docker run -d --rm -p 8080:8080 --runtime=krun --name spring-boot-hello kontainguide/spring-boot-hello
+
+$ docker ps
 CONTAINER ID   IMAGE                                COMMAND                  CREATED         STATUS         PORTS                                       NAMES
 445f87eb70bd   kontainguide/spring-boot-hello:1.0   "java -XX:-UseCompre…"   5 seconds ago   Up 5 seconds   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   spring-boot-hello
-
 
 # invoke the service
 $ curl http://localhost:8080
