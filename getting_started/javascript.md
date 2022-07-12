@@ -6,24 +6,25 @@ order: 700
 
 This example shows how to build, push, run a NodeJS based app in a Kontain container in Docker and Kubernetes.
 
-The [implementation of this example is here](https://github.com/kontainapp/guide-examples/tree/master/examples/js/node-express-hello).
+[!ref text="implementation of this example"](https://github.com/kontainapp/guide-examples/tree/master/examples/js/node-express-hello)
+
 
 ### to build this example
 ```bash
 $ docker build -t kontainguide/node-express-hello:1.0 .
 ```
 
-### see image sizes
+### see image sizes for benefits of using Kontain base image
 ```bash
-$ docker images | grep -E 'spring|jdk'
+$ docker images | grep -E 'node'
 ...
+node                               12      918MB
 kontainguide/node-express-hello    1.0     84.2MB
 kontainapp/runenv-node             latest  81.3MB
-node                               12      918MB  
 ...
 ```
 
-**Please note that the image size for the Kontain based container is 84.2MB versus the base container being 918MB**
+**Please note that the image size for the Kontain based container is 84.2MB versus the base node image has a size of 918MB**
 
 ### to run this example
 ```bash

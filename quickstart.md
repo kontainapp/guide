@@ -131,8 +131,8 @@ Hello Kontain!
 $ docker stop py-flask-hello
 ```
 
-### Using Kontain with a NodeJS Express service (Docker Container)
-[!ref text="Using Kontain with NodeJS/Express (Docker and Kubernetes)"](/getting_started/javascript)
+### Using Kontain with a NodeJS hello world http service (Docker Container)
+[!ref text="Using Kontain with NodeJS express service (Docker and Kubernetes)"](/getting_started/javascript)
 
 ```shell
 # now let's run a NodeJS express service
@@ -151,4 +151,70 @@ Hello World!
 
 # now let's stop the nodejs container
 $ docker stop node-hello-world
+```
+
+### Observing the full benefits of using Kontain's base image
+```bash
+$ docker images | grep -E 'node'
+...
+node                               12      918MB
+kontainguide/node-express-hello    1.0     84.2MB
+kontainapp/runenv-node             latest  81.3MB
+...
+```
+**Please note that the image size for the Kontain based container is 84.2MB versus the base node image has a size of 918MB**
+
+### Using Kontain with docker-compose
+[!ref text="Using Kontain with docker-compose example"](https://github.com/kontainapp/guide-examples/blob/master/examples/js/node-hello-world/docker-compose.yml)
+
+See below for an example.  Note the use of the Kontain runtime class in the docker-compose yaml file.
+
+```shell
+$ cat docker-compose.yml
+version: "3.7"
+
+services:
+  demo:
+    runtime: krun
+    image: kontainguide/node-hello-world:1.0
+    ports:
+      - "3000:3000"
+    deploy:
+      replicas: 1
+```
+
+### Using Kontain with Kubernetes
+[!ref text="Using Kontain with Kubernetes example"](https://github.com/kontainapp/guide-examples/blob/master/examples/js/node-hello-world/k8s.yml)
+
+Below is an example of using Kontain with Kubernetes.
+
+In the app kubernetes manifest below, you will notice the *"runtime: kontain"* stanza.  
+
+You will see that this enables Kontain launched containers to be deployed and run in Kubernetes alongside regular Docker or other Containers.
+
+
+```shell
+$ cat k8s.yml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-hello-world
+...
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+...
+  template:
+    metadata:
+      labels:
+        app: node-hello-world
+    spec:
+      runtimeClassName: kontain
+      containers:
+      - name: node-hello-world
+        image: kontainguide/node-hello-world:1.0
+        ports:
+        - containerPort: 3000
 ```
