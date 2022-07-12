@@ -153,7 +153,7 @@ Hello World!
 $ docker stop node-hello-world
 ```
 
-### using Kontain's base images to enjoy the full benefits of smaller containers and lower resources 
+### Using Kontain's base images for smaller container images and lower resource consumption 
 Kontain can run existing Containers as is, but these can lead to bloated containers 
 that are huge in size and consume significant computing resources when run.
 
