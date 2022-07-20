@@ -96,11 +96,11 @@ $ cd guide-examples/examples/java/java-hello-world/
 $ docker build -t kontainguide/spring-boot-hello .
 
 # now run this
-docker run -d --rm -p 8080:8080 --runtime=krun --name spring-boot-hello kontainguide/spring-boot-hello
-docker ps
+$ docker run -d --rm -p 8080:8080 --runtime=krun --name spring-boot-hello kontainguide/spring-boot-hello
+
+$ docker ps
 CONTAINER ID   IMAGE                                COMMAND                  CREATED         STATUS         PORTS                                       NAMES
 445f87eb70bd   kontainguide/spring-boot-hello:1.0   "java -XX:-UseCompre…"   5 seconds ago   Up 5 seconds   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   spring-boot-hello
-
 
 # invoke the service
 $ curl http://localhost:8080
@@ -153,21 +153,32 @@ Hello World!
 $ docker stop node-hello-world
 ```
 
-### Observing the full benefits of using Kontain's base image
+### Using Kontain's base images for smaller container images and lower resource consumption 
+Kontain can run existing Containers as is, but these can lead to bloated containers 
+that are huge in size and consume significant computing resources when run.
+
+Although optional, usage of Kontain's base images and enhanced build steps during the Container build process
+can produce significantly reduced image sizes.
+
 ```bash
 $ docker images | grep -E 'node'
 ...
 node                               12      918MB
+
 kontainguide/node-express-hello    1.0     84.2MB
 kontainapp/runenv-node             latest  81.3MB
 ...
 ```
-**Please note that the image size for the Kontain based container is 84.2MB versus the base node image has a size of 918MB**
+**Please note that the image size for the the base node image has a size of 918MB whereas the Kontain based Application container image is 84.2MB because Kontain's base node image is significantly smaller**
+
+More examples of the benefits of using Kontain base images:
+![](/images/image_sizes.png)
 
 ### Using Kontain with docker-compose
 [!ref text="Using Kontain with docker-compose example"](https://github.com/kontainapp/guide-examples/blob/master/examples/js/node-hello-world/docker-compose.yml)
 
-See below for an example.  Note the use of the Kontain runtime class in the docker-compose yaml file.
+See below for an example.  Note the use of the Kontain runtime stanza (runtime: krun) in the docker-compose yaml file. 
+This is the same as using --runtime=krun in the CLI and shows how easy it is to use Kontain with your regular development tools.
 
 ```shell
 $ cat docker-compose.yml
