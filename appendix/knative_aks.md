@@ -1,7 +1,7 @@
 ---
 label: Installing Kontain and KNative on Azure AKS
 icon: /images/aks.png
-order: 690
+order: 880
 ---
 # KNative and Kontain
 ### Installing Kontain on AKS cluster
