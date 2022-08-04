@@ -1,10 +1,10 @@
 ---
-label: Installing Kontain and KNative on Azure AKS
+label: Installing KNative with Kontain on Azure AKS
 icon: /images/aks.png
 order: 880
 ---
-# KNative and Kontain
-### Installing Kontain on AKS cluster
+# KNative and Kontain on AKS Cluster
+### Install Kontain
 Once you have [started your AKS Kubernetes Cluster](/appendix/azure_aks), you can install Kontain as shown below:
 
 ```shell
@@ -26,7 +26,7 @@ kube-system   tunnelfront-7d8df6bfdc-dr6z2          1/1     Running   0         
 $ kubectl get logs daemonset/kontain-node-initializer
 ```
 
-### Installing KNative on AKS cluster
+### Install KNative
 Below we show the steps needed to install KNative on AKS cluster.  We follow the instructions from the [knative docs](https://knative.dev/docs/install/yaml-install/serving/install-serving-with-yaml/#prerequisites).
 
 ```shell
