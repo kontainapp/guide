@@ -1,7 +1,7 @@
 ---
 label: Starting Azure AKS Cluster
 icon: /images/aks.png
-order: 700
+order: 790
 ---
 
 # Launching an AKS cluster

@@ -126,5 +126,6 @@ The above installs the Kontain runtime class and contains the libraries for inst
 
 +++
 
-## Using Kontain to deploy Java, Python, Golang and JS examples in Kubernetes
+### Using Kontain to deploy Java, Python, Golang and JS examples in Kubernetes
 [!ref text="examples" target=_blank](https://github.com/kontainapp/guide-examples/tree/master/examples)
+
