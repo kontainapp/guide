@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/guide">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.712967024425">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.712968213332">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -32,12 +32,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../images/favicon.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.4.0.712967024425" rel="stylesheet" />
+    <link href="../../resources/css/retype.css?v=2.4.0.712968213332" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.712967024425" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.712968213332" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.712967024425" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.4.0.712967024425" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.712968213332" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.4.0.712968213332" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -261,6 +261,13 @@
 <li>and install Kontain</li>
 <li>deploy and run a KNative service that uses a secure Kontain Container to run the function</li>
 </ul>
+<doc-anchor-target id="azure-aks-with-knative-and-kontain">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#azure-aks-with-knative-and-kontain">#</doc-anchor-trigger>
+        <span>Azure AKS with knative and kontain</span>
+    </h2>
+</doc-anchor-target>
+<p>Here are instructions to <a href="../../appendix/knative_aks/">install knative and kontain on an AKS cluster</a>.</p>
 <doc-anchor-target id="starting-a-knative-kind-cluster-with-kontain">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#starting-a-knative-kind-cluster-with-kontain">#</doc-anchor-trigger>
@@ -273,10 +280,15 @@
         <span>Installing knative kind quickstart plugins on your local desktop</span>
     </h3>
 </doc-anchor-target>
-<p>Note that this has to be done <strong>only once</strong>.<br />
-Also, please note that this has to be done on an OS that satisfies the pre-requisites for Kontain as shown earlier.</p>
+<p>Note that this has to be done <strong>only once</strong>.  This also assumes that you have the pre-requisites, Docker and kind kubernetes utility along with kubectl already installed.</p>
+<p>Also, please note that this has to be done on an OS that satisfies the pre-requisites for Kontain as shown earlier.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ make knativecluster-plugins-install</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash"># you will need to clone the examples repo
+$ git clone https://github.com/kontainapp/guide-examples.git
+$ cd examples/knative/basics
+
+# install the knative plugins for kind
+$ make knativecluster-plugins-install</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="starting-the-kind-cluster-with-knative-and-kontain-installed">
     <h3>
