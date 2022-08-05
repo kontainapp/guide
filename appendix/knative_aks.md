@@ -23,7 +23,7 @@ kube-system   metrics-server-569f6547dd-flsb4       1/1     Running   1         
 kube-system   tunnelfront-7d8df6bfdc-dr6z2          1/1     Running   0          38m
 
 # to check logs of the daemonset use
-$ kubectl get logs daemonset/kontain-node-initializer
+$ kubectl logs -n kube-system daemonset/kontain-node-initializer
 ```
 
 ### Install KNative
