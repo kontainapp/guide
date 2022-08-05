@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/guide">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.713051570469">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.713052043352">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -12,7 +12,7 @@
     <!-- Primary Meta Tags -->
     <title>KNative and Kontain on AKS Cluster</title>
     <meta name="title" content="KNative and Kontain on AKS Cluster">
-    <meta name="description" content="Once you have started your AKS Kubernetes Cluster, you can install Kontain as shown below:" />
+    <meta name="description" content="To view and query knative services in Kubernetes, you need the knative CLI. You can install this on your own desktop OS as shown below." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://kontainapp.github.io/guide/appendix/knative_aks/" />
@@ -21,23 +21,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kontainapp.github.io/guide/appendix/knative_aks/">
     <meta property="og:title" content="KNative and Kontain on AKS Cluster">
-    <meta property="og:description" content="Once you have started your AKS Kubernetes Cluster, you can install Kontain as shown below:">
+    <meta property="og:description" content="To view and query knative services in Kubernetes, you need the knative CLI. You can install this on your own desktop OS as shown below.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://kontainapp.github.io/guide/appendix/knative_aks/">
     <meta property="twitter:title" content="KNative and Kontain on AKS Cluster">
-    <meta property="twitter:description" content="Once you have started your AKS Kubernetes Cluster, you can install Kontain as shown below:">
+    <meta property="twitter:description" content="To view and query knative services in Kubernetes, you need the knative CLI. You can install this on your own desktop OS as shown below.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../images/favicon.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.4.0.713051570469" rel="stylesheet" />
+    <link href="../../resources/css/retype.css?v=2.4.0.713052043352" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.713051570469" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.713052043352" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.713051570469" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.4.0.713051570469" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.713052043352" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.4.0.713052043352" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -233,10 +233,21 @@
         <span>KNative and Kontain on AKS Cluster</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="install-kontain">
+<doc-anchor-target id="installing-client-side-knative-cli">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain">#</doc-anchor-trigger>
-        <span>Install Kontain</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#installing-client-side-knative-cli">#</doc-anchor-trigger>
+        <span>Installing client-side knative CLI</span>
+    </h3>
+</doc-anchor-target>
+<p>To view and query knative services in Kubernetes, you need the knative CLI.  You can install this on your own desktop OS as shown below.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">$ sudo curl -s -Lo /usr/local/bin/kn https://github.com/knative/client/releases/download/knative-v1.4.1/kn-linux-amd64
+$ sudo chmod +x /usr/local/bin/kn</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="install-kontain-on-aks-cluster">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain-on-aks-cluster">#</doc-anchor-trigger>
+        <span>Install Kontain on AKS Cluster</span>
     </h3>
 </doc-anchor-target>
 <p>Once you have <a href="../azure_aks/">started your AKS Kubernetes Cluster</a>, you can install Kontain as shown below:</p>
@@ -258,10 +269,10 @@ kube-system   tunnelfront-7d8df6bfdc-dr6z2          1/1     Running   0         
 # to check logs of the daemonset use
 $ kubectl logs -n kube-system daemonset/kontain-node-initializer</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="install-knative">
+<doc-anchor-target id="install-knative-on-aks-cluster">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#install-knative">#</doc-anchor-trigger>
-        <span>Install KNative</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#install-knative-on-aks-cluster">#</doc-anchor-trigger>
+        <span>Install KNative on AKS Cluster</span>
     </h3>
 </doc-anchor-target>
 <p>Below we show the steps needed to install KNative on AKS cluster.  We follow the instructions from the <a href="https://knative.dev/docs/install/yaml-install/serving/install-serving-with-yaml/#prerequisites">knative docs</a>.</p>
