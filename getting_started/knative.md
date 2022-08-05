@@ -16,13 +16,21 @@ This describes how to use Kontain with KNative.  It shows you how to:
 - and install Kontain
 - deploy and run a KNative service that uses a secure Kontain Container to run the function
 
+## Azure AKS with knative and kontain
+Here are instructions to [install knative and kontain on an AKS cluster](/appendix/knative_aks).
 
 ## Starting a knative kind cluster with Kontain
 ### Installing knative kind quickstart plugins on your local desktop
-Note that this has to be done **only once**.  
+Note that this has to be done **only once**.  This also assumes that you have the pre-requisites, Docker and kind kubernetes utility along with kubectl already installed.
+
 Also, please note that this has to be done on an OS that satisfies the pre-requisites for Kontain as shown earlier.
 
 ```shell
+# you will need to clone the examples repo
+$ git clone https://github.com/kontainapp/guide-examples.git
+$ cd examples/knative/basics
+
+# install the knative plugins for kind
 $ make knativecluster-plugins-install
 ```
 
