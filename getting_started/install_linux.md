@@ -13,7 +13,7 @@ Fedora 34 or higher, or
 Amazon Linux 2 VM with kernel version 5.10 or higher.
 Note that this also assumes that your user has access to /dev/kvm.
 
-Please note that Kontain also runs on platforms that do not offer access to Nested Virtualization by using a Software Virtualization Module (for e.g. AWS).
+Kontain also runs on platforms that do not offer access to Nested Virtualization by using a Software Virtualization Module.
 
 +++ checking for pre-requisites
 ```shell
