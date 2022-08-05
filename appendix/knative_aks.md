@@ -4,7 +4,15 @@ icon: /images/aks.png
 order: 880
 ---
 # KNative and Kontain on AKS Cluster
-### Install Kontain
+### Installing client-side knative CLI
+To view and query knative services in Kubernetes, you need the knative CLI.  You can install this on your own desktop OS as shown below.
+
+```shell
+$ sudo curl -s -Lo /usr/local/bin/kn https://github.com/knative/client/releases/download/knative-v1.4.1/kn-linux-amd64
+$ sudo chmod +x /usr/local/bin/kn
+```
+
+### Install Kontain on AKS Cluster
 Once you have [started your AKS Kubernetes Cluster](/appendix/azure_aks), you can install Kontain as shown below:
 
 ```shell
@@ -26,7 +34,7 @@ kube-system   tunnelfront-7d8df6bfdc-dr6z2          1/1     Running   0         
 $ kubectl get logs daemonset/kontain-node-initializer
 ```
 
-### Install KNative
+### Install KNative on AKS Cluster
 Below we show the steps needed to install KNative on AKS cluster.  We follow the instructions from the [knative docs](https://knative.dev/docs/install/yaml-install/serving/install-serving-with-yaml/#prerequisites).
 
 ```shell
