@@ -119,7 +119,7 @@ Here is a [great reference](https://www.containiq.com/post/kubernetes-events) to
 
 ```shell
 # viewing kubernetes events
-$ kubernetes get events
+$ kubectl get events
 ...
 ...
 6m3s        Normal    Created                 pod/py-flask-hello-00001-deployment-674697d47f-57g4g           Created container queue-proxy
