@@ -22,6 +22,9 @@ $ chroot /host
 ```
 
 For more details:
-[Kubernetes](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-running-pod/#node-shell-session)
-[Azure](https://docs.microsoft.com/en-us/azure/aks/ssh)
-[Google Cloud](https://cloud.google.com/anthos/clusters/docs/on-prem/1.3/how-to/ssh-cluster-node)
+[!ref text="Install Kontain in Linux"](/getting_started/install_linux)
+[!ref text="Kubernetes"](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-running-pod/#node-shell-session)
+
+[!ref text="Azure"](https://docs.microsoft.com/en-us/azure/aks/ssh)
+
+[!ref text="Google Cloud"](https://cloud.google.com/anthos/clusters/docs/on-prem/1.3/how-to/ssh-cluster-node)
