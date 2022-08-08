@@ -6,7 +6,11 @@ order: 995
 
 # Installing in Kubernetes
 ## Pre-requisites for Kubernetes Worker node to run Kontain
-Kontain runs on *Linux kernel version 4.15 or newer*, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled, ideally Ubuntu or Fedora.  For enabling KVM on Ubuntu 18.04 or higher, you can refer to this [article](https://linuxize.com/post/how-to-install-kvm-on-ubuntu-18-04/).
+Kontain runs on *Linux kernel version 4.15 or newer*, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled, ideally Ubuntu or Fedora.  
+
+To check for pre-requisites on Kubernetes worker nodes, you can refer to [this link](/getting_started/install_linux/#checking-for-pre-requisites)
+
+For more information to enable KVM on Ubuntu 20.04 or higher, you can refer to this [article](https://linuxize.com/post/how-to-install-kvm-on-ubuntu-20-04/).
 
 For Kubernetes platforms that do not offer nested virtualization like GKE and AWS, we use a software virtualization module that gets installed as part of the Kontain install.  For other platforms that do offer nested virtualization, we recommend using the regular Kontain install.
 
@@ -29,8 +33,8 @@ $ minikube start --container-runtime=containerd --driver=docker --wait=all
 ```
 ===
 
-## Install Kontain using Daemonset in Kubernetes
-Deploy Kontain Runtime using the Kubernetes client CLI
+## Install Kontain on Kubernetes nodes using a Daemonset install
+Once you have ensured that KVM has been enabled on your worker node(s), deploy Kontain Runtime using the Kubernetes client CLI.
 
 ```shell
 # we install Kontain using a Daemonset
@@ -38,6 +42,12 @@ $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/m
 ```
 
 The above yaml contains the Kontain runtime class and the install scripts for the Daemonset to be installed.
+
+**Important note:**
+Please note that AWS EKS and Google Cloud GKE do allow KVM to be enabled.  For installing Kontain on these versions of Kubernetes please refer to the below.
+
+[!ref text="To install Kontain on AWS, GKE nodes"](/getting_started/kubenetes/#aws-eks-with-containerd-and-google-cloud-gke)
+
 
 ## Verify Install
 Let's run a Kontain test app to verify that the runtime class is working as designed

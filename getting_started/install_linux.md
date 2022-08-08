@@ -36,6 +36,9 @@ $ systemctl|grep docker.service
   docker.service
 ```
 
+==- Tip: Enabling KVM for Ubuntu 20.04
+To enable KVM for Ubuntu, you can see the [tips here](https://linuxize.com/post/how-to-install-kvm-on-ubuntu-20-04/)
+===
 ==- Tip: Installing Docker on RHEL/Fedora, Amazon Linux 2 or Ubuntu systems
 If Docker is not present, you can install Docker On Fedora/RHEL systems using [instructions from here](https://developer.fedoraproject.org/tools/docker/docker-installation.html) or for Ubuntu using these [instructions](https://docs.docker.com/engine/install/ubuntu/).
 ===
