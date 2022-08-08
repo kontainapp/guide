@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/guide">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.713060425959">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.713292583185">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -32,12 +32,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../images/favicon.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.4.0.713060425959" rel="stylesheet" />
+    <link href="../../resources/css/retype.css?v=2.4.0.713292583185" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.713060425959" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.713292583185" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.713060425959" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.4.0.713060425959" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.713292583185" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.4.0.713292583185" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -239,7 +239,9 @@
         <span>Pre-requisites for Kubernetes Worker node to run Kontain</span>
     </h2>
 </doc-anchor-target>
-<p>Kontain runs on <em>Linux kernel version 4.15 or newer</em>, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled, ideally Ubuntu or Fedora.  For enabling KVM on Ubuntu 18.04 or higher, you can refer to this <a href="https://linuxize.com/post/how-to-install-kvm-on-ubuntu-18-04/">article</a>.</p>
+<p>Kontain runs on <em>Linux kernel version 4.15 or newer</em>, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled, ideally Ubuntu or Fedora.</p>
+<p>To check for pre-requisites on Kubernetes worker nodes, you can refer to <a href="../install_linux/#checking-for-pre-requisites">this link</a></p>
+<p>For more information to enable KVM on Ubuntu 20.04 or higher, you can refer to this <a href="https://linuxize.com/post/how-to-install-kvm-on-ubuntu-20-04/">article</a>.</p>
 <p>For Kubernetes platforms that do not offer nested virtualization like GKE and AWS, we use a software virtualization module that gets installed as part of the Kontain install.  For other platforms that do offer nested virtualization, we recommend using the regular Kontain install.</p>
 <p>Recommended distros for Kubernetes Worker Nodes are Ubuntu 20.04 and Amazon Linux 2, or newer.</p>
 <p>To package Kontain images, it is also necessary to have a recent version of Docker or Moby-engine is installed.</p>
@@ -255,18 +257,34 @@ For trying out Kontain with Kubernetes, you can launch Minikube with Docker Desk
 <pre class="language-bash"><code v-pre class="language-bash">$ minikube start --container-runtime=containerd --driver=docker --wait=all</code></pre>
 </doc-codeblock></div>
 </doc-panel>
-<doc-anchor-target id="install-kontain-using-daemonset-in-kubernetes">
+<doc-anchor-target id="install-kontain-on-kubernetes-nodes-using-a-daemonset-install">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain-using-daemonset-in-kubernetes">#</doc-anchor-trigger>
-        <span>Install Kontain using Daemonset in Kubernetes</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain-on-kubernetes-nodes-using-a-daemonset-install">#</doc-anchor-trigger>
+        <span>Install Kontain on Kubernetes nodes using a Daemonset install</span>
     </h2>
 </doc-anchor-target>
-<p>Deploy Kontain Runtime using the Kubernetes client CLI</p>
+<p>Once you have ensured that KVM has been enabled on your worker node(s), deploy Kontain Runtime using the Kubernetes client CLI.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash"># we install Kontain using a Daemonset
 $ kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/km.yaml</code></pre>
 </doc-codeblock></div>
 <p>The above yaml contains the Kontain runtime class and the install scripts for the Daemonset to be installed.</p>
+<p><strong>Important note:</strong>
+Please note that AWS EKS and Google Cloud GKE do allow KVM to be enabled.  For installing Kontain on these versions of Kubernetes please refer to the below.</p>
+<p>
+<div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
+    <div class="flex items-center text-blue-500 dark:text-blue-400">
+        <span class="inline-block mb-px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
+        </span>
+        <span class="inline-block font-medium ml-2">To install Kontain on AWS, GKE nodes</span>
+    </div>
+    <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
+        <span>#aws-eks-with-containerd-and-google-cloud-gke</span>
+    </div>
+    <a href="#aws-eks-with-containerd-and-google-cloud-gke" class="absolute block inset-0"></a>
+</div>
+</p>
 <doc-anchor-target id="verify-install">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#verify-install">#</doc-anchor-trigger>
