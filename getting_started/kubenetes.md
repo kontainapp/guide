@@ -47,8 +47,8 @@ The above yaml contains the Kontain runtime class and the install scripts for th
 +++ AWS EKS
 To create EKS cluster with Kontain:
 
-1. Create cluster on EKS using Kontain-enabled AMI (kontain-eks-node-1.22-<version>).  
-    You can Amazon Management Console or eksclt as described in ["Getting started with Amazon EKS"](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html).
+1. Create cluster on EKS using Kontain-enabled AMI (kontain-eks-node-1.22-*version*)
+    You can use Amazon AWS Management Console or eksctl as described in ["Getting started with Amazon EKS"](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html).
     Alternatively, you can download Kontain EKS cluster creation script create-cluster.sh and run as shown below or customize it as needed
     
     !!!
@@ -60,7 +60,7 @@ To create EKS cluster with Kontain:
     ```console
      curl -o create-cluster.sh https://raw.githubusercontent.com/kontainapp/km/current/cloud/k8s/deploy/amazon-eks/create-cluster.sh
      chmod +x create-cluster.sh 
-     create-cluster --region=<your region> --ami=<Kontain-enabled AMI ID> <prefix>
+     ./create-cluster.sh --region=<your region> --ami=<Kontain-enabled AMI ID> <prefix>
     ```
     where \<prefix\> is used as your unique cluster identifier and is pre-pended to all resource names related to your cluster
 
