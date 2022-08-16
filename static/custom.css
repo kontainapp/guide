@@ -1,0 +1,7 @@
+.custom-shell-output {
+    background-color: lightgray;
+}
+
+.custom-shell-output .absolute {
+    display:none
+}
