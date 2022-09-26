@@ -5,3 +5,7 @@
 .custom-shell-output .absolute {
     display:none
 }
+
+table.options-table tr td:first-child {
+    white-space: nowrap;
+}
