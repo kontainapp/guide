@@ -33,23 +33,23 @@ Note: Follow instructions in [Sign in with Azure CLI](https://docs.microsoft.com
 Download helper script and make sure it is executable
 
 ```shell
-curl -o aks-cluster.sh curl -o aks-cluster.sh https://raw.githubusercontent.com/kontainapp/k8s-deploy/master/helpers/aks-cluster.sh
+curl -o aks-cluster.sh https://raw.githubusercontent.com/kontainapp/k8s-deploy/master/helpers/aks-cluster.sh
 chmod +x aks-cluster.sh
 ```
 
 Run script using your credential. Make sure to set region and prefix to your desired values.  The script will create AKS cluster with the name <prefix>-aks-cluster. All other associated recource names are prefixed with <prefix> 
 
 ```shell
-aks-cluster.sh  --tenant=TENANT_ID --app-id=AZURE_APP_ID --password=AZURE_SECRET --region=westus3 <prefix>
+aks-cluster.sh  --tenant=TENANT_ID --app-id=AZURE_APP_ID --password=AZURE_SECRET --region=<your region> <prefix>
 ```
 
 ### Verify your cluster was created
 ```shell
 az aks list -o table
 ```
-### Enable and Test Kontain Runtime
+## Enable and Test Kontain Runtime
 Please refer to: [Install Kontain in Kubernetes](/getting_started/kubenetes/)
-### Clean up
+## Clean up
 ```shell
-aks-cluster.sh  --tenant=TENANT_ID --app-id=AZURE_APP_ID --password=AZURE_SECRET --region=westus3 <prefix> --cleanup
+aks-cluster.sh  --tenant=TENANT_ID --app-id=AZURE_APP_ID --password=AZURE_SECRET --region=<your region> <prefix> --cleanup
 ```

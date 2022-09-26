@@ -6,37 +6,76 @@ order: 800
 
 Minikube is a great little Kubernetes distribution that can be used to verify Kontain working with Vanilla Kubernetes distributions.
 
-### Start Minikube with Containerd as default runtime
-For this, Kontain needs a minimum version of Minikube, which can be installed from [here](https://minikube.sigs.k8s.io/docs/start/)
+# Launching a Minikube cluster
+
+## Starting Cluster
+
+### Install Minikube 
+
+Kontain only supports running minikube on linux. To install minikube 
+
+```shell
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+```
+
+If you have another configuration of Linux, refer to [Intallation instructions](https://minikube.sigs.k8s.io/docs/start/)
+### Download  Kontain helper script
+
+Download helper script and make sure it is executable
+
+```shell
+curl -o minikube-cluster.sh https://raw.githubusercontent.com/kontainapp/k8s-deploy/master/helpers/minikube-cluster.sh
+chmod +x minikube-cluster.sh
+```
+### Start Minikube cluster
+
+#### with Docker and Containerd as runtime
 
 To start Minikube use:
 ```shell
-$ minikube start --container-runtime=containerd --driver=docker --wait=all
+minikube-cluster.sh --driver=docker --runtime=containerd
+```
+#### with Podman and Containerd as runtime
 
-# to see status of cluster (s) - cluster name is 'default'
-$ minikube profile list
-|----------|-----------|------------|--------------|------|---------|---------|-------|
-| Profile  | VM Driver |  Runtime   |      IP      | Port | Version | Status  | Nodes |
-|----------|-----------|------------|--------------|------|---------|---------|-------|
-| default  | docker    | containerd | 192.168.58.2 | 8443 | v1.22.2 | Running |     1 |
-|----------|-----------|------------|--------------|------|---------|---------|-------|
+To start Minikube use:
+```shell
+minikube-cluster.sh --driver=podman --runtime=containerd
+```
+#### with Podman and Cri-o as runtime
 
-# check if the kube-system pods have launched properly
-$ kubectl get pods -n kube-system
+To start Minikube use:
+```shell
+minikube-cluster.sh --driver=podman --runtime=cri-o
+```
+### Verify your cluster 
+
+```shell
+minikube profile list
+```
+
+### Check if the kube-system pods have launched properly
+
+```shell
+kubectl get pods -n kube-system
+```
+
+The result will look like 
+:::custom-shell-output
+```
 NAMESPACE     NAME                                READY   STATUS    RESTARTS   AGE
 kube-system   coredns-78fcd69978-gqz46            1/1     Running   0          2d21h
 kube-system   etcd-minikube                       1/1     Running   0          2d21h
 kube-system   kindnet-d7xwr                       1/1     Running   0          2d21h
 kube-system   kube-apiserver-minikube             1/1     Running   0          2d21h
 ```
+:::
 
-Now we can use the [instructions here](/guide/getting_started/kubenetes/) to install and use Kontain.
+## Enable and Test Kontain Runtime
+Please refer to: [Install Kontain in Kubernetes](/getting_started/kubenetes/)
 
 ### Clean up
-You can remove the Minikube cluster by using the following:
 
 ```
-$ minikube delete
-or 
-$ minikube delete -p <profile-name>
+minikube-cluster.sh --cleanup
 ```

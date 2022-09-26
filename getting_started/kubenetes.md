@@ -21,11 +21,11 @@ To package Kontain images, it is also necessary to have a recent version of Dock
 ==- Tip: Creating Kubernetes Cluster
 Kontain provides the following sjell helper scripts that you can use to create and start cluster for a number of different cluster environments:
 
-[!ref](/appendix/azure_aks/)
-[!ref](/appendix/amazon-eks/)
-[!ref](/appendix/google-gce/)
-[!ref](/appendix/k3s/)
-[!ref](/appendix/minikube/)
+- [Azure AKS Cluster](/appendix/azure_aks/)
+- [Amazon EKS](/appendix/amazon_eks/)
+- [Google GKE](/appendix/google-gke/)
+- [K3S](/appendix/k3s/)
+- [Minikube](/appendix/minikube/)
 
 ===
 

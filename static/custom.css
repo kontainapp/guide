@@ -1,5 +1,5 @@
-.custom-shell-output {
-    background-color: lightgray;
+pre[class*=language-] {
+    background-color: lightslategray;
 }
 
 .custom-shell-output .absolute {
