@@ -1,9 +1,10 @@
-pre[class*=language-] {
-    background-color: lightslategray;
-}
+/* pre[class*=language-] {
+    background-color: antiquewhite;
+    color: black
+} */
 
 .custom-shell-output .absolute {
-    display:none
+    display: none
 }
 
 table.options-table tr td:first-child {
