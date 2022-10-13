@@ -143,7 +143,32 @@ kube-system   kindnet          1         1         1       1            1       
 kube-system   kube-proxy       1         1         1       1            1           kubernetes.io/os=linux   168m
 ```
 :::
+## Modifying your Deploymen to run with Kontain Runtime
+To run your deployment using Kontain runtime modify deployment file by adding runtimeClass and nodeSelector as highlighted below in out test deployment
 
-### Using Kontain to deploy Java, Python, Golang and JS examples in Kubernetes
+```yaml !#14-16
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kontain-test-app
+spec:
+  selector:
+    matchLabels:
+      kontain: test-app
+  template:
+    metadata:
+      labels:
+        kontain: test-app
+    spec:
+      runtimeClassName: kontain
+      nodeSelector:
+        sandbox: kontain
+      containers:
+        - name: kontain-test-app
+          image: busybox:latest
+          command: ["sleep", "infinity"]
+          imagePullPolicy: IfNotPresent
+```
+## Using Kontain to deploy Java, Python, Golang and JS examples in Kubernetes
 [!ref text="examples" target=_blank](https://github.com/kontainapp/guide-examples/tree/master/examples)
 

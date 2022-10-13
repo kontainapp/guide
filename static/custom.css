@@ -3,6 +3,10 @@
     color: black
 } */
 
+.line-highlight {
+    background: hsla(0, 0%, 100%, .3);
+}
+
 .custom-shell-output .absolute {
     display: none
 }
