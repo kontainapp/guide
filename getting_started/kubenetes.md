@@ -14,12 +14,10 @@ For more information to enable KVM on Ubuntu 20.04 or higher, you can refer to t
 
 For Kubernetes platforms that do not offer nested virtualization like GKE and AWS, we use a software virtualization module that gets installed as part of the Kontain install.
 
-Recommended distros for Kubernetes Worker Nodes are Ubuntu 20.04 and Amazon Linux 2, or newer.
-
-To package Kontain images, it is also necessary to have a recent version of Docker or Moby-engine is installed.
+Recommended distros for Kubernetes Worker Nodes are Ubuntu 20.04 and Amazon Linux 2, or newer. For Amazon EKS Kontain maintains kontain-compatible AMI which is a derivitive of Amazon Linux 2 and can be found by filter "kontain-eks-node*". For GKE make sure to use UBUNTU_CONTAINERD image type. 
 
 ==- Tip: Creating Kubernetes Cluster
-Kontain provides the following sjell helper scripts that you can use to create and start cluster for a number of different cluster environments:
+Kontain provides the following shell helper scripts that you can use to create and start cluster for a number of different cluster environments:
 
 - [Azure AKS Cluster](/appendix/azure_aks/)
 - [Amazon EKS](/appendix/amazon_eks/)
@@ -44,12 +42,12 @@ kontain-kustomize.sh [--deploy-version=version | --deploy-location=path] [--km-v
 
 Option| Usage { class="options-table" }
 ----------------------------------|---
---deploy-version=\<tag> | Kontain Deployment version to use. Defaults to current release
---deploy-location=\<deployment location> | location of local kontain-deploy directory. Use --download to download kontain-deploy directory to local path. 
+--deploy-version=\<tag> | Kontain deployment version to use. Defaults to current release
+--deploy-location=\<deployment location> | location of local kontain-deploy directory. Use --download to download kontain-deploy directory to local path 
 --km-version=\<tag> | Kontain release to deploy. Defaults to current Kontain release
 --km-url=\<url> | url to download kontain_bin.tar.gz. Development only
 --help(-h) | prints this message
---dry-run=\<strategy> | If 'review' strategy, only generate resulting customization file. If 'client' strategy, only print the object that would be sent, without sending it. If 'server' strategy, submit server-side request without persisting the resource.
+--dry-run=\<strategy> | if 'review' strategy, only generate resulting customization file. If 'client' strategy, only print the object that would be sent, without sending it. If 'server' strategy, submit server-side request without persisting the resource
 --download=\<path> | downloads kontain-deploy directory structure to specified location. If directory down not exist, it will be created. This directory can be used as path for --deploy-location 
  --remove | removes all the resources produced by overlay
 
@@ -77,12 +75,12 @@ Let's run a Kontain test app to verify that the runtime class is working as desi
 ```shell
 kubectl apply -f https://raw.githubusercontent.com/kontainapp/k8s-deploy/current/tests/test.yaml
 ```
-a new Kontain test app should appear as 'Running'. YOu can check that by running the following command:
+A new Kontain test app should appear as 'Running'. You can check that by running the following command
 
 ```shell
 kubectl get pods 
 ```
-The example output is as follows.
+The example output is as follows
 
 :::custom-shell-output
 ```
@@ -91,14 +89,14 @@ default       kontain-test-app-647874765d-7ftrp   1/1     Running   0          2
 ```
 :::
 
-Use kubectl exec to run uname -r on the test pod. When running under the Kontain Runtime, the uname(2) system call appends the string "kontain." to the release name. 
+Use kubectl exec to run uname -r on the test pod.
 
 
 ```shell
 kubectl exec deployment.apps/kontain-test-app -- uname -r
 ```
+When running under the Kontain Runtime, the uname(2) system call adds the string "kontain" to the release name 
 
-The output example is 
 :::custom-shell-output
 ```
 <kernel-version>.<host-name>.x86_64.kontain.KVM 
@@ -124,7 +122,7 @@ kube-system   kontain-node-initializer-tvr84        1/1     Running   0         
 ```
 :::
 
-If need be, to debug an "Error" state, you can view its logs:
+If need be, to debug an "Error" state, you can view its logs
 ```shell
 kubectl logs -n kube-system kontain-node-initializer-<id>
 ```
@@ -143,7 +141,7 @@ kube-system   kindnet          1         1         1       1            1       
 kube-system   kube-proxy       1         1         1       1            1           kubernetes.io/os=linux   168m
 ```
 :::
-## Modifying your Deploymen to run with Kontain Runtime
+## Modifying your Deployment to run with Kontain Runtime
 To run your deployment using Kontain runtime modify deployment file by adding runtimeClass and nodeSelector as highlighted below in out test deployment
 
 ```yaml !#14-16

@@ -65,11 +65,12 @@ If Docker is not present, you can install Docker On Fedora/RHEL systems using [i
 To ensure a smooth install, we recommend updating your OS:
 - For Fedora:
 ```shell
-sudo dnf update -y
+sudo dnf upgrade --refresh -y
 ```
 - For Ubuntu Focal:
 ```shell
-sudo apt update -y
+sudo apt update
+sudo apt upgrade -y
 ```
 - For Amazon Linux 2:
 ```shell
@@ -94,13 +95,13 @@ This also executed a smoke test of the unikernel virtual machine.
 ls -l /opt/kontain
 drwxr-xr-x   4 smijar  121   4096 Sep 16 18:03 alpine-lib
 drwxr-xr-x   2 smijar  121   4096 Oct 10 16:20 bin
-drwxr-xr-x   3 smijar  root   4096 Oct  5 17:10 config
+drwxr-xr-x   3 smijar  root  4096 Oct  5 17:10 config
 drwxr-xr-x   7 smijar  121   4096 Sep 16 17:24 examples
 drwxr-xr-x   2 smijar  121   4096 Sep 16 18:03 include
 -rwxr-xr-x   1 smijar  121 370035 Sep 16 18:03 kkm.run
 drwxr-xr-x   2 smijar  121   4096 Sep 16 18:03 lib
 drwxr-xr-x   2 smijar  121   4096 Sep 16 18:03 runtime
-drwxr-xr-x   2 smijar  root   4096 Oct  7 09:25 tests
+drwxr-xr-x   2 smijar  root  4096 Oct  7 09:25 tests
 ```
 
 2. Verify Kontain install

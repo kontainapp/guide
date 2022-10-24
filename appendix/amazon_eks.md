@@ -27,16 +27,16 @@ curl -o eks-cluster.sh https://raw.githubusercontent.com/kontainapp/k8s-deploy/m
 chmod +x eks-cluster.sh
 ```
 
-Run script using your credential. Make sure to set region and prefix to your desired values.  The script will create AKS cluster with the name <prefix>-eks-cluster. All other associated recource names are prefixed with <prefix> 
+Run script using your credentials. Make sure to set region and prefix to your desired values.  The script will create AKS cluster with the name \<prefix\>-eks-cluster. All other associated recource names are prefixed with \<prefix\>. 
 
 ```shell
 eks-cluster.sh  --region=<your region> --ami=<Kontain-enabled AMI id> <prefix>
 ```
 
-To locate Kontain-enabled ami run use the following coman:
+To locate Kontain-enabled ami run use the following command:
 
 ```shell
-aws ec2 describe-images --region=us-west-1 --filters "Name=name,Values=kontain-ecs-node*" |jq -r '.Images[] | "AMI-Id: \(.ImageId), Name: \(.Name)"'
+aws ec2 describe-images --region=us-west-1 --filters "Name=name,Values=kontain-eks-node*" | jq -r '.Images[] | "AMI-Id: \(.ImageId), Name: \(.Name)"'
 ```
 
 and select the version you want. 
@@ -51,6 +51,8 @@ aws eks list-clusters --region=<your region>
 ## Enable and Test Kontain Runtime
 Please refer to: [Install Kontain in Kubernetes](/getting_started/kubenetes/)
 ## Clean up
+To delete cluster and all associated resources use the following
+
 ```shell
 eks-cluster.sh  --region=<your region> <prefix> --cleanup
 ```

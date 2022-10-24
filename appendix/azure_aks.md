@@ -37,7 +37,7 @@ curl -o aks-cluster.sh https://raw.githubusercontent.com/kontainapp/k8s-deploy/m
 chmod +x aks-cluster.sh
 ```
 
-Run script using your credential. Make sure to set region and prefix to your desired values.  The script will create AKS cluster with the name <prefix>-aks-cluster. All other associated recource names are prefixed with <prefix> 
+Run script using your credentials. Make sure to set region and prefix to your desired values.  The script will create AKS cluster with the name \<prefix\>-aks-cluster. All other associated recource names are prefixed with \<prefix\>.
 
 ```shell
 aks-cluster.sh  --tenant=TENANT_ID --app-id=AZURE_APP_ID --password=AZURE_SECRET --region=<your region> <prefix>
@@ -50,6 +50,8 @@ az aks list -o table
 ## Enable and Test Kontain Runtime
 Please refer to: [Install Kontain in Kubernetes](/getting_started/kubenetes/)
 ## Clean up
+To delete cluster and all associated resources use the following
+
 ```shell
 aks-cluster.sh  --tenant=TENANT_ID --app-id=AZURE_APP_ID --password=AZURE_SECRET --region=<your region> <prefix> --cleanup
 ```

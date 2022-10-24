@@ -32,19 +32,19 @@ chmod +x minikube-cluster.sh
 
 #### with Docker and Containerd as runtime
 
-To start Minikube use:
+To start Minikube use
 ```shell
 minikube-cluster.sh --driver=docker --runtime=containerd
 ```
 #### with Podman and Containerd as runtime
 
-To start Minikube use:
+To start Minikube use
 ```shell
 minikube-cluster.sh --driver=podman --runtime=containerd
 ```
-#### with Podman and Cri-o as runtime
+#### with Podman and CRI-O as runtime
 
-To start Minikube use:
+To start Minikube use
 ```shell
 minikube-cluster.sh --driver=podman --runtime=cri-o
 ```
@@ -75,7 +75,7 @@ kube-system   kube-apiserver-minikube             1/1     Running   0          2
 Please refer to: [Install Kontain in Kubernetes](/getting_started/kubenetes/)
 
 ### Clean up
-
+To delete cluster and all associated resources use the following
 ```
 minikube-cluster.sh --cleanup
 ```

@@ -224,6 +224,8 @@ Repeat this process to add more worker nodes
 ## Enable and Test Kontain Runtime
 Please refer to: [Install Kontain in Kubernetes](/getting_started/kubenetes/)
 ## Clean up
+To delete cluster and all associated resources use the following
+
 - On each worker node
 ```
 sudo /usr/local/bin/k3s-agent-uninstall.sh
