@@ -31,7 +31,7 @@ Note: If you don't plan to keep the resources that you create in this procedure,
 Download helper script and make sure it is executable
 
 ```shell
-curl -o gce-cluster.sh https://raw.githubusercontent.com/kontainapp/k8s-deploy/master/helpers/eks-cluster.sh
+curl -o gce-cluster.sh https://raw.githubusercontent.com/kontainapp/k8s-deploy/master/helpers/gce-cluster.sh
 chmod +x gce-cluster.sh
 ```
 
