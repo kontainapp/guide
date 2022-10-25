@@ -1,7 +1,16 @@
-.custom-shell-output {
-    background-color: lightgray;
+/* pre[class*=language-] {
+    background-color: antiquewhite;
+    color: black
+} */
+
+.line-highlight {
+    background: hsla(0, 0%, 100%, .3);
 }
 
 .custom-shell-output .absolute {
-    display:none
+    display: none
+}
+
+table.options-table tr td:first-child {
+    white-space: nowrap;
 }

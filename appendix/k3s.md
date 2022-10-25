@@ -4,210 +4,235 @@ icon: /images/k3s.png
 order: 600
 ---
 
-## Overview
-Below we use Vagrant to start a multi-node K3s cluster to test Kontain in K3s using Vagrant and libvirt as a provider since we are enabling nested virtualization using KVM.  
+# Launching an K3S cluster
 
-A more common use-case is to use VirtualBox as the Vagrant provider, but we haven't really so that will be left as an exercise for the user.
+## Starting up a K3S cluster
+### Pre-requisites
 
-To install Kontain in K3s, we use the instructions from [here](http://localhost:5000/guide/getting_started/install/#on-a-k3s-edge-cluster)
-
-## Requirements for Lab cluster with nested virtualization
-We would need a Linux (ideally, Ubuntu or Fedora/Centos) machine with KVM virtualization installed as outlined [here](https://docs.fedoraproject.org/en-US/quick-docs/getting-started-with-virtualization/)
-
-After that, we installed Vagrant with libvirt as the provider as outlined [here](https://developer.fedoraproject.org/tools/vagrant/vagrant-libvirt.html).
-
-## Bring up the cluster: vagrant up helper script
-We provide a helper script below to install the server (master/control plane) node at first, and then to install the worker nodes (known as agents).
-
-```
-#!/bin/bash
-# up.sh
-set -euxo pipefail
-
-# first, bring up the server
-vagrant up server
-
-sleep 10
-
-# save server details post-provisioning for agent nodes to use
-./scripts/save_server_details.sh
-
-sleep 5
-
-# bring up the agent
-vagrant up agent1
-
-echo "All deployed!! to leverage the new cluster you can do one of the following:"
-echo "you do $ export KUBECONFIG=`pwd`/shared/server_details/kubeconfig"
-```
-
-### kubectl
-After bringng up the multi-node k3s cluster in Vagrant, you can use the following to run kubectl commands on the cluster:
-```shell
-$ export KUBECONFIG=`pwd`/shared/server_details/kubeconfig
-
-$ kubectl get nodes -o wide
-```
-
-## The files
-### save server details script
-```
-# save_server_details.sh
-set -euxo pipefail
-
-# get node-token for agent
-vagrant ssh -c "sudo cat /etc/rancher/k3s/k3s.yaml" 2>/dev/null > ./shared/server_details/kubeconfig
-
-# get node-token for agent
-vagrant ssh -c "sudo cat /var/lib/rancher/k3s/server/node-token" 2>/dev/null > ./shared/server_details/node-token
-
-# get IP
-vagrant ssh server -c "hostname -I" 2>/dev/null | cut -d' ' -f2 > ./shared/server_details/server_ip
-
-export SERVER_IP=$(cat ./shared/server_details/server_ip)
-echo $SERVER_IP
-
-# replace IP in kubeconfig
-sed -i 's/127\.0\.0\.1/'"$SERVER_IP"'/g' ./shared/server_details/kubeconfig
-```
-
-### VagrantFile
-The Vagrant file that stands up both the Server VM and Agent VM (worker node) is given below:
-
-```
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-# check network IP CIDR with virsh first
-# sudo virsh net-dumpxml default (normally: 192.168.122.10)
-
-server_ip = "192.168.122.10"
-
-# not using fixed IPs right now as libvirt provider has not been figured out
-agents = { "agent1" => "192.168.122.20",
-    }
-
-#system("virsh net-update my-network add ip-dhcp-host \"<host mac='52:54:00:fb:95:91' ip='10.11.12.13' />\" --live --config")
-
-
-# Extra parameters in INSTALL_K3S_EXEC variable because of
-# K3s picking up the wrong interface when starting server and agent
-# https://github.com/alexellis/k3sup/issues/306
-
-Vagrant.configure("2") do |config|
-  config.vm.box = "generic/ubuntu1804" #"generic/alpine314"
-
-  config.vm.define "server", primary: true do |server|
-    server.vm.network :public_network, ip: server_ip, dev: "virbr0", mode: "bridge", type: "bridge"
-    server.vm.synced_folder "./shared", "/vagrant", type: "rsync",
-      rsync__exclude: ".git/"
-
-    # add ssh - hangs
-    # config.ssh.private_key_path = "~/.ssh/id_rsa"
-    # config.ssh.forward_agent = true
-
-    server.vm.hostname = "server"
-    server.vm.provider "libvirt" do |vb|
-      vb.nested = true
-      vb.cpu_mode = "host-passthrough"
-      vb.memory = "2048"
-      vb.cpus = "2"
-
-      # turn off inputs
-      vb.inputs = []
-    end
-
-    args = []
-    # server.vm.provision "shell", inline: server_script
-    server.vm.provision "k3s shell script", type: "shell",
-        path: "scripts/k3s_server_provisioning.sh",
-        args: args
-  end
-
-  agents.each do |agent_name, agent_ip|
-    config.vm.define agent_name do |agent|
-      agent.vm.network :public_network, ip: agent_ip, dev: "virbr0", mode: "bridge", type: "bridge"
-      agent.vm.synced_folder "./shared", "/vagrant", type: "rsync",
-        rsync__exclude: ".git/"
-
-      agent.vm.hostname = agent_name
-      agent.vm.provider "libvirt" do |vb|
-        vb.nested = true
-        vb.cpu_mode = "host-passthrough"
-        vb.memory = "1024"
-        vb.cpus = "2"
-      end
-
-      # agent.vm.provision "shell", inline: agent_script
-      args = []
-      agent.vm.provision "k3s agent shell script", type: "shell",
-      path: "scripts/k3s_agent_provisioning.sh",
-      args: args
-  end
-  end
-end
-```
-
-### Server Provisioning script
-The server provisioning script referred to in the Vagrantfile is given below:
+- Make sure docker is installed and running 
 
 ```shell
-set -euox pipefail
-sudo -i
-
-# echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
-#hostname -I | cut -d' ' -f2 2>/dev/null > /vagrant/SERVER1_IP
-
-chmod +x /dev/kvm
-sed -i 's/DNSSEC=yes/DNSSEC=no/1'  /etc/systemd/resolved.conf
-systemctl restart systemd-resolved.service
-apt-get -y update
-
-ufw allow 6443/tcp
-
-echo "**** Begin installing k3s"
-
-SERVER_IP="192.168.122.10"
-# INSTALL_K3S_EXEC="--bind-address ${SERVER_IP} --node-external-ip ${SERVER_IP} --tls-san $SERVER_IP --tls-san server --disable-agent" # --flannel-iface=eth1
-# curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s - --bind-address ${SERVER_IP} --node-external-ip ${SERVER_IP} --tls-san $SERVER_IP --tls-san server
-curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s - --tls-san $SERVER_IP --tls-san server
-
-echo "**** End installing k3s"
-
-# systemctl enable --now k3s
-# systemctl start k3s
+systemctl status docker
 ```
+Output will look something like:
+:::custom-shell-output
+```
+● docker.service - Docker Application Container Engine
+     Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; vendor preset: disabled)
+     Active: active (running) since Mon 2022-09-26 12:32:27 MST; 1h 19min ago
+TriggeredBy: ● docker.socket
+       Docs: https://docs.docker.com
+   Main PID: 2208 (dockerd)
+      Tasks: 38
+     Memory: 178.6M
+     CGroup: /system.slice/docker.service
+             └─ 2208 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
 
-### Agent Provisioning script
-The agent provisioning script referred to in the Vagrantfile is given below:
+Sep 26 12:32:27 fc dockerd[2208]: time="2022-09-26T12:32:27.421464986-07:00" level=debug msg="Registering POST, /grpc"
+Sep 26 12:32:27 fc dockerd[2208]: time="2022-09-26T12:32:27.421478846-07:00" level=debug msg="Registering GET, /networks"
+Sep 26 12:32:27 fc dockerd[2208]: time="2022-09-26T12:32:27.421492427-07:00" level=debug msg="Registering GET, /networks/"
+Sep 26 12:32:27 fc dockerd[2208]: time="2022-09-26T12:32:27.421505787-07:00" level=debug msg="Registering GET, /networks/{id:.+}"
+Sep 26 12:32:27 fc dockerd[2208]: time="2022-09-26T12:32:27.421526207-07:00" level=debug msg="Registering POST, /networks/create"
+Sep 26 12:32:27 fc dockerd[2208]: time="2022-09-26T12:32:27.421542257-07:00" level=debug msg="Registering POST, /networks/{id:.*}/connect"
+Sep 26 12:32:27 fc dockerd[2208]: time="2022-09-26T12:32:27.421562477-07:00" level=debug msg="Registering POST, /networks/{id:.*}/disconnect"
+Sep 26 12:32:27 fc dockerd[2208]: time="2022-09-26T12:32:27.421583447-07:00" level=debug msg="Registering POST, /networks/prune"
+Sep 26 12:32:27 fc dockerd[2208]: time="2022-09-26T12:32:27.421599597-07:00" level=debug msg="Registering DELETE, /networks/{id:.*}"
+Sep 26 12:32:27 fc dockerd[2208]: time="2022-09-26T12:32:27.421807158-07:00" level=info msg="API listen on /run/docker.sock"
+
+```
+:::
+
+- Add your user to Docker group to avoid typing sudo everytime you run docker commands.
 
 ```shell
-set -euox pipefail
-sudo -i
-chmod +x /dev/kvm
-sed -i 's/DNSSEC=yes/DNSSEC=no/1'  /etc/systemd/resolved.conf
-systemctl restart systemd-resolved.service
-apt-get -y update
+sudo usermod -aG docker ${USER}
+newgrp docker
+```
+### Create cluster using Kontain helper script
 
-echo "**** Begin installing k3s"
+Download helper script, make sure it is executable and run it
 
-SERVER_IP="192.168.122.10" # $(cat /vagrant/server_details/server_ip)
-K3S_TOKEN=$(cat /vagrant/server_details/node-token)
-K3S_URL="https://$SERVER_IP:6443"
+```shell
+curl -o k3s-cluster.sh https://raw.githubusercontent.com/kontainapp/k8s-deploy/master/helpers/k3s-cluster.sh
+chmod +x k3s-cluster.sh
+./k3s-cluster.sh
+```
 
-# INSTALL_K3S_EXEC="K3S_URL=https://192.168.122.10:6443 K3S_TOKEN_FILE=/vagrant/server_details/node-token SERVER_IP=\"192.168.122.10\" "
-curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" K3S_URL=https://192.168.122.10:6443 K3S_TOKEN_FILE=/vagrant/server_details/node-token SERVER_IP=\"192.168.122.10\" sh -s -
+Setup kubectl config file
+```shell
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+```
+### Verify your cluster was created
 
-# copying custom service file because agent install doesn't add the 
-#cp /vagrant/server_details/k3s-agent.service /etc/systemd/system/k3s-agent.service
-echo "**** End installing k3s"
+First, make sure k3s is running
+```shell
+systemctl status k3s
+```
+The output will look like 
+:::custom-shell-output
+```
+● k3s.service - Lightweight Kubernetes
+     Loaded: loaded (/etc/systemd/system/k3s.service; enabled; vendor preset: disabled)
+     Active: active (running) since Mon 2022-09-26 14:00:25 MST; 3min 11s ago
+       Docs: https://k3s.io
+    Process: 16675 ExecStartPre=/bin/sh -xc ! /usr/bin/systemctl is-enabled --quiet nm-cloud-setup.service (code=exited, status=0/SUCCESS)
+    Process: 16677 ExecStartPre=/sbin/modprobe br_netfilter (code=exited, status=0/SUCCESS)
+    Process: 16678 ExecStartPre=/sbin/modprobe overlay (code=exited, status=0/SUCCESS)
+   Main PID: 16679 (k3s-server)
+      Tasks: 183
+     Memory: 870.2M
+     CGroup: /system.slice/k3s.service
+             ├─ 16679 "/usr/local/bin/k3s server"
+             ├─ 16738 containerd -c /var/lib/rancher/k3s/agent/etc/containerd/config.toml -a /run/k3s/containerd/containerd.sock --state /run/k3s/containerd --root>
+             ├─ 32748 /var/lib/rancher/k3s/data/1d787a9b6122e3e3b24afe621daa97f895d85f2cb9cc66860ea5ff973b5c78f2/bin/containerd-shim-runc-v2 -namespace k8s.io -id >
+             ├─ 32775 /var/lib/rancher/k3s/data/1d787a9b6122e3e3b24afe621daa97f895d85f2cb9cc66860ea5ff973b5c78f2/bin/containerd-shim-runc-v2 -namespace k8s.io -id >
+             └─ 32802 /var/lib/rancher/k3s/data/1d787a9b6122e3e3b24afe621daa97f895d85f2cb9cc66860ea5ff973b5c78f2/bin/containerd-shim-runc-v2 -namespace k8s.io -id >
+```
+:::
 
-# truncate -s -1 /etc/systemd/system/k3s-agent.service
-# cat <<-EOT | tee -a /etc/systemd/system/k3s-agent.service
-#     --token-file /vagrant/server_details/node-token \
-#     --server https://192.168.122.10:6443
-# EOT
+Now, we will check that master node is running
 
-# systemctl enable --now k3s-agent
-# systemctl daemon-reload k3s-agent
-# systemctl restart k3s-agent.service
-````
+```
+kubectl get nodes
+```
+The output looks like 
+:::custom-shell-output
+```
+NAME        STATUS   ROLES                  AGE     VERSION
+my-comp     Ready    control-plane,master   4m41s   v1.24.3+k3s1
+```
+:::
+
+### Add worker nodes ( skip if single node cluster is sufficient)
+- Allow ports on firewall
+for Ubuntu
+```
+sudo ufw allow 6443/tcp
+sudo ufw allow 443/tcp
+```
+for Fedora or Centos
+```
+sudo firewall-cmd --add-port=443/tcp
+sudo firewall-cmd --add-port=6443/tcp
+```
+
+- On the master node:
+
+```shell
+sudo cat /var/lib/rancher/k3s/server/node-token
+```
+You will then obtain a token that looks like:
+
+:::custom-shell-output
+```
+K1078f2861628c95aa328595484e77f831adc3b58041e9ba9a8b2373926c8b034a3::server:417a7c6f46330b601954d0aaaa1d0f5b
+```
+:::
+
+- On worker node 
+First,make sure docker is running
+```shell
+systemctl status docker
+```
+Output will look something like:
+:::custom-shell-output
+```
+● docker.service - Docker Application Container Engine
+     Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; vendor preset: disabled)
+     Active: active (running) since Mon 2022-09-26 12:32:27 MST; 1h 19min ago
+TriggeredBy: ● docker.socket
+       Docs: https://docs.docker.com
+   Main PID: 2208 (dockerd)
+      Tasks: 38
+     Memory: 178.6M
+     CGroup: /system.slice/docker.service
+             └─ 2208 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+Sep 26 12:32:27 fc dockerd[2208]: time="2022-09-26T12:32:27.421464986-07:00" level=debug msg="Registering POST, /grpc"
+Sep 26 12:32:27 fc dockerd[2208]: time="2022-09-26T12:32:27.421478846-07:00" level=debug msg="Registering GET, /networks"
+Sep 26 12:32:27 fc dockerd[2208]: time="2022-09-26T12:32:27.421492427-07:00" level=debug msg="Registering GET, /networks/"
+Sep 26 12:32:27 fc dockerd[2208]: time="2022-09-26T12:32:27.421505787-07:00" level=debug msg="Registering GET, /networks/{id:.+}"
+Sep 26 12:32:27 fc dockerd[2208]: time="2022-09-26T12:32:27.421526207-07:00" level=debug msg="Registering POST, /networks/create"
+Sep 26 12:32:27 fc dockerd[2208]: time="2022-09-26T12:32:27.421542257-07:00" level=debug msg="Registering POST, /networks/{id:.*}/connect"
+Sep 26 12:32:27 fc dockerd[2208]: time="2022-09-26T12:32:27.421562477-07:00" level=debug msg="Registering POST, /networks/{id:.*}/disconnect"
+Sep 26 12:32:27 fc dockerd[2208]: time="2022-09-26T12:32:27.421583447-07:00" level=debug msg="Registering POST, /networks/prune"
+Sep 26 12:32:27 fc dockerd[2208]: time="2022-09-26T12:32:27.421599597-07:00" level=debug msg="Registering DELETE, /networks/{id:.*}"
+Sep 26 12:32:27 fc dockerd[2208]: time="2022-09-26T12:32:27.421807158-07:00" level=info msg="API listen on /run/docker.sock"
+
+```
+:::
+
+Install k3s agent
+
+```shell
+curl -sfL http://get.k3s.io | K3S_URL=https://<master_IP>:6443 K3S_TOKEN=<join_token> sh -s - --docker
+```
+
+and check that agent is running
+
+```shell
+systemctl status k3s-agent
+```
+The output will look like 
+:::custom-shell-output
+```
+● k3s-agent.service - Lightweight Kubernetes
+     Loaded: loaded (/etc/systemd/system/k3s-agent.service; enabled; vendor preset: disabled)
+     Active: active (running) since Mon 2022-09-26 14:26:51 MST; 9s ago
+       Docs: https://k3s.io
+    Process: 23437 ExecStartPre=/bin/sh -xc ! /usr/bin/systemctl is-enabled --quiet nm-cloud-setup.service (code=exited, status=0/SUCCESS)
+    Process: 23439 ExecStartPre=/sbin/modprobe br_netfilter (code=exited, status=0/SUCCESS)
+    Process: 23440 ExecStartPre=/sbin/modprobe overlay (code=exited, status=0/SUCCESS)
+   Main PID: 23441 (k3s-agent)
+      Tasks: 19
+     Memory: 39.2M
+        CPU: 1.086s
+     CGroup: /system.slice/k3s-agent.service
+             └─ 23441 "/usr/local/bin/k3s agent"
+
+Sep 26 14:26:52 serge-laptop k3s[23441]: I0926 14:26:52.098089   23441 kube.go:128] Node controller sync successful
+Sep 26 14:26:52 serge-laptop k3s[23441]: I0926 14:26:52.167886   23441 kube.go:357] Skip setting NodeNetworkUnavailable
+Sep 26 14:26:52 serge-laptop k3s[23441]: time="2022-09-26T14:26:52-07:00" level=info msg="Wrote flannel subnet file to /run/flannel/subnet.env"
+Sep 26 14:26:52 serge-laptop k3s[23441]: time="2022-09-26T14:26:52-07:00" level=info msg="Running flannel backend."
+Sep 26 14:26:52 serge-laptop k3s[23441]: I0926 14:26:52.172324   23441 route_network.go:55] Watching for new subnet leases
+Sep 26 14:26:52 serge-laptop k3s[23441]: I0926 14:26:52.172422   23441 route_network.go:92] Subnet added: 10.42.0.0/24 via 10.100.101.101
+Sep 26 14:26:52 serge-laptop k3s[23441]: I0926 14:26:52.195126   23441 iptables.go:177] bootstrap done
+Sep 26 14:26:52 serge-laptop k3s[23441]: I0926 14:26:52.199374   23441 iptables.go:177] bootstrap done
+Sep 26 14:26:55 serge-laptop k3s[23441]: time="2022-09-26T14:26:55-07:00" level=info msg="Using CNI configuration file /var/lib/rancher/k3s/agent/etc/cni/net.d/10-flannel.co>
+Sep 26 14:27:00 serge-laptop k3s[23441]: time="2022-09-26T14:27:00-07:00" level=info msg="Using CNI configuration file /var/lib/rancher/k3s/agent/etc/cni/net.d/10-flannel.co>
+```
+:::
+
+- On master node use kubectl to see both master and worker nodes
+```
+kubectl get nodes
+```
+
+Output will look like 
+
+The output will look like the following.
+:::custom-shell-output
+```
+NAME        STATUS   ROLES                  AGE     VERSION
+my-comp     Ready    control-plane,master   4m41s   v1.24.3+k3s1
+worker      Ready    <none>                 28s     v1.24.4+k3s1
+```
+:::
+
+Repeat this process to add more worker nodes
+
+## Enable and Test Kontain Runtime
+Please refer to: [Install Kontain in Kubernetes](/getting_started/kubenetes/)
+## Clean up
+To delete cluster and all associated resources use the following
+
+- On each worker node
+```
+sudo /usr/local/bin/k3s-agent-uninstall.sh
+sudo rm -rf /var/lib/rancher
+```
+
+- On master node
+```shell
+k3s-cluster.sh  --cleanup
+```
