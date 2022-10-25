@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/guide">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.713994986078">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.720041208826">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -32,12 +32,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../images/favicon.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.4.0.713994986078" rel="stylesheet" />
+    <link href="../../resources/css/retype.css?v=2.4.0.720041208826" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.713994986078" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.720041208826" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.713994986078" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.4.0.713994986078" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.720041208826" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.4.0.720041208826" defer></script>
 
     <link href="/guide/static/custom.css" rel="stylesheet" />
 
@@ -245,106 +245,94 @@
 <p>Kontain runs on <em>Linux kernel version 4.15 or newer</em>, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled, ideally Ubuntu or Fedora.</p>
 <p>To check for pre-requisites on Kubernetes worker nodes, you can refer to <a href="../install_linux/#checking-for-pre-requisites">this link</a></p>
 <p>For more information to enable KVM on Ubuntu 20.04 or higher, you can refer to this <a href="https://linuxize.com/post/how-to-install-kvm-on-ubuntu-20-04/">article</a>.</p>
-<p>For Kubernetes platforms that do not offer nested virtualization like GKE and AWS, we use a software virtualization module that gets installed as part of the Kontain install.  For other platforms that do offer nested virtualization, we recommend using the regular Kontain install.</p>
-<p>Recommended distros for Kubernetes Worker Nodes are Ubuntu 20.04 and Amazon Linux 2, or newer.</p>
-<p>To package Kontain images, it is also necessary to have a recent version of Docker or Moby-engine is installed.</p>
-<doc-panel id="tip-starting-a-kubernetes-cluster-with-minikube-or-kind" collapsed>
-    <template #title>Tip: Starting a Kubernetes cluster with Minikube or kind</template>
-<p>contains instructions for launching various versions of Kubernetes
-For trying out Kontain with Kubernetes, you can launch Minikube with Docker Desktop <a href="../../appendix/minikube/">view instructions here</a>.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"> kind create cluster</code></pre>
-</doc-codeblock></div>
-<p>or Minikube:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"> minikube start --container-runtime=containerd --driver=docker --wait=all</code></pre>
-</doc-codeblock></div>
+<p>For Kubernetes platforms that do not offer nested virtualization like GKE and AWS, we use a software virtualization module that gets installed as part of the Kontain install.</p>
+<p>Recommended distros for Kubernetes Worker Nodes are Ubuntu 20.04 and Amazon Linux 2, or newer. For Amazon EKS Kontain maintains kontain-compatible AMI which is a derivitive of Amazon Linux 2 and can be found by filter &quot;kontain-eks-node*&quot;. For GKE make sure to use UBUNTU_CONTAINERD image type.</p>
+<doc-panel id="tip-creating-kubernetes-cluster" collapsed>
+    <template #title>Tip: Creating Kubernetes Cluster</template>
+<p>Kontain provides the following shell helper scripts that you can use to create and start cluster for a number of different cluster environments:</p>
+<ul>
+<li><a href="../../appendix/azure_aks/">Azure AKS Cluster</a></li>
+<li><a href="../../appendix/amazon_eks/">Amazon EKS</a></li>
+<li><a href="../../appendix/google-gke/">Google GKE</a></li>
+<li><a href="../../appendix/k3s/">K3S</a></li>
+<li><a href="../../appendix/minikube/">Minikube</a></li>
+</ul>
 </doc-panel>
-<doc-anchor-target id="enabling-kontain-on-cloud-kubernetesopenshift">
+<doc-anchor-target id="enabling-kontain-runtime-on-kubernetes-cluster">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#enabling-kontain-on-cloud-kubernetesopenshift">#</doc-anchor-trigger>
-        <span>Enabling Kontain on Cloud Kubernetes/Openshift</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#enabling-kontain-runtime-on-kubernetes-cluster">#</doc-anchor-trigger>
+        <span>Enabling Kontain Runtime on Kubernetes Cluster</span>
     </h2>
 </doc-anchor-target>
 <doc-tabs>
-<doc-tab id="azure-aks">
-<template #title>Azure AKS</template>
-<p>Deploy Kontain Runtime using the Kubernetes client CLI and Kontain Deamonset</p>
+<doc-tab id="aks-eks-gke-k3s-and-minikube-clusters">
+<template #title>AKS, EKS, GKE, K3S, and Minikube clusters</template>
+<p>To enable Kontain runtime</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"> kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/current/cloud/k8s/deploy/azure-aks/kontain-install.yaml</code></pre>
+<pre class="language-none"><code v-pre class="language-none">curl -s https://raw.githubusercontent.com/kontainapp/k8s-deploy/current/kontain-kustomize.sh | bash -s - [options]</code></pre>
 </doc-codeblock></div>
-<p>The above yaml contains the Kontain runtime class and the install scripts for the Daemonset to be installed.</p>
-</doc-tab>
-<doc-tab id="aws-eks">
-<template #title>AWS EKS</template>
-<p>To create EKS cluster with Kontain:</p>
-<ol>
-<li><p>Create cluster on EKS using Kontain-enabled AMI (kontain-eks-node-1.22-<em>version</em>)
-You can use Amazon AWS Management Console or eksctl as described in <a href="https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html">&quot;Getting started with Amazon EKS&quot;</a>.
-Alternatively, you can download Kontain EKS cluster creation script create-cluster.sh and run as shown below or customize it as needed</p>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>Note: AWS CLI is required by eksclt and create-cluster.sh</p>
-        </div>
-    </div>
+<doc-anchor-target id="script-options">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#script-options">#</doc-anchor-trigger>
+        <span>Script options</span>
+    </h3>
+</doc-anchor-target>
+<p>kontain-kustomize.sh [--deploy-version=version | --deploy-location=path] [--km-version=version | --km-url=url&gt;] [--dry-run=strategy] [--download=path] [--remove]</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="options-table">
+<thead>
+<tr>
+<th>Option</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>--deploy-version=&lt;tag&gt;</td>
+<td>Kontain deployment version to use. Defaults to current release</td>
+</tr>
+<tr>
+<td>--deploy-location=&lt;deployment location&gt;</td>
+<td>location of local kontain-deploy directory. Use --download to download kontain-deploy directory to local path</td>
+</tr>
+<tr>
+<td>--km-version=&lt;tag&gt;</td>
+<td>Kontain release to deploy. Defaults to current Kontain release</td>
+</tr>
+<tr>
+<td>--km-url=&lt;url&gt;</td>
+<td>url to download kontain_bin.tar.gz. Development only</td>
+</tr>
+<tr>
+<td>--help(-h)</td>
+<td>prints this message</td>
+</tr>
+<tr>
+<td>--dry-run=&lt;strategy&gt;</td>
+<td>if &#x27;review&#x27; strategy, only generate resulting customization file. If &#x27;client&#x27; strategy, only print the object that would be sent, without sending it. If &#x27;server&#x27; strategy, submit server-side request without persisting the resource</td>
+</tr>
+<tr>
+<td>--download=&lt;path&gt;</td>
+<td>downloads kontain-deploy directory structure to specified location. If directory down not exist, it will be created. This directory can be used as path for --deploy-location</td>
+</tr>
+<tr>
+<td>--remove</td>
+<td>removes all the resources produced by overlay</td>
+</tr>
+</tbody>
+</table>
 </div>
-<p>To run script:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-shell-session"><code v-pre class="language-shell-session"> curl -o create-cluster.sh https://raw.githubusercontent.com/kontainapp/km/current/cloud/k8s/deploy/amazon-eks/create-cluster.sh
- chmod +x create-cluster.sh 
- ./create-cluster.sh --region=&lt;your region&gt; --ami=&lt;Kontain-enabled AMI ID&gt; &lt;prefix&gt;</code></pre>
-</doc-codeblock></div>
-<p>where &lt;prefix&gt; is used as your unique cluster identifier and is pre-pended to all resource names related to your cluster</p>
-</li>
-<li><p>Create Kontain RuntimeClass resources</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-shell-session"><code v-pre class="language-shell-session"> kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/current/cloud/k8s/deploy/amazon-eks/kontain-runtime-config.yaml
-</code></pre>
-</doc-codeblock></div>
-</li>
-</ol>
-</doc-tab>
-<doc-tab id="google-cloud-gke">
-<template #title>Google Cloud GKE</template>
-<p>To install Kontain on GKE use:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"> kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/kkm.yaml</code></pre>
-</doc-codeblock></div>
-<p>The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.</p>
-</doc-tab>
-<doc-tab id="k3s">
-<template #title>K3s</template>
-<p>To install Kontain on K3s:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"> kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/km.yaml</code></pre>
-</doc-codeblock></div>
-<p>The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.</p>
-</doc-tab>
-<doc-tab id="openshift-with-crio">
-<template #title>Openshift with CRIO</template>
-<p>To install Kontain on Openshift or Minikube with CRIO:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"> kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/km-crio.yaml</code></pre>
-</doc-codeblock></div>
-<p>The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.</p>
 </doc-tab>
 <doc-tab id="other">
 <template #title>Other</template>
-<p>Install Kontain using Deamonset</p>
+<p>To install Kontain using Deamonset, first generate deployment file:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># we install Kontain using a Daemonset
- kubectl apply -f https://raw.githubusercontent.com/kontainapp/guide-examples/master/infra/kustomize_outputs/km.yaml</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">curl -s https://raw.githubusercontent.com/kontainapp/k8s-deploy/current/kontain-kustomize.sh | bash -s - --dry-run=review</code></pre>
+</doc-codeblock></div>
+<p>This command will create kontain-deploy.yaml file in local directory.
+You can now apply it to your Kubernetes installation using the following command</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">kubectl apply -f kontain-deploy.yaml</code></pre>
 </doc-codeblock></div>
 <p>The above installs the Kontain runtime class and contains the libraries for installing Kontain using the daemonset.</p>
 </doc-tab>
@@ -357,66 +345,48 @@ Alternatively, you can download Kontain EKS cluster creation script create-clust
 </doc-anchor-target>
 <p>Let&#x27;s run a Kontain test app to verify that the runtime class is working as designed</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">kubectl apply -f https://raw.githubusercontent.com/kontainapp/km/current/cloud/k8s/tools/test.yaml</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">kubectl apply -f https://raw.githubusercontent.com/kontainapp/k8s-deploy/current/tests/test.yaml</code></pre>
 </doc-codeblock></div>
-<p>a new Kontain test app should appear as &#x27;Running&#x27;</p>
+<p>A new Kontain test app should appear as &#x27;Running&#x27;. You can check that by running the following command</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash">kubectl get pods </code></pre>
 </doc-codeblock></div>
-<p>The example output is as follows.</p>
+<p>The example output is as follows</p>
 <div class="custom-shell-output">
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">NAMESPACE     NAME                                READY   STATUS    RESTARTS   AGE
-default       kontain-test-app-647874765d-7ftrp   1/1     Running   0          23m</code></pre>
+default       kontain-test-app-647874765d-7ftrp   1/1     Running   0          2m</code></pre>
 </doc-codeblock></div>
 </div>
-<p>Use kubectl exec to run uname -r on the test pod. When running under the Kontain Runtime, the uname(2) system call appends the string &quot;kontain.&quot; to the release name.</p>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>Note: Please replace the kontain-test-app-xxxxx with the appropriate pod id.</p>
-        </div>
-    </div>
-</div>
+<p>Use kubectl exec to run uname -r on the test pod.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">kubectl exec -it kontain-test-&lt;appropriate-pod-id&gt;  -- uname -r </code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">kubectl exec deployment.apps/kontain-test-app -- uname -r</code></pre>
 </doc-codeblock></div>
-<p>The output example is</p>
+<p>When running under the Kontain Runtime, the uname(2) system call adds the string &quot;kontain&quot; to the release name</p>
 <div class="custom-shell-output">
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">&lt;kernel-version&gt;.&lt;host-name&gt;.x86_64.kontain.KVM or &lt;kernel-version&gt;.&lt;host-name&gt;.x86_64.kontain.KKM</code></pre>
+<pre class="language-none"><code v-pre class="language-none">&lt;kernel-version&gt;.&lt;host-name&gt;.x86_64.kontain.KVM </code></pre>
+</doc-codeblock></div>
+</div>
+<p>or</p>
+<div class="custom-shell-output">
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">&lt;kernel-version&gt;.&lt;host-name&gt;.x86_64.kontain.KKM</code></pre>
 </doc-codeblock></div>
 </div>
 <p>To verify that Kontain Daemonset has been successfull and the kontain-node-initializer ran successfully and is in &quot;Running&quot; state and not &quot;Error&quot; state</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"> kubectl get po -n kube-system</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">kubectl get pods -n kube-system -l app=kontain-init</code></pre>
 </doc-codeblock></div>
 <p>You will see output similar to</p>
 <div class="custom-shell-output">
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">kube-system   azure-ip-masq-agent-tr7c7             1/1     Running   0          37m
-kube-system   coredns-58567c6d46-ncsqq              1/1     Running   0          38m
-kube-system   coredns-58567c6d46-rrb4m              1/1     Running   0          36m
-kube-system   coredns-autoscaler-54d55c8b75-j97sj   1/1     Running   0          38m
-kube-system   kontain-node-initializer-tvr84        1/1     Running   0          39s
-kube-system   kube-proxy-7hkjc                      1/1     Running   0          37m
-kube-system   metrics-server-569f6547dd-flsb4       1/1     Running   1          38m
-kube-system   tunnelfront-7d8df6bfdc-dr6z2          1/1     Running   0          38m</code></pre>
+<pre class="language-none"><code v-pre class="language-none">kube-system   kontain-node-initializer-tvr84        1/1     Running   0          3m</code></pre>
 </doc-codeblock></div>
 </div>
-<p>If need be, to debug an &quot;Error&quot; state, you can view its logs:</p>
+<p>If need be, to debug an &quot;Error&quot; state, you can view its logs</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"> kubectl logs kontain-node-initializer-&lt;id&gt;</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">kubectl logs -n kube-system kontain-node-initializer-&lt;id&gt;</code></pre>
 </doc-codeblock></div>
 <p>To check the daemonset status</p>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -431,11 +401,41 @@ kube-system   kindnet          1         1         1       1            1       
 kube-system   kube-proxy       1         1         1       1            1           kubernetes.io/os=linux   168m</code></pre>
 </doc-codeblock></div>
 </div>
+<doc-anchor-target id="modifying-your-deployment-to-run-with-kontain-runtime">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#modifying-your-deployment-to-run-with-kontain-runtime">#</doc-anchor-trigger>
+        <span>Modifying your Deployment to run with Kontain Runtime</span>
+    </h2>
+</doc-anchor-target>
+<p>To run your deployment using Kontain runtime modify deployment file by adding runtimeClass and nodeSelector as highlighted below in out test deployment</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-yaml" data-line="14-16"><code v-pre class="language-yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kontain-test-app
+spec:
+  selector:
+    matchLabels:
+      kontain: test-app
+  template:
+    metadata:
+      labels:
+        kontain: test-app
+    spec:
+      runtimeClassName: kontain
+      nodeSelector:
+        sandbox: kontain
+      containers:
+        - name: kontain-test-app
+          image: busybox:latest
+          command: [&quot;sleep&quot;, &quot;infinity&quot;]
+          imagePullPolicy: IfNotPresent</code></pre>
+</doc-codeblock></div>
 <doc-anchor-target id="using-kontain-to-deploy-java-python-golang-and-js-examples-in-kubernetes">
-    <h3>
+    <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-to-deploy-java-python-golang-and-js-examples-in-kubernetes">#</doc-anchor-trigger>
         <span>Using Kontain to deploy Java, Python, Golang and JS examples in Kubernetes</span>
-    </h3>
+    </h2>
 </doc-anchor-target>
 <p>
 <div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">

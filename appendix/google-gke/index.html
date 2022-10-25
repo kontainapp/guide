@@ -10,24 +10,24 @@
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>Python Flask and FastAPI (Docker/Compose/K8s)</title>
-    <meta name="title" content="Python Flask and FastAPI (Docker/Compose/K8s)">
-    <meta name="description" content="This example shows how to build, push, run a Python Flask based microservice in a Kontain container in Docker and Kubernetes." />
+    <title>Launching an GKE cluster</title>
+    <meta name="title" content="Launching an GKE cluster">
+    <meta name="description" content="Below we describe how we can launch and use Kontain in a Google GKE (Kubernetes) cluster." />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://kontainapp.github.io/guide/getting_started/python/" />
+    <link rel="canonical" href="https://kontainapp.github.io/guide/appendix/google-gke/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kontainapp.github.io/guide/getting_started/python/">
-    <meta property="og:title" content="Python Flask and FastAPI (Docker/Compose/K8s)">
-    <meta property="og:description" content="This example shows how to build, push, run a Python Flask based microservice in a Kontain container in Docker and Kubernetes.">
+    <meta property="og:url" content="https://kontainapp.github.io/guide/appendix/google-gke/">
+    <meta property="og:title" content="Launching an GKE cluster">
+    <meta property="og:description" content="Below we describe how we can launch and use Kontain in a Google GKE (Kubernetes) cluster.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://kontainapp.github.io/guide/getting_started/python/">
-    <meta property="twitter:title" content="Python Flask and FastAPI (Docker/Compose/K8s)">
-    <meta property="twitter:description" content="This example shows how to build, push, run a Python Flask based microservice in a Kontain container in Docker and Kubernetes.">
+    <meta property="twitter:url" content="https://kontainapp.github.io/guide/appendix/google-gke/">
+    <meta property="twitter:title" content="Launching an GKE cluster">
+    <meta property="twitter:description" content="Below we describe how we can launch and use Kontain in a Google GKE (Kubernetes) cluster.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
@@ -230,168 +230,100 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="python-flask-and-fastapi-dockercomposek8s" class="break-words">
+<doc-anchor-target id="launching-an-gke-cluster" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#python-flask-and-fastapi-dockercomposek8s">#</doc-anchor-trigger>
-        <span>Python Flask and FastAPI (Docker/Compose/K8s)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#launching-an-gke-cluster">#</doc-anchor-trigger>
+        <span>Launching an GKE cluster</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="example-of-using-kontain-with-a-python-flask-based-service">
+<p>Below we describe how we can launch and use Kontain in a Google GKE (Kubernetes) cluster.</p>
+<doc-anchor-target id="starting-up-an-gke-cluster">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#example-of-using-kontain-with-a-python-flask-based-service">#</doc-anchor-trigger>
-        <span>Example of using Kontain with a Python Flask-based Service</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#starting-up-an-gke-cluster">#</doc-anchor-trigger>
+        <span>Starting up an GKE cluster</span>
     </h2>
 </doc-anchor-target>
-<p>This example shows how to build, push, run a Python Flask based microservice in a Kontain container in Docker and Kubernetes.</p>
-<p><a href="https://github.com/kontainapp/guide-examples/tree/master/examples/python/py-flask-hello">The implementation of this example is here</a> along with instructions to build and run this example.</p>
-<doc-anchor-target id="to-build-this-example">
+<doc-anchor-target id="pre-requisites">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#to-build-this-example">#</doc-anchor-trigger>
-        <span>to build this example</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#pre-requisites">#</doc-anchor-trigger>
+        <span>Pre-requisites</span>
+    </h3>
+</doc-anchor-target>
+<p>Take the following steps to enable the Kubernetes Engine API:</p>
+<ul>
+<li><p><a href="https://console.cloud.google.com/freetrial?_ga=2.49271654.1392909812.1664219973-2131462911.1664219973">Sign in to your Google Cloud account</a>. If you&#x27;re new to Google Cloud, <a href="https://console.cloud.google.com/freetrial?_ga=2.49271654.1392909812.1664219973-2131462911.1664219973">create an account</a> to evaluate how our products perform in real-world scenarios.</p>
+</li>
+<li><p>In the Google Cloud console, on the project selector page, select or <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">create a Google Cloud project</a>.</p>
+</li>
+</ul>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Note: If you don&#x27;t plan to keep the resources that you create in this procedure, create a new project instead of selecting an existing one. After you finish these steps, you can delete the project, removing all resources associated with it.</p>
+        </div>
+    </div>
+</div>
+<ul>
+<li><p><a href="https://console.cloud.google.com/projectselector2/home/dashboard">Go to project selector</a></p>
+</li>
+<li><p>Make sure that billing is enabled for your Cloud project. Learn how to <a href="https://cloud.google.com/billing/docs/how-to/verify-billing-enabled">check if billing is enabled on a project</a>.</p>
+</li>
+<li><p><a href="https://console.cloud.google.com/flows/enableapi?apiid=artifactregistry.googleapis.com,container.googleapis.com">Enable the Artifact Registry and Google Kubernetes Engine APIs</a>.</p>
+</li>
+<li><p><a href="https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke">Install Kubectl auth plugin</a></p>
+</li>
+</ul>
+<doc-anchor-target id="create-cluster-using-kontain-helper-script">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#create-cluster-using-kontain-helper-script">#</doc-anchor-trigger>
+        <span>Create cluster using Kontain helper script</span>
+    </h3>
+</doc-anchor-target>
+<p>Download helper script and make sure it is executable</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">curl -o gce-cluster.sh https://raw.githubusercontent.com/kontainapp/k8s-deploy/master/helpers/gce-cluster.sh
+chmod +x gce-cluster.sh</code></pre>
+</doc-codeblock></div>
+<p>Run script using your credentials. Make sure to set region and prefix to your desired values.  The script will create AKS cluster with the name &lt;prefix&gt;-gce-cluster. All other associated recource names are prefixed with &lt;prefix&gt;.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">gce-cluster.sh  --project=&lt;you rproject id&gt; &lt;prefix&gt;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="verify-your-cluster-was-created">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#verify-your-cluster-was-created">#</doc-anchor-trigger>
+        <span>Verify your cluster was created</span>
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ docker build -t kontainguide/py-flask-hello:1.0 .</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">gcloud container clusters list</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="see-image-sizes">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#see-image-sizes">#</doc-anchor-trigger>
-        <span>see image sizes</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ docker images|grep python
-kontainapp/runenv-python-3.9 latest               793bfa36a196   2 days ago          24.1MB
-python                       3.8-slim             5ce3cfb9de89   8 days ago          124MB
-python                       3.9-slim             8c7051081f58   8 days ago          125MB
-kontainapp/runenv-python-3.8 v0.9.1               aee035a4b2bc   7 months ago        23.5MB</code></pre>
-</doc-codeblock></div>
-<p><strong>Please note that the Kontain based container is 23.5MB in size versus the &quot;Slim&quot; python-slim base container</strong></p>
-<doc-anchor-target id="to-run-this-example">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#to-run-this-example">#</doc-anchor-trigger>
-        <span>to run this example</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ docker run -d --rm -p 5000:5000 --runtime=krun --name py-flask-hello kontainguide/py-flask-hello:1.0
-
-# invoke the service
-$ curl -v http://localhost:5000
-
-$ docker stop py-flask-hello</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="to-run-this-example-in-docker-compose">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#to-run-this-example-in-docker-compose">#</doc-anchor-trigger>
-        <span>to run this example in docker-compose</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ docker-compose up -d
-
-# invoke the service
-$ curl -v http://localhost:5000
-
-# shut down compose
-$ docker-compose down</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="to-run-this-example-in-kubernetes">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#to-run-this-example-in-kubernetes">#</doc-anchor-trigger>
-        <span>to run this example in kubernetes</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ kubectl apply -f k8s.yml
-
-# check that the pod is ready
-$ kubectl get pods -w
-
-# port-forward the port in 1 terminal
-$ kubectl port-forward svc/py-flask-hello 5000:5000 2&gt;/dev/null &amp;
-
-# invoke the service
-$ curl -vvv http://localhost:8080
-
-# kill the port-forward
-$ pkill -f &quot;port-forward&quot;</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="example-of-using-kontain-with-a-python-fastapi-based-service">
+<doc-anchor-target id="enable-and-test-kontain-runtime">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#example-of-using-kontain-with-a-python-fastapi-based-service">#</doc-anchor-trigger>
-        <span>Example of using Kontain with a Python FastAPI-based Service</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#enable-and-test-kontain-runtime">#</doc-anchor-trigger>
+        <span>Enable and Test Kontain Runtime</span>
     </h2>
 </doc-anchor-target>
-<p>This example shows how to build, push, run a Python FastAPI based microservice in a Kontain container in Docker and Kubernetes.</p>
-<p>The difference between this and the Flask API based example is that we run the Docker image as is without any conversion to Kontain based containers, but yet provide a secure environment. Thus this does not reduce the size but enables the convenience of using current containers as-is without any changes.</p>
-<p><a href="https://github.com/kontainapp/guide-examples/tree/master/examples/python/fastapi-hello">The implementation of this example is here</a> along with instructions to build and run this example.</p>
-<doc-anchor-target id="to-build-this-example-1">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#to-build-this-example-1">#</doc-anchor-trigger>
-        <span>to build this example</span>
-    </h3>
+<p>Please refer to: <a href="../../getting_started/kubenetes/">Install Kontain in Kubernetes</a></p>
+<doc-anchor-target id="clean-up">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#clean-up">#</doc-anchor-trigger>
+        <span>Clean up</span>
+    </h2>
 </doc-anchor-target>
+<p>To delete cluster and all associated resources use the following</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ docker build -t kontainguide/fastapi-hello:1.0 .</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">gce-cluster.sh  &lt;prefix&gt; --cleanup</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="to-run-this-example-1">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#to-run-this-example-1">#</doc-anchor-trigger>
-        <span>to run this example</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ docker run -d --rm -p 5000:5000 --runtime=krun --name fastapi-hello kontainguide/fastapi-hello:1.0</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="invoke-the-service">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#invoke-the-service">#</doc-anchor-trigger>
-        <span>invoke the service</span>
-    </h3>
-</doc-anchor-target>
-<p>$ curl -v http://localhost:5000</p>
-<p>$ docker stop fastapi-hello</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">
-# to run this example in docker-compose
-```bash
-$ docker-compose up -d
-
-# invoke the service
-$ curl -v http://localhost:5000
-
-# shut down compose
-$ docker-compose down</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="to-run-this-example-kubernetes">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#to-run-this-example-kubernetes">#</doc-anchor-trigger>
-        <span>to run this example kubernetes</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ kubectl apply -f k8s.yml
-
-# check that the pod is ready
-$ kubectl get pods -w
-
-# port-forward the port
-$ kubectl port-forward svc/fastapi-hello 5000:5000 2&gt;/dev/null &amp;
-
-# invoke the service
-$ curl -vvv http://localhost:8080
-
-# kill the port-forward
-$ pkill -f &quot;port-forward&quot;</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="reference">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#reference">#</doc-anchor-trigger>
-        <span>reference</span>
-    </h3>
-</doc-anchor-target>
-<p><a href="https://fastapi.tiangolo.com/deployment/docker/">https://fastapi.tiangolo.com/deployment/docker/</a></p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -401,20 +333,20 @@ $ pkill -f &quot;port-forward&quot;</code></pre>
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../getting_started/kubenetes/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../appendix/azure_aks/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Install in Kubernetes (Minikube/Kind, AWS, AKS, GKE)</span>
+                                                <span class="block mt-1">Starting Azure AKS Cluster</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../getting_started/golang/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../appendix/knative_aks/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Go (Docker, Compose, Kubernetes)</span>
+                                                <span class="block mt-1">Installing K​Native with Kontain on Azure AKS</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -458,6 +390,6 @@ $ pkill -f &quot;port-forward&quot;</code></pre>
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Python Flask and FastAPI (Docker/Compose/K8s)", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Starting Google GKE Cluster", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>

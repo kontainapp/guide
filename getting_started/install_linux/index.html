@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/guide">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.713994986078">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.720041208826">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -32,12 +32,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../images/favicon.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.4.0.713994986078" rel="stylesheet" />
+    <link href="../../resources/css/retype.css?v=2.4.0.720041208826" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.713994986078" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.720041208826" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.713994986078" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.4.0.713994986078" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.720041208826" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.4.0.720041208826" defer></script>
 
     <link href="/guide/static/custom.css" rel="stylesheet" />
 
@@ -259,31 +259,65 @@
 <p>Kontain runs on Linux kernel version 4.15 or newer, running on Intel VT (vmx) or AMD (svm) with KVM based virtualization enabled, ideally:</p>
 <p>Ubuntu 20.04 or higher, or
 Fedora 34 or higher, or
-Amazon Linux 2 VM with kernel version 5.10 or higher.
-Note that this also assumes that your user has access to /dev/kvm.</p>
+Amazon Linux 2 VM with kernel version 5.10 or higher.</p>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
 <p>Kontain also runs on platforms that do not offer access to Nested Virtualization by using a Software Virtualization Module.</p>
+        </div>
+    </div>
+</div>
 <doc-tabs>
 <doc-tab id="checking-for-pre-requisites">
 <template #title>checking for pre-requisites</template>
+<ol>
+<li>Verify that you have a 64-bit Linux kernel version 4.15 or higher</li>
+</ol>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># verify that you have a 64-bit Linux kernel version 4.15 or higher
-$ uname -m
-x86_64
-
-$ uname -r
-5.14.14-200.fc34.x86_64
-
-# verify that you have nested virtualization turned on
-$ cat /proc/cpuinfo| egrep &quot;vmx|svm&quot; | wc -l
-# output must be atleast 1 or greater
-
-# verify that you have KVM already installed /dev/kvm enabled by checking:
-$ ls -l /dev/kvm
-
-# verify that Docker is installed
-$ systemctl|grep docker.service
-  docker.service</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">uname -r</code></pre>
 </doc-codeblock></div>
+<p>The output will lool like the following</p>
+<div class="custom-shell-output">
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">5.14.14-200.fc34.x86_64</code></pre>
+</doc-codeblock></div>
+</div>
+<ol start="2">
+<li>verify that Docker is installed and running</li>
+</ol>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">systemctl status docker</code></pre>
+</doc-codeblock></div>
+<p>The output will look like</p>
+<div class="custom-shell-output">
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">● docker.service - Docker Application Container Engine
+     Loaded: loaded (/usr/lib/systemd/system/docker.service; disabled; vendor preset: disabled)
+     Active: active (running) since Mon 2022-10-10 11:12:42 MST; 1 day 22h ago
+TriggeredBy: ● docker.socket
+       Docs: https://docs.docker.com
+   Main PID: 30042 (dockerd)
+      Tasks: 38
+     Memory: 11.1G
+        CPU: 6min 3.380s
+     CGroup: /system.slice/docker.service
+             └─ 30042 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+Oct 12 07:13:41 fc dockerd[30042]: time=&quot;2022-10-12T07:13:41.140880944-07:00&quot; level=debug msg=&quot;Applying tar in /var/lib/docker/overlay2/ccdf8db5665a209a4630503f26bdf3f8e&gt;
+Oct 12 07:13:48 fc dockerd[30042]: time=&quot;2022-10-12T07:13:48.442110019-07:00&quot; level=debug msg=&quot;Applied tar sha256:89b603e67eaf0f31ae0ffc6526d960d9807c6476745001e79bba49d&gt;
+Oct 12 07:13:49 fc dockerd[30042]: time=&quot;2022-10-12T07:13:49.737426859-07:00&quot; level=debug msg=&quot;[BUILDER] Command to be executed: [/bin/sh -c #(nop)  CMD [\&quot;/home/appuser&gt;</code></pre>
+</doc-codeblock></div>
+</div>
 <doc-panel id="tip-enabling-kvm-for-ubuntu-20-04" collapsed>
     <template #title>Tip: Enabling KVM for Ubuntu 20.04</template>
 <p>To enable KVM for Ubuntu, you can see the <a href="https://linuxize.com/post/how-to-install-kvm-on-ubuntu-20-04/">tips here</a></p>
@@ -296,15 +330,24 @@ $ systemctl|grep docker.service
 <doc-tab id="update-your-os">
 <template #title>Update your OS</template>
 <p>To ensure a smooth install, we recommend updating your OS:</p>
+<ul>
+<li>For Fedora:</li>
+</ul>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># For Fedora:
-$ sudo dnf update -y
-
-# For Ubuntu Focal:
-$ sudo apt update -y
-
-# For Amazon Linux 2:
-$ sudo yum update -y</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">sudo dnf upgrade --refresh -y</code></pre>
+</doc-codeblock></div>
+<ul>
+<li>For Ubuntu Focal:</li>
+</ul>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">sudo apt update
+sudo apt upgrade -y</code></pre>
+</doc-codeblock></div>
+<ul>
+<li>For Amazon Linux 2:</li>
+</ul>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">sudo yum update -y</code></pre>
 </doc-codeblock></div>
 </doc-tab>
 </doc-tabs>
@@ -315,37 +358,63 @@ $ sudo yum update -y</code></pre>
     </h2>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># create the kontain folder for install
-$ sudo mkdir -p /opt/kontain ; sudo chown root /opt/kontain
-
-# download and install the latest Kontain release
-$ curl -s https://raw.githubusercontent.com/kontainapp/km/current/km-releases/kontain-install.sh | sudo bash
-...
-
-# This installed Kontain in /opt/kontain and added the Kontain runtime (/opt/bin/km) to docker in /etc/docker/daemon.json. 
-# This also executed a smoke test of the unikernel virtual machine.
-
-# check for Kontain in /opt/kontain folder
-$ ls -l /opt/kontain
-...
-drwxr-xr-x 1 smijar  121 296 Nov 10 09:32 bin
-drwxr-xr-x 1 smijar  121 140 Nov 10 09:32 lib
-drwxr-xr-x 1 smijar  121 194 Nov 10 09:32 runtime
-...</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">sudo mkdir -p /opt/kontain ; sudo chown root /opt/kontain
+curl -s https://raw.githubusercontent.com/kontainapp/km/current/km-releases/kontain-install.sh | sudo bash</code></pre>
 </doc-codeblock></div>
+<p>This installed Kontain in /opt/kontain directory and configured the Kontain runtime for docker (/etc/docker/daemon.json) and podman (~/.config/containers/containers.conf).</p>
+<p>This also executed a smoke test of the unikernel virtual machine.</p>
 <doc-anchor-target id="verify-kontain-install">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#verify-kontain-install">#</doc-anchor-trigger>
-        <span>Verify Kontain install</span>
+        <span>Verify Kontain Install</span>
     </h2>
 </doc-anchor-target>
+<ol>
+<li>Check for Kontain in /opt/kontain folder</li>
+</ol>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># check if Kontain monitor can run the unikernel
-$ /opt/kontain/bin/km /opt/kontain/tests/hello_test.km
-
-# check if docker can run with kontain as runtime
-$ docker run --runtime=krun kontainguide/hello-kontain</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">ls -l /opt/kontain
+drwxr-xr-x   4 smijar  121   4096 Sep 16 18:03 alpine-lib
+drwxr-xr-x   2 smijar  121   4096 Oct 10 16:20 bin
+drwxr-xr-x   3 smijar  root  4096 Oct  5 17:10 config
+drwxr-xr-x   7 smijar  121   4096 Sep 16 17:24 examples
+drwxr-xr-x   2 smijar  121   4096 Sep 16 18:03 include
+-rwxr-xr-x   1 smijar  121 370035 Sep 16 18:03 kkm.run
+drwxr-xr-x   2 smijar  121   4096 Sep 16 18:03 lib
+drwxr-xr-x   2 smijar  121   4096 Sep 16 18:03 runtime
+drwxr-xr-x   2 smijar  root  4096 Oct  7 09:25 tests</code></pre>
 </doc-codeblock></div>
+<ol start="2">
+<li>Verify Kontain install</li>
+</ol>
+<ul>
+<li>check if Kontain monitor can run the unikernel</li>
+</ul>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">/opt/kontain/bin/km /opt/kontain/tests/hello_test.km</code></pre>
+</doc-codeblock></div>
+<p>Output will look like</p>
+<div class="custom-shell-output">
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">Hello, world
+Hello, argv[0] = '/opt/kontain/tests/hello_test.km'</code></pre>
+</doc-codeblock></div>
+</div>
+<ul>
+<li>check if docker can run with kontain as runtime</li>
+</ul>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">docker run --runtime=krun kontainguide/hello-kontain</code></pre>
+</doc-codeblock></div>
+<p>Output will look like</p>
+<div class="custom-shell-output">
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">Hello, world
+Hello, argv[0] = '/hello_test.km'
+Hello, argv[1] = 'from'
+Hello, argv[2] = 'docker'</code></pre>
+</doc-codeblock></div>
+</div>
 <doc-anchor-target id="using-kontain-with-different-languages">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#using-kontain-with-different-languages">#</doc-anchor-trigger>
@@ -356,12 +425,11 @@ $ docker run --runtime=krun kontainguide/hello-kontain</code></pre>
 <doc-tab id="java">
 <template #title>Java</template>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ docker run -d --rm -p 8080:8080 --runtime=krun --name spring-boot-hello kontainguide/spring-boot-hello:1.0
-
+<pre class="language-bash"><code v-pre class="language-bash">docker run -d --rm -p 8080:8080 --runtime=krun --name spring-boot-hello kontainguide/spring-boot-hello:1.0
 # invoke the service
-$ curl -v http://localhost:8080
-
-$ docker stop spring-boot-hello</code></pre>
+curl -v http://localhost:8080
+# stop the service
+docker stop spring-boot-hello</code></pre>
 </doc-codeblock></div>
 <p>For more details see <a href="../java/">Using Kontain with Java</a></p>
 <p>For impelementation details, you can see:
@@ -382,11 +450,11 @@ $ docker stop spring-boot-hello</code></pre>
 <doc-tab id="python">
 <template #title>Python</template>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ docker run -d --rm -p 5000:5000 --runtime=krun --name py-flask-hello kontainguide/py-flask-hello:1.0
-
-$ curl -v http://localhost:5000
-
-$ docker stop py-flask-hello</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">docker run -d --rm -p 5000:5000 --runtime=krun --name py-flask-hello kontainguide/py-flask-hello:1.0
+# invoke the service
+curl -v http://localhost:5000
+# stop the service
+docker stop py-flask-hello</code></pre>
 </doc-codeblock></div>
 <p>For more details see <a href="../python/">Using Kontain with Python</a></p>
 <p>For impelementation details, you can see:
@@ -407,13 +475,11 @@ $ docker stop py-flask-hello</code></pre>
 <doc-tab id="go">
 <template #title>Go</template>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ $ docker run -d --rm -e &quot;PORT=8080&quot; -e &quot;TARGET=Kontain&quot; -p 8080:8080 --runtime=krun --name golang-http-hello kontainguide/golang-http-hello:1.0
-
-# invoke the service
-$ curl -v http://localhost:8080
-
-# stop the service
-$ docker stop golang-http-hello</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">docker run -d --rm -e &quot;PORT=8080&quot; -e &quot;TARGET=Kontain&quot; -p 8080:8080 --runtime=krun --name golang-http-hello kontainguide/golang-http-hello:1.0
+#invoke the service
+curl -v http://localhost:8080
+#stop the service
+docker stop golang-http-hello</code></pre>
 </doc-codeblock></div>
 <p>For more details see <a href="../golang/">Using Kontain with Go</a></p>
 <p>For impelementation details, you can see:
@@ -434,12 +500,11 @@ $ docker stop golang-http-hello</code></pre>
 <doc-tab id="javascript-nodejs">
 <template #title>Javascript/NodeJS</template>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ docker run -d --rm -p 8080:8080 --runtime=krun --name node-express-hello kontainguide/node-express-hello:1.0
-
+<pre class="language-bash"><code v-pre class="language-bash">docker run -d --rm -p 8080:8080 --runtime=krun --name node-express-hello kontainguide/node-express-hello:1.0
 # invoke the service
-$ curl -v http://localhost:8080
-
-$ docker stop node-express-hello</code></pre>
+curl -v http://localhost:8080
+# stop the service
+docker stop node-express-hello</code></pre>
 </doc-codeblock></div>
 <p>For more details see <a href="../javascript/">Using Kontain with Javascript/NodeJS</a></p>
 <p>For impelementation details, you can see:
@@ -466,8 +531,8 @@ $ docker stop node-express-hello</code></pre>
 </doc-anchor-target>
 <p>You can see the <a href="https://github.com/kontainapp/guide-examples">Kontain guide examples</a> for more details on how to use Kontain in Kubernetes and docker-compose.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$ git clone https://github.com/kontainapp/guide-examples.git
-$ cd examples</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">git clone https://github.com/kontainapp/guide-examples.git
+cd examples</code></pre>
 </doc-codeblock></div>
 
                                 

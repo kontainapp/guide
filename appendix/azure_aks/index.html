@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/guide">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.713994986078">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.720041208826">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -32,12 +32,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../images/favicon.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.4.0.713994986078" rel="stylesheet" />
+    <link href="../../resources/css/retype.css?v=2.4.0.720041208826" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.713994986078" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.720041208826" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.713994986078" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.4.0.713994986078" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.720041208826" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.4.0.720041208826" defer></script>
 
     <link href="/guide/static/custom.css" rel="stylesheet" />
 
@@ -243,95 +243,69 @@
         <span>Starting up an AKS cluster</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="login-to-azure">
+<doc-anchor-target id="pre-requisites">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#login-to-azure">#</doc-anchor-trigger>
-        <span>Login to Azure</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#pre-requisites">#</doc-anchor-trigger>
+        <span>Pre-requisites</span>
     </h3>
 </doc-anchor-target>
-<p>Here, we assume that you have Azure CLI <a href="https://docs.microsoft.com/en-us/cli/azure/install-azure-cli">installed</a> have an Azure AKS account and are able to use the Azure CLI to be able to <a href="https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli">login</a> to AKS using either:</p>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/cli/azure/install-azure-cli">Install</a>  Azure CLI,</li>
+<li>Create an Azure AKS account</li>
+<li>Verify that you are able to use the Azure CLI to  <a href="https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli">login</a> to AKS:</li>
+</ul>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># launches a browser for logging in with your credentials
-$ az login
-# or
-$ az login -u &lt;username&gt; -p &lt;password&gt;
-# or (if you don't have a browser - use this URL https://aka.ms/devicelogin)
-$ az login --use-device-code
-
-# and, only once, set your subscription to ensure that you are using the right one for your cluster
-$ az account set --subscription &quot;&lt;your-subscription-id&gt;&quot;
-</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">az login --service-principal -u &lt;app-id&gt; -p &lt;password-or-cert&gt; --tenant &lt;tenant&gt;</code></pre>
 </doc-codeblock></div>
-<p>Note: This approach may not work with Microsoft accounts or accounts that have two-factor authentication enabled.</p>
-<doc-anchor-target id="aks-kubernetes-cluster-with-nested-virtualization">
+<p>or</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">az login -u &lt;username&gt; -p &lt;password&gt;</code></pre>
+</doc-codeblock></div>
+<p>and, only once, set your subscription to ensure that you are using the right one for your cluster</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">az account set --subscription &quot;&lt;your-subscription-id&gt;&quot;</code></pre>
+</doc-codeblock></div>
+<p>Note: Follow instructions in <a href="https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli">Sign in with Azure CLI</a> if you have any issues or questions</p>
+<doc-anchor-target id="create-cluster-using-kontain-helper-script">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#aks-kubernetes-cluster-with-nested-virtualization">#</doc-anchor-trigger>
-        <span>AKS Kubernetes cluster with <em><strong>Nested</strong></em> Virtualization</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#create-cluster-using-kontain-helper-script">#</doc-anchor-trigger>
+        <span>Create cluster using Kontain helper script</span>
     </h3>
 </doc-anchor-target>
-<p>Below is an example of starting a kubernetes cluster in US-West region 1.</p>
-<p>As a reference, the various instances available in Azure are outlined <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/dv3-dsv3-series">here</a>.</p>
-<p>We use an instance type that enables use of <strong>&quot;Nested&quot;</strong> Virutalization using KVM, and in case of Azure, the minimum instance that enables this is &quot;Standard_D4s_v3&quot;.</p>
+<p>Download helper script and make sure it is executable</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none"># create a Resource Group using which you can dispose of your cluster later
-# a Resource Group is like a project, a grouping of all resources used for sake of billing
-$ az group create --name kdocs --location westus2
-
-# Initially, create a 1 node cluster for testing with an instance that enables nested virutalization using KVM
-$ az aks create \
--g kdocs \
--n kdocscluster \
---enable-managed-identity \
---node-count 1 \
---generate-ssh-keys \
---node-vm-size Standard_D4s_v3 \
---node-vm-size Standard_D4s_v3
-# --network-policy calico
-# --network-plugin kubenet
-# --enable-addons monitoring
-
-# wait for a bit, as it takes a little time to start
-# Now, you are ready for testing Kontain
-
-# Now, ONLY if you want to add additional nodes using a node pool with nested virtualization turned on, add a custom node
-$ az aks nodepool add \
---resource-group kdocs \
---cluster-name kdocscluster \
---name nested \
---node-vm-size Standard_D4s_v3 \
---labels nested=true \
---node-count 1
-
-# list your current clusters
-$ az aks list -o table
-
-# To access this cluster using kubectl
-$ az aks get-credentials --resource-group kdocs --name kdocscluster
-
-# check the nodes
-$ kubectl get nodes -o wide</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">curl -o aks-cluster.sh https://raw.githubusercontent.com/kontainapp/k8s-deploy/master/helpers/aks-cluster.sh
+chmod +x aks-cluster.sh</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="install-kontain">
+<p>Run script using your credentials. Make sure to set region and prefix to your desired values.  The script will create AKS cluster with the name &lt;prefix&gt;-aks-cluster. All other associated recource names are prefixed with &lt;prefix&gt;.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">aks-cluster.sh  --tenant=TENANT_ID --app-id=AZURE_APP_ID --password=AZURE_SECRET --region=&lt;your region&gt; &lt;prefix&gt;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="verify-your-cluster-was-created">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#install-kontain">#</doc-anchor-trigger>
-        <span>Install Kontain</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#verify-your-cluster-was-created">#</doc-anchor-trigger>
+        <span>Verify your cluster was created</span>
     </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">az aks list -o table</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="enable-and-test-kontain-runtime">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#enable-and-test-kontain-runtime">#</doc-anchor-trigger>
+        <span>Enable and Test Kontain Runtime</span>
+    </h2>
 </doc-anchor-target>
 <p>Please refer to: <a href="../../getting_started/kubenetes/">Install Kontain in Kubernetes</a></p>
 <doc-anchor-target id="clean-up">
-    <h3>
+    <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#clean-up">#</doc-anchor-trigger>
         <span>Clean up</span>
-    </h3>
+    </h2>
 </doc-anchor-target>
+<p>To delete cluster and all associated resources use the following</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">#--------
-# clean up after using it
-# to delete the nodepool only use:
-$ az aks nodepool delete --resource-group kdocs --cluster-name kdocscluster --name nested
-
-# to delete cluster and corresponding, delete the resource group itself
-$ az group delete --name kdocs --yes #--no-wait</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">aks-cluster.sh  --tenant=TENANT_ID --app-id=AZURE_APP_ID --password=AZURE_SECRET --region=&lt;your region&gt; &lt;prefix&gt; --cleanup</code></pre>
 </doc-codeblock></div>
 
                                 
@@ -342,20 +316,20 @@ $ az group delete --name kdocs --yes #--no-wait</code></pre>
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../appendix/log4jshell/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../appendix/amazon_eks/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Log​4​J Shell Attack Mitigation with Kontain</span>
+                                                <span class="block mt-1">Starting Amazon EKS Cluster</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../appendix/knative_aks/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../appendix/google-gke/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Installing K​Native with Kontain on Azure AKS</span>
+                                                <span class="block mt-1">Starting Google GKE Cluster</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
