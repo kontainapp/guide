@@ -26,6 +26,8 @@ Note: If you don't plan to keep the resources that you create in this procedure,
 
 - [Install Kubectl auth plugin](https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke)
 
+- [Installing](https://cloud.google.com/sdk/docs/install) and [Initializing](https://cloud.google.com/sdk/docs/initializing) gcloud CLI
+
 ### Create cluster using Kontain helper script
 
 Download helper script and make sure it is executable
