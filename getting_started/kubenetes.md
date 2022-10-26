@@ -32,7 +32,7 @@ Kontain provides the following shell helper scripts that you can use to create a
 
 +++ AKS, EKS, GKE, K3S, and Minikube clusters
 
-To enable Kontain runtime 
+To enable Kontain runtime (Please note that the current kubernetes context needs to point to cluster that you want to use):
 ```
 curl -s https://raw.githubusercontent.com/kontainapp/k8s-deploy/current/kontain-kustomize.sh | bash -s - [options]
 ```
