@@ -10,33 +10,35 @@
     <meta name="generator" content="Retype 3.1.0">
 
     <!-- Primary Meta Tags -->
-    <title>SSH into K8s nodes</title>
-    <meta name="title" content="SSH into K8s nodes">
-    <meta name="description" content="To ssh into K8s worker nodes for checking pre-requisites or debugging purposes, you can use the following command:">
+    <title>Overview/Architecture</title>
+    <meta name="title" content="Overview/Architecture">
+    <meta name="description" content="“Inside every large program is a small program struggling to get out.”— Tony Hoare">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://kontainapp.github.io/guide/appendix/ssh_k8s_nodes/">
+    <link rel="canonical" href="https://kontainapp.github.io/guide/overview/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kontainapp.github.io/guide/appendix/ssh_k8s_nodes/">
-    <meta property="og:title" content="SSH into K8s nodes">
-    <meta property="og:description" content="To ssh into K8s worker nodes for checking pre-requisites or debugging purposes, you can use the following command:">
+    <meta property="og:url" content="https://kontainapp.github.io/guide/overview/">
+    <meta property="og:title" content="Overview/Architecture">
+    <meta property="og:description" content="“Inside every large program is a small program struggling to get out.”— Tony Hoare">
+    <meta property="og:image" content="https://kontainapp.github.io/guide/images/kontain_vs_containers.gif">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://kontainapp.github.io/guide/appendix/ssh_k8s_nodes/">
-    <meta property="twitter:title" content="SSH into K8s nodes">
-    <meta property="twitter:description" content="To ssh into K8s worker nodes for checking pre-requisites or debugging purposes, you can use the following command:">
+    <meta property="twitter:url" content="https://kontainapp.github.io/guide/overview/">
+    <meta property="twitter:title" content="Overview/Architecture">
+    <meta property="twitter:description" content="“Inside every large program is a small program struggling to get out.”— Tony Hoare">
+    <meta property="twitter:image" content="https://kontainapp.github.io/guide/images/kontain_vs_containers.gif">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("/guide/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../images/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.1.0.744415047526" rel="stylesheet">
+    <link href="../images/favicon.png" rel="icon">
+    <link href="../resources/css/retype.css?v=3.1.0.744415047526" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.1.0.744415047526" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.1.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.1.0.744415047526" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.1.0.744415047526" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/retype.js?v=3.1.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.1.0.744415047526" data-turbo-eval="false" defer></script>
 
     <link href="/guide/static/custom.css" rel="stylesheet" />
 
@@ -54,10 +56,10 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="docs-site-logo" href="../../" class="flex items-center leading-snug text-xl">
+                        <a id="docs-site-logo" href="../" class="flex items-center leading-snug text-xl">
                             <span class="w-10 mr-2 grow-0 shrink-0 overflow-hidden">
-                                <img class="max-h-10 dark:hidden md:inline-block" src="../../images/logo2.png">
-                                <img class="max-h-10 hidden dark:inline-block" src="../../images/logo2.png">
+                                <img class="max-h-10 dark:hidden md:inline-block" src="../images/logo2.png">
+                                <img class="max-h-10 hidden dark:inline-block" src="../images/logo2.png">
                             </span>
                             <span class="dark:text-white font-semibold line-clamp-1 md:line-clamp-2">Kontain User Guide</span>
                         </a><span class="hidden px-2 py-1 ml-4 text-sm font-semibold leading-none text-root-logo-label-text bg-root-logo-label-bg rounded-sm md:inline-block">v0.9.8</span>
@@ -227,87 +229,65 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="ssh-into-k8s-nodes" class="break-words">
+<doc-anchor-target id="introduction" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#ssh-into-k8s-nodes">#</doc-anchor-trigger>
-        <span>SSH into K8s nodes</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#introduction">#</doc-anchor-trigger>
+        <span>Introduction</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="ssh-into-k8s-nodes">
+<doc-anchor-target id="kontain">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#ssh-into-k8s-nodes">#</doc-anchor-trigger>
-        <span>SSH into K8s nodes</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#kontain">#</doc-anchor-trigger>
+        <span>Kontain</span>
     </h2>
 </doc-anchor-target>
-<p>To ssh into K8s worker nodes for checking pre-requisites or debugging purposes, you can use the following command:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none"># to ssh into the Kubernetes nodes where you want to test Kontain
-# This command starts a privileged container on your node and connects to it over SSH
-
-$ kubectl debug node/&lt;nodeid&gt; -it --image=busybox
-or
-$ kubectl debug node/&lt;nodeid&gt; -it image=mcr.microsoft.com/aks/fundamental/base-ubuntu:v0.0.11
-
-# NOTE: After this, you have access to the worker node using a privileged pod launched on the target worker node 
-# this mounts the node FS at /host
-# so to be able to browse/run commands on the worker node's FS in a normal fashion, you have to do the following:
-
-$ chroot /host</code></pre>
-</doc-codeblock></div>
-<p>For more details:
-<div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
-    <div class="flex items-center text-blue-500 dark:text-blue-400">
-        <span class="inline-block mb-px">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
-        </span>
-        <span class="inline-block font-medium ml-2">Install Kontain in Linux</span>
-    </div>
-    <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
-        <span>../../getting_started/install_linux/</span>
-    </div>
-    <a href="../../getting_started/install_linux/" class="absolute block inset-0"></a>
-</div>
-<div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
-    <div class="flex items-center text-blue-500 dark:text-blue-400">
-        <span class="inline-block mb-px">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
-        </span>
-        <span class="inline-block font-medium ml-2">Kubernetes</span>
-    </div>
-    <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
-        <span>https://kubernetes.io/docs/tasks/debug-application-cluster/debug-running-pod/#node-shell-session</span>
-    </div>
-    <a href="https://kubernetes.io/docs/tasks/debug-application-cluster/debug-running-pod/#node-shell-session" class="absolute block inset-0"></a>
-</div>
+<p>“Inside every large program is a small program struggling to get out.”
+— Tony Hoare</p>
+<p>It’s a misconception to think of Containers as a way of securely isolating their deployments. Rather, containers are a ‘packaging technology’.</p>
+<p>How do you secure Containers and containerised deployments?
+However Containers can actually be isolated to avoid the security risks that they create.</p>
+<p><a href="https://kontain.app">Kontain</a> was founded on the insight that 2013-era containers are far too insecure, slow, and bloated for the demands of the 2020s as explained here.</p>
+<p><em>Kontain creates strongly isolated containers with fortress-strong security isolation, thousands of times faster startup, and vastly smaller footprint.</em></p>
+<p><em>Kontain is fully integrated with Docker and Kubernetes with a OCI and CRI compliant approach, and requiring no changes to source code, CI, or DevOps tooling.</em></p>
+<p>To use Kontain, view the <a href="/gettingstarted/install">Install Guide</a></p>
+<!-- ![test](images/vms-ctrs-unikernels.png) -->
+<p><figure class="content-center">
+    <img src="../images/kontain_vs_containers.gif" alt="test">
+    <figcaption class="caption">test</figcaption>
+</figure>
 </p>
-<p>
-<div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
-    <div class="flex items-center text-blue-500 dark:text-blue-400">
-        <span class="inline-block mb-px">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
-        </span>
-        <span class="inline-block font-medium ml-2">Azure</span>
-    </div>
-    <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
-        <span>https://docs.microsoft.com/en-us/azure/aks/ssh</span>
-    </div>
-    <a href="https://docs.microsoft.com/en-us/azure/aks/ssh" class="absolute block inset-0"></a>
-</div>
-</p>
-<p>
-<div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
-    <div class="flex items-center text-blue-500 dark:text-blue-400">
-        <span class="inline-block mb-px">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
-        </span>
-        <span class="inline-block font-medium ml-2">Google Cloud</span>
-    </div>
-    <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
-        <span>https://cloud.google.com/anthos/clusters/docs/on-prem/1.3/how-to/ssh-cluster-node</span>
-    </div>
-    <a href="https://cloud.google.com/anthos/clusters/docs/on-prem/1.3/how-to/ssh-cluster-node" class="absolute block inset-0"></a>
-</div>
-</p>
+<doc-anchor-target id="a-new-approach-with-no-change-in-code-or-devops-tooling">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#a-new-approach-with-no-change-in-code-or-devops-tooling">#</doc-anchor-trigger>
+        <span>A new approach (with no change in code or DevOps tooling)</span>
+    </h2>
+</doc-anchor-target>
+<p>A new approach to Containers but fully integrated with Docker and Kubernetes.
+With the current ongoing tectonic shift to cloud-based shared tenant, microservice based architectures, where containers, VMs all run on shared cloud hardware, it is time that these microservices are packaged into strongly isolated, secure, specialized packages that only includes the application code and just the required OS code and nothing more to run fast and securely on the shared multi-tenant cloud hardware with strong isolation.  It almost literally packages and employs only the functions needed to make an application work, and nothing more.</p>
+<p>This sort of packaging into a minimalistic unikernel image allows the application to leverage a Single Address Space, Single Process model and  run at screaming speeds.  There is no context switching, so the Application almost runs at the speed of the host Operating system.  Some more advantages are outlined here.  This enables it to be secure by nature since they do not share a kernel and present a minimal to no attack surface at the OS level.</p>
+<p>A unikernel is a single-address-space machine image that contains an application workload—the program you want to run in a container—combined with a minimal set of library functions which provide the OS services required to run the workload.  This approach comes with a ton of advantages in terms of:
+Security - highly secure, isolated, minimal attack surface packages in multi-tenant environments
+Shared-nothing architecture with very high density
+Speed - almost instantaneous startup time (in milliseconds rather than seconds)
+Resource consumption reduced by orders of magnitude - compute and size
+Really Immutable packages of code</p>
+<p>This Docker workflow/tools compatible approach offers huge advantages in the following areas:</p>
+<ul>
+<li>For packaging microservices in minimalistic, fast, secure containers</li>
+<li>Functions as a service without the security, startup downsides
+Scale to zero with instantaneous startup time</li>
+<li>IOT where security, speed, resource size are critical</li>
+<li>Edge computing</li>
+<li>Anyplace where security, speed, cost and resource constraints are a high priority</li>
+</ul>
+<doc-anchor-target id="fast-secure-minimal-resources">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#fast-secure-minimal-resources">#</doc-anchor-trigger>
+        <span>Fast, secure, minimal resources</span>
+    </h2>
+</doc-anchor-target>
+<p>You can watch the video from <a href="https://www.abhaybhargav.com">Abhay Bhargav</a>, the founder of Application Security Company, we45, talk about security aspects of Containers and Unikernels.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/V5g50QiGArc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
                                 
                                 <!-- Required only on API pages -->
@@ -317,20 +297,20 @@ $ chroot /host</code></pre>
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../appendix/minikube/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../quickstart/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Using Kontain in Minikube (with Containerd)</span>
+                                                <span class="block mt-1">Quick start</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../appendix/k3s/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../overview/docker_int/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">k​3​s multi-​node cluster lab</span>
+                                                <span class="block mt-1">Docker Integration Overview</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -374,6 +354,6 @@ $ chroot /host</code></pre>
 
     <div id="docs-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "SSH into K8s nodes", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "Overview/Architecture", level: 1, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
