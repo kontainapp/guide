@@ -1,7 +1,6 @@
 ---
-label: Java (Spring Boot) in Docker/Compose/K8s
-icon: /images/logo.png
-order: 596
+label: Program Snapshot with Kontain Monitor
+icon: /images/kon.png
 ---
 
 ## Snapshots with Kontain Monitor
