@@ -1,7 +1,6 @@
 ---
 label: Program Snapshot with Kontain Monitor
 icon: /images/kon.png
-order: 596
 ---
 
 ## Snapshots with Kontain Monitor
